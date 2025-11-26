@@ -1,0 +1,139 @@
+\chapter{Teoretická část studentské práce}
+
+
+\section{Impedance}
+
+Impedance $Z$ je fyzikální veličina, která popisuje celkový odpor elektrického obvodu vůči střídavému proudu o dané frekvenci.
+Vyjadřuje se komplexním číslem, kdy reálná část odpovídá odporu $R$ a imaginární část reprezentuje reaktanci $X$.
+
+V některých případech je výhodné použít obrácenou hodnotu impedance $Y = \frac{1}{Z}$, zvanou admitance. \cite{KeysightImpedanceHandbook}
+
+\section{Metody měření impedance}
+
+\subsection{Můstková metoda}
+
+Měření pomocí můstku je jednoduché a přesné, avšak velmi nepraktické.
+Princip metody spočívá v tom, že pokud jsou impedance obou větví ($Z2$ a $Zx$) stejné,
+pak musí být napětí mezi větvemi nulové.
+
+\begin{figure}[h!]
+    \centering
+    \includesvg[width=0.55\textwidth]{obrazky/wheatstone.svg}
+    \caption{Schéma měřícího můstku}
+    \label{fig:wheatstone}
+\end{figure}
+
+Když se $Z2$ nastaví tak, aby mezi větvemi bylo naměřeno nulové napětí, pak je měřená
+impedance $Zx = \frac{Z1}{Z3}\cdot Z2$
+
+Problém této metody spočívá v tom, že je nutno znát nastavenou hodnotu $Z2$.
+Protože nastavitelné kondenzátory a cívky nejsou praktické, používá se tato metoda
+zejména pro měření malých změn v odporu např. tenzometru.
+
+\subsection{Rezonanční metoda}
+
+
+\subsection{Metoda měření proudu a napětí}
+Princip této metody je výpočet hodnoty neznámé impedance z naměřených hodnot napětí a proudu podle ohmova zákona.
+V praxi se proud měří pomocí měření napětí na bočníku.
+$$|Z| = \frac{U_{1}}{I} = \frac{U_{1}}{U_{2}}\cdot R$$
+Takovým měřením však získáme pouze modul komplexní impedance, z čehož nelze určit, 
+zda je charakter impedance rezistivní nebo reaktivní.
+Proto je nutné měřit také fázový posun $U_{1}$ a $U_{2}$, který je roven argumentu $\varphi$.
+$$ Z = |Z| \angle \varphi$$
+
+\subsection{Samo-vyvažovací můstek}
+V praxi se metoda měření proudu a napětí často implementuje pomocí tzv. samo-vyvažovacího můstku,
+což je operační zesilovač, který vytváří virtuální zem.
+
+Výhoda takového uspořádání je, že jak měřená impedance tak bočník jsou připojeny k zemi, 
+je tedy možné na nich jednoduše měřit napětí vzhledem k zemi.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.55\textwidth]{obrazky/i_v_conv.pdf}
+    \caption{Schéma samo-vyvažovacího můstku}
+    \label{fig:autobalance_bridge}
+\end{figure}
+
+
+\section{Měřiče impedance dostupné na trhu}
+Na trhu je mnoho dostupných zařízení pro měření impedance. Pro ukázku byly vybrány tři,
+každé ze samostatné cenové kategorie.
+
+\subsection{Univerzální tester komponent}
+
+Jako zástupce nejlevnější třídy byl vybrán tester LCR-T4. Tento přístroj neměří přímo impedanci,
+ale měří hodnoty odporu, kapacity a indukčnosti. Jako doplněk má také funkci rozpoznání tranzistorů.
+
+Pro měření využívá metodu časové konstanty, kdy se měří čas nabití kondenzátoru přes známý odpor.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{obrazky/LCR-T4.jpg}
+    \caption{Univerzální tester komponent LCR-T4}
+    \label{fig:lcr-t4}
+\end{figure}
+
+Přesnost měření není udávána, přístroj totiž slouží pouze pro hrubou identifikaci součástek.
+Cena se pohybuje okolo 350 Kč.
+
+\subsection{Ruční LCR měřiče}
+
+Pokročilejší přístroje jsou ruční měřiče LCR ve formě podobné multimetrům. Pro příklad
+byl vybrán měřič Keysight U1732C.
+
+Ruční měřiče jsou vhodné pro rychlou identifikaci cívek a kondenzátorů.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.35\textwidth]{obrazky/Keysight_U1732C.jpg}
+    \caption{Ruční měřič LCR Keysight U1732C}
+    \label{fig:keysight_lcr}
+\end{figure}
+
+
+
+
+\subsection{Stolní LCR měřiče}
+
+Pro nejpřesnější měření je nutno použít špičkové stolní LCR měřiče. 
+Jako zástupce byl vybrán přistroj LCX200 od firmy Rhode\&Schwarz.
+
+Tyto přístroje podporují čtyřbodovou metodu měření, která eliminuje parazitní indukčnost
+měřících sond. Narozdíl od ručních měřičů se zde používají stíněné koaxiální sondy, které jsou méně náchylné k rušení.
+
+Výrobce standardně dodává několik různých fixtur k připojení měřeného vzorku, typicky SMD součástky.
+
+Většina stolních měřičů také podporuje připojení do sítě LAN a automatizaci měření.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{obrazky/Rhode_schwarz-LCX200.jpg}
+    \caption{Stolní měřič Rhode\&Schwarz LCX200}
+    \label{fig:rhode_lcr}
+\end{figure}
+\begin{table}[h!]
+    \centering
+    \caption{Porovnání LCR metrů \cite{RS_LCX_Datasheet} \cite{Keysight_U1732C_Datasheet}}
+    \vspace{0.2cm}
+    
+    % Definice sloupců:
+    % l = zarovnání doleva (pro první sloupec, aby byl kompaktní)
+    % X = sloupec, který vyplní zbývající místo a zalamuje text
+    % >{\raggedright\arraybackslash} = zajistí zarovnání vlevo uvnitř X sloupce (lépe vypadá než plné zarovnání do bloku u úzkých sloupců)
+    \begin{tabularx}{\textwidth}{@{} l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X @{}}
+    \toprule
+    \textbf{Parametr}               & \textbf{Keysight U1732C}                  & \textbf{Rohde \& Schwarz LCX200}                  \\ \midrule
+    \textbf{Konstrukce}             & Ruční                                     & Stolní                                            \\ \addlinespace
+    \textbf{Cena}                   & cca $13\,000$ – $15\,000$ Kč              & cca $120\,000$ – $300\,000$ Kč+                   \\ \addlinespace
+    \textbf{Frekvenční rozsah}      & Pevné body: $100$ Hz, $120$Hz, $1$ kHz, $10$ kHz & Spojitý: $4$ Hz až $10$ MHz                       \\ \addlinespace
+    \textbf{Základní přesnost}      & $0,2\,\%$                                 & $0,05\,\%$                                        \\ \addlinespace
+    \textbf{Amplituda test. signálu}& Pevná (typicky $0,74$ Vrms)               & Nastavitelná: $10$ mV až $10$ V                   \\ \addlinespace
+    \textbf{DC Bias (Předpětí)}     & Není k dispozici                          & Interní $0$--$10$ V (Externí až $40$ V)           \\ \addlinespace
+    \textbf{Rychlost měření}        & $\sim 1$--$2$ měření/s                    & až $250$ měření/s                   \\ \addlinespace
+    \textbf{Konektivita}            & IR-to-USB                                 & USB, LAN, Digital I/O, GPIB                       \\ \bottomrule
+    \end{tabularx}
+    
+\end{table}

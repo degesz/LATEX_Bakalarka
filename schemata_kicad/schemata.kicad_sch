@@ -1,0 +1,289 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "ba5b7f3f-bcc2-4274-bf72-d951c4da15c7")
+	(paper "A4")
+	(lib_symbols)
+	(text "Ix"
+		(exclude_from_sim no)
+		(at 121.666 -16.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(color 0 142 7 1)
+			)
+		)
+		(uuid "6cd0e08a-2c71-4260-bd76-c82aae58034c")
+	)
+	(text "Ux"
+		(exclude_from_sim no)
+		(at 115.824 -21.336 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(color 213 0 18 1)
+			)
+		)
+		(uuid "8cc63dd2-6cd7-4e94-9c3f-91e9fa0f777b")
+	)
+	(text "Ix"
+		(exclude_from_sim no)
+		(at 110.49 -30.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "c90d94ab-7bb2-4676-9f4e-7ed75a2e2573")
+	)
+	(polyline
+		(pts
+			(xy 113.284 -28.194) (xy 114.046 -28.702)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d97cb43-a91b-4955-a403-ab559f58f0d4")
+	)
+	(polyline
+		(pts
+			(xy 114.046 -17.526) (xy 114.554 -18.288)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 213 0 18 1)
+		)
+		(uuid "416ccbea-0152-4272-8f59-53ee9562f56a")
+	)
+	(polyline
+		(pts
+			(xy 113.284 -29.21) (xy 114.046 -28.702)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "450918a4-ff33-433e-851c-e99e4393e902")
+	)
+	(polyline
+		(pts
+			(xy 107.696 -28.702) (xy 113.284 -28.702)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4639f508-eb0b-4cee-9c3b-f9a575a91ed1")
+	)
+	(polyline
+		(pts
+			(xy 124.46 -15.24) (xy 125.222 -14.732)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 0 142 7 1)
+		)
+		(uuid "4e582ae6-fd83-4b12-8c85-ec2aac487603")
+	)
+	(polyline
+		(pts
+			(xy 118.872 -14.732) (xy 124.46 -14.732)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 0 142 7 1)
+		)
+		(uuid "5eb27c69-8dd7-4259-b0fa-e7b80867c316")
+	)
+	(polyline
+		(pts
+			(xy 113.284 -29.21) (xy 113.284 -28.194)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c17131df-3225-4fda-a4bb-c8883601f130")
+	)
+	(polyline
+		(pts
+			(xy 113.538 -18.288) (xy 114.046 -17.526)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 213 0 18 1)
+		)
+		(uuid "c6aa17b8-848d-4830-909c-f71f601bb401")
+	)
+	(polyline
+		(pts
+			(xy 124.46 -14.224) (xy 125.222 -14.732)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 0 142 7 1)
+		)
+		(uuid "ca6e945d-220c-464f-8106-62c3706e6c31")
+	)
+	(polyline
+		(pts
+			(xy 114.046 -25.146) (xy 114.046 -17.526)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 213 0 18 1)
+		)
+		(uuid "ec68528d-8d2f-46a0-9ce6-213cf9553d23")
+	)
+	(polyline
+		(pts
+			(xy 124.46 -15.24) (xy 124.46 -14.224)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 0 142 7 1)
+		)
+		(uuid "f74cd8b2-b06f-40af-ba4f-357938dde75c")
+	)
+	(sheet
+		(at 16.51 16.51)
+		(size 25.4 8.89)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "81b9f537-724d-48ac-ae2f-ece78e16245d")
+		(property "Sheetname" "i_v_conv"
+			(at 16.51 15.7984 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "i_v_conv.kicad_sch"
+			(at 16.51 25.9846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 46.355 60.96)
+		(size 12.7 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b07e9222-1b5b-4006-ba73-7ec0f2c6acad")
+		(property "Sheetname" "resonant method"
+			(at 46.355 60.2484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "resonant.kicad_sch"
+			(at 46.355 65.3546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 16.51 33.02)
+		(size 26.67 8.89)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "e39c6ceb-98aa-46f9-8e7d-c134b310cc1c")
+		(property "Sheetname" "wheatstone"
+			(at 16.51 32.3084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "wheatstone.kicad_sch"
+			(at 16.51 42.4946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
