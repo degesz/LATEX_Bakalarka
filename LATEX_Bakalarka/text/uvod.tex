@@ -2,12 +2,36 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Úvod}
 
+Měřiče impedance, často označované jako \acs{LCR} metry, představují klíčové vybavení jak pro 
+vývojové laboratoře, tak pro výrobní linky. Jejich primárním účelem je precizní 
+měření impedance a odvozených veličin, jako jsou ztrátový činitel, \acs{ESR} či 
+činitel kvality.
 
-Tato práce se zabývá návrhem měřiče impedance.
-Cílem bylo navrhnout, zkonstruovat a otestovat funkční prototyp měřiče. 
+Tato bakalářská práce se zabývá komplexním návrhem, konstrukcí a otestováním 
+funkčního prototypu měřiče impedance. Hlavní motivací pro vznik tohoto zařízení 
+byla absence cenově dostupného řešení na trhu, které by zároveň nabízelo 
+dostatečnou přesnost a možnost snadné integrace s počítačem.
 
-Oproti existujícím řešením 
-analýza existujících řešení
-hardwarový návrh
-softwarová implementace
-ověření funkčnosti
+Na základě rešerše komerčně dostupných přístrojů a analýzy požadavků na měření 
+byly stanoveny klíčové parametry navrhovaného zařízení. 
+Cílem je vytvořit přístroj, který se svými vlastnostmi přiblíží profesionálním 
+řešením, avšak s výrazně nižšími pořizovacími náklady.
+
+Specifikace navrženého zařízení: 
+\begin{itemize} 
+    \item Frekvenční rozsah: 10 Hz -- 100 kHz 
+    \item Rozsah měření indukčnosti: 100 nH -- 10 H 
+    \item Rozsah měření kapacity: 100 pF -- 10 mF 
+    \item Cílová přesnost: 1\% 
+    \item Amplituda měřicího signálu: 0,1 -- 2 V 
+    \item Stejnosměrná složka (Bias): 0 -- 2 V 
+    \item Konektivita: Komunikace s PC a napájení přes USB 
+\end{itemize}
+
+Text práce je logicky členěn do několika částí. 
+První kapitola shrnuje teoretická východiska týkající se impedance. 
+Druhá kapitola se zaměřuje na princip a implementaci metody samo-vyvažovacího můstku. 
+Třetí část rozebírá problematiku digitalizace a zpracování signálu. 
+Čtvrtá a pátá kapitola detailně popisují samotný hardwarový návrh a související softwarové vybavení. 
+Závěrečná kapitola je věnována verifikaci prototypu a prezentaci naměřených výsledků, 
+které demonstrují dosaženou přesnost zařízení.

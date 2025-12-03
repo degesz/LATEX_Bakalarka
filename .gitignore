@@ -1,0 +1,84 @@
+# LaTeX intermediate and output files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.lol
+*.loa
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.run.xml
+
+# Generated PDFs
+#*.pdf
+
+# Fonts and map files
+#*.tfm
+#*.vf
+#*.pfb
+#*.map
+#*.fd
+#*.enc
+
+# Backup and temp files
+*~
+*.bak
+*.tmp
+*.old
+
+# Editor / OS junk
+.DS_Store
+Thumbs.db
+
+# Output or build directories (if used)
+build/
+output/
+
+
+# General Backup/Temporary Files
+*~
+\#*
+.\#*
+
+# KiCad Backup Files (for schematics and PCBs)
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.sch-bak
+
+# KiCad Generated Files (e.g., netlists, BOMs, plot outputs)
+*.erc
+*.net
+*.drc
+
+# Libraries and Caches
+*-cache.lib
+*-rescue.lib
+fp-info-cache
+sym-lib-table.local
+proj-lib-table.local
+
+# Local Settings and History
+*.prl
+*.kicad_prl
+history
+
+# Plot and Fabrication Outputs (Gerbers, etc.) - Uncomment as needed if you
+# keep these in a 'build' or 'export' folder, or if you plot directly
+# to the project root.
+# *.gbr
+# *.drl
+# *.pdf
+# *.ps
+# *.svg
+# *.gerber
+# */
