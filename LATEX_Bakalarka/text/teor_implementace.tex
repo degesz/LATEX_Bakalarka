@@ -1,0 +1,50 @@
+\chapter{Implementace samo-vyvažovacího můstku}
+
+\section{Zdroj měřícího signálu}
+
+Pro účely měření impedance je nezbytné vybudit měřenou komponentu adekvátním napětím a proudem.
+
+Specifikace návrhových požadavků definují, že budicí zdroj musí generovat harmonické 
+střídavé napětí s plně nastavitelnými parametry, zahrnujícími frekvenci, 
+amplitudu a superponovanou stejnosměrnou složku (DC offset).
+
+
+\subsection{Přímá digitální syntéza (\acs{DDS})}
+V moderních měřičích impedance se téměř výhradně používá pro generování sinusoidního signálu
+metoda DDS. Historicky nebyly digitální integrované obvody dostatečně výkonné, proto se využívaly
+různé analogové oscilátory a harmonické tvarovače. 
+Takové obvody byly však složité, dnes se již implementují jen zřídka.
+
+Metoda DDS spočívá v generování sinusového průběhu \acs{D/A} převodníkem, do kterého jsou 
+z paměti načítány předvypočítané hodnoty funkce $sin(t)$. Tyto hodnoty se nazývají \uv(vyhledávací tabulka),
+nebo anglicky \uv(lookup table) (\acs{LUT}).
+Frekvence výsledného signálu je závislá na prodlevě mezi načítáním jednotlivých hodnot. \cite{ArtOfElectronics}
+Signál z převodníku je následně filtrován dolní propustí o adekvátní mezní frekvenci,
+která odstraní vyšší harmonické složky vzniklé z diskrétních digitálních kroků.
+Princip funkce DDS je ilustrován na obr. \ref{fig:DDS} 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{obrazky/DDS_chart.pdf} % Adjusted width for the second figure
+    \caption{Ilustrace principu DDS}
+    \label{fig:DDS} % Changed label for the second figure
+\end{figure}
+
+
+\subsection{Úprava amplitudy a stejnosměrné složky signálu}
+Jednoduché integrované obvody DDS typicky nepodporují nastavení amplitudy nebo 
+stejnosměrné složky signálu, tuto úpravu je tedy nutno provést externě.
+
+Digitálního řízení amplitudy lze docílit několika způsoby, například:
+\begin{itemize}
+    \item Použít zesilovač s programovatelným zesílením (\acs{PGA}). Tyto zesilovače většinou mají málo úrovní zesílení.
+    \item Použít operační zesilovač s digitálním potenciometrem ve zpětné vazbě. Takové zapojení je limitováno minimálním zesílením $A=1$.
+    \item Operačním zesilovačem zesílit amplitudu na maximální hodnotu a následně ji snížit digitálním potenciometrem zapojeným jako odporový dělič.
+    \item Nejdříve zeslabit signál digitálním potenciometrem -- děličem a poté jej zesílit operačním zesilovačem s fixním zesílením. Oproti předchozímu zapojení se tím ušetří jeden sledovač, protože výstup operačního zesilovače je nízkoimpedanční.
+\end{itemize}
+
+
+
+
+
+

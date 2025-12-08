@@ -55,6 +55,12 @@
 \usepackage{svg}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{float}
+
+\newcommand{\vizobr}[1]{%
+    (viz obr. \ref{#1})%
+}
+
 
 \usepackage[formats]{listings}	% Balíček pro sazbu zdrojových textů
 \lstset{              % nastavení
@@ -207,6 +213,9 @@
 %%% Vložení souboru 'text/reseni' s popisem řešení práce
 % (rozdělte na více souborů či kapitol, pokud je vhodné)
 \include{text/teorie}
+\include{text/teor_uvod}
+\include{text/teor_implementace}
+\include{text/teor_digitalizace}
 
 %%% Vložení souboru 'text/vysledky' s popisem vysledků práce
 % (rozdělte na více souborů či kapitol, pokud je vhodné)

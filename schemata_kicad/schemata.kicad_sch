@@ -197,8 +197,8 @@
 		)
 	)
 	(sheet
-		(at 46.355 60.96)
-		(size 12.7 3.81)
+		(at 17.145 50.8)
+		(size 24.765 10.16)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -213,7 +213,7 @@
 		)
 		(uuid "b07e9222-1b5b-4006-ba73-7ec0f2c6acad")
 		(property "Sheetname" "resonant method"
-			(at 46.355 60.2484 0)
+			(at 17.145 50.0884 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -222,7 +222,7 @@
 			)
 		)
 		(property "Sheetfile" "resonant.kicad_sch"
-			(at 46.355 65.3546 0)
+			(at 17.145 61.5446 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -234,6 +234,90 @@
 			(project "schemata"
 				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
 					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 17.78 90.17)
+		(size 24.13 8.89)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b4cf9568-c830-403d-b725-6918fa0d8830")
+		(property "Sheetname" "XOR_phase"
+			(at 17.78 89.4584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "XOR_phase.kicad_sch"
+			(at 17.78 99.6446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 17.78 71.12)
+		(size 24.13 8.89)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "cf495051-2476-4c51-be7f-aa6f5b7b53b1")
+		(property "Sheetname" "peak_detect"
+			(at 17.78 70.4084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "peak_detect.kicad_sch"
+			(at 17.78 80.5946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "5")
 				)
 			)
 		)

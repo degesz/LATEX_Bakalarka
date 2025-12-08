@@ -627,6 +627,14 @@
     [
       "b07e9222-1b5b-4006-ba73-7ec0f2c6acad",
       "resonant method"
+    ],
+    [
+      "cf495051-2476-4c51-be7f-aa6f5b7b53b1",
+      "peak_detect"
+    ],
+    [
+      "b4cf9568-c830-403d-b725-6918fa0d8830",
+      "XOR_phase"
     ]
   ],
   "text_variables": {}
