@@ -635,6 +635,10 @@
     [
       "b4cf9568-c830-403d-b725-6918fa0d8830",
       "XOR_phase"
+    ],
+    [
+      "cc843ba0-d1bd-4c35-8f2d-0fd5113ded5b",
+      "amplitude"
     ]
   ],
   "text_variables": {}

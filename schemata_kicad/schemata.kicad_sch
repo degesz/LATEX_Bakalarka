@@ -281,6 +281,48 @@
 		)
 	)
 	(sheet
+		(at 18.415 109.22)
+		(size 22.225 10.16)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "cc843ba0-d1bd-4c35-8f2d-0fd5113ded5b")
+		(property "Sheetname" "amplitude"
+			(at 18.415 108.5084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "amplitude.kicad_sch"
+			(at 18.415 119.9646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 17.78 71.12)
 		(size 24.13 8.89)
 		(exclude_from_sim no)

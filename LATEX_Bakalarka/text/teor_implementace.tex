@@ -37,11 +37,48 @@ stejnosměrné složky signálu, tuto úpravu je tedy nutno provést externě.
 
 Digitálního řízení amplitudy lze docílit několika způsoby, například:
 \begin{itemize}
+    \item Zapojit sinusový signál jako referenci \acs{D/A} převodníku, který pak bude fungovat jako digitálně ovládaný dělič. 
     \item Použít zesilovač s programovatelným zesílením (\acs{PGA}). Tyto zesilovače většinou mají málo úrovní zesílení.
     \item Použít operační zesilovač s digitálním potenciometrem ve zpětné vazbě. Takové zapojení je limitováno minimálním zesílením $A=1$.
     \item Operačním zesilovačem zesílit amplitudu na maximální hodnotu a následně ji snížit digitálním potenciometrem zapojeným jako odporový dělič.
     \item Nejdříve zeslabit signál digitálním potenciometrem -- děličem a poté jej zesílit operačním zesilovačem s fixním zesílením. Oproti předchozímu zapojení se tím ušetří jeden sledovač, protože výstup operačního zesilovače je nízkoimpedanční.
 \end{itemize}
+
+Z těchto metod se jako nejvýhodnější jeví poslední jmenovaná. Její schéma je zobrazeno na obr. \ref{fig:ampl}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{obrazky/amplitude_set_sch.pdf} % Adjusted width for the second figure
+    \caption{Schéma obvodu pro nastavení amplitudy signálu.}
+    \label{fig:ampl} % Changed label for the second figure
+\end{figure}
+Fixní zesílení operačního zesilovače se řídí vztahem \ref{eq:noninv_gain}.
+\begin{equation}
+    A =\frac{V_{out}}{V_{in}} = 1 + \frac{R_2}{R_3}
+    \label{eq:noninv_gain}
+\end{equation}
+Vstupní amplituda je dána $U_{in} = 0,6 \ \unit{V}$, požadovaná maximální amplituda signálu je $U_{out} =3\ V$.
+Dosazením (rovnice \ref{eq:noninv_dosaz}) získáme poměr rezistorů $R_{2}$ a $R_{3}$.
+\begin{equation}
+    A =\frac{3}{0,6} = 5 = 1 + \frac{4}{1}
+    \label{eq:noninv_dosaz}
+\end{equation}
+Prakticky můžeme použít např. $R_{3} = 10\ k\Omega$ ; $R_{2} = 4\times 10\ k\Omega$ v sérii.
+
+Celková amplituda výstupního signálu $U_{\text{out}}$ vychází z rovnice \ref{eq:outputamp}.
+Digitální hodnotu potenciometru pro konkrétní amplitudu $U_{out}$ vypočítáme ze vztahu \ref{eq:digival}.
+
+\begin{equation}
+    U_{\text{out}} = U_{\text{in}} \cdot \frac{X}{2^n} \cdot A
+\label{eq:outputamp}
+\end{equation}
+\begin{equation}
+        X = \frac{2^n\cdot U_{\text{out}}}{A\cdot U_{\text{in}}} 
+    \label{eq:digival}
+\end{equation}
+\hspace{11em}\text{kde } $n$ \text{ je bitové rozlišení digitálního potenciometru}
+
+
 
 
 
