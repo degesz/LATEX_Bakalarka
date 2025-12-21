@@ -1096,13 +1096,13 @@
 			)
 		)
 		(pin ""
-			(uuid "f78c10fc-0179-40aa-a860-08e789303045")
+			(uuid "183bc0e6-1aa1-47b3-88ba-e03fee8afc7f")
 		)
 		(pin ""
-			(uuid "47da8af5-7199-4074-8bdd-b12feb7dbcc6")
+			(uuid "cc0c6d7d-f21a-456d-9e86-37e6d8d424e7")
 		)
 		(pin ""
-			(uuid "dfadf0d4-39cb-487d-baee-549e99f1bcca")
+			(uuid "543e6517-7855-4324-bc07-9051e3a08222")
 		)
 		(instances
 			(project "schemata"
@@ -1167,10 +1167,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "948241a5-a06b-4842-90dd-8199a8127a86")
+			(uuid "95a87880-09ee-409d-96fa-de1039625ba3")
 		)
 		(pin "1"
-			(uuid "0e328573-6bfd-4c52-8b7a-7f8b69b354b4")
+			(uuid "9bb92bb5-27ff-4f0b-a17c-8cce574a41c0")
 		)
 		(instances
 			(project "schemata"
@@ -1190,7 +1190,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "66999f5a-8ac6-4815-b934-3d363efcd146")
-		(property "Reference" "sdf"
+		(property "Reference" "sdf?"
 			(at 59.69 43.1799 0)
 			(effects
 				(font
@@ -1237,21 +1237,13 @@
 			)
 		)
 		(pin ""
-			(uuid "5eee111d-aa72-4b96-8f11-a1f8dcabacdf")
+			(uuid "15183ea9-0efe-4d2e-93e9-eee21f0f3563")
 		)
 		(pin ""
-			(uuid "c9cbf20c-bc4a-42bd-acb3-3ca137e6b80f")
+			(uuid "b9783b7d-b87e-4660-a817-cdddee6ada74")
 		)
 		(pin ""
-			(uuid "900d94de-68e0-4182-955a-986d4fbfeec0")
-		)
-		(instances
-			(project ""
-				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7/cc843ba0-d1bd-4c35-8f2d-0fd5113ded5b"
-					(reference "sdf")
-					(unit 1)
-				)
-			)
+			(uuid "17df5603-e7a7-4d00-b4af-a7162c8db617")
 		)
 	)
 	(symbol
@@ -1312,7 +1304,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "3e5780c7-933d-43f4-aa5d-f0e0ce21976b")
+			(uuid "c63557fe-9160-4440-b40c-cc82b145f1f1")
 		)
 		(instances
 			(project "schemata"
@@ -1419,10 +1411,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "c6f7e8e2-9a38-4898-ade9-c098e2640935")
+			(uuid "b4be873f-ccdc-4931-85d2-d481a1febc0a")
 		)
 		(pin "2"
-			(uuid "9c8e1ae4-e955-4802-b0ed-59767da01989")
+			(uuid "1abafee8-9560-4aeb-bd3d-1afc5aa2b058")
 		)
 		(instances
 			(project "schemata"
@@ -1443,7 +1435,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d601297d-149d-4a73-9fa0-125961ce6677")
-		(property "Reference" "TP1"
+		(property "Reference" "TP?"
 			(at 112.5221 39.37 0)
 			(effects
 				(font
@@ -1491,15 +1483,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "e5462dae-6b33-41a0-917a-46209186748b")
-		)
-		(instances
-			(project ""
-				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7/cc843ba0-d1bd-4c35-8f2d-0fd5113ded5b"
-					(reference "TP1")
-					(unit 1)
-				)
-			)
+			(uuid "a56e9904-6111-418e-95bc-cbe1e8cd4598")
 		)
 	)
 	(symbol
@@ -1556,10 +1540,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "a7cfda05-c4cc-45d2-be19-a97b50712958")
+			(uuid "5b55242b-b092-45b4-810d-6780e1bfa2e7")
 		)
 		(pin "1"
-			(uuid "321a7303-f47e-4415-bcee-867c92c9ebdd")
+			(uuid "66327cc1-4645-4057-a51b-ef7dbb511834")
 		)
 		(instances
 			(project "schemata"

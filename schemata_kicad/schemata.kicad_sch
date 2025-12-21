@@ -239,6 +239,48 @@
 		)
 	)
 	(sheet
+		(at 17.78 128.27)
+		(size 22.225 10.16)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b2272ab4-eaf0-415a-9fcd-515f8aa481a6")
+		(property "Sheetname" "DC Offset"
+			(at 17.78 127.5584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "DC_offset.kicad_sch"
+			(at 17.78 139.0146 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 17.78 90.17)
 		(size 24.13 8.89)
 		(exclude_from_sim no)
