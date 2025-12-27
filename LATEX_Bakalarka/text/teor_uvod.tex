@@ -4,8 +4,66 @@
 
 Impedance $Z$ je fyzikální veličina, která popisuje celkový odpor elektrického obvodu vůči střídavému proudu o dané frekvenci.
 Vyjadřuje se komplexním číslem, kdy reálná část odpovídá odporu $R$ a imaginární část reprezentuje reaktanci $X$.
+\begin{equation}
+Z = R + jX
+\end{equation}
+
+Impedance je často také vyjádřena v polárním tvaru:
+\begin{equation}
+Z = |Z| \cdot e^{j\varphi} = |Z| \angle \varphi
+\end{equation}
+kde $|Z| = \sqrt{R^2 + X^2}$ je modul impedance a $\varphi = \arctan(\frac{X}{R})$ je fázový úhel (argument).
 
 V některých případech je výhodné použít obrácenou hodnotu impedance $Y = \frac{1}{Z}$, zvanou admitance. \cite{KeysightImpedanceHandbook}
+
+\section{Veličiny odvozené z impedance}
+Při měření impedance součástek a obvodů je často cílem určit jejich fyzikální parametry nebo charakteristiky, které jsou z impedance odvozeny.
+
+\subsection{Primární parametry součástek}
+
+Pro základní pasivní součástky lze z naměřené impedance určit jejich primární parametry:
+
+\begin{itemize}
+    \item \textbf{Odpor} $R$ -- reálná část impedance rezistoru
+    \item \textbf{Indukčnost} $L$ -- vypočítá se z imaginární části impedance cívky podle vztahu:
+    \begin{equation}
+    L = \frac{X_L}{2\pi f} = \frac{\text{Im}(Z)}{2\pi f}
+    \end{equation}
+    \item \textbf{Kapacita} $C$ -- vypočítá se z imaginární části impedance kondenzátoru podle vztahu:
+    \begin{equation}
+    C = \frac{1}{2\pi f \cdot |X_C|} = \frac{-1}{2\pi f \cdot \text{Im}(Z)}
+    \end{equation}
+\end{itemize}
+
+kde $f$ je frekvence měřicího signálu.
+
+\subsection{Činitel kvality}
+
+Činitel kvality $Q$ (quality factor) vyjadřuje poměr mezi reaktivní a rezistivní složkou impedance. Pro cívky a kondenzátory se definuje jako:
+\begin{equation}
+Q = \frac{|X|}{R} = \frac{|\text{Im}(Z)|}{\text{Re}(Z)}
+\end{equation}
+
+Vysoká hodnota $Q$ znamená nízké ztráty v součástce. Typicky se $Q$ používá pro charakterizaci cívek a rezonančních obvodů.
+
+\subsection{Ztrátový činitel}
+
+Ztrátový činitel $D$ (dissipation factor) je převrácenou hodnotou činitele kvality:
+\begin{equation}
+D = \frac{1}{Q} = \frac{R}{|X|} = \frac{\text{Re}(Z)}{|\text{Im}(Z)|}
+\end{equation}
+
+Tato veličina se často používá pro charakterizaci kondenzátorů, kde vyjadřuje poměr ztrátové energie k energii uložené v elektrickém poli.
+
+\subsection{Ekvivalentní sériový odpor}
+
+Ekvivalentní sériový odpor \acs{ESR} (Equivalent Series Resistance) představuje rezistivní složku impedance v sériovém náhradním modelu součástky. Pro kondenzátory a cívky je \acs{ESR} důležitým parametrem, který charakterizuje jejich ztráty:
+\begin{equation}
+\text{ESR} = \text{Re}(Z)
+\end{equation}
+
+Nízká hodnota \acs{ESR} je žádoucí zejména u kondenzátorů používaných ve spínaných zdrojích a vysokofrekvenčních aplikacích.
+
 
 \section{Metody měření impedance}
 
@@ -31,15 +89,39 @@ zejména pro měření malých změn v odporu např. tenzometru.
 
 \subsection{Rezonanční metoda}
 
+Rezonanční metoda měření impedance využívá vlastností rezonančního obvodu, který vznikne zapojením měřené impedance do sériového nebo paralelního RLC obvodu. \cite{KeysightImpedanceHandbook}
+
+Princip metody spočívá v tom, že při rezonanční frekvenci $f_0$ dosahuje sériový RLC obvod minimální impedance (pouze rezistivní složka), zatímco paralelní RLC obvod dosahuje maximální impedance. Rezonanční frekvence je dána Thomsonovým vzorcem:
+\begin{equation}
+f_0 = \frac{1}{2\pi\sqrt{LC}}
+\end{equation}
+
+Pro měření neznámé impedance se obvykle používá sériový rezonanční obvod. Měřená impedance se zapojí sériově s opačným typem reaktance známé hodnoty:
+\begin{itemize}
+    \item Pro měření \textbf{indukčnosti} (cívky) se zapojí sériově s kondenzátorem známé kapacity $C$. Z naměřené rezonanční frekvence $f_0$ se pak vypočítá indukčnost:
+    \begin{equation}
+    L = \frac{1}{(2\pi f_0)^2 C}
+    \end{equation}
+    \item Pro měření \textbf{kapacity} (kondenzátoru) se zapojí sériově s cívkou známé indukčnosti $L$. Z naměřené rezonanční frekvence $f_0$ se pak vypočítá kapacita:
+    \begin{equation}
+    C = \frac{1}{(2\pi f_0)^2 L}
+    \end{equation}
+\end{itemize}
+
+Výhodou této metody je její jednoduchost a možnost měření při vysokých frekvencích. Nevýhodou je nutnost znalosti přesné hodnoty referenční součástky a omezení na měření jen jedné z reaktivních složek (indukčnosti a kapacity), zatímco rezistivní složka se měří obtížněji.
 
 \subsection{Metoda měření proudu a napětí}
 Princip této metody je výpočet hodnoty neznámé impedance z naměřených hodnot napětí a proudu podle ohmova zákona. \cite{KeysightImpedanceHandbook}
 V praxi se proud měří pomocí měření napětí na bočníku.
-$$|Z| = \frac{U_{1}}{I} = \frac{U_{1}}{U_{2}}\cdot R$$
+\begin{equation}
+|Z| = \frac{U_{1}}{I} = \frac{U_{1}}{U_{2}}\cdot R
+\end{equation}
 Takovým měřením však získáme pouze modul komplexní impedance, z čehož nelze určit, 
 zda je charakter impedance rezistivní nebo reaktivní.
 Proto je nutné měřit také fázový posun $U_{1}$ a $U_{2}$, který je roven argumentu $\varphi$.
-$$ Z = |Z| \angle \varphi$$
+\begin{equation}
+ Z = |Z| \angle \varphi
+\end{equation}
 
 \subsection{Samo-vyvažovací můstek}
 V praxi se metoda měření proudu a napětí často implementuje pomocí tzv. samo-vyvažovacího můstku,
@@ -70,7 +152,7 @@ Pro měření využívá metodu časové konstanty, kdy se měří čas nabití 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.6\textwidth]{obrazky/LCR-T4.jpg}
-    \caption{Univerzální tester komponent LCR-T4 \cite{hadex_lcrt4}}
+    \caption{Univerzální tester komponent LCR-T4. Převzato z \cite{hadex_lcrt4}.}
     \label{fig:lcr-t4}
 \end{figure}
 
@@ -89,7 +171,7 @@ a možnost nastavit parametry měření jako frekvenci měřícího signálu. \c
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.35\textwidth]{obrazky/Keysight_U1732C.jpg}
-    \caption{Ruční měřič LCR Keysight U1732C \cite{Keysight_U1732C_Datasheet}}
+    \caption{Ruční měřič LCR Keysight U1732C. Převzato z \cite{Keysight_U1732C_Datasheet}.}
     \label{fig:keysight_lcr}
 \end{figure}
 
@@ -108,7 +190,7 @@ Většina stolních měřičů také podporuje připojení do sítě LAN a autom
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{obrazky/Rhode_schwarz-LCX200.jpg}
-    \caption{Stolní měřič Rohde\&Schwarz LCX200 \cite{RS_LCX_Datasheet}}
+    \caption{Stolní měřič Rohde\&Schwarz LCX200. Převzato z \cite{RS_LCX_Datasheet}}
     \label{fig:rhode_lcr}
 \end{figure}
 
@@ -129,7 +211,7 @@ Stolní přístroj je výrazně přesnější a nabízí pokročilejší možnos
     \toprule
     \textbf{Parametr}               & \textbf{Keysight U1732C}                  & \textbf{Rohde \& Schwarz LCX200}                  \\ \midrule
     \textbf{Konstrukce}             & Ruční                                     & Stolní                                            \\ \addlinespace
-    \textbf{Cena}                   & cca $13\,000$ – $15\,000$ Kč              & cca $120\,000$ – $300\,000$ Kč+                   \\ \addlinespace
+    \textbf{Cena}                   & $\approx 13\,000$ – $15\,000$ Kč              & $\approx 120\,000$ – $300\,000$ Kč                   \\ \addlinespace
     \textbf{Frekvenční rozsah}      & Pevné body: $100$ Hz, $120$Hz, $1$ kHz, $10$ kHz & Spojitý: $4$ Hz až $10$ MHz                       \\ \addlinespace
     \textbf{Základní přesnost}      & $0,2\,\%$                                 & $0,05\,\%$                                        \\ \addlinespace
     \textbf{Amplituda test. signálu}& Pevná (typicky $0,74$ Vrms)               & Nastavitelná: $10$ mV až $10$ V                   \\ \addlinespace

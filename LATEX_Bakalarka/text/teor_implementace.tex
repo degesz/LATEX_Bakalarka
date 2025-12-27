@@ -1,4 +1,6 @@
-\chapter{Implementace samo-vyvažovacího můstku}
+\chapter{Implementace analogového obvodu}
+
+Tato kapitola se zabývá obecnou implementací analogové měřící části zařízení.
 
 \section{Zdroj měřícího signálu}
 
@@ -22,6 +24,10 @@ Frekvence výsledného signálu je závislá na prodlevě mezi načítáním jed
 Signál z převodníku je následně filtrován dolní propustí o adekvátní mezní frekvenci,
 která odstraní vyšší harmonické složky vzniklé z diskrétních digitálních kroků.
 Princip funkce DDS je ilustrován na obr. \ref{fig:DDS}. 
+
+V praxi se používají integrované obvody, které řeší celou funkčnost DDS (např. AD9837). Vstupní parametr požadované frekvence se do nich zadává 
+pomocí sériové sběrnice z mikrokontroléru. \cite{AD9837}
+
 
 \begin{figure}[h!]
     \centering
@@ -106,8 +112,9 @@ Schéma zapojení je zobrazeno na obr. \ref{fig:sch_adder}.
     \label{fig:sch_adder} % Changed label for the second figure
 \end{figure}
 
-\section{Měřící Sekce}
+\section{Samovyvažovací můstek}
 
+Ústřední částí měřícího obvodu je samovyvažovací můstek, který se chová jako převodník proudu na napětí. Skládá se z \acs{OZ} a referenčního rezistoru.
 
 \subsection{Výběr operačního zesilovače}
 Operační zesilovač v měřící sekci je kritický prvek, odvíjí se od něj přesnost celého měřidla.
@@ -147,17 +154,20 @@ Pro přepínání bočníků lze použít několik metod:
 
 
 Automatické přepínání rozsahu lze implementovat následujícím algoritmem:
+\begin{tcolorbox}[colback=gray!10, colframe=black!50, boxrule=0.7pt, arc=2pt]
 \begin{enumerate}
     \item Začít měření s největším bočníkem (pro nejvyšší impedance).
     \item Změřit napětí na bočníku.
-    \item Pokud je napětí příliš malé (pod prahovou hodnotou, např. $10\%$ plného rozsahu \acs{A/D} převodníku), přepnout na menší bočník.
-    \item Pokud je napětí příliš velké (nad $90\%$ plného rozsahu), přepnout na větší bočník.
+    \item Pokud je napětí pod $10\%$ plného rozsahu \acs{A/D} převodníku, přepnout na menší bočník.
+    \item Pokud je napětí nad $90\%$ plného rozsahu, přepnout na větší bočník.
     \item Opakovat kroky 2--4, dokud není nalezen vhodný rozsah.
 \end{enumerate}
+\end{tcolorbox}
 
 Pro zajištění stability měření je vhodné po přepnutí rozsahu počkat několik period měřícího signálu, než se provede finální měření, aby se přechodové jevy ustálily.
 
 Hodnoty bočníků by měly být voleny tak, aby se jejich rozsahy překrývaly, což umožňuje plynulé přepínání bez mezer v měřitelném rozsahu.
-Typicky se používají dekadické hodnoty (např. $1\ \Omega$, $10\ \Omega$, $100\ \Omega$, $1\ \text{k}\Omega$, $10\ \text{k}\Omega$).
+
+
 
 

@@ -10,6 +10,7 @@ Dále je v tomto případě cílem měřit i střední hodnotu napětí, protož
 Nezáleží, zda je měřena amplituda nebo efektivní hodnota napětí, protože důležité nejsou absolutní hodnoty napětí, ale jejich poměr.
 
 \section{Metoda převodu na stejnosměrná napětí}
+\label{sec:digit_DC}
 
 Jako nejjednodušší řešení se nabízí vytvořit obvod, 
 který jednotlivé veličiny převede na stejnosměrné napětí, které je následně změřeno \acs{A/D} převodníkem (\acs{ADC}).
@@ -64,8 +65,12 @@ fázovému posunu. Pro získání stejnosměrného napětí se použije RC filtr
 který ze signálu získá střední hodnotu \vizobr{fig:chart_XOR}. \cite{ArtOfElectronics}
 
 Fázový posun se ze střední hodnoty vypočítá následovně:
-$$k = \frac{180}{U_{log}}$$
-$$\varphi = k \cdot U_{XOR - stř} \quad [^\circ]$$
+\begin{equation}
+k = \frac{180}{U_{log}}
+\end{equation}
+\begin{equation}
+\varphi = k \cdot U_{XOR - stř} \quad [^\circ]
+\end{equation}
 kde $U_{log}$ je logická úroveň napětí (napájecí napětí hradla).
 
 
@@ -110,9 +115,9 @@ Tímto přístupem se lze vyhnout mnoha nedostatkům výše popsané metody.
 
 \subsection{Vzorkování \acs{A/D} převodníkem}
 
-Pro správné vzorkování signálu je nutné dodržet Nyquistův-Shannonův teorém, který říká, že vzorkovací frekvence $f_vz$ musí být alespoň dvojnásobkem nejvyšší frekvence v signálu $f_{max}$:
+Pro správné vzorkování signálu je nutné dodržet Nyquistův-Shannonův teorém \cite[kap.~3]{smith_dsp_guide}, který říká, že vzorkovací frekvence $f_vz$ musí být alespoň dvojnásobkem nejvyšší frekvence v signálu $f_{max}$:
 \begin{equation}
-    f_vz \geq 2 \cdot f_{max}
+    f_{vz} \geq 2 \cdot f_{max}
     \label{eq:nyquist}
 \end{equation}
 
@@ -125,90 +130,97 @@ Tomu lze předejít použitím antialiasingového filtru před \acs{A/D} převod
 Vzorkovány jsou dva signály -- napětí a proud. Je důležité, aby byly oba kanály vzorkovány synchronně, 
 aby nedošlo k fázovému posunu způsobenému časovým zpožděním mezi vzorky. Toho lze docílit použitím dvou \acs{A/D} převodníků pracujících současně.
 
-\subsection{Výpočet efektivní hodnoty navzorkovaného signálu}
-Před výpočtem amplitudy musí být navzorkovaný signál očištěn od případné stejnosměrné složky.
-To se provede výpočtem průměrné hodnoty všech vzorků podle vztahu \ref{eq:dc_component}, 
-která je následně od každého vzorku odečtena (vztah \ref{eq:remove_dc}).
+\subsection{Výpočet amplitud a fází z navzorkovaných signálů}
+
+%   Před dalšími výpočty musí být navzorkovaný signál očištěn od stejnosměrné složky.
+%   To se provede výpočtem průměrné hodnoty všech vzorků podle vztahu \ref{eq:dc_component}, 
+%   která je následně od každého vzorku odečtena (vztah \ref{eq:remove_dc}).
+%   \begin{equation}
+%       U_{DC} = \frac{1}{N}\sum_{i=1}^{N} u_i
+%       \label{eq:dc_component}
+%   \end{equation}
+%   \begin{equation}
+%       u_{i,AC} = u_i - U_{DC}
+%       \label{eq:remove_dc}
+%   \end{equation}
+%   kde $N$ je počet vzorků, $u_i$ jsou původní hodnoty napětí a $u_{i,AC}$ jsou hodnoty napětí bez stejnosměrné složky.
+
+Amplituda a fáze se z navzorkovaných dat vypočítá pomocí diskrétní Fourierovy transformace (\acs{DFT}), 
+konkrétně se použije její zjednodušená forma pro jednu frekvenci (dosadí se frekvence budícího signálu) \cite[kap.~8]{smith_dsp_guide}.
+Pro zvýšení přesnosti měření se výpočet provádí z více navzorkovaných period signálu.
+
+Pro harmonický signál ve tvaru $u(t) = A \cos(\omega t + \varphi)$ lze amplitudu $A$ a fázi $\varphi$ vypočítat pomocí vztahů:
 \begin{equation}
-    U_{DC} = \frac{1}{N}\sum_{i=1}^{N} u_i
-    \label{eq:dc_component}
+    A = \sqrt{U_c^2 + U_s^2}
+    \label{eq:amplitude_dft}
 \end{equation}
 \begin{equation}
-    u_{i,AC} = u_i - U_{DC}
-    \label{eq:remove_dc}
-\end{equation}
-kde $N$ je počet vzorků, $u_i$ jsou původní hodnoty napětí a $u_{i,AC}$ jsou hodnoty napětí bez stejnosměrné složky.
-
-Efektivní hodnota \acs{RMS} je obecně definována vztahem:
-\begin{equation}
-    U_{RMS} = \sqrt{\frac{1}{T}\int_0^T u^2(t) \ dt}
-    \label{eq:rms}
-\end{equation}
-kde $T$ je perioda signálu nebo časový interval, přes který se integruje. \\
-Pro její výpočet ze vzorků použijeme diskrétní podobu vztahu \ref{eq:rms_discrete}:
-
-\begin{equation}
-    U_{RMS} = \sqrt{\frac{1}{N}\sum_{i=1}^{N} u_i^2}
-    \label{eq:rms_discrete}
-\end{equation}
-kde $N$ je počet vzorků a $u_i$ jsou jednotlivé hodnoty napětí.
-
-Pro harmonický signál s amplitudou $U_m$ platí vztah mezi efektivní hodnotou a amplitudou:
-\begin{equation}
-    U_{RMS} = \frac{U_m}{\sqrt{2}}
-    \label{eq:rms_amplitude}
+    \varphi = \arctan\left(\frac{-U_s}{U_c}\right)
+    \label{eq:phase_dft}
 \end{equation}
 
-Pro potlačení vlivu šumu se často používá průměrování přes více period signálu. Pokud je vzorkováno $M$ period, efektivní hodnota se vypočítá jako:
+kde $U_c$ a $U_s$ jsou kosinová a sinová složka signálu. Při vzorkování $M$ period signálu s $N$ vzorky na periodu (celkem $M \cdot N$ vzorků) jsou tyto složky vypočítány podle vztahů:
 \begin{equation}
-    U_{RMS} = \sqrt{\frac{1}{M \cdot N_p}\sum_{j=1}^{M}\sum_{i=1}^{N_p} u_{i,j}^2}
-    \label{eq:rms_averaged}
-\end{equation}
-kde $N_p$ je počet vzorků v jedné periodě.
-
-\subsection{Výpočet fázového posunu navzorkovaných signálů}
-
-Pro výpočet fázového posunu mezi dvěma navzorkovanými signály existuje několik algoritmů. Jednou z nejpřesnějších metod je výpočet pomocí vzájemné korelace (\acs{cross-correlation}).
-
-Vzájemná korelace dvou signálů $u_1(t)$ a $u_2(t)$ je definována jako:
-\begin{equation}
-    R_{12}(\tau) = \frac{1}{T}\int_0^T u_1(t) \cdot u_2(t+\tau) \ dt
-    \label{eq:crosscorr_cont}
-\end{equation}
-
-Pro diskrétní vzorky se vzájemná korelace počítá jako:
-\begin{equation}
-    R_{12}[k] = \frac{1}{N}\sum_{i=0}^{N-1} u_1[i] \cdot u_2[i+k]
-    \label{eq:crosscorr_disc}
-\end{equation}
-
-Fázový posun $\varphi$ se získá z časového posunu $\tau_{max}$, při kterém vzájemná korelace dosahuje maxima:
-\begin{equation}
-    \varphi = 2\pi f \cdot \tau_{max} \quad [\text{rad}]
-    \label{eq:phase_from_crosscorr}
-\end{equation}
-nebo v stupních:
-\begin{equation}
-    \varphi = 360^\circ \cdot f \cdot \tau_{max} \quad [^\circ]
-    \label{eq:phase_from_crosscorr_deg}
-\end{equation}
-
-Další možností je použití diskrétní Fourierovy transformace (\acs{DFT}) nebo rychlé Fourierovy transformace (\acs{FFT}). Pokud jsou signály harmonické s frekvencí $f$, lze vypočítat jejich komplexní amplitudy pomocí \acs{DFT}:
-\begin{equation}
-    U_1 = \frac{2}{N}\sum_{i=0}^{N-1} u_1[i] \cdot e^{-j2\pi f i/f_s}
-    \label{eq:dft_u1}
+    U_c = \frac{2}{M \cdot N}\sum_{i=1}^{M \cdot N} u_i \cos\left(\frac{2\pi i}{N}\right)
+    \label{eq:cos_component}
 \end{equation}
 \begin{equation}
-    U_2 = \frac{2}{N}\sum_{i=0}^{N-1} u_2[i] \cdot e^{-j2\pi f i/f_s}
-    \label{eq:dft_u2}
+    U_s = \frac{2}{M \cdot N}\sum_{i=1}^{M \cdot N} u_i \sin\left(\frac{2\pi i}{N}\right)
+    \label{eq:sin_component}
 \end{equation}
 
-Fázový posun se pak vypočítá z argumentu podílu komplexních amplitud:
+Tento výpočet se provede pro oba kanály -- napětí i proud. Fázový posun mezi napětím a proudem je pak dán rozdílem jejich fází:
 \begin{equation}
-    \varphi = \arg\left(\frac{U_2}{U_1}\right) = \arg(U_2) - \arg(U_1)
-    \label{eq:phase_from_dft}
+    \Delta\varphi = \varphi_u - \varphi_i
+    \label{eq:phase_difference}
 \end{equation}
 
-Výhodou metody založené na \acs{DFT} je možnost současného výpočtu amplitudy i fáze signálu. Navíc tato metoda lépe potlačuje harmonické složky a šum, pokud je použito okénkování (\acs{windowing}) před transformací.
+Výhodou této metody je vysoká odolnost vůči šumu a harmonickým zkreslením, protože \acs{DFT} extrahuje pouze složku na základní frekvenci měřeného signálu.
 
-Pro přesné měření fáze je důležité, aby oba signály byly vzorkovány synchronně a aby byla známa přesná frekvence měřeného signálu. V případě, že frekvence není přesně známa, lze ji odhadnout z navzorkovaných dat pomocí metody nulových průchodů nebo spektrální analýzy.
+
+
+
+
+
+%    \subsection{Výpočet efektivní hodnoty navzorkovaného signálu}
+%    Před výpočtem amplitudy musí být navzorkovaný signál očištěn od případné stejnosměrné složky.
+%    To se provede výpočtem průměrné hodnoty všech vzorků podle vztahu \ref{eq:dc_component}, 
+%    která je následně od každého vzorku odečtena (vztah \ref{eq:remove_dc}).
+%    \begin{equation}
+%        U_{DC} = \frac{1}{N}\sum_{i=1}^{N} u_i
+%        \label{eq:dc_component}
+%    \end{equation}
+%    \begin{equation}
+%        u_{i,AC} = u_i - U_{DC}
+%        \label{eq:remove_dc}
+%    \end{equation}
+%    kde $N$ je počet vzorků, $u_i$ jsou původní hodnoty napětí a $u_{i,AC}$ jsou hodnoty napětí bez stejnosměrné složky.
+%    
+%    Efektivní hodnota \acs{RMS} je obecně definována vztahem:
+%    \begin{equation}
+%        U_{RMS} = \sqrt{\frac{1}{T}\int_0^T u^2(t) \ dt}
+%        \label{eq:rms}
+%    \end{equation}
+%    Pro její výpočet ze vzorků použijeme diskrétní podobu vztahu:
+%    
+%    \begin{equation}
+%        U_{RMS} = \sqrt{\frac{1}{N}\sum_{i=1}^{N} u_i^2}
+%        \label{eq:rms_discrete}
+%    \end{equation}
+%    kde $N$ je počet vzorků a $u_i$ jsou jednotlivé hodnoty napětí.
+%    
+%    %Pro harmonický signál s amplitudou $U_m$ platí vztah mezi efektivní hodnotou a amplitudou:
+%    %\begin{equation}
+%    %    U_{RMS} = \frac{U_m}{\sqrt{2}}
+%    %    \label{eq:rms_amplitude}
+%    %\end{equation}
+%    
+%    Za účelem potlačení vlivu šumu se často používá průměrování přes více period signálu. Pokud je vzorkováno $M$ period, efektivní hodnota se vypočítá jako:
+%    \begin{equation}
+%        U_{RMS} = \sqrt{\frac{1}{M \cdot N_p}\sum_{j=1}^{M}\sum_{i=1}^{N_p} u_{i,j}^2}
+%        \label{eq:rms_averaged}
+%    \end{equation}
+%    kde $N_p$ je počet vzorků v jedné periodě.
+%    
+%    \subsection{Výpočet fázového posunu navzorkovaných signálů}
+    

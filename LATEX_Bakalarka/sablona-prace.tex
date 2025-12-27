@@ -19,6 +19,12 @@
 \usepackage{graphicx} % Balíček 'graphicx' pro vkládání obrázků
 											% Nutné pro vložení logotypů školy a fakulty
 
+\usepackage{subcaption} % Balíček pro subfigure prostředí
+
+\usepackage[table]{xcolor} % Balíček pro barvy a střídavé barvy řádků v tabulkách
+
+\usepackage[most]{tcolorbox} % Balíček pro barevné boxy a seznamy
+
 \usepackage[          % Balíček 'acronym' pro sazby zkratek a symbolů
 	nohyperlinks				% Nebudou tvořeny hypertextové odkazy do seznamu zkratek
 ]{acronym}						
@@ -62,7 +68,7 @@
 }
 
 
-\usepackage[formats]{listings}	% Balíček pro sazbu zdrojových textů
+\usepackage{listings}	% Balíček pro sazbu zdrojových textů
 \lstset{              % nastavení
 %	Definice jazyka použitého ve výpisech
 %    language=[LaTeX]{TeX},	% LaTeX
@@ -219,6 +225,11 @@
 
 %%% Vložení souboru 'text/vysledky' s popisem vysledků práce
 % (rozdělte na více souborů či kapitol, pokud je vhodné)
+
+\include{text/prvni_prototyp}
+\include{text/testovaci_prototyp}
+\include{text/vyber_soucastek}
+\include{text/realizace_zarizeni}
 \include{text/vysledky}
 
 %%% Vložení souboru 'text/zaver' se závěrem

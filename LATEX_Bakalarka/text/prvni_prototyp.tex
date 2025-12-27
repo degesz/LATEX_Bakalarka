@@ -1,0 +1,36 @@
+\chapter{První prototyp}
+
+Pro ověření proveditelnosti a funkčnosti konceptu byl vytvořen první prototyp zařízení.
+Prototyp obsahoval pouze měřící část bez uživatelského rozhraní. Naměřená data byla přenášena na počítač pomocí sériové linky.
+
+
+
+Na prototypu byly také odzkoušeny řešení pro napájení a generaci měřícího signálu. Tyto subsystémy fungovaly bezproblémově, byly tedy přeneseny do finálního designu.
+
+
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{obrazky/prototyp_render.png}
+		\caption{Přední strana}
+		\label{fig:prototyp_render_front}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{obrazky/prototyp_render_back.png}
+		\caption{Zadní strana}
+		\label{fig:prototyp_render_back}
+	\end{subfigure}
+	\caption{3D render prvního prototypu}
+	\label{fig:prototyp_render}
+\end{figure}
+
+
+\section{Zjištěné nedostatky}
+K digitalizaci signálu byla použita metoda převodu na stejnosměrná napětí, která je blíže popsána v kapitole \ref{sec:digit_DC}.
+Tento přístup byl zvolen zpočátku intuitivně, avšak výsledky zkoušení prototypu odhalily jeho nedostatky. To vedlo k výzkumu dalších metod digitalizace.
+
+\subsection{}

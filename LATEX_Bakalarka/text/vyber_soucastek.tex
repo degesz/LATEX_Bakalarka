@@ -1,0 +1,61 @@
+\section{Výběr součástek}
+
+Tato kapitola popisuje výběr klíčových součástek pro navržený měřič impedance a zdůvodňuje jejich použití.
+Výběr jednotlivých komponent byl proveden na základě analýzy požadavků stanovených ve specifikaci 
+zařízení a s ohledem na dosažení požadované přesnosti měření, spolehlivosti a cenové dostupnosti.
+
+\subsection{ESP32-S3 -- Mikrokontrolér}
+
+Jako řídicí jednotka celého měřiče impedance byl zvolen mikrokontrolér ESP32-S3 od společnosti Espressif Systems \cite{ESP32S3_Datasheet,ESP32S3_HardwareDesign}.
+Hlavním důvodem tohoto výběru byla předchozí zkušenost s těmito mikrokontroléry, která umožnila 
+rychlejší vývoj a spolehlivější implementaci. Mezi další důležité vlastnosti patří:
+
+\begin{itemize}
+    \item \textbf{Vysoký výkon} -- Takt procesoru až 240 MHz poskytuje dostatečný výpočetní výkon pro 
+    zpracování signálu a rychlé výpočty impedance.
+    \item \textbf{Dvojitá periferie \acs{I$^{2}$S} s podporou \acs{DMA}} -- Klíčová vlastnost pro vstup dat 
+    z \acs{ADC}, která umožňuje uložení velkého množství vzorků do paměti bez zatížení procesoru.
+    \item \textbf{Integrované USB} -- Nativní podpora USB 2.0 umožňuje přímé připojení k počítači 
+    bez nutnosti externích převodníků.
+    \item \textbf{Wi-Fi a Bluetooth} -- Přestože nejsou v základním návrhu využívány, představují 
+    možnost budoucího rozšíření o bezdrátovou komunikaci.
+    \item \textbf{Široká podpora knihoven} -- Čipy ESP32 jsou v open-source projektech velmi populární, existuje proto pro ně mnoho softwarových knihoven
+    , které usnadňují vývoj.
+\end{itemize}
+
+
+\subsection{AD9837 -- Generátor signálu DDS}
+
+Jako generátor harmonického měřícího signálu byl zvolen integrovaný obvod AD9837 od společnosti Analog Devices.
+Tento obvod implementuje metodu přímé digitální syntézy (\acs{DDS}) a umožňuje generovat obdélníkové, pilovité nebo harmonické průběhy
+ve frekvenčním rozsahu 0 až 12,5 MHz. Frekvence je nastavitelná s přesností 0,1 Hz.
+
+
+\subsection{Operační zesilovače}
+
+to be done
+
+\subsection{LM27762 -- Invertující regulátor}
+
+Symetrické napájení operačních zesilovačů vyžaduje kladnou a zápornou kolej, které zajišťuje integrovaný obvod 
+LM27762 od společnosti Texas Instruments \cite{LM27762}.
+Tento čip v sobě sdružuje invertující nábojovou pumpu a lineární regulátory pro obě koleje.
+
+\subsection{REF3033 -- Precizní napěťová reference}
+
+Přesné referenční napětí pro \acs{ADC} a \acs{DAC} převodníky zajišťuje integrovaný obvod REF3033 od společnosti Texas Instruments \cite{REF3033}.
+
+\begin{itemize}
+    \item \textbf{Vysoká přesnost} -- Referenční napětí 3,0 V s přesností ±0,2\% a teplotním koeficientem 50 ppm/°C.
+    \item \textbf{Jednoduchost implementace} -- Obvod vyžaduje pouze několik externích kondenzátorů pro stabilizaci.
+\end{itemize}
+
+\subsection{NCD98011 -- Analogově-digitální převodník (\acs{ADC})}
+
+Pro digitalizaci měřícího signálu byl zvolen integrovaný obvod NCD98011 od společnosti ON Semiconductor \cite{NCD9801}.
+
+\subsection{Digitální potenciometr}
+
+\subsection{Analogové spínače}
+
+\subsection{Shrnutí výběru součástek}
