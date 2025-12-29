@@ -685,7 +685,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "02c7c8be-001b-4f1e-aea4-b3aaf871096a")
-		(property "Reference" "Z6"
+		(property "Reference" "Z2"
 			(at 128.778 52.07 0)
 			(effects
 				(font
@@ -736,6 +736,12 @@
 			(uuid "e1143d28-e54a-464d-9211-4a01c2b61231")
 		)
 		(instances
+			(project "wheatstone"
+				(path "/71305d32-c10f-4c05-8337-91cd088b5d4d"
+					(reference "Z2")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7/e39c6ceb-98aa-46f9-8e7d-c134b310cc1c"
 					(reference "Z6")
@@ -753,7 +759,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "09b0c928-b966-45d6-a2a1-1f51f1c3755a")
-		(property "Reference" "Zx1"
+		(property "Reference" "Zx"
 			(at 127.762 66.802 90)
 			(effects
 				(font
@@ -805,6 +811,12 @@
 			(uuid "b7cf683b-9fe4-4a27-9229-34eaab436df0")
 		)
 		(instances
+			(project "wheatstone"
+				(path "/71305d32-c10f-4c05-8337-91cd088b5d4d"
+					(reference "Zx")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7/e39c6ceb-98aa-46f9-8e7d-c134b310cc1c"
 					(reference "Zx1")
@@ -874,6 +886,12 @@
 			(uuid "a82cf3f9-33d7-4fc8-add1-b0d001763fe5")
 		)
 		(instances
+			(project "wheatstone"
+				(path "/71305d32-c10f-4c05-8337-91cd088b5d4d"
+					(reference "Z1")
+					(unit 1)
+				)
+			)
 			(project "schemata"
 				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7/e39c6ceb-98aa-46f9-8e7d-c134b310cc1c"
 					(reference "Z1")
@@ -942,6 +960,12 @@
 			(uuid "6e450e54-e4c3-4455-98df-fc20d2828103")
 		)
 		(instances
+			(project "wheatstone"
+				(path "/71305d32-c10f-4c05-8337-91cd088b5d4d"
+					(reference "Z3")
+					(unit 1)
+				)
+			)
 			(project "schemata"
 				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7/e39c6ceb-98aa-46f9-8e7d-c134b310cc1c"
 					(reference "Z3")
@@ -960,7 +984,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fc1513e3-e6b7-42d8-bba5-cee2b77b7c42")
-		(property "Reference" "U3"
+		(property "Reference" "U?"
 			(at 102.87 67.1801 0)
 			(effects
 				(font
@@ -1052,6 +1076,12 @@
 			(uuid "e103c90e-b7db-424b-ab9b-6df499cf7ffa")
 		)
 		(instances
+			(project "wheatstone"
+				(path "/71305d32-c10f-4c05-8337-91cd088b5d4d"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project "schemata"
 				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7/e39c6ceb-98aa-46f9-8e7d-c134b310cc1c"
 					(reference "U3")
@@ -1060,4 +1090,10 @@
 			)
 		)
 	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
 )

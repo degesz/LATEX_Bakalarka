@@ -1,11 +1,11 @@
 \chapter{První prototyp}
+První pokus o návrh zařízení byl založen na metodě převodu na stejnosměrná napětí, která je blíže popsána v kapitole \ref{sec:digit_DC}.
+Tato metoda se však později ukázala jako slepá vývojová větev, protože neposkytovala dostatečnou přesnost měření. 
+Pro ověření konceptu byl vytvořen prototyp zařízení (obr. \ref{fig:prototyp_render}).
 
-Pro ověření proveditelnosti a funkčnosti konceptu byl vytvořen první prototyp zařízení.
 Prototyp obsahoval pouze měřící část bez uživatelského rozhraní. Naměřená data byla přenášena na počítač pomocí sériové linky.
+Původní záměr byl připojit ovládací modul s displejem a tlačítky později jako samostatný modul.
 
-
-
-Na prototypu byly také odzkoušeny řešení pro napájení a generaci měřícího signálu. Tyto subsystémy fungovaly bezproblémově, byly tedy přeneseny do finálního designu.
 
 
 
@@ -29,8 +29,48 @@ Na prototypu byly také odzkoušeny řešení pro napájení a generaci měříc
 \end{figure}
 
 
+\section{Validované subsystémy}
+Na prototypu byly odzkoušeny řešení pro napájení a generaci měřícího signálu. Tyto subsystémy fungovaly bezproblémově a byly proto přeneseny do finálního návrhu.
+
+\subsection{Napájecí systém}
+Celé zařízení je napájeno z 5V USB. Dále je zařazen jednoduchý lineární regulátor HT7533, který poskytuje napájecí linku 3,3 V pro digitální součástky.
+
+Jelikož analogová část obvodu pracuje se střídavým napětím, potřebují \acs{OZ} kladnou i zápornou napájecí linku.
+Tu zajišťuje integrovaný obvod LM27762 od společnosti Texas Instruments \cite{LM27762}.
+Tento čip v sobě sdružuje invertující nábojovou pumpu a lineární regulátory pro obě koleje.
+Schéma napájecího systému je zobrazeno na obr.~\ref{fig:power_sch}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{obrazky/power_sch.pdf}
+    \caption{Schéma napájecího systému prvního prototypu.}
+    \label{fig:power_sch}
+\end{figure}
+
+Rezistory R4 až R7 tvoří děliče zpětné vazby a nastavují výstupní napětí regulátorů.
+
+Výstupní napětí kladné koleje je dáno vztahem \ref{eq:vout_pos}.
+\begin{equation}
+    V_{OUT+} = 1{,}2\ \unit{V} \cdot \frac{R_4 + R_5}{R_5}
+    \label{eq:vout_pos}
+\end{equation}
+Analogicky pro zápornou kolej platí vztah \ref{eq:vout_neg}.
+\begin{equation}
+    V_{OUT-} = -1{,}2\ \unit{V} \cdot \frac{R_6 + R_7}{R_7}
+    \label{eq:vout_neg}
+\end{equation}
+
+Zvolením hodnot $R_4 = R_6 = 68\ \text{k}\Omega$ a $R_5 = R_7 = 22\ \text{k}\Omega$ je regulace výstupu nastavena na $\pm 4{,}91\ \unit{V}$.
+Tím je zajištěn dostatečný prostor pro úbytek napětí na regulátorech. \cite{LM27762}
+
+
+\subsection{Generátor měřícího signálu}
+
+
+
+
 \section{Zjištěné nedostatky}
-K digitalizaci signálu byla použita metoda převodu na stejnosměrná napětí, která je blíže popsána v kapitole \ref{sec:digit_DC}.
-Tento přístup byl zvolen zpočátku intuitivně, avšak výsledky zkoušení prototypu odhalily jeho nedostatky. To vedlo k výzkumu dalších metod digitalizace.
+
+
 
 \subsection{}

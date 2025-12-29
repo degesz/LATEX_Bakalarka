@@ -2,9 +2,9 @@
 
 Výstupem samo-vyvažovacího můstku jsou dva harmonické signály 
 reprezentující napětí a proud na měřeném obvodu. 
-Tyto signály je potřeba zdigitalizovat a následně zpracovat tak, aby bylo následně možné vypočítat impedanci obvodu.
+Tyto signály je potřeba zdigitalizovat a následně zpracovat tak, aby bylo možné vypočítat impedanci obvodu.
 
-Pro výpočet komplexní impedance je potřeba znát amplitudy (nebo efektivní hodnoty) a fázový posun mezi oběma signály.
+Pro výpočet komplexní impedance je potřeba znát amplitudy a fáze obou signálů.
 Dále je v tomto případě cílem měřit i střední hodnotu napětí, protože signály mohou mít stejnosměrnou složku.
 
 Nezáleží, zda je měřena amplituda nebo efektivní hodnota napětí, protože důležité nejsou absolutní hodnoty napětí, ale jejich poměr.
@@ -52,7 +52,7 @@ Tento jev je ukázán na grafu v obr. \ref{fig:chart_peakdetect}.
 \subsection{Fázový detektor}
 Fázový posun signálů může být měřen fázovými detektory fungujícími na principu průchodu nulou. Jednoduchá implementace takového 
 detektoru je založena na logickém hradle XOR, do kterého vstupují pulzní signály z komparátorů, které indikují momentální
-polaritu signálu \vizobr{fig:sch_XOR}.
+polaritu signálu \vizobr{fig:sch_XOR}. 
 
 Pokud mají signály stejnou fázi, mají v každý okamžik i stejnou polaritu, 
 tudíž výstup XOR hradla 
@@ -62,7 +62,7 @@ opačná, výstup XOR tedy bude aktivní 100\% času.
 
 Při fázových posunech mezi těmito extrémy $\varphi\in(0^\circ;180^\circ)$ je střída výstupu XOR přímo úměrná 
 fázovému posunu. Pro získání stejnosměrného napětí se použije RC filtr dolní propust,
-který ze signálu získá střední hodnotu \vizobr{fig:chart_XOR}. \cite{ArtOfElectronics}
+který ze signálu získá střední hodnotu \vizobr{fig:chart_XOR}. \cite[str.~957]{ArtOfElectronics}
 
 Fázový posun se ze střední hodnoty vypočítá následovně:
 \begin{equation}
@@ -77,7 +77,7 @@ kde $U_{log}$ je logická úroveň napětí (napájecí napětí hradla).
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.65\textwidth]{obrazky/XOR_phase_sch.pdf} % Adjusted width for the second figure
-    \caption{Schéma XOR fázového detektoru. \cite{ArtOfElectronics}}
+    \caption{Schéma XOR fázového detektoru. \cite[str.~957]{ArtOfElectronics}}
     \label{fig:sch_XOR} % Changed label for the second figure
 \end{figure}
 
@@ -115,7 +115,7 @@ Tímto přístupem se lze vyhnout mnoha nedostatkům výše popsané metody.
 
 \subsection{Vzorkování \acs{A/D} převodníkem}
 
-Pro správné vzorkování signálu je nutné dodržet Nyquistův-Shannonův teorém \cite[kap.~3]{smith_dsp_guide}, který říká, že vzorkovací frekvence $f_vz$ musí být alespoň dvojnásobkem nejvyšší frekvence v signálu $f_{max}$:
+Pro správné vzorkování signálu je nutné dodržet Nyquistův-Shannonův teorém \cite[str.~11]{Shannon1949}, který říká, že vzorkovací frekvence $f_vz$ musí být alespoň dvojnásobkem nejvyšší frekvence v signálu $f_{max}$:
 \begin{equation}
     f_{vz} \geq 2 \cdot f_{max}
     \label{eq:nyquist}
@@ -125,7 +125,7 @@ V praxi se však používá vzorkovací frekvence výrazně vyšší, typicky 10
 pro přesné zpracování a potlačení vlivu šumu.
 
 Při nedostatečné vzorkovací frekvenci dochází k jevu zvanému aliasing, kdy se vyšší frekvence v signálu projeví jako nižší frekvence v navzorkovaném signálu. 
-Tomu lze předejít použitím antialiasingového filtru před \acs{A/D} převodníkem, který odstraní frekvence vyšší než $f_s/2$.
+Tomu lze předejít použitím antialiasingového filtru před \acs{A/D} převodníkem, který odstraní frekvence vyšší než $\frac{f_s}{2}$.
 
 Vzorkovány jsou dva signály -- napětí a proud. Je důležité, aby byly oba kanály vzorkovány synchronně, 
 aby nedošlo k fázovému posunu způsobenému časovým zpožděním mezi vzorky. Toho lze docílit použitím dvou \acs{A/D} převodníků pracujících současně.

@@ -39,7 +39,7 @@ kde $f$ je frekvence měřicího signálu.
 
 \subsection{Činitel kvality}
 
-Činitel kvality $Q$ (quality factor) vyjadřuje poměr mezi reaktivní a rezistivní složkou impedance. Pro cívky a kondenzátory se definuje jako:
+Činitel kvality $Q$ (quality factor) vyjadřuje poměr mezi reaktivní a rezistivní složkou impedance. \cite{KeysightImpedanceHandbook} Pro cívky a kondenzátory se definuje jako:
 \begin{equation}
 Q = \frac{|X|}{R} = \frac{|\text{Im}(Z)|}{\text{Re}(Z)}
 \end{equation}
@@ -53,11 +53,11 @@ Ztrátový činitel $D$ (dissipation factor) je převrácenou hodnotou činitele
 D = \frac{1}{Q} = \frac{R}{|X|} = \frac{\text{Re}(Z)}{|\text{Im}(Z)|}
 \end{equation}
 
-Tato veličina se často používá pro charakterizaci kondenzátorů, kde vyjadřuje poměr ztrátové energie k energii uložené v elektrickém poli.
+Tato veličina se často používá pro charakterizaci kondenzátorů, kde vyjadřuje poměr ztrátové energie k energii uložené v elektrickém poli \cite{KeysightImpedanceHandbook}.
 
 \subsection{Ekvivalentní sériový odpor}
 
-Ekvivalentní sériový odpor \acs{ESR} (Equivalent Series Resistance) představuje rezistivní složku impedance v sériovém náhradním modelu součástky. Pro kondenzátory a cívky je \acs{ESR} důležitým parametrem, který charakterizuje jejich ztráty:
+Ekvivalentní sériový odpor \acs{ESR} (Equivalent Series Resistance) představuje rezistivní složku impedance v sériovém náhradním modelu součástky \cite{KeysightImpedanceHandbook}. Pro kondenzátory a cívky je \acs{ESR} důležitým parametrem, který charakterizuje jejich ztráty:
 \begin{equation}
 \text{ESR} = \text{Re}(Z)
 \end{equation}
@@ -66,16 +66,20 @@ Nízká hodnota \acs{ESR} je žádoucí zejména u kondenzátorů používaných
 
 
 \section{Metody měření impedance}
+Existuje mnoho metod pro měření impedance, z nichž každá má své výhody a nevýhody. Neexistuje jediná nejlepší metoda -- volba závisí na požadované přesnosti, měřeném frekvenčním rozsahu, typu měřené impedance a dalších faktorech.
+
+Níže je popsáno několik metod, které se v běžné laboratorní praxi používají. Dále existuje několik specializovaných metod pro měření impedance při rádiových frekvencích, které zde nejsou zmíněny.
+
 
 \subsection{Můstková metoda}
 
-Měření pomocí můstku je jednoduché a přesné, avšak velmi nepraktické.
+Měření pomocí můstku je jednoduché a přesné, avšak často nepraktické.
 Princip metody spočívá v tom, že pokud jsou impedance obou větví ($Z2$ a $Zx$) stejné,
 pak musí být napětí mezi větvemi nulové. Schéma můstku je zobrazeno v obr. \ref{fig:wheatstone}. \cite{KeysightImpedanceHandbook}
 
 \begin{figure}[h!]
     \centering
-    \includesvg[width=0.55\textwidth]{obrazky/wheatstone.svg}
+    \includegraphics[width=0.55\textwidth]{obrazky/wheatstone.pdf}
     \caption{Schéma měřícího můstku}
     \label{fig:wheatstone}
 \end{figure}
@@ -114,11 +118,11 @@ Výhodou této metody je její jednoduchost a možnost měření při vysokých 
 Princip této metody je výpočet hodnoty neznámé impedance z naměřených hodnot napětí a proudu podle ohmova zákona. \cite{KeysightImpedanceHandbook}
 V praxi se proud měří pomocí měření napětí na bočníku.
 \begin{equation}
-|Z| = \frac{U_{1}}{I} = \frac{U_{1}}{U_{2}}\cdot R
+|Z| = \frac{U_{x}}{I_{x}} = \frac{U_{x}}{U_{r}}\cdot R1
 \end{equation}
 Takovým měřením však získáme pouze modul komplexní impedance, z čehož nelze určit, 
 zda je charakter impedance rezistivní nebo reaktivní.
-Proto je nutné měřit také fázový posun $U_{1}$ a $U_{2}$, který je roven argumentu $\varphi$.
+Proto je nutné měřit také fázový posun $U_{x}$ a $U_{r}$, který je roven argumentu $\varphi$.
 \begin{equation}
  Z = |Z| \angle \varphi
 \end{equation}
@@ -140,7 +144,7 @@ je tedy možné na nich jednoduše měřit napětí vzhledem k zemi.
 
 \section{Měřiče impedance dostupné na trhu}
 Na trhu je mnoho dostupných zařízení pro měření impedance. Pro ukázku byly vybrány tři,
-každé ze samostatné cenové kategorie.
+každé reprezentující svou cenovou kategorie.
 
 \subsection{Univerzální tester komponent}
 

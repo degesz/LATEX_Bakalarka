@@ -4,11 +4,11 @@ Tato kapitola se zabývá obecnou implementací analogové měřící části za
 
 \section{Zdroj měřícího signálu}
 
-Pro účely měření impedance je nezbytné vybudit měřenou komponentu adekvátním napětím a proudem.
+Komponentu, jejíž impedanci chceme měřit, je nezbytné vybudit adekvátním napětím.
 
-Specifikace návrhových požadavků definují, že budicí zdroj musí generovat harmonické 
-střídavé napětí s plně nastavitelnými parametry, zahrnujícími frekvenci, 
-amplitudu a superponovanou stejnosměrnou složku (DC offset).
+Specifikace návrhových požadavků definuje, že budicí zdroj musí generovat harmonické 
+střídavé napětí s plně nastavitelnými parametry: frekvence, 
+amplituda a superponovaná stejnosměrná složka (DC offset).
 
 
 \subsection{Přímá digitální syntéza (\acs{DDS})}
@@ -25,8 +25,8 @@ Signál z převodníku je následně filtrován dolní propustí o adekvátní m
 která odstraní vyšší harmonické složky vzniklé z diskrétních digitálních kroků.
 Princip funkce DDS je ilustrován na obr. \ref{fig:DDS}. 
 
-V praxi se používají integrované obvody, které řeší celou funkčnost DDS (např. AD9837). Vstupní parametr požadované frekvence se do nich zadává 
-pomocí sériové sběrnice z mikrokontroléru. \cite{AD9837}
+V praxi se používají integrované obvody, které řeší celou funkčnost DDS (např. AD9837 \cite{AD9837}). Vstupní parametr požadované frekvence se do nich zadává 
+pomocí sériové sběrnice z mikrokontroléru. 
 
 
 \begin{figure}[h!]
@@ -37,14 +37,43 @@ pomocí sériové sběrnice z mikrokontroléru. \cite{AD9837}
 \end{figure}
 
 
+
+
+\subsection{Úprava stejnosměrné složky signálu}
+
+Integrované obvody DDS typicky generují signál s takovou superponovanou stejnosměrnou složkou, že výstupní napětí je vždy kladné. \cite{AD9837}
+Pro základní měření impedance se používá signál bez stejnosměrné složky, je tedy nutno ji odstranit CR filtrem horní propust.
+
+Mezní frekvence filtru je dána vztahem \ref{eq:cutoff_freq}. Hodnoty R a C jsou voleny tak, aby mezní frekvence byla v rozmezí 10 Hz až 30 Hz (rovnice \ref{eq:cutoff_freq_calc}).
+\begin{equation}
+    f_c = \frac{1}{2\pi R C}
+    \label{eq:cutoff_freq}
+\end{equation}
+\begin{equation}
+    f_c = \frac{1}{2\pi \cdot 10000 \cdot 1\cdot 10^{-6}} = 15{,}92\ \unit{Hz}
+    \label{eq:cutoff_freq_calc}
+\end{equation}
+
+V některých případech je žádoucí k vyfiltrovanému signálu přidat nastavitelnou stejnosměrnou složku. Toho se jednoduše docílí \acs{OZ} v zapojení \uv{neinvertující sčítač}, 
+který k signálu přičte nastavitelné napětí $U_{DC}$ z \acs{D/A} převodníku, případně vyfiltrované napětí PWM z mikrokontroléru. Aby filtry nebyly zatíženy, jsou použity \acs{OZ} v zapojení \uv{sledovač}.
+Schéma zapojení je zobrazeno na obr. \ref{fig:sch_adder}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{obrazky/adder_sch.pdf} % Adjusted width for the second figure
+    \caption{Schéma obvodu pro úpravu stejnosměrné složky signálu.}
+    \label{fig:sch_adder} % Changed label for the second figure
+\end{figure}
+
+
 \subsection{Úprava amplitudy}
 Jednoduché integrované obvody DDS typicky nepodporují nastavení amplitudy nebo 
-stejnosměrné složky signálu, tuto úpravu je tedy nutno provést externě.
+stejnosměrné složky signálu, tuto úpravu je tedy nutno provést externě. \cite{AD9837}
 
 Digitálního řízení amplitudy lze docílit několika způsoby, například:
 \begin{itemize}
-    \item Zapojit sinusový signál jako referenci \acs{D/A} převodníku, který pak bude fungovat jako digitálně ovládaný dělič. 
-    \item Použít zesilovač s programovatelným zesílením (\acs{PGA}). Tyto zesilovače většinou mají málo úrovní zesílení.
+    \item Zapojit sinusový signál jako referenci \acs{D/A} převodníku, který pak bude fungovat jako digitálně ovládaný dělič. \cite[str.~413]{ArtOfElectronics}
+    \item Použít zesilovač s programovatelným zesílením (\acs{PGA}). Tyto zesilovače většinou mají málo úrovní zesílení. \cite[str.~371]{ArtOfElectronics}
     \item Použít operační zesilovač s digitálním potenciometrem ve zpětné vazbě. Takové zapojení je limitováno minimálním zesílením $A=1$.
     \item Operačním zesilovačem zesílit amplitudu na maximální hodnotu a následně ji snížit digitálním potenciometrem zapojeným jako odporový dělič.
     \item Nejdříve zeslabit signál digitálním potenciometrem -- děličem a poté jej zesílit operačním zesilovačem s fixním zesílením. Oproti předchozímu zapojení se tím ušetří jeden sledovač, protože výstup operačního zesilovače je nízkoimpedanční.
@@ -86,51 +115,27 @@ Digitální hodnotu potenciometru pro konkrétní amplitudu $U_{out}$ vypočít�
 \hspace{11em}\text{kde } $n$ \text{ je bitové rozlišení digitálního potenciometru}
 
 
-\subsection{Úprava stejnosměrné složky signálu}
-
-Integrované obvody DDS typicky generují signál s takovou superponovanou stejnosměrnou složkou, že výstupní napětí je vždy kladné.
-Pro základní měření impedance se používá signál bez stejnosměrné složky, je tedy nutno ji odstranit CR filtrem horní propust.
-
-Mezní frekvence filtru je dána vztahem \ref{eq:cutoff_freq}. Hodnoty R a C jsou voleny tak, aby mezní frekvence byla v rozmezí 10 Hz až 30 Hz (rovnice \ref{eq:cutoff_freq_calc}).
-\begin{equation}
-    f_c = \frac{1}{2\pi R C}
-    \label{eq:cutoff_freq}
-\end{equation}
-\begin{equation}
-    f_c = \frac{1}{2\pi \cdot 10000 \cdot 1\cdot 10^{-6}} = 15{,}92\ \unit{Hz}
-    \label{eq:cutoff_freq_calc}
-\end{equation}
-
-V některých případech je žádoucí k vyfiltrovanému signálu přidat nastavitelnou stejnosměrnou složku. Toho se jednoduše docílí \acs{OZ} v zapojení \uv{neinvertující sčítač}, 
-který k signálu přičte nastavitelné napětí $U_{DC}$ z \acs{D/A} převodníku, případně vyfiltrované napětí PWM z mikrokontroléru. Aby filtry nebyly zatíženy, jsou použity \acs{OZ} v zapojení \uv{sledovač}.
-Schéma zapojení je zobrazeno na obr. \ref{fig:sch_adder}.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.85\textwidth]{obrazky/adder_sch.pdf} % Adjusted width for the second figure
-    \caption{Schéma obvodu pro úpravu stejnosměrné složky signálu.}
-    \label{fig:sch_adder} % Changed label for the second figure
-\end{figure}
 
 \section{Samovyvažovací můstek}
 
 Ústřední částí měřícího obvodu je samovyvažovací můstek, který se chová jako převodník proudu na napětí. Skládá se z \acs{OZ} a referenčního rezistoru.
 
 \subsection{Výběr operačního zesilovače}
+\label{sec:opamp_selection}
 Operační zesilovač v měřící sekci je kritický prvek, odvíjí se od něj přesnost celého měřidla.
 Při jeho výběru je nutno dbát na následující parametry:
 \begin{enumerate}
     \item \textbf{Šířka pásma (\acs{GBW})} -- U samovyvažovacího můstku musí \acs{OZ} udržovat \uv{virtuální nulu} na svém invertujícím vstupu. 
     Aby byla tato nula dostatečně stabilní i při vyšších frekvencích, musí mít \acs{OZ} velkou rezervu zesílení. 
-    \acs{GBW} by tedy mělo být alespoň $100\times$ vyšší, než je maximální měřící frekvence.
-    \item \textbf{Vstupní proud} -- Vstupní proud \acs{OZ} by měl být co nejnižší, aby nedocházelo ke zkreslení zejména při měření vysokých impedancí.
+    \acs{GBW} by tedy mělo být alespoň $100\times$ vyšší, než je maximální měřící frekvence. 
+    \item \textbf{Vstupní proud} -- Vstupní proud \acs{OZ} by měl být co nejnižší, aby nedocházelo ke zkreslení zejména při měření vysokých impedancí. \cite{TI_ImpedanceMeasurement} 
     Vstupní proud musí být řádově menší než proud protékající měřenou impedancí, jinak vznikne hrubá chyba.
     \item \textbf{Napěťový offset} -- \acs{OZ} by měl mít co nejmenší napěťový offset, aby neovlivňoval výsledky měření nízkých napětí a nebyla tak do výsledků vnášena systematická chyba.
     \item \textbf{Rychlost přeběhu (slew rate)} -- Rychlost přeběhu musí být dostatečná, aby \acs{OZ} byl schopen sledovat rychle se měnící signál. Aby se zabránilo zkreslení, musí platit:
     \begin{equation}
         SR \geq 2 \cdot \pi \cdot f_{max} \cdot U_p
     \end{equation}
-    kde $f_{max}$ je maximální měřená frekvence signálu a $U_p$ je jeho špičková amplituda.
+    kde $f_{max}$ je maximální měřená frekvence signálu a $U_p$ je jeho špičková amplituda. \cite[str.~248]{ArtOfElectronics}
     \item \textbf{Šumové vlastnosti} -- \acs{OZ} by měl mít nízkou úroveň vlastního šumu zejména při měření malých signálů, aby nebyl výsledek měření ovlivněn rušivými komponentami ze zesilovače samotného.
 \end{enumerate}
 
@@ -147,7 +152,7 @@ Pro měření nízkých impedancí se použije menší bočník (např. $1\ \Ome
 Pro přepínání bočníků lze použít několik metod:
 \begin{itemize}
     \item \textbf{Relé} -- Mechanická relé poskytují nejlepší vlastnosti z hlediska odporu v sepnutém stavu (typicky $< 100\ \text{m}\Omega$) a izolace v rozepnutém stavu.
-    Nevýhodou je jejich pomalé přepínání (typicky $5$--$10\ \text{ms}$), omezená životnost a vyšší cena.
+    Nevýhodou je jejich pomalé přepínání (typicky $5$--$10\ \text{ms}$), omezená životnost a vyšší cena. \cite{citrelay_j104d}
     \item \textbf{Analogové spínače (\acs{CMOS})} -- Integrované obvody obsahující více analogových spínačů jsou rychlé, mají dlouhou životnost a nízkou spotřebu.
     Nevýhodou je vyšší odpor v sepnutém stavu (typicky $5$--$100\ \Omega$) a omezená izolace v rozepnutém stavu.
 \end{itemize}
