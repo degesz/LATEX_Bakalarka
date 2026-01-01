@@ -12,6 +12,7 @@ amplituda a superponovaná stejnosměrná složka (DC offset).
 
 
 \subsection{Přímá digitální syntéza (\acs{DDS})}
+\label{sec:dds}
 V moderních měřičích impedance se téměř výhradně používá pro generování sinusoidního signálu
 metoda DDS. Historicky nebyly digitální integrované obvody dostatečně výkonné, proto se využívaly
 různé analogové oscilátory a harmonické tvarovače. 
@@ -20,7 +21,7 @@ Takové obvody byly však složité, dnes se již implementují jen zřídka.
 Metoda DDS spočívá v generování sinusového průběhu \acs{D/A} převodníkem, do kterého jsou 
 z paměti načítány předvypočítané hodnoty funkce $sin(t)$. Tyto hodnoty se nazývají \uv{vyhledávací tabulka},
 nebo anglicky \uv{lookup table} (\acs{LUT}).
-Frekvence výsledného signálu je závislá na prodlevě mezi načítáním jednotlivých hodnot. \cite{ArtOfElectronics}
+Frekvence výsledného signálu je závislá na prodlevě mezi načítáním jednotlivých hodnot. \cite[str.~451]{ArtOfElectronics}
 Signál z převodníku je následně filtrován dolní propustí o adekvátní mezní frekvenci,
 která odstraní vyšší harmonické složky vzniklé z diskrétních digitálních kroků.
 Princip funkce DDS je ilustrován na obr. \ref{fig:DDS}. 
@@ -44,7 +45,7 @@ pomocí sériové sběrnice z mikrokontroléru.
 Integrované obvody DDS typicky generují signál s takovou superponovanou stejnosměrnou složkou, že výstupní napětí je vždy kladné. \cite{AD9837}
 Pro základní měření impedance se používá signál bez stejnosměrné složky, je tedy nutno ji odstranit CR filtrem horní propust.
 
-Mezní frekvence filtru je dána vztahem \ref{eq:cutoff_freq}. Hodnoty R a C jsou voleny tak, aby mezní frekvence byla v rozmezí 10 Hz až 30 Hz (rovnice \ref{eq:cutoff_freq_calc}).
+Mezní frekvence filtru je dána vztahem \ref{eq:cutoff_freq}. Hodnoty $R$ a $C$ jsou voleny tak, aby mezní frekvence byla v rozmezí 10~Hz až 30~Hz (rovnice \ref{eq:cutoff_freq_calc}).
 \begin{equation}
     f_c = \frac{1}{2\pi R C}
     \label{eq:cutoff_freq}
@@ -54,7 +55,7 @@ Mezní frekvence filtru je dána vztahem \ref{eq:cutoff_freq}. Hodnoty R a C jso
     \label{eq:cutoff_freq_calc}
 \end{equation}
 
-V některých případech je žádoucí k vyfiltrovanému signálu přidat nastavitelnou stejnosměrnou složku. Toho se jednoduše docílí \acs{OZ} v zapojení \uv{neinvertující sčítač}, 
+V některých případech je žádoucí k vyfiltrovanému signálu přidat nastavitelnou stejnosměrnou složku. Toho se jednoduše dosáhne \acs{OZ} v zapojení \uv{neinvertující sčítač}, 
 který k signálu přičte nastavitelné napětí $U_{DC}$ z \acs{D/A} převodníku, případně vyfiltrované napětí PWM z mikrokontroléru. Aby filtry nebyly zatíženy, jsou použity \acs{OZ} v zapojení \uv{sledovač}.
 Schéma zapojení je zobrazeno na obr. \ref{fig:sch_adder}.
 
@@ -70,7 +71,7 @@ Schéma zapojení je zobrazeno na obr. \ref{fig:sch_adder}.
 Jednoduché integrované obvody DDS typicky nepodporují nastavení amplitudy nebo 
 stejnosměrné složky signálu, tuto úpravu je tedy nutno provést externě. \cite{AD9837}
 
-Digitálního řízení amplitudy lze docílit několika způsoby, například:
+Digitálního řízení amplitudy lze dosáhnout několika způsoby, například:
 \begin{itemize}
     \item Zapojit sinusový signál jako referenci \acs{D/A} převodníku, který pak bude fungovat jako digitálně ovládaný dělič. \cite[str.~413]{ArtOfElectronics}
     \item Použít zesilovač s programovatelným zesílením (\acs{PGA}). Tyto zesilovače většinou mají málo úrovní zesílení. \cite[str.~371]{ArtOfElectronics}
@@ -93,16 +94,16 @@ Fixní zesílení operačního zesilovače se řídí vztahem \ref{eq:noninv_gai
     A =\frac{V_{out}}{V_{in}} = 1 + \frac{R_2}{R_3}
     \label{eq:noninv_gain}
 \end{equation}
-Vstupní amplituda je dána $U_{in} = 0,6 \ \unit{V}$, požadovaná maximální amplituda signálu je $U_{out} =3\ V$.
+Vstupní amplituda je dána $U_{\text{in}} = 0{,}6\ \unit{V}$, požadovaná maximální amplituda signálu je $U_{\text{out}} = 3\ \unit{V}$.
 Dosazením (rovnice \ref{eq:noninv_dosaz}) získáme poměr rezistorů $R_{2}$ a $R_{3}$.
 \begin{equation}
     A =\frac{3}{0,6} = 5 = 1 + \frac{4}{1}
     \label{eq:noninv_dosaz}
 \end{equation}
-Prakticky můžeme použít např. $R_{3} = 10\ k\Omega$ ; $R_{2} = 4\times 10\ k\Omega$ v sérii.
+Prakticky můžeme použít např. $R_{3} = 10\ \unit{k\Omega}$; $R_{2} = 4\times 10\ \unit{k\Omega}$ v sérii.
 
 Celková amplituda výstupního signálu $U_{\text{out}}$ vychází z rovnice \ref{eq:outputamp}.
-Digitální hodnotu potenciometru pro konkrétní amplitudu $U_{out}$ vypočítáme ze vztahu \ref{eq:digival}.
+Digitální hodnotu potenciometru pro konkrétní amplitudu $U_{\text{out}}$ vypočítáme ze vztahu \ref{eq:digival}.
 
 \begin{equation}
     U_{\text{out}} = U_{\text{in}} \cdot \frac{X}{2^n} \cdot A
@@ -112,7 +113,7 @@ Digitální hodnotu potenciometru pro konkrétní amplitudu $U_{out}$ vypočít�
         X = \frac{2^n\cdot U_{\text{out}}}{A\cdot U_{\text{in}}} 
     \label{eq:digival}
 \end{equation}
-\hspace{11em}\text{kde } $n$ \text{ je bitové rozlišení digitálního potenciometru}
+kde $n$ je bitové rozlišení digitálního potenciometru.
 
 
 
@@ -135,7 +136,7 @@ Při jeho výběru je nutno dbát na následující parametry:
     \begin{equation}
         SR \geq 2 \cdot \pi \cdot f_{max} \cdot U_p
     \end{equation}
-    kde $f_{max}$ je maximální měřená frekvence signálu a $U_p$ je jeho špičková amplituda. \cite[str.~248]{ArtOfElectronics}
+    kde $f_{\text{max}}$ je maximální měřená frekvence signálu a $U_p$ je jeho špičková amplituda. \cite[str.~248]{ArtOfElectronics}
     \item \textbf{Šumové vlastnosti} -- \acs{OZ} by měl mít nízkou úroveň vlastního šumu zejména při měření malých signálů, aby nebyl výsledek měření ovlivněn rušivými komponentami ze zesilovače samotného.
 \end{enumerate}
 
@@ -147,14 +148,15 @@ Volba správného bočníku je kritická pro přesnost měření -- pokud je odp
 Pokud je odpor příliš malý, může dojít k přetížení operačního zesilovače nebo k nedostatečnému rozlišení při měření vysokých impedancí.
 
 Princip přepínání rozsahu spočívá v tom, že podle očekávané hodnoty měřené impedance se automaticky nebo manuálně zapojí do obvodu vhodný bočník.
-Pro měření nízkých impedancí se použije menší bočník (např. $1\ \Omega$, $10\ \Omega$), pro měření vysokých impedancí se použije větší bočník (např. $1\ \text{k}\Omega$, $10\ \text{k}\Omega$).
+Pro měření nízkých impedancí se použije menší bočník (např. $1\ \Omega$, $10\ \Omega$), 
+pro měření vysokých impedancí se použije větší bočník (např. $1\ \unit{k\Omega}$, $10\ \unit{k\Omega}$).
 
 Pro přepínání bočníků lze použít několik metod:
 \begin{itemize}
-    \item \textbf{Relé} -- Mechanická relé poskytují nejlepší vlastnosti z hlediska odporu v sepnutém stavu (typicky $< 100\ \text{m}\Omega$) a izolace v rozepnutém stavu.
-    Nevýhodou je jejich pomalé přepínání (typicky $5$--$10\ \text{ms}$), omezená životnost a vyšší cena. \cite{citrelay_j104d}
+    \item \textbf{Relé} -- Mechanická relé poskytují nejlepší vlastnosti z hlediska odporu v sepnutém stavu (typicky $< 100\ \unit{m\Omega}$) a izolace v rozepnutém stavu.
+    Nevýhodou je jejich pomalé přepínání (typicky 5--10~ms), omezená životnost a vyšší cena. \cite{citrelay_j104d}
     \item \textbf{Analogové spínače (\acs{CMOS})} -- Integrované obvody obsahující více analogových spínačů jsou rychlé, mají dlouhou životnost a nízkou spotřebu.
-    Nevýhodou je vyšší odpor v sepnutém stavu (typicky $5$--$100\ \Omega$) a omezená izolace v rozepnutém stavu.
+    Nevýhodou je vyšší odpor v sepnutém stavu (typicky 5--$100\ \Omega$) a omezená izolace v rozepnutém stavu.
 \end{itemize}
 
 

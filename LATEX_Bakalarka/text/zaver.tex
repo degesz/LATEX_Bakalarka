@@ -2,4 +2,24 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Závěr}
 
-Shrnutí studentské práce.
+Cílem této semestrální práce bylo nastudovat principy měření impedance elektrických součástek a navrhnout koncepci měřiče impedance pro frekvenční pásmo do 100~kHz.
+
+V~teoretické části práce byly popsány základní principy měření impedance a analyzovány různé metody realizace měřicích přístrojů. 
+Jako hlavní koncept byl zvolen samo-vyvažovací můstek, který se používá v~moderních komerčních LCR metrech. 
+Dále byla zpracována problematika generace měřicího signálu metodou přímé digitální syntézy (DDS) a možnosti úpravy jeho parametrů -- amplitudy a stejnosměrné složky.
+
+Významná část práce byla věnována digitalizaci a zpracování signálů. Byla analyzována jednodušší metoda převodu na stejnosměrná napětí pomocí špičkových a 
+fázových detektorů, která se však ukázala jako nevhodná pro přesná měření kvůli citlivosti na šum. 
+Proto byla navržena alternativní metoda přímého vzorkování harmonických signálů A/D převodníkem a jejich následného zpracování diskrétní Fourierovou transformací.
+
+Pro ověření navržených konceptů byl zkonstruován první prototyp měřiče. Na tomto prototypu byly úspěšně ověřeny subsystémy napájení a generátoru měřicího signálu. 
+Testování však odhalilo několik nedostatků návrhu, což motivovalo přechod na metodu digitalizace přímým vzorkováním.
+
+Na základě získaných poznatků bude práce v~navazující bakalářské práci pokračovat následujícími kroky:
+\begin{itemize}
+    \item Konstrukce testovacího přípravku pro ověření synchronního vzorkování dvou signálů při vzorkovací frekvenci 1~MHz.
+    \item Finální návrh a realizace kompletního měřiče impedance s~vylepšenou analogovou částí a implementací metody přímého vzorkování.
+    \item Provedení ověřovacích měření na sadě referenčních součástek a porovnání výsledků s~komerčním laboratorním přístrojem.
+    \item Stanovení dosažené přesnosti měření a zhodnocení parametrů zařízení.
+\end{itemize}
+

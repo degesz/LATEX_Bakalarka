@@ -4,8 +4,8 @@
 %  draft,    				  % Testovací překlad
   12pt,       				% Velikost základního písma je 12 bodů
   a4paper,    				% Formát papíru je A4
-  %oneside,      			% Jednostranný tisk
-    twoside,      			% Dvoustranný tisk (kapitoly a další důležité části tedy začínají na lichých stranách)
+  oneside,      			% Jednostranný tisk
+  %twoside,      			% Dvoustranný tisk (kapitoly a další důležité části tedy začínají na lichých stranách)
 	unicode,						% Záložky a metainformace ve výsledném  PDF budou v kódování unicode
 ]{report}				    	% Dokument třídy 'zpráva', vhodná pro sazbu závěrečných prací s kapitolami
 
@@ -227,10 +227,10 @@
 % (rozdělte na více souborů či kapitol, pokud je vhodné)
 
 \include{text/prvni_prototyp}
-\include{text/testovaci_prototyp}
-\include{text/vyber_soucastek}
-\include{text/realizace_zarizeni}
-\include{text/vysledky}
+%\include{text/testovaci_prototyp}  % Prázdná kapitola - zatím vynecháno
+%TEMPORARY: \include{text/vyber_soucastek}
+%TEMPORARY: \include{text/realizace_zarizeni}
+%TEMPORARY: \include{text/vysledky}
 
 %%% Vložení souboru 'text/zaver' se závěrem
 \include{text/zaver}

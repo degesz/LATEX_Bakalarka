@@ -30,7 +30,7 @@ Původní záměr byl připojit ovládací modul s displejem a tlačítky pozdě
 
 
 \section{Validované subsystémy}
-Na prototypu byly odzkoušeny řešení pro napájení a generaci měřícího signálu. Tyto subsystémy fungovaly bezproblémově a byly proto přeneseny do finálního návrhu.
+Na prototypu byly odzkoušeny řešení pro napájení a generaci měřícího signálu. Tyto subsystémy fungovaly bezproblémově a budou proto přeneseny do finálního návrhu.
 
 \subsection{Napájecí systém}
 Celé zařízení je napájeno z 5V USB. Dále je zařazen jednoduchý lineární regulátor HT7533, který poskytuje napájecí linku 3,3 V pro digitální součástky.
@@ -47,7 +47,7 @@ Schéma napájecího systému je zobrazeno na obr.~\ref{fig:power_sch}.
     \label{fig:power_sch}
 \end{figure}
 
-Rezistory R4 až R7 tvoří děliče zpětné vazby a nastavují výstupní napětí regulátorů.
+Rezistory $R_{4}$ až $R_{7}$ tvoří děliče zpětné vazby a nastavují výstupní napětí regulátorů.
 
 Výstupní napětí kladné koleje je dáno vztahem \ref{eq:vout_pos}.
 \begin{equation}
@@ -60,17 +60,44 @@ Analogicky pro zápornou kolej platí vztah \ref{eq:vout_neg}.
     \label{eq:vout_neg}
 \end{equation}
 
-Zvolením hodnot $R_4 = R_6 = 68\ \text{k}\Omega$ a $R_5 = R_7 = 22\ \text{k}\Omega$ je regulace výstupu nastavena na $\pm 4{,}91\ \unit{V}$.
+Zvolením hodnot $R_4 = R_6 = 68\ \unit{k\Omega}$ a $R_5 = R_7 = 22\ \unit{k\Omega}$ je regulace výstupu nastavena na $\pm 4{,}91\ \unit{V}$.
 Tím je zajištěn dostatečný prostor pro úbytek napětí na regulátorech. \cite{LM27762}
+
 
 
 \subsection{Generátor měřícího signálu}
 
+Generátor měřícího signálu je realizován pomocí \acs{DDS} syntézy, jak bylo popsáno v kapitole \ref{sec:dds}.
+Jelikož výstupní signál integrovaného obvodu AD9837 má jak amplitudu, tak stejnosměrnou složku 0,3~V \cite{AD9837}, bylo nutné použít upravovací obvod se zesilovačem, digitálním potenciometrem a sčítačkou.
+V tomto prototypu byla nedopatřením zapojena sčítačka jako invertující zesilovač, nastavený DC offset byl tedy záporný. 
+Schéma generátoru je zobrazeno na obr.~\ref{fig:sigsource_sch}.
+
+Měřením bylo zjištěno, že tento návrh generátoru signálu je plně funkční i při maximální frekvenci 100~kHz.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{obrazky/sigsource_sch.pdf}
+    \caption{Schéma generátoru měřícího signálu.}
+    \label{fig:sigsource_sch}
+\end{figure}
 
 
 
 \section{Zjištěné nedostatky}
+V průběhu testování prototypu došlo k odkrytí několika chyb v návrhu. Z toho pramenil další výzkum způsobů měření, jako metoda přímého vzorkování signálů.
+
+\subsection{Zkreslující OZ}
+V zájmu snížení nákladů na prototyp byl v samovyvažovacím můstku použit levnější OZ TLV9154 \cite{TLV9154}.
+Při vyšších frekvencích bylo osciloskopem změřeno, že tento OZ zkresluje tvar sinusového signálu, což výrazně snižuje přesnost měření.
+
+\subsection{Nadbytečné zesilovače}
+V návrhu prototypu byly v dráze signálu měřeného napětí a proudu použity diferenční zesilovače INA823 s nastavitelným zesílením \cite{INA823}.
+Zesílení bylo nastavováno připojením různých rezistorů pomocí analogového multiplexeru.
+
+To se ukázalo jako zbytečná komplikace, nastavování rozsahů pak bylo příliš složité.
+
+\subsection{Špatné měření fáze}
+V tomto prototypu bylo měření fáze implementováno pomocí detekce průchodu nulou komparátorem a následném měření časové prodlevy hran pulzů mikrokontrolérem.
+Takové měření je nejen nákladné na procesorový čas vzhledem k časté aktivaci přerušení, ale také při frekvenci 100 kHz neposkytuje vysoké rozlišení.
 
 
-
-\subsection{}

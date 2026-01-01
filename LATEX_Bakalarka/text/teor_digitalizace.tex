@@ -115,20 +115,20 @@ Tímto přístupem se lze vyhnout mnoha nedostatkům výše popsané metody.
 
 \subsection{Vzorkování \acs{A/D} převodníkem}
 
-Pro správné vzorkování signálu je nutné dodržet Nyquistův-Shannonův teorém \cite[str.~11]{Shannon1949}, který říká, že vzorkovací frekvence $f_vz$ musí být alespoň dvojnásobkem nejvyšší frekvence v signálu $f_{max}$:
+Pro správné vzorkování signálu je nutné dodržet Nyquistův--Shannonův teorém \cite[str.~11]{Shannon1949}, který říká, že vzorkovací frekvence $f_{\text{vz}}$ musí být alespoň dvojnásobkem nejvyšší frekvence v signálu $f_{\text{max}}$:
 \begin{equation}
-    f_{vz} \geq 2 \cdot f_{max}
+    f_{\text{vz}} \geq 2 \cdot f_{\text{max}}
     \label{eq:nyquist}
 \end{equation}
 
-V praxi se však používá vzorkovací frekvence výrazně vyšší, typicky 10 až 20 násobek frekvence měřeného signálu, aby bylo zajištěno dostatečné množství vzorků
+V praxi se však používá vzorkovací frekvence výrazně vyšší, typicky 10 až 20násobek frekvence měřeného signálu, aby bylo zajištěno dostatečné množství vzorků
 pro přesné zpracování a potlačení vlivu šumu.
 
 Při nedostatečné vzorkovací frekvenci dochází k jevu zvanému aliasing, kdy se vyšší frekvence v signálu projeví jako nižší frekvence v navzorkovaném signálu. 
-Tomu lze předejít použitím antialiasingového filtru před \acs{A/D} převodníkem, který odstraní frekvence vyšší než $\frac{f_s}{2}$.
+Tomu lze předejít použitím antialiasingového filtru před \acs{A/D} převodníkem, který odstraní frekvence vyšší než $\frac{f_{\text{vz}}}{2}$.
 
-Vzorkovány jsou dva signály -- napětí a proud. Je důležité, aby byly oba kanály vzorkovány synchronně, 
-aby nedošlo k fázovému posunu způsobenému časovým zpožděním mezi vzorky. Toho lze docílit použitím dvou \acs{A/D} převodníků pracujících současně.
+Vzorkovány jsou dva signály~-- napětí a proud. Je důležité, aby byly oba kanály vzorkovány synchronně, 
+aby nedošlo k fázovému posunu způsobenému časovým zpožděním mezi vzorky. Toho lze dosáhnout použitím dvou \acs{A/D} převodníků pracujících současně.
 
 \subsection{Výpočet amplitud a fází z navzorkovaných signálů}
 
@@ -169,7 +169,7 @@ kde $U_c$ a $U_s$ jsou kosinová a sinová složka signálu. Při vzorkování $
     \label{eq:sin_component}
 \end{equation}
 
-Tento výpočet se provede pro oba kanály -- napětí i proud. Fázový posun mezi napětím a proudem je pak dán rozdílem jejich fází:
+Tento výpočet se provede pro oba kanály~-- napětí i proud. Fázový posun mezi napětím a proudem je pak dán rozdílem jejich fází:
 \begin{equation}
     \Delta\varphi = \varphi_u - \varphi_i
     \label{eq:phase_difference}

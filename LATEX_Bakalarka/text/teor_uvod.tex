@@ -89,7 +89,7 @@ impedance $Zx = \frac{Z1}{Z3}\cdot Z2$
 
 Problém této metody spočívá v tom, že je nutno znát nastavenou hodnotu $Z2$.
 Protože nastavitelné kondenzátory a cívky nejsou praktické, používá se tato metoda
-zejména pro měření malých změn v odporu např. tenzometru.
+zejména pro měření malých změn v odporu, např. tenzometru.
 
 \subsection{Rezonanční metoda}
 
@@ -115,7 +115,7 @@ Pro měření neznámé impedance se obvykle používá sériový rezonanční o
 Výhodou této metody je její jednoduchost a možnost měření při vysokých frekvencích. Nevýhodou je nutnost znalosti přesné hodnoty referenční součástky a omezení na měření jen jedné z reaktivních složek (indukčnosti a kapacity), zatímco rezistivní složka se měří obtížněji.
 
 \subsection{Metoda měření proudu a napětí}
-Princip této metody je výpočet hodnoty neznámé impedance z naměřených hodnot napětí a proudu podle ohmova zákona. \cite{KeysightImpedanceHandbook}
+Princip této metody je výpočet hodnoty neznámé impedance z naměřených hodnot napětí a proudu podle Ohmova zákona. \cite{KeysightImpedanceHandbook}
 V praxi se proud měří pomocí měření napětí na bočníku.
 \begin{equation}
 |Z| = \frac{U_{x}}{I_{x}} = \frac{U_{x}}{U_{r}}\cdot R1
@@ -131,7 +131,7 @@ Proto je nutné měřit také fázový posun $U_{x}$ a $U_{r}$, který je roven 
 V praxi se metoda měření proudu a napětí často implementuje pomocí tzv. samo-vyvažovacího můstku,
 což je operační zesilovač, který vytváří virtuální zem \vizobr{fig:autobalance_bridge}. \cite{KeysightImpedanceHandbook}
 
-Výhoda takového uspořádání je, že jak měřená impedance tak bočník jsou připojeny k zemi, 
+Výhoda takového uspořádání je, že jak měřená impedance, tak bočník jsou připojeny k zemi, 
 je tedy možné na nich jednoduše měřit napětí vzhledem k zemi.
 
 \begin{figure}[h!]
@@ -144,7 +144,7 @@ je tedy možné na nich jednoduše měřit napětí vzhledem k zemi.
 
 \section{Měřiče impedance dostupné na trhu}
 Na trhu je mnoho dostupných zařízení pro měření impedance. Pro ukázku byly vybrány tři,
-každé reprezentující svou cenovou kategorie.
+každé reprezentující svou cenovou kategorii.
 
 \subsection{Univerzální tester komponent}
 
@@ -161,7 +161,7 @@ Pro měření využívá metodu časové konstanty, kdy se měří čas nabití 
 \end{figure}
 
 Přesnost měření není udávána, přístroj totiž slouží pouze pro hrubou identifikaci součástek.
-Cena se pohybuje okolo 350 Kč\cite{hadex_lcrt4}.
+Cena se pohybuje okolo 350~Kč \cite{hadex_lcrt4}.
 
 \subsection{Ruční LCR měřiče}
 
@@ -182,10 +182,10 @@ a možnost nastavit parametry měření jako frekvenci měřícího signálu. \c
 \subsection{Stolní LCR měřiče}
 
 Pro nejpřesnější měření je nutno použít špičkové stolní LCR měřiče. 
-Jako zástupce byl vybrán přistroj LCX200 od firmy Rohde\&Schwarz \vizobr{fig:rhode_lcr}.
+Jako zástupce byl vybrán přístroj LCX200 od firmy Rohde \& Schwarz \vizobr{fig:rhode_lcr}.
 
 Tyto přístroje podporují čtyřbodovou metodu měření, která eliminuje parazitní indukčnost
-měřících sond. Narozdíl od ručních měřičů se zde používají stíněné koaxiální sondy, které jsou méně náchylné k rušení.
+měřících sond. Na rozdíl od ručních měřičů se zde používají stíněné koaxiální sondy, které jsou méně náchylné k rušení.
 
 Výrobce standardně dodává několik různých fixtur k připojení měřeného vzorku, typicky SMD součástky.
 
@@ -194,7 +194,7 @@ Většina stolních měřičů také podporuje připojení do sítě LAN a autom
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{obrazky/Rhode_schwarz-LCX200.jpg}
-    \caption{Stolní měřič Rohde\&Schwarz LCX200. Převzato z \cite{RS_LCX_Datasheet}}
+    \caption{Stolní měřič Rohde \& Schwarz LCX200. Převzato z \cite{RS_LCX_Datasheet}.}
     \label{fig:rhode_lcr}
 \end{figure}
 
