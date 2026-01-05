@@ -2,35 +2,24 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Úvod}
 
-Měřiče impedance, často označované jako \acs{LCR} metry, představují klíčové vybavení jak pro 
-vývojové laboratoře, tak pro výrobní linky. Jejich primárním účelem je precizní 
-měření impedance a odvozených veličin, jako jsou ztrátový činitel, \acs{ESR} či 
-činitel kvality.
+V elektronické praxi se často setkáváme s požadavkem na měření impedance, 
+od jednoduché identifikace hodnot součástek až po plnou charakterizaci kondenzátorů či cívek.
 
-Tato semestrální práce se zabývá návrhem a ověřením konceptu 
-měřiče impedance. Hlavní motivací pro vznik tohoto zařízení 
-byla absence cenově dostupného řešení na trhu, které by zároveň nabízelo 
-dostatečnou přesnost a možnost snadné integrace s počítačem.
+Měřiče impedance, často označované jako \acs{LCR} metry, představují klíčové vybavení
+jak pro vývojové laboratoře, tak pro výrobní linky.
+Komerční \acs{LCR} metry dosahují vysoké přesnosti a nabízejí široké 
+spektrum funkcí, avšak jejich cena je často příliš vysoká pro běžné 
+použití v~domácích laboratořích a~při vývoji prototypů. Tato 
+skutečnost motivovala k~návrhu vlastního měřicího zařízení, které by 
+při rozumných nákladech poskytovalo dostatečnou přesnost pro běžné 
+aplikace.
 
-Na základě rešerše komerčně dostupných přístrojů a analýzy požadavků na měření 
-byly stanoveny klíčové parametry navrhovaného zařízení. 
-Cílem je vytvořit přístroj, který se svými vlastnostmi přiblíží profesionálním 
-řešením, avšak s výrazně nižšími pořizovacími náklady.
-
-Specifikace navrženého zařízení: 
-\begin{itemize} 
-    \item Frekvenční rozsah: 100 Hz -- 100 kHz 
-    \item Rozsah měření indukčnosti: 100 nH -- 10 H 
-    \item Rozsah měření kapacity: 100 pF -- 10 mF 
-    \item Cílová přesnost: 1\% 
-    \item Amplituda měřicího signálu: 0,1 -- 2 V 
-    \item Stejnosměrná složka (Bias): 0 -- 2 V 
-    \item Konektivita: Komunikace s PC a napájení přes USB 
-\end{itemize}
-
-Text práce je logicky členěn do několika částí. 
-První kapitola shrnuje teoretická východiska týkající se impedance a přehled měřicích metod. 
-Druhá kapitola se zaměřuje na implementaci analogového měřicího obvodu včetně zdroje signálu a samo-vyvažovacího můstku. 
-Třetí část rozebírá problematiku digitalizace a zpracování signálu. 
-Čtvrtá kapitola popisuje první prototyp zařízení, ověřené subsystémy a zjištěné nedostatky návrhu. 
-V závěru jsou shrnuty dosažené výsledky a navrženy další kroky pro navazující bakalářskou práci.
+Práce se nejprve věnuje teoretickým základům měření impedance, 
+včetně popisu různých měřicích metod se zaměřením na metodu 
+samo-vyvažovacího můstku. Dále je popsána implementace zdroje 
+měřicího signálu a jsou rozebrány 
+metody digitalizace naměřených signálů. V~praktické části je 
+představen první prototyp zařízení, na kterém byly ověřeny navržené 
+koncepty. Testování prototypu odhalilo několik nedostatků, které 
+jsou v~práci analyzovány a na základě kterých jsou navrženy další 
+kroky pro navazující bakalářskou práci.
