@@ -88,106 +88,326 @@
 % 1. snímek s cíli (zadaním) práce
 \begin{frame} 
 	% nadpis snímku
-	\frametitle{Cíle práce}
-	\begin{itemize}
-			\item Nastudovat
-			\item Popsat
-				\begin{itemize}
-					\item nastudované
-				\end{itemize}
-			\item Implementovat
-				\begin{itemize}
-					\item nastudované
-					\item nové
-				\end{itemize}
-			\item Porovnat a vyhodnotit
-				\begin{itemize}
-						\item výsledky
-				\end{itemize}
-	\end{itemize}
+	\frametitle{Zadání práce}
+	
+	\begin{enumerate}
+		\item Nastudujte principy měření impedance elektrických součástek a dostupné metody realizace měřicích přístrojů v~oblasti nízkých a~středních frekvencí. Zaměřte se na způsoby buzení měřeného prvku, zpracování signálu a~vyhodnocení výsledků.
+		
+		\item Na základě rešerše navrhněte schéma přístroje pro měření impedance v~pásmu nastavitelných frekvencí do 100~kHz. Přístroj by měl umožňovat charakterizaci pasivních součástek, zejména cívek a~kondenzátorů.
+		
+		\item Výsledky zpracujte v~semestrálním projektu.
+	\end{enumerate}
+	
+	\vspace{2ex}
+	\begin{block}{Specifikace navrhovaného zařízení}
+		\begin{itemize}
+			\item Frekvenční rozsah: $100~\mathrm{Hz}$ -- $100~\mathrm{kHz}$
+			\item Cílová přesnost: $1\,\%$
+			\item Nastavitelná amplituda: $0{,}1~\mathrm{V}$ -- $2~\mathrm{V}$
+			\item Napájení a komunikace přes USB
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 
 %%%%%%%%%%%%%
 \begin{frame} 
-	\frametitle{Klíčové nástroje}
-
-	% prostředí 'alertblock', které slouží pro zdůraznění informace
-	\begin{alertblock}{Pro práci je klíčový Eulerův vzorec}
-		$$\eul^{\jmag x}=\cos x + \jmag\sin x$$
-	\end{alertblock}
-
-	\vspace{4ex}
-	Eulerova identita je speciálním případem tohoto vzorce, jestliže dosadíme $x=\uppi$\,:
-
-	% prostředí 'block', které slouží jako informativní
-	\begin{block}{Eulerova identita}
-		$$\eul^{\jmag \uppi}=\cos \uppi + \jmag\sin \uppi,$$\\
-		odkud vyplývá
-		$$\eul^{\jmag \uppi}+1=0.$$
+	\frametitle{Rešerše -- Komerční měřiče impedance}
+	
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\textbf{Ruční LCR metr} \\
+			Keysight U1732C
+			\begin{itemize}
+				\item Cena: $\approx 15\,000$ Kč
+				\item Přesnost: $0{,}2\,\%$
+				\item Pevné frekvence
+			\end{itemize}
+			\vspace{1em}
+			\includegraphics[width=0.35\columnwidth]{obrazky/Keysight_U1732C.jpg}
+		\end{column}
+		%
+		\begin{column}{0.5\textwidth}
+			\textbf{Stolní LCR metr} \\
+			Rohde \& Schwarz LCX200
+			\begin{itemize}
+				\item Cena: $\approx 200\,000$ Kč
+				\item Přesnost: $0{,}05\,\%$
+				\item Spojitý rozsah 4~Hz -- 10~MHz
+				\item Pokročilé funkce
+			\end{itemize}
+			\vspace{1em}
+			\includegraphics[width=0.95\columnwidth]{obrazky/Rhode_schwarz-LCX200.jpg}
+		\end{column}
+	\end{columns}
+	
+	\vspace{1em}
+	\begin{block}{Cíl projektu}
+		Navrhnout cenově dostupný měřič s dostatečnou přesností pro domácí laboratoř
 	\end{block}
-\end{frame} 
+\end{frame}
+
+%%%%%%%%%%%%%
+\begin{frame} 
+	\frametitle{Zvolená metoda -- Samo-vyvažovací můstek}
+	
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\textbf{Princip metody:}
+			\begin{itemize}
+				\item Měří se napětí, proud a jejich fázový rozdíl
+				\item OZ vytváří virtuální zem
+				\item Měření napětí na DUT i na bočníku oproti zemi
+			\end{itemize}
+			
+			\vspace{1em}
+			\textbf{Výpočet impedance:}
+			$$|Z| = \frac{U_{x}}{U_{r}}\cdot R_1$$
+			$$ Z = |Z| \angle \varphi$$
+			
+		%	\vspace{1em}
+		%	Fázový posun $\varphi$ je rozdíl fází $U_x$ a $U_r$
+		\end{column}
+		%
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.95\columnwidth]{obrazky/i_v_conv.pdf}
+				\caption{Samo-vyvažovací můstek}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 
 %%%%%%%%%%%%%
 \begin{frame} 
-	\frametitle{Plošný spoj}
+	\frametitle{Generátor měřícího signálu}
 	
-	\begin{columns}[T] 								% prostředí sloupce s umístěním nahoře
-		\begin{column}{0.4\textwidth}		% první sloupec
-			Obrázek znázorňuje model:\\[2ex]
-			%
+	\begin{columns}[T]
+		\begin{column}{0.45\textwidth}
+			\textbf{Přímá digitální syntéza (DDS):}
 			\begin{itemize}
-				\item Deska
-				\item Součástky
-				\item Signály
-				\item Napájení
+				\item Hodnoty $\sin(t)$ v paměti (LUT)
+				\item D/A převodník generuje průběh
+				\item Frekvence řízena rychlostí čtení
+				\item Filtr DP odstraní harmonické
+			\end{itemize}
+			
+			\vspace{1em}
+			\textbf{Použitý obvod AD9837:}
+			\begin{itemize}
+				\item Rozsah 0 -- 12,5~MHz
+				\item Rozlišení 0,1~Hz
+				\item Řízení přes SPI
 			\end{itemize}
 		\end{column}
 		%
-		\begin{column}{0.6\textwidth}		% druhý sloupec
-			\begin{figure}%	
+		\begin{column}{0.55\textwidth}
+
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%
+\begin{frame} 
+	\frametitle{Úprava signálu -- Amplituda a DC offset}
+	
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\textbf{Nastavení amplitudy:}
+			\begin{itemize}
+				\item Digitální potenciometr jako dělič
+				\item Zesílení OZ s fixním $A = 5$
+			\end{itemize}
+			
+			\begin{figure}
 				\centering
-				\vspace{1cm}	              % horizontální mezera
-				\includegraphics[width=0.8\columnwidth]{obrazky/soucastky}
-				%lze vložit popisek, ale povetšinou je to v prezentaci zbytečné
-				%\caption{Popisek obrázku}%
-				%\label{obr:ukazka}
+				\includegraphics[width=0.9\columnwidth]{obrazky/amplitude_set_sch.pdf}
 			\end{figure}
 		\end{column}
-	\end{columns}											% ukončení prostředí sloupce
+		%
+		\begin{column}{0.5\textwidth}
+			\textbf{Nastavení DC offsetu:}
+			\begin{itemize}
+				\item CR filtr HP pro odstranění DC
+				\item Sčítačka přidá nastavitelné $U_{DC}$
+			\end{itemize}
+			
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.95\columnwidth]{obrazky/adder_sch.pdf}
+			\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 %%%%%%%%%%%%%
 \begin{frame} 
-	\frametitle{Výsledky}
-	\vspace{1cm}
-	\begin{table}[]
-		\centering
-		\caption{Výsledky měření mobilních sítí}
-		\label{tab:tabulka}
-			\begin{tabular}{lcc}
-				\toprule
-					Technologie  & Rychlost stahování [kB/s] & Rychlost nahrávání [kB/s] \\
-				\midrule
-					GPRS (2,5G)	& 7,2 	& 3,6\\
-					UMTS 3G     & 48 		& 48\\
-					HSPA (3,5G)	&	1\,706	&	720\\
-					LTE (4G) 		& 40\,750 & 10\,750\\
-				\bottomrule                                       
-			\end{tabular}
-	\end{table}
+	\frametitle{Digitalizace signálů -- Převod na DC}
+	
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\textbf{Princip metody:}
+			\begin{itemize}
+				\item Špičkový detektor -- amplituda
+				\item XOR fázový detektor -- fáze
+				\item Jednoduchý ADC, nízký výkon MCU
+			\end{itemize}
+			
+			\vspace{1em}
+			\begin{block}{Výhoda}
+				Intuitivní princip měření
+			\end{block}
+			
+			\vspace{0.5em}
+			\begin{alertblock}{Nevýhody}
+				\begin{itemize}
+					\item Nepřesné měření
+					\item Citlivost na šum a rušení
+				\end{itemize}
+			\end{alertblock}
+		\end{column}
+		%
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.95\columnwidth]{obrazky/peak_detect_chart.pdf}
+				\caption{Špičkový detektor}
+			\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 %%%%%%%%%%%%%
 \begin{frame} 
-	\frametitle{Závěr}
-	\dots
+	\frametitle{Digitalizace signálů -- Přímé vzorkování}
+	
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\textbf{Princip metody:}
+			\begin{itemize}
+				\item Synchronní vzorkování ADC
+				\item Diskrétní Fourierova transformace
+				\item Výpočet amplitudy a fáze v MCU
+			\end{itemize}
+			
+			\vspace{1em}
+			\begin{block}{Výhoda}
+				Přesnější měření
+			\end{block}
+			
+			\vspace{0.5em}
+			\begin{alertblock}{Nevýhody}
+				\begin{itemize}
+					\item Nutnost rychlého vzorkování
+					\item Složitější výpočet
+				\end{itemize}
+			\end{alertblock}
+		\end{column}
+		%
+		\begin{column}{0.5\textwidth}
+			\textbf{Výpočet parametrů:}
+			$$A = \sqrt{U_c^2 + U_s^2}$$
+			$$\varphi = \arctan\left(\frac{-U_s}{U_c}\right)$$
+			
+			\vspace{1em}
+			kde $U_c$ a $U_s$ jsou kosinová a~sinová složka signálu z~DFT.
+		\end{column}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%
+\begin{frame} 
+	\frametitle{První prototyp}
+	
+	\begin{columns}[T]
+		\begin{column}{0.45\textwidth}
+			\textbf{Realizace:}
+			\begin{itemize}
+				\item Metoda převodu na DC napětí
+				\item Pouze měřící část
+				\item Data přes sériovou linku
+				\item Napájení z USB 5V
+			\end{itemize}
+			
+			\vspace{1em}
+			\textbf{Ověřené subsystémy:}
+			\begin{itemize}
+				\item[$\checkmark$] Napájecí systém (LM27762)
+				\item[$\checkmark$] Generátor DDS signálu
+				\item[$\checkmark$] Nastavení amplitudy a DC
+			\end{itemize}
+		\end{column}
+		%
+		\begin{column}{0.55\textwidth}
+			\vspace{-1.5em}
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.75\columnwidth]{obrazky/prototyp_render.png}
+				\caption{3D render prvního prototypu}
+			\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
+%%%%%%%%%%%%%
+\begin{frame} 
+	\frametitle{Zjištěné nedostatky prototypu}
+	
+	\begin{alertblock}{Identifikované problémy}
+		\begin{enumerate}
+			\item \textbf{Zkreslující OZ (TLV9154)} \\
+			Při vyšších frekvencích zkresluje tvar sinusového signálu $\rightarrow$ chyba měření
+			
+			\vspace{0.5em}
+			\item \textbf{Nadbytečné zesilovače} \\
+			Diferenční zesilovače INA823 s přepínáním zesílení -- zbytečná komplikace
+			
+			\vspace{0.5em}
+			\item \textbf{Nepřesné měření} \\
+			Amplituda ze šp. detektoru a měření průchodu nulou neposkytovaly přesné výsledky
+		\end{enumerate}
+	\end{alertblock}
+	
+	\vspace{1em}
+	\begin{block}{Závěr z testování}
+		$\Rightarrow$ Přechod na metodu přímého vzorkování harmonických signálů
+	\end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%
+\begin{frame} 
+	\frametitle{Závěr a zhodnocení}
+	
+	\textbf{Dosažené výsledky:}
+	\begin{itemize}
+		\item Nastudovány metody měření impedance
+		\item Navržena koncepce měřiče s samo-vyvažovacím můstkem
+		\item Implementace DDS generátoru a úprava signálu
+		\item Analyzovány metody digitalizace (DC převod vs. přímé vzorkování)
+		\item Zkonstruován a otestován první prototyp
+		\item Identifikovány nedostatky $\rightarrow$ nový směr vývoje
+	\end{itemize}
+	
+	\vspace{1em}
+	\begin{block}{Úkoly pro bakalářskou práci}
+		\begin{enumerate}
+			\item Konstrukce testovacího přípravku pro synchronní vzorkování (1~MHz)
+			\item Finální návrh měřiče s metodou přímého vzorkování
+			\item Ověřovací měření oproti komerčnímu přístroji
+			\item Stanovení dosažené přesnosti
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%
 % podekovani
 \begin{frame}[c] 
 % bez nadpisu snímku
@@ -196,13 +416,5 @@
 		{\Huge Děkuji za pozornost!}
 	\end{center}
 \end{frame}
-
-% otázky oponenta
-\frame{
-\frametitle{Otázky oponenta}
-	\emph{Jaká je souvislost Vašeho vzorce (1.2) s~Maxwellovými rovnicemi v~integrálním tvaru?}\\[2ex]
-	%
-	Již staří Římané\,\dots
-}
 
 \end{document}
