@@ -51,43 +51,8 @@
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [
-        {
-          "gap": 0.0,
-          "via_gap": 0.0,
-          "width": 0.0
-        }
-      ],
-      "drc_exclusions": [
-        [
-          "copper_edge_clearance|134600000|55300000|33a98dde-39d3-451f-b7cb-4505b9d007e5|2c5f7c98-40fb-4e6c-9800-54c0970250ac",
-          ""
-        ],
-        [
-          "copper_edge_clearance|134600000|55300000|33a98dde-39d3-451f-b7cb-4505b9d007e5|87ad6e9d-fd4a-4219-98b4-21f46810f110",
-          ""
-        ],
-        [
-          "copper_edge_clearance|34800000|68900000|91fcda04-42ad-45be-b19c-dd85f082d221|4c68e0fb-27b2-45a8-9860-e453891e33fb",
-          ""
-        ],
-        [
-          "copper_edge_clearance|34800000|68900000|91fcda04-42ad-45be-b19c-dd85f082d221|81673b0d-3aa6-4eff-ae2b-62da6f86e3d6",
-          "ssfdasf"
-        ],
-        [
-          "copper_edge_clearance|90300000|135900000|0207e448-dd88-4631-81e7-c01f67456bfb|ee3c6959-4068-4521-9456-abf271eaa457",
-          ""
-        ],
-        [
-          "copper_edge_clearance|90300000|135900000|0207e448-dd88-4631-81e7-c01f67456bfb|f9c4ce6f-608f-4e9c-9fd7-0bdf1821e157",
-          ""
-        ],
-        [
-          "starved_thermal|115399000|41551000|02b41395-e9bc-483b-ad45-bddc330a6b48|6f867462-50ba-4bf1-b37e-a4c246d85eea|B.Cu",
-          ""
-        ]
-      ],
+      "diff_pair_dimensions": [],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -152,11 +117,11 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.1016,
-        "min_connection": 0.1016,
-        "min_copper_edge_clearance": 0.15,
+        "min_clearance": 0.0,
+        "min_connection": 0.0,
+        "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
-        "min_hole_clearance": 0.15,
+        "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
@@ -165,10 +130,10 @@
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.1016,
+        "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.005,
+        "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -215,14 +180,7 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [
-        0.0,
-        0.1,
-        0.15,
-        0.25,
-        0.35,
-        0.5
-      ],
+      "track_widths": [],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -249,12 +207,7 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [
-        {
-          "diameter": 0.0,
-          "drill": 0.0
-        }
-      ],
+      "via_dimensions": [],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -477,7 +430,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "error",
+      "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
       "same_local_global_label": "warning",
       "similar_label_and_power": "warning",
@@ -498,7 +451,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "test_board.kicad_pro",
+    "filename": "front_panel.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -520,24 +473,6 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "line_style": 0,
-        "name": "RF",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "line_style": 0,
-        "name": "USB",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "wire_width": 6
       }
     ],
     "meta": {
@@ -555,11 +490,11 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": ".step",
+      "step": "",
       "svg": "",
       "vrml": ""
     },
-    "page_layout_descr_file": "kicad-embed://AmericanEmbedded.kicad_wks"
+    "page_layout_descr_file": ""
   },
   "schematic": {
     "annotate_start_num": 0,
@@ -574,210 +509,13 @@
       "ref_range_delimiter": "",
       "string_delimiter": "\""
     },
-    "bom_presets": [
-      {
-        "exclude_dnp": false,
-        "fields_ordered": [
-          {
-            "group_by": true,
-            "label": "Comment",
-            "name": "Value",
-            "show": true
-          },
-          {
-            "group_by": true,
-            "label": "Designator",
-            "name": "Reference",
-            "show": true
-          },
-          {
-            "group_by": false,
-            "label": "Qty",
-            "name": "${QUANTITY}",
-            "show": false
-          },
-          {
-            "group_by": true,
-            "label": "MPN",
-            "name": "MPN",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "Manufacturer",
-            "name": "Manufacturer",
-            "show": false
-          },
-          {
-            "group_by": true,
-            "label": "Footprint",
-            "name": "Footprint",
-            "show": true
-          },
-          {
-            "group_by": false,
-            "label": "Description",
-            "name": "Description",
-            "show": false
-          },
-          {
-            "group_by": true,
-            "label": "DNP",
-            "name": "${DNP}",
-            "show": false
-          },
-          {
-            "group_by": true,
-            "label": "Exclude from BOM",
-            "name": "${EXCLUDE_FROM_BOM}",
-            "show": false
-          },
-          {
-            "group_by": true,
-            "label": "Exclude from Board",
-            "name": "${EXCLUDE_FROM_BOARD}",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "Datasheet",
-            "name": "Datasheet",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "#",
-            "name": "${ITEM_NUMBER}",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "Customer Note",
-            "name": "Customer Note",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "LCSC",
-            "name": "LCSC",
-            "show": true
-          }
-        ],
-        "filter_string": "",
-        "group_symbols": true,
-        "include_excluded_from_bom": true,
-        "name": "JLCPCB",
-        "sort_asc": true,
-        "sort_field": "Value"
-      },
-      {
-        "exclude_dnp": false,
-        "fields_ordered": [
-          {
-            "group_by": true,
-            "label": "Designator",
-            "name": "Reference",
-            "show": true
-          },
-          {
-            "group_by": false,
-            "label": "Quantity",
-            "name": "${QUANTITY}",
-            "show": true
-          },
-          {
-            "group_by": true,
-            "label": "Manufacturer Part Number",
-            "name": "MPN",
-            "show": true
-          },
-          {
-            "group_by": false,
-            "label": "Manufacturer",
-            "name": "Manufacturer",
-            "show": true
-          },
-          {
-            "group_by": true,
-            "label": "Footprint",
-            "name": "Footprint",
-            "show": true
-          },
-          {
-            "group_by": false,
-            "label": "Description",
-            "name": "Description",
-            "show": true
-          },
-          {
-            "group_by": true,
-            "label": "Value",
-            "name": "Value",
-            "show": false
-          },
-          {
-            "group_by": true,
-            "label": "Procurement Type",
-            "name": "${DNP}",
-            "show": true
-          },
-          {
-            "group_by": true,
-            "label": "Exclude from BOM",
-            "name": "${EXCLUDE_FROM_BOM}",
-            "show": false
-          },
-          {
-            "group_by": true,
-            "label": "Exclude from Board",
-            "name": "${EXCLUDE_FROM_BOARD}",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "Datasheet",
-            "name": "Datasheet",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "#",
-            "name": "${ITEM_NUMBER}",
-            "show": false
-          },
-          {
-            "group_by": false,
-            "label": "Customer Note",
-            "name": "Customer Note",
-            "show": true
-          },
-          {
-            "group_by": false,
-            "label": "LCSC",
-            "name": "LCSC",
-            "show": false
-          }
-        ],
-        "filter_string": "",
-        "group_symbols": true,
-        "include_excluded_from_bom": true,
-        "name": "NextPCB",
-        "sort_asc": true,
-        "sort_field": "Reference"
-      }
-    ],
+    "bom_presets": [],
     "bom_settings": {
       "exclude_dnp": false,
       "fields_ordered": [
         {
-          "group_by": true,
-          "label": "Comment",
-          "name": "Value",
-          "show": true
-        },
-        {
-          "group_by": true,
-          "label": "Designator",
+          "group_by": false,
+          "label": "Reference",
           "name": "Reference",
           "show": true
         },
@@ -785,19 +523,31 @@
           "group_by": false,
           "label": "Qty",
           "name": "${QUANTITY}",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
-          "label": "MPN",
-          "name": "MPN",
-          "show": false
+          "label": "Value",
+          "name": "Value",
+          "show": true
         },
         {
-          "group_by": false,
-          "label": "Manufacturer",
-          "name": "Manufacturer",
-          "show": false
+          "group_by": true,
+          "label": "DNP",
+          "name": "${DNP}",
+          "show": true
+        },
+        {
+          "group_by": true,
+          "label": "Exclude from BOM",
+          "name": "${EXCLUDE_FROM_BOM}",
+          "show": true
+        },
+        {
+          "group_by": true,
+          "label": "Exclude from Board",
+          "name": "${EXCLUDE_FROM_BOARD}",
+          "show": true
         },
         {
           "group_by": true,
@@ -807,59 +557,17 @@
         },
         {
           "group_by": false,
-          "label": "Description",
-          "name": "Description",
-          "show": false
-        },
-        {
-          "group_by": true,
-          "label": "DNP",
-          "name": "${DNP}",
-          "show": false
-        },
-        {
-          "group_by": true,
-          "label": "Exclude from BOM",
-          "name": "${EXCLUDE_FROM_BOM}",
-          "show": false
-        },
-        {
-          "group_by": true,
-          "label": "Exclude from Board",
-          "name": "${EXCLUDE_FROM_BOARD}",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Datasheet",
           "name": "Datasheet",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "#",
-          "name": "${ITEM_NUMBER}",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Customer Note",
-          "name": "Customer Note",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "LCSC",
-          "name": "LCSC",
           "show": true
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "",
+      "name": "Default Editing",
       "sort_asc": true,
-      "sort_field": "Value"
+      "sort_field": "Reference"
     },
     "connection_grid_size": 50.0,
     "drawing": {
@@ -889,7 +597,7 @@
       "version": 1
     },
     "net_format_name": "",
-    "page_layout_descr_file": "kicad-embed://AmericanEmbedded.kicad_wks",
+    "page_layout_descr_file": "",
     "plot_directory": "",
     "space_save_all_events": true,
     "spice_current_sheet_as_root": false,
@@ -903,20 +611,8 @@
   },
   "sheets": [
     [
-      "46ec7b9e-7ce4-471b-b2a3-117ade628de1",
+      "2bb801a7-d807-4984-8212-e142652969ce",
       "Root"
-    ],
-    [
-      "ae3455d3-6fb5-430b-99fe-56e3e8ba7cb3",
-      "USB+Power"
-    ],
-    [
-      "7c88be16-e214-406a-aea0-b685b938eb54",
-      "Analog"
-    ],
-    [
-      "747f5f47-6192-4cf9-8581-e71f30d19b67",
-      "additions"
     ]
   ],
   "text_variables": {}
