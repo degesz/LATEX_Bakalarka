@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.6
         }
       },
       "diff_pair_dimensions": [],
@@ -133,7 +133,7 @@
         "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.0,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -613,6 +613,10 @@
     [
       "2bb801a7-d807-4984-8212-e142652969ce",
       "Root"
+    ],
+    [
+      "b356e71d-36b0-4915-9555-c7a025667bb0",
+      "Touch array"
     ]
   ],
   "text_variables": {}

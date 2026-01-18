@@ -1,0 +1,95 @@
+<svg width="20mm" height="20mm" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="20" height="20" fill="none"/>
+
+  <defs>
+    <!-- Radial gradients for color wheel - darker center, lighter outer -->
+    <radialGradient id="grad-red" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#660000"/>
+      <stop offset="100%" stop-color="#FF4444"/>
+    </radialGradient>
+    <radialGradient id="grad-orange" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#663300"/>
+      <stop offset="100%" stop-color="#FFAA44"/>
+    </radialGradient>
+    <radialGradient id="grad-yellow" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#666600"/>
+      <stop offset="100%" stop-color="#FFFF66"/>
+    </radialGradient>
+    <radialGradient id="grad-chartreuse" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#336600"/>
+      <stop offset="100%" stop-color="#AAFF66"/>
+    </radialGradient>
+    <radialGradient id="grad-green" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#006600"/>
+      <stop offset="100%" stop-color="#66FF66"/>
+    </radialGradient>
+    <radialGradient id="grad-spring" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#006633"/>
+      <stop offset="100%" stop-color="#66FFAA"/>
+    </radialGradient>
+    <radialGradient id="grad-cyan" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#006666"/>
+      <stop offset="100%" stop-color="#66FFFF"/>
+    </radialGradient>
+    <radialGradient id="grad-azure" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#003366"/>
+      <stop offset="100%" stop-color="#66AAFF"/>
+    </radialGradient>
+    <radialGradient id="grad-blue" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#000066"/>
+      <stop offset="100%" stop-color="#6666FF"/>
+    </radialGradient>
+    <radialGradient id="grad-violet" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#330066"/>
+      <stop offset="100%" stop-color="#AA66FF"/>
+    </radialGradient>
+    <radialGradient id="grad-magenta" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#660066"/>
+      <stop offset="100%" stop-color="#FF66FF"/>
+    </radialGradient>
+    <radialGradient id="grad-rose" cx="10" cy="9" r="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#660033"/>
+      <stop offset="100%" stop-color="#FF66AA"/>
+    </radialGradient>
+
+    <linearGradient id="grayScale" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:black;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(10, 9)">
+    <path d="M0,0 L0,-8 A8,8 0 0,1 4,-6.928 Z" fill="url(#grad-red)"/>
+    <path d="M0,0 L4,-6.928 A8,8 0 0,1 6.928,-4 Z" fill="url(#grad-orange)"/>
+    <path d="M0,0 L6.928,-4 A8,8 0 0,1 8,0 Z" fill="url(#grad-yellow)"/>
+    <path d="M0,0 L8,0 A8,8 0 0,1 6.928,4 Z" fill="url(#grad-chartreuse)"/>
+    <path d="M0,0 L6.928,4 A8,8 0 0,1 4,6.928 Z" fill="url(#grad-green)"/>
+    <path d="M0,0 L4,6.928 A8,8 0 0,1 0,8 Z" fill="url(#grad-spring)"/>
+    <path d="M0,0 L0,8 A8,8 0 0,1 -4,6.928 Z" fill="url(#grad-cyan)"/>
+    <path d="M0,0 L-4,6.928 A8,8 0 0,1 -6.928,4 Z" fill="url(#grad-azure)"/>
+    <path d="M0,0 L-6.928,4 A8,8 0 0,1 -8,0 Z" fill="url(#grad-blue)"/>
+    <path d="M0,0 L-8,0 A8,8 0 0,1 -6.928,-4 Z" fill="url(#grad-violet)"/>
+    <path d="M0,0 L-6.928,-4 A8,8 0 0,1 -4,-6.928 Z" fill="url(#grad-magenta)"/>
+    <path d="M0,0 L-4,-6.928 A8,8 0 0,1 0,-8 Z" fill="url(#grad-rose)"/>
+    
+    <circle cx="0" cy="0" r="2" fill="white"/>
+    
+    <line x1="-2" y1="0" x2="2" y2="0" stroke="black" stroke-width="0.1"/>
+    <line x1="0" y1="-2" x2="0" y2="2" stroke="black" stroke-width="0.1"/>
+  </g>
+
+  <rect x="2" y="17.5" width="16" height="1.5" fill="url(#grayScale)" stroke="black" stroke-width="0.1"/>
+
+  <g stroke="black" stroke-width="0.2">
+    <line x1="0" y1="2" x2="0" y2="0" />
+    <line x1="0" y1="0" x2="2" y2="0" />
+    <line x1="18" y1="0" x2="20" y2="0" />
+    <line x1="20" y1="0" x2="20" y2="2" />
+    <line x1="20" y1="18" x2="20" y2="20" />
+    <line x1="20" y1="20" x2="18" y2="20" />
+    <line x1="2" y1="20" x2="0" y2="20" />
+    <line x1="0" y1="20" x2="0" y2="18" />
+  </g>
+
+  <text x="10" y="16.5" font-family="Arial, sans-serif" font-size="1.2" text-anchor="middle" fill="black">UV TEST</text>
+</svg>
