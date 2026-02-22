@@ -623,7 +623,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "LCR_Meter.kicad_pro",
+    "filename": "V2_LCR_Meter.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -645,13 +645,60 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "name": "+5V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgb(255, 87, 46)",
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "name": "-5V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgb(74, 152, 222)",
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "line_style": 0,
+        "name": "GND",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2,
+        "schematic_color": "rgb(34, 42, 255)",
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "line_style": 0,
+        "name": "Vcc",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 3,
+        "schematic_color": "rgb(255, 33, 0)",
+        "wire_width": 6
       }
     ],
     "meta": {
       "version": 4
     },
     "net_colors": null,
-    "netclass_assignments": null,
+    "netclass_assignments": {
+      "+3V3": [
+        "Vcc"
+      ],
+      "+5V": [
+        "+5V"
+      ],
+      "-5V": [
+        "-5V"
+      ],
+      "GND": [
+        "GND"
+      ]
+    },
     "netclass_patterns": []
   },
   "pcbnew": {
