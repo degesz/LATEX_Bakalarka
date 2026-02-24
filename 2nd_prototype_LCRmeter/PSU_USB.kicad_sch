@@ -2224,7 +2224,7 @@
 		(uuid "12ffe003-46b6-4d18-ac6e-2c26a92dbec5")
 	)
 	(junction
-		(at 85.09 130.81)
+		(at 55.88 130.81)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "156cc75e-cd14-4c3e-a5ef-a20fab384a8a")
@@ -2236,16 +2236,16 @@
 		(uuid "19d9fb62-9f38-455e-be13-cd40f3c1eed1")
 	)
 	(junction
-		(at 144.78 116.84)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1be77c15-8513-4b00-aec6-f7ac11681be0")
-	)
-	(junction
 		(at 195.58 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "237144c3-c987-4cab-b0f8-8a8ed6d15d2b")
+	)
+	(junction
+		(at 99.06 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "28f59380-d2c1-4047-b0be-351350c2001a")
 	)
 	(junction
 		(at 139.7 124.46)
@@ -2254,10 +2254,16 @@
 		(uuid "3b0d9724-e2e2-4c03-a6e7-fd4ab56d975c")
 	)
 	(junction
-		(at 205.74 124.46)
+		(at 74.93 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4780c989-ade1-400e-9b32-07b96bf52285")
+		(uuid "45e151ad-a162-4319-a026-969e37de6bda")
+	)
+	(junction
+		(at 144.78 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4e55a89e-df45-4b0c-bd54-1e010c86ee35")
 	)
 	(junction
 		(at 186.69 127)
@@ -2272,12 +2278,6 @@
 		(uuid "4f1118ae-06f6-4666-9aa8-c6581c7fa50b")
 	)
 	(junction
-		(at 144.78 124.46)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "540f4b30-64e5-433d-97bd-7f9d2de935bb")
-	)
-	(junction
 		(at 231.14 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2290,6 +2290,12 @@
 		(uuid "62d06ac2-7bd6-426f-9adc-fcf1db7cf3dc")
 	)
 	(junction
+		(at 215.9 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "67041f32-b0f1-425b-9369-8793e69b2728")
+	)
+	(junction
 		(at 134.62 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2300,6 +2306,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "71362aca-6bea-4b5e-91e2-26219cd65282")
+	)
+	(junction
+		(at 124.46 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "773b72bd-99d6-41be-9377-a932dfbb6b2b")
 	)
 	(junction
 		(at 179.07 95.25)
@@ -2326,16 +2338,16 @@
 		(uuid "9db4b43c-0f24-4ff2-9f88-c40bb3ff670b")
 	)
 	(junction
-		(at 215.9 116.84)
+		(at 124.46 134.62)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a03bf33d-115d-4040-832a-0f3a3049ef1d")
+		(uuid "a20bc1d3-d02c-4ada-8ad4-b4d658e05840")
 	)
 	(junction
-		(at 118.11 116.84)
+		(at 119.38 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a17beebd-0da8-4140-851d-9ef768146a4c")
+		(uuid "b06f71b3-2c22-483e-b38b-9b7bf37bf77c")
 	)
 	(junction
 		(at 153.67 116.84)
@@ -2344,7 +2356,7 @@
 		(uuid "b2eaaf65-4295-46a1-ae00-f7f5a56b7254")
 	)
 	(junction
-		(at 85.09 135.89)
+		(at 55.88 135.89)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b30ef700-746d-4cb8-bc41-78dff00d5c5c")
@@ -2356,10 +2368,10 @@
 		(uuid "b386aac6-5b6d-4fb1-8b6a-bd50a1cffb68")
 	)
 	(junction
-		(at 205.74 116.84)
+		(at 109.22 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d3f8f442-43ec-48a8-89c7-70bd0d0f4580")
+		(uuid "bba40656-ccbb-4a9a-b32a-d289c32bec45")
 	)
 	(junction
 		(at 189.23 87.63)
@@ -2368,32 +2380,18 @@
 		(uuid "e299a029-5acd-4f1b-add5-254418114ad5")
 	)
 	(junction
-		(at 105.41 116.84)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e46b7543-7d4e-4951-9da4-7c8d9275b92d")
-	)
-	(junction
 		(at 167.64 144.78)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f2fafd16-feb6-45aa-8dc2-22ab3c738231")
 	)
 	(no_connect
-		(at 85.09 124.46)
-		(uuid "667d571a-2153-49ac-b8da-d128e4e8cd86")
-	)
-	(no_connect
-		(at 85.09 144.78)
+		(at 55.88 144.78)
 		(uuid "9cc06e35-e4c5-4157-a9a2-6138e36245d8")
 	)
 	(no_connect
-		(at 85.09 147.32)
+		(at 55.88 147.32)
 		(uuid "d50660e6-1672-445c-b037-49d317efcce3")
-	)
-	(no_connect
-		(at 85.09 121.92)
-		(uuid "fdb13155-ed7a-4062-a95d-e7737ef302ff")
 	)
 	(wire
 		(pts
@@ -2404,16 +2402,6 @@
 			(type default)
 		)
 		(uuid "00057215-c685-42ae-88c4-08ff2e32a0f7")
-	)
-	(wire
-		(pts
-			(xy 144.78 116.84) (xy 153.67 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0253a54d-8a9d-434d-a760-dea2d69eab37")
 	)
 	(wire
 		(pts
@@ -2434,6 +2422,16 @@
 			(type default)
 		)
 		(uuid "07155956-f72b-480e-a616-cd4817fcb442")
+	)
+	(wire
+		(pts
+			(xy 119.38 116.84) (xy 119.38 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a0851c3-4b1d-4fa4-a3e1-ec25b78d7ff8")
 	)
 	(wire
 		(pts
@@ -2477,7 +2475,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 135.89) (xy 86.36 135.89)
+			(xy 55.88 135.89) (xy 57.15 135.89)
 		)
 		(stroke
 			(width 0)
@@ -2497,6 +2495,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 116.84) (xy 109.22 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "292c30e7-bb15-4704-aeb5-a11dae610675")
+	)
+	(wire
+		(pts
 			(xy 154.94 130.81) (xy 147.32 130.81)
 		)
 		(stroke
@@ -2507,7 +2515,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 137.16) (xy 85.09 135.89)
+			(xy 55.88 137.16) (xy 55.88 135.89)
 		)
 		(stroke
 			(width 0)
@@ -2527,6 +2535,26 @@
 	)
 	(wire
 		(pts
+			(xy 124.46 124.46) (xy 124.46 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2fbcf8a3-6b1e-4a5f-af13-aee730a154bb")
+	)
+	(wire
+		(pts
+			(xy 215.9 116.84) (xy 224.79 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3576395e-249f-4691-84d2-0d2b2a89766f")
+	)
+	(wire
+		(pts
 			(xy 195.58 132.08) (xy 231.14 132.08)
 		)
 		(stroke
@@ -2534,6 +2562,26 @@
 			(type default)
 		)
 		(uuid "38bf400c-b53b-419d-8e96-e5e19d6a843a")
+	)
+	(wire
+		(pts
+			(xy 119.38 116.84) (xy 124.46 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "396a6f05-0342-4d8c-94fe-451033354821")
+	)
+	(wire
+		(pts
+			(xy 119.38 134.62) (xy 119.38 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b270e81-30b7-4b35-8f07-609c78a741e9")
 	)
 	(wire
 		(pts
@@ -2587,7 +2635,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 116.84) (xy 93.98 116.84)
+			(xy 55.88 116.84) (xy 93.98 116.84)
 		)
 		(stroke
 			(width 0)
@@ -2607,16 +2655,6 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 116.84) (xy 205.74 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a7b5eea-fd2f-4313-a533-ba12838f4e8b")
-	)
-	(wire
-		(pts
 			(xy 152.4 95.25) (xy 167.64 95.25)
 		)
 		(stroke
@@ -2624,6 +2662,26 @@
 			(type default)
 		)
 		(uuid "54939d8f-0901-4e06-b74f-ef109f9533f8")
+	)
+	(wire
+		(pts
+			(xy 151.13 121.92) (xy 151.13 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5c67d23e-1f62-45f3-a4a7-d52cbd6c422d")
+	)
+	(wire
+		(pts
+			(xy 55.88 124.46) (xy 71.12 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5da1cc2b-d8fa-4935-b7ac-cefc3b6f4101")
 	)
 	(wire
 		(pts
@@ -2657,6 +2715,16 @@
 	)
 	(wire
 		(pts
+			(xy 119.38 134.62) (xy 124.46 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66ef68b9-6655-4b28-b118-1a4509ae696b")
+	)
+	(wire
+		(pts
 			(xy 195.58 119.38) (xy 195.58 116.84)
 		)
 		(stroke
@@ -2687,13 +2755,23 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 116.84) (xy 105.41 116.84)
+			(xy 93.98 116.84) (xy 99.06 116.84)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "6b631e3a-ade2-496f-bcc0-344dcd0e8b44")
+	)
+	(wire
+		(pts
+			(xy 109.22 116.84) (xy 119.38 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6fc94ccd-ef2b-462d-8115-a1d32234c051")
 	)
 	(wire
 		(pts
@@ -2737,6 +2815,16 @@
 	)
 	(wire
 		(pts
+			(xy 124.46 116.84) (xy 134.62 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b6a6bae-e5e7-44ff-ba7a-4bde1687b48f")
+	)
+	(wire
+		(pts
 			(xy 154.94 132.08) (xy 154.94 130.81)
 		)
 		(stroke
@@ -2744,16 +2832,6 @@
 			(type default)
 		)
 		(uuid "86fb3c4b-0f5c-4eee-8227-a08f67119d9f")
-	)
-	(wire
-		(pts
-			(xy 151.13 124.46) (xy 144.78 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "874ac7fb-3bde-483d-9d4e-feba70eddf98")
 	)
 	(wire
 		(pts
@@ -2817,6 +2895,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 121.92) (xy 78.74 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c81c5ed-4514-4b07-8778-6050da6bcb57")
+	)
+	(wire
+		(pts
 			(xy 167.64 95.25) (xy 179.07 95.25)
 		)
 		(stroke
@@ -2827,7 +2915,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 130.81) (xy 85.09 132.08)
+			(xy 55.88 130.81) (xy 55.88 132.08)
 		)
 		(stroke
 			(width 0)
@@ -2847,13 +2935,23 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 129.54) (xy 85.09 130.81)
+			(xy 55.88 129.54) (xy 55.88 130.81)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "ab760b53-ad86-4a22-b13b-7778d6d8871c")
+	)
+	(wire
+		(pts
+			(xy 124.46 134.62) (xy 143.51 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac46c6c9-95fc-4be2-801d-bfa24ff8039c")
 	)
 	(wire
 		(pts
@@ -2877,6 +2975,26 @@
 	)
 	(wire
 		(pts
+			(xy 151.13 127) (xy 143.51 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5eaeed6-343c-48cf-ba0c-4c1c8f4ea4ec")
+	)
+	(wire
+		(pts
+			(xy 143.51 127) (xy 143.51 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf49c894-0286-4c21-9864-72bba497baa6")
+	)
+	(wire
+		(pts
 			(xy 179.07 95.25) (xy 189.23 95.25)
 		)
 		(stroke
@@ -2887,7 +3005,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 138.43) (xy 118.11 135.89)
+			(xy 109.22 138.43) (xy 109.22 135.89)
 		)
 		(stroke
 			(width 0)
@@ -2897,23 +3015,13 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 116.84) (xy 118.11 116.84)
+			(xy 144.78 116.84) (xy 153.67 116.84)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c81bf66d-b730-46a6-adb9-a9f95cd87f87")
-	)
-	(wire
-		(pts
-			(xy 205.74 116.84) (xy 215.9 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cf06da4b-11d2-4440-a984-e3ef6bc6f429")
+		(uuid "ca1d2398-c93e-4b31-8944-7c7127391e4d")
 	)
 	(wire
 		(pts
@@ -2937,17 +3045,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 121.92) (xy 151.13 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d1304d1e-1ccd-4a51-b4fe-2c14ba7df35d")
-	)
-	(wire
-		(pts
-			(xy 86.36 130.81) (xy 85.09 130.81)
+			(xy 57.15 130.81) (xy 55.88 130.81)
 		)
 		(stroke
 			(width 0)
@@ -2967,7 +3065,17 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 135.89) (xy 85.09 134.62)
+			(xy 74.93 132.08) (xy 78.74 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6df3009-b9af-46cb-a51b-38c5f961310c")
+	)
+	(wire
+		(pts
+			(xy 55.88 135.89) (xy 55.88 134.62)
 		)
 		(stroke
 			(width 0)
@@ -2997,7 +3105,7 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 116.84) (xy 215.9 116.84)
+			(xy 195.58 116.84) (xy 215.9 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3007,7 +3115,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 116.84) (xy 118.11 120.65)
+			(xy 109.22 116.84) (xy 109.22 120.65)
 		)
 		(stroke
 			(width 0)
@@ -3017,13 +3125,13 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 116.84) (xy 134.62 116.84)
+			(xy 71.12 132.08) (xy 74.93 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f276c8be-3043-412c-816f-6f18cb00608f")
+		(uuid "f1964fc7-eb73-48d5-8af3-9a83ab7256d0")
 	)
 	(wire
 		(pts
@@ -3034,6 +3142,16 @@
 			(type default)
 		)
 		(uuid "f4a359aa-80c0-4884-8040-75da02b5204a")
+	)
+	(wire
+		(pts
+			(xy 78.74 121.92) (xy 78.74 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f682b054-4896-4f1a-886c-49e330505d67")
 	)
 	(wire
 		(pts
@@ -3057,7 +3175,7 @@
 	)
 	(hierarchical_label "USB_D+"
 		(shape input)
-		(at 86.36 135.89 0)
+		(at 57.15 135.89 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3068,7 +3186,7 @@
 	)
 	(hierarchical_label "USB_D-"
 		(shape input)
-		(at 86.36 130.81 0)
+		(at 57.15 130.81 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3087,7 +3205,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "011ee206-44a8-43fe-9d1b-babdc601824f")
-		(property "Reference" "U8"
+		(property "Reference" "U2"
 			(at 167.64 109.22 0)
 			(effects
 				(font
@@ -3173,7 +3291,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "U8")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -3189,7 +3307,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0d438e26-1c65-43c4-b317-73ea08224b44")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR028"
 			(at 93.98 120.65 0)
 			(effects
 				(font
@@ -3239,7 +3357,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR07")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -3255,7 +3373,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "11eb263c-f7de-4ac0-9d6e-cd643493c8ca")
-		(property "Reference" "C7"
+		(property "Reference" "C14"
 			(at 193.04 90.1699 0)
 			(effects
 				(font
@@ -3309,7 +3427,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C7")
+					(reference "C14")
 					(unit 1)
 				)
 			)
@@ -3324,7 +3442,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1f912777-3620-43a0-b451-9e91c6da413d")
-		(property "Reference" "R2"
+		(property "Reference" "R9"
 			(at 190.246 119.38 90)
 			(effects
 				(font
@@ -3376,7 +3494,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "R2")
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -3392,7 +3510,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1fb01ee8-22a2-4011-ba3f-e3024570ffce")
-		(property "Reference" "#PWR0140"
+		(property "Reference" "#PWR037"
 			(at 215.9 130.81 0)
 			(effects
 				(font
@@ -3442,7 +3560,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR0140")
+					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -3457,7 +3575,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2880cbfc-4509-44d2-9fd7-c219adcf371e")
-		(property "Reference" "R5"
+		(property "Reference" "R12"
 			(at 190.754 129.54 90)
 			(effects
 				(font
@@ -3509,7 +3627,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "R5")
+					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -3517,16 +3635,15 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 195.58 135.89 0)
+		(at 180.34 140.97 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3a635769-5de6-4da4-8b68-5dbb3174a031")
-		(property "Reference" "C8"
-			(at 199.39 134.6199 0)
+		(uuid "43a9ba4c-8348-4549-af8f-52f016fe4c5f")
+		(property "Reference" "C13"
+			(at 174.752 140.208 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3535,7 +3652,7 @@
 			)
 		)
 		(property "Value" "4.7u"
-			(at 199.39 137.1599 0)
+			(at 174.752 142.748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3543,8 +3660,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 196.5452 139.7 0)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 181.3052 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3553,7 +3670,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 195.58 135.89 0)
+			(at 180.34 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3562,7 +3679,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 195.58 135.89 0)
+			(at 180.34 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3571,15 +3688,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "eaedfd82-a8f6-48d5-ab97-a06486b09c02")
+			(uuid "bfcb51b7-c94c-4c93-8e7d-cf3023c77def")
 		)
 		(pin "2"
-			(uuid "9e0e1183-73a7-4a13-afb3-e6346c659167")
+			(uuid "eb3564a2-74f2-4a41-9225-0c7dcbbbbf28")
 		)
 		(instances
-			(project "LCR_Meter"
+			(project "V2_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C8")
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -3595,7 +3712,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4619dbd3-9589-4ecd-9047-64c2ec34b48d")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR036"
 			(at 205.74 130.81 0)
 			(effects
 				(font
@@ -3645,24 +3762,156 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR014")
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Polarized")
-		(at 215.9 120.65 0)
+		(lib_id "power:GND")
+		(at 74.93 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "4ace62fd-e519-444b-8e59-010a3784a91b")
-		(property "Reference" "C51"
-			(at 219.71 118.4909 0)
+		(uuid "4620c245-01ce-4c77-aa73-3016a99fa2d3")
+		(property "Reference" "#PWR0143"
+			(at 74.93 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 74.93 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 74.93 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.93 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 74.93 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8f2f486d-2daa-4a21-9cb5-a7d991bf11b7")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "#PWR0143")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 78.74 128.27 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "534504e3-9725-4ed0-8f88-e65dba49f45b")
+		(property "Reference" "R66"
+			(at 78.74 128.016 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5k1"
+			(at 82.042 128.016 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 80.518 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 78.74 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 78.74 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8af8a270-7eb7-4b47-ad62-c8fd7f17a6b6")
+		)
+		(pin "1"
+			(uuid "9ba69aae-5e93-459b-afd3-24c72dc041c7")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "R66")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 215.9 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "59ecf850-4d07-4def-b251-34072407ae8e")
+		(property "Reference" "C16"
+			(at 210.312 119.888 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3670,8 +3919,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470u"
-			(at 219.71 121.0309 0)
+		(property "Value" "4.7u"
+			(at 210.312 122.428 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3679,7 +3928,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 216.8652 124.46 0)
 			(effects
 				(font
@@ -3697,7 +3946,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Polarized capacitor"
+		(property "Description" "Unpolarized capacitor"
 			(at 215.9 120.65 0)
 			(effects
 				(font
@@ -3707,15 +3956,84 @@
 			)
 		)
 		(pin "1"
-			(uuid "38634f52-daf4-453b-b58f-e69cc65704d7")
+			(uuid "a1c5570e-5dcb-437a-b74e-fc714377d0b8")
 		)
 		(pin "2"
-			(uuid "5450ba8c-9b1c-4234-afa5-8f9f70f75946")
+			(uuid "5bbf6ca7-ca86-4f1b-8016-e7bb37bb5902")
 		)
 		(instances
-			(project "LCR_Meter"
+			(project "V2_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C51")
+					(reference "C16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 195.58 135.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "62daebef-6f91-4964-bee5-1f5c658d4b49")
+		(property "Reference" "C9"
+			(at 189.992 135.128 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7u"
+			(at 189.992 137.668 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 196.5452 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 195.58 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 195.58 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2224234e-6c3d-4fc6-b092-9211c431d679")
+		)
+		(pin "2"
+			(uuid "ec13457f-eafa-469a-9943-39b96611ba4e")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "C9")
 					(unit 1)
 				)
 			)
@@ -3731,7 +4049,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "681ff48b-1ab2-457a-8e22-778ade36c6e0")
-		(property "Reference" "U9"
+		(property "Reference" "U3"
 			(at 167.64 80.01 0)
 			(effects
 				(font
@@ -3787,42 +4105,41 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "U9")
+					(reference "U3")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Polarized")
-		(at 105.41 120.65 0)
+		(lib_id "Device:LED")
+		(at 119.38 124.46 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7cca903c-0348-4cdb-a747-f04c3a360c24")
-		(property "Reference" "C11"
-			(at 109.22 118.4909 0)
+		(uuid "6f866eab-1c3c-4e69-b8d7-94c5035de4a0")
+		(property "Reference" "D18"
+			(at 115.062 119.126 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "470u"
-			(at 109.22 121.0309 0)
+		(property "Value" "LED"
+			(at 115.062 121.666 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
-			(at 106.3752 124.46 0)
+		(property "Footprint" "LED_SMD:LED_miniPLCC_2315_Handsoldering"
+			(at 119.38 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3831,7 +4148,144 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 105.41 120.65 0)
+			(at 119.38 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 119.38 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "36bc1fe4-7b94-4b56-ac1d-af21235bd552")
+		)
+		(pin "2"
+			(uuid "265451ef-7961-492c-8c9c-89ea172738cf")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "D18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 71.12 128.27 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7b8eb4c5-bd6a-4bd7-9306-daec7e672152")
+		(property "Reference" "R65"
+			(at 71.12 128.016 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5k1"
+			(at 74.422 128.016 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 72.898 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 71.12 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 71.12 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e1ef2548-3dc1-43c9-b9cb-b4d85ceed598")
+		)
+		(pin "1"
+			(uuid "67d1e9fa-672b-45dc-9b19-dba9d9924978")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "R65")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Polarized")
+		(at 99.06 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7cca903c-0348-4cdb-a747-f04c3a360c24")
+		(property "Reference" "C7"
+			(at 102.87 118.4909 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "470u"
+			(at 102.87 121.0309 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
+			(at 100.0252 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3840,7 +4294,7 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
-			(at 105.41 120.65 0)
+			(at 99.06 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3857,7 +4311,7 @@
 		(instances
 			(project ""
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C11")
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -3873,7 +4327,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "81ec42f3-4d86-4483-b038-3dbf146f54d5")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR034"
 			(at 180.34 151.13 0)
 			(effects
 				(font
@@ -3923,7 +4377,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR012")
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -3939,7 +4393,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "86430c9f-80ea-4e6b-8291-8aa5da464088")
-		(property "Reference" "C12"
+		(property "Reference" "C18"
 			(at 234.95 133.7309 0)
 			(effects
 				(font
@@ -3993,76 +4447,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C12")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 144.78 120.65 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "86f3fbf2-11d3-4d10-91c9-df4af3fd2ee4")
-		(property "Reference" "C2"
-			(at 147.574 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "4.7u"
-			(at 147.574 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 145.7452 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 144.78 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 144.78 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e692577a-3248-4188-91b1-a68bed25cec5")
-		)
-		(pin "2"
-			(uuid "49c240a5-67b0-442b-9dcf-5ba33df32abb")
-		)
-		(instances
-			(project "LCR_Meter"
-				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C2")
+					(reference "C18")
 					(unit 1)
 				)
 			)
@@ -4070,7 +4455,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 69.85 154.94 0)
+		(at 40.64 154.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4078,8 +4463,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8915b1bb-3505-47f6-b70d-080bd057e817")
-		(property "Reference" "#PWR06"
-			(at 69.85 161.29 0)
+		(property "Reference" "#PWR027"
+			(at 40.64 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4088,7 +4473,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 69.85 160.02 0)
+			(at 40.64 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4096,7 +4481,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 69.85 154.94 0)
+			(at 40.64 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4105,7 +4490,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 69.85 154.94 0)
+			(at 40.64 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4114,7 +4499,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 69.85 154.94 0)
+			(at 40.64 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4128,7 +4513,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR06")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -4144,7 +4529,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8bffbf76-8f42-49a4-bd1a-29dff8dcd71e")
-		(property "Reference" "C5"
+		(property "Reference" "C12"
 			(at 182.88 90.1699 0)
 			(effects
 				(font
@@ -4198,7 +4583,74 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C5")
+					(reference "C12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 124.46 120.65 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8e6c5917-90f0-4a1d-9fd3-d28459628ebd")
+		(property "Reference" "R64"
+			(at 124.46 120.396 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 124.206 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 126.238 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 124.46 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 124.46 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "5c92e814-d133-4695-9c7f-692c1c2d1387")
+		)
+		(pin "1"
+			(uuid "890a17a0-7d38-48af-a475-e5f7ab02268f")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "R64")
 					(unit 1)
 				)
 			)
@@ -4214,7 +4666,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "91dd4b71-532f-429f-9b46-e6693c72e736")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR038"
 			(at 220.98 91.44 0)
 			(effects
 				(font
@@ -4264,7 +4716,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR015")
+					(reference "#PWR038")
 					(unit 1)
 				)
 			)
@@ -4272,7 +4724,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 105.41 124.46 0)
+		(at 99.06 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4280,8 +4732,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9423e1c9-0be7-4c34-8ec2-088079fc143e")
-		(property "Reference" "#PWR0138"
-			(at 105.41 130.81 0)
+		(property "Reference" "#PWR029"
+			(at 99.06 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4290,7 +4742,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 105.41 129.54 0)
+			(at 99.06 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4298,7 +4750,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 105.41 124.46 0)
+			(at 99.06 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4307,7 +4759,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 124.46 0)
+			(at 99.06 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4316,7 +4768,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 105.41 124.46 0)
+			(at 99.06 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4330,7 +4782,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR0138")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -4346,7 +4798,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9ad25af7-ef87-43de-975e-85490465c41a")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR039"
 			(at 224.79 119.38 0)
 			(effects
 				(font
@@ -4396,77 +4848,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR016")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 205.74 120.65 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9f6160a7-d107-4cd0-93bc-c5f907a6e637")
-		(property "Reference" "C9"
-			(at 209.55 119.3799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "4.7u"
-			(at 209.55 121.9199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 206.7052 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 205.74 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 205.74 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0c4a8b47-bf25-4cb2-8ffb-a0dacc50bf29")
-		)
-		(pin "2"
-			(uuid "36eca654-67af-4291-9441-dc22534f2093")
-		)
-		(instances
-			(project "LCR_Meter"
-				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C9")
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)
@@ -4482,7 +4864,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aa94e9bb-fb06-4cdf-beb9-aa71f3d3be74")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR035"
 			(at 195.58 146.05 0)
 			(effects
 				(font
@@ -4532,7 +4914,76 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR013")
+					(reference "#PWR035")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 144.78 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b90a9002-1095-4629-8956-c830b4ee7957")
+		(property "Reference" "C15"
+			(at 139.192 119.888 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7u"
+			(at 139.192 122.428 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 145.7452 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 144.78 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 144.78 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d9a9c02a-480d-493f-8a27-9c49d23886ff")
+		)
+		(pin "2"
+			(uuid "eba60912-fddd-47a6-b39e-84153db40cc2")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "C15")
 					(unit 1)
 				)
 			)
@@ -4540,7 +4991,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 118.11 138.43 0)
+		(at 109.22 138.43 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4548,8 +4999,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c2c17c90-2a7f-40ba-89c9-96500fc6c60d")
-		(property "Reference" "#PWR08"
-			(at 118.11 144.78 0)
+		(property "Reference" "#PWR030"
+			(at 109.22 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4558,7 +5009,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 118.11 143.51 0)
+			(at 109.22 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4566,7 +5017,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 118.11 138.43 0)
+			(at 109.22 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4575,7 +5026,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 118.11 138.43 0)
+			(at 109.22 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4584,7 +5035,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 118.11 138.43 0)
+			(at 109.22 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4598,7 +5049,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR08")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -4606,7 +5057,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 118.11 132.08 90)
+		(at 109.22 132.08 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4615,7 +5066,7 @@
 		(fields_autoplaced yes)
 		(uuid "c86d54f4-ef4e-4c79-ad7b-8ea31254ce1f")
 		(property "Reference" "D1"
-			(at 121.92 132.3974 90)
+			(at 113.03 132.3974 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4624,7 +5075,7 @@
 			)
 		)
 		(property "Value" "LED"
-			(at 121.92 134.9374 90)
+			(at 113.03 134.9374 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4633,7 +5084,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_miniPLCC_2315_Handsoldering"
-			(at 118.11 132.08 0)
+			(at 109.22 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4642,7 +5093,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 118.11 132.08 0)
+			(at 109.22 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4651,7 +5102,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 118.11 132.08 0)
+			(at 109.22 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4684,7 +5135,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ccf08f5b-bdaa-49de-a84a-606d6e3393de")
-		(property "Reference" "#PWR0139"
+		(property "Reference" "#PWR040"
 			(at 231.14 146.05 0)
 			(effects
 				(font
@@ -4734,7 +5185,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR0139")
+					(reference "#PWR040")
 					(unit 1)
 				)
 			)
@@ -4750,7 +5201,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d373ca64-ba2c-44cf-bd1e-ef57b5b67050")
-		(property "Reference" "C4"
+		(property "Reference" "C11"
 			(at 156.21 90.1699 0)
 			(effects
 				(font
@@ -4804,7 +5255,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C4")
+					(reference "C11")
 					(unit 1)
 				)
 			)
@@ -4819,7 +5270,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d4373170-c11a-4dc8-9eee-c595f5646fcb")
-		(property "Reference" "R4"
+		(property "Reference" "R11"
 			(at 190.754 127 90)
 			(effects
 				(font
@@ -4871,7 +5322,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "R4")
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -4887,7 +5338,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d8b528a7-26ac-44c7-b7ea-bbf701adb6a6")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR031"
 			(at 139.7 132.08 0)
 			(effects
 				(font
@@ -4937,7 +5388,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR09")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -4953,7 +5404,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "df5e7ce0-3530-4958-b9c4-d6a97043ed85")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR033"
 			(at 167.64 151.13 0)
 			(effects
 				(font
@@ -5003,7 +5454,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR011")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -5011,7 +5462,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 62.23 154.94 0)
+		(at 33.02 154.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5019,8 +5470,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e21ef975-e665-4b4f-8144-00df800e1f43")
-		(property "Reference" "#PWR05"
-			(at 62.23 161.29 0)
+		(property "Reference" "#PWR026"
+			(at 33.02 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5029,7 +5480,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 62.23 160.02 0)
+			(at 33.02 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5037,7 +5488,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 62.23 154.94 0)
+			(at 33.02 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5046,7 +5497,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 62.23 154.94 0)
+			(at 33.02 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5055,7 +5506,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 62.23 154.94 0)
+			(at 33.02 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5069,77 +5520,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR05")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 180.34 140.97 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e5b435ab-0d5c-4f65-b02b-eacbc71c2608")
-		(property "Reference" "C6"
-			(at 184.15 139.6999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "4.7u"
-			(at 184.15 142.2399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 181.3052 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 180.34 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 180.34 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2d1d4937-0d49-4409-9cea-02361ec3865a")
-		)
-		(pin "2"
-			(uuid "63da4033-b6ee-481d-aa80-e856e9a96a4e")
-		)
-		(instances
-			(project "LCR_Meter"
-				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C6")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -5155,7 +5536,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f01e3c0e-9e14-4c06-8eb0-5fdbd53fbdad")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR032"
 			(at 167.64 102.87 0)
 			(effects
 				(font
@@ -5205,7 +5586,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR010")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -5213,15 +5594,15 @@
 	)
 	(symbol
 		(lib_id "Connector:USB_C_Receptacle_USB2.0_16P")
-		(at 69.85 132.08 0)
+		(at 40.64 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "f46b9156-8632-4b59-b9f4-2b7e3f7743d0")
-		(property "Reference" "J5"
-			(at 69.85 109.22 0)
+		(property "Reference" "J4"
+			(at 40.64 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5229,7 +5610,7 @@
 			)
 		)
 		(property "Value" "USB_C_Receptacle_USB2.0_16P"
-			(at 69.85 111.76 0)
+			(at 40.64 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5237,7 +5618,7 @@
 			)
 		)
 		(property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal"
-			(at 73.66 132.08 0)
+			(at 44.45 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5246,7 +5627,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
-			(at 73.66 132.08 0)
+			(at 44.45 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5255,7 +5636,7 @@
 			)
 		)
 		(property "Description" "USB 2.0-only 16P Type-C Receptacle connector"
-			(at 69.85 132.08 0)
+			(at 40.64 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5317,7 +5698,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "J5")
+					(reference "J4")
 					(unit 1)
 				)
 			)
@@ -5325,15 +5706,15 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 118.11 124.46 180)
+		(at 109.22 124.46 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "f57d4079-e0e8-4aa6-bc08-e5c163c1b5ef")
-		(property "Reference" "R1"
-			(at 118.11 124.206 90)
+		(property "Reference" "R8"
+			(at 109.22 124.206 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5341,7 +5722,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 121.412 124.206 0)
+			(at 112.522 124.206 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5349,7 +5730,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 119.888 124.46 90)
+			(at 110.998 124.46 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5358,7 +5739,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 118.11 124.46 0)
+			(at 109.22 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5367,7 +5748,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 118.11 124.46 0)
+			(at 109.22 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5384,7 +5765,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "R1")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -5399,7 +5780,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f6d9fc4d-3bf8-4f4c-8b2b-e13a3d3ac1bb")
-		(property "Reference" "R3"
+		(property "Reference" "R10"
 			(at 190.246 121.92 90)
 			(effects
 				(font
@@ -5451,7 +5832,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "R3")
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -5466,7 +5847,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f7252e89-129c-4972-b485-a590bd32a7c5")
-		(property "Reference" "C1"
+		(property "Reference" "C8"
 			(at 129.032 119.888 0)
 			(effects
 				(font
@@ -5484,7 +5865,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 135.5852 124.46 0)
 			(effects
 				(font
@@ -5520,7 +5901,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C1")
+					(reference "C8")
 					(unit 1)
 				)
 			)
@@ -5536,7 +5917,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fc3a19ef-d4cf-4f45-b028-819762b5e371")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR041"
 			(at 238.76 135.89 0)
 			(effects
 				(font
@@ -5586,7 +5967,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "#PWR017")
+					(reference "#PWR041")
 					(unit 1)
 				)
 			)
@@ -5602,7 +5983,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fe999433-875f-41f4-9407-0e61d858e341")
-		(property "Reference" "C3"
+		(property "Reference" "C10"
 			(at 151.13 133.3499 0)
 			(effects
 				(font
@@ -5656,7 +6037,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
-					(reference "C3")
+					(reference "C10")
 					(unit 1)
 				)
 			)

@@ -856,7 +856,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0479193b-d956-4c6d-874a-3eca1bc92b19")
-		(property "Reference" "R48"
+		(property "Reference" "R63"
 			(at 170.18 130.81 90)
 			(effects
 				(font
@@ -908,7 +908,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "R48")
+					(reference "R63")
 					(unit 1)
 				)
 			)
@@ -924,7 +924,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5c73aa03-afd4-4aa6-bcfb-aaa2f92f9366")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR0140"
 			(at 184.15 104.14 0)
 			(effects
 				(font
@@ -974,7 +974,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "#PWR03")
+					(reference "#PWR0140")
 					(unit 1)
 				)
 			)
@@ -990,7 +990,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7a6d7d06-cce8-4a76-a652-e470a67a9918")
-		(property "Reference" "#PWR0131"
+		(property "Reference" "#PWR0137"
 			(at 156.21 104.14 0)
 			(effects
 				(font
@@ -1040,7 +1040,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "#PWR0131")
+					(reference "#PWR0137")
 					(unit 1)
 				)
 			)
@@ -1056,7 +1056,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "82a7cca5-7585-4b96-9a66-b01f10dc83ba")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR0141"
 			(at 184.15 121.92 0)
 			(effects
 				(font
@@ -1106,7 +1106,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "#PWR04")
+					(reference "#PWR0141")
 					(unit 1)
 				)
 			)
@@ -1122,7 +1122,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8d4ffa2d-bea0-4e2e-a2db-427ea470fe1c")
-		(property "Reference" "D19"
+		(property "Reference" "D17"
 			(at 172.72 101.6314 0)
 			(effects
 				(font
@@ -1182,7 +1182,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "D19")
+					(reference "D17")
 					(unit 1)
 				)
 			)
@@ -1198,7 +1198,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a501ef1d-dced-4212-9d63-7976b5a0bcd2")
-		(property "Reference" "#PWR0137"
+		(property "Reference" "#PWR0139"
 			(at 157.48 137.16 0)
 			(effects
 				(font
@@ -1248,7 +1248,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "#PWR0137")
+					(reference "#PWR0139")
 					(unit 1)
 				)
 			)
@@ -1263,7 +1263,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aa06abab-a226-4f10-aa7a-0fcfe9de212b")
-		(property "Reference" "D20"
+		(property "Reference" "D16"
 			(at 179.07 133.35 0)
 			(effects
 				(font
@@ -1316,7 +1316,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "D20")
+					(reference "D16")
 					(unit 1)
 				)
 			)
@@ -1332,7 +1332,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c93b1803-fb25-44f1-bf27-0a9096a308f4")
-		(property "Reference" "D21"
+		(property "Reference" "D15"
 			(at 144.78 101.6314 0)
 			(effects
 				(font
@@ -1393,7 +1393,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "D21")
+					(reference "D15")
 					(unit 1)
 				)
 			)
@@ -1409,7 +1409,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d1d567b0-c06a-4e42-b23e-4a44e2c5763d")
-		(property "Reference" "#PWR0132"
+		(property "Reference" "#PWR0138"
 			(at 156.21 121.92 0)
 			(effects
 				(font
@@ -1459,7 +1459,7 @@
 		(instances
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
-					(reference "#PWR0132")
+					(reference "#PWR0138")
 					(unit 1)
 				)
 			)
