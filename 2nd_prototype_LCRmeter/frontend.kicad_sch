@@ -5381,12 +5381,6 @@
 		(uuid "3e2e7ac0-e5da-4af4-a9ce-c9d79481756f")
 	)
 	(junction
-		(at 351.79 35.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "40219028-fe9f-4cbd-a8f7-cda049831af4")
-	)
-	(junction
 		(at 97.79 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5739,6 +5733,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c5bea844-1dc9-45e4-bc31-90c13ab37130")
+	)
+	(junction
+		(at 351.79 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c668b485-7b06-4eb7-b0c5-0b0947182e90")
 	)
 	(junction
 		(at 214.63 48.26)
@@ -7926,6 +7926,16 @@
 	)
 	(wire
 		(pts
+			(xy 54.61 199.39) (xy 57.15 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c19c75a-9b09-4867-a477-c2b1bd7852b0")
+	)
+	(wire
+		(pts
 			(xy 54.61 212.09) (xy 58.42 212.09)
 		)
 		(stroke
@@ -8023,6 +8033,16 @@
 			(type default)
 		)
 		(uuid "93f82eb5-162b-4287-8d78-e0190d6e1ffe")
+	)
+	(wire
+		(pts
+			(xy 351.79 33.02) (xy 351.79 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9463507e-92a5-4d6c-8816-fa4ebaae067f")
 	)
 	(wire
 		(pts
@@ -12596,6 +12616,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 351.79 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "26823ea7-489c-4d4e-8652-ed055776a79d")
+		(property "Reference" "#PWR0113"
+			(at 351.79 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V_USB"
+			(at 351.79 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 351.79 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 351.79 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 351.79 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6318147b-e0ec-4232-a5e1-f0a9eff9e187")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/846a19e8-f160-402c-9a0e-aa155abd6cf9"
+					(reference "#PWR0113")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 387.35 109.22 0)
 		(unit 1)
@@ -13697,6 +13783,72 @@
 			(project "V2_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/846a19e8-f160-402c-9a0e-aa155abd6cf9"
 					(reference "R30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 323.85 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3b92a5fb-4e32-4c7e-9d0b-e66a50748924")
+		(property "Reference" "#PWR0149"
+			(at 323.85 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V_USB"
+			(at 323.85 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 323.85 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 323.85 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 323.85 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8e0bf26d-579d-4d8a-8527-668c87892d8b")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/846a19e8-f160-402c-9a0e-aa155abd6cf9"
+					(reference "#PWR0149")
 					(unit 1)
 				)
 			)
@@ -21516,72 +21668,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 351.79 35.56 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "be7489fc-011e-44ae-8415-dad2ea79198a")
-		(property "Reference" "#PWR0117"
-			(at 351.79 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+5V"
-			(at 351.79 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 351.79 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 351.79 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 351.79 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a4a810ce-79a6-4569-b643-715d8d9be1bb")
-		)
-		(instances
-			(project "LCR_Meter"
-				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/846a19e8-f160-402c-9a0e-aa155abd6cf9"
-					(reference "#PWR0117")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 210.82 52.07 90)
 		(unit 1)
@@ -22547,72 +22633,6 @@
 			(project "V2_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/846a19e8-f160-402c-9a0e-aa155abd6cf9"
 					(reference "U13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+5V")
-		(at 323.85 45.72 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "cf3309f0-bf66-473e-8da8-a75a457307d0")
-		(property "Reference" "#PWR0113"
-			(at 323.85 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+5V"
-			(at 323.85 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 323.85 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 323.85 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 323.85 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e31d3c33-56a7-4bdc-94fe-95c7d5f5e36a")
-		)
-		(instances
-			(project "LCR_Meter"
-				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/846a19e8-f160-402c-9a0e-aa155abd6cf9"
-					(reference "#PWR0113")
 					(unit 1)
 				)
 			)

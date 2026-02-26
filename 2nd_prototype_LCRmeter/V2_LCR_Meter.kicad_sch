@@ -3755,6 +3755,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 58.42) (xy 123.19 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1025326b-8e22-4de6-97de-243c19186c52")
+	)
+	(wire
+		(pts
 			(xy 48.26 45.72) (xy 50.8 45.72)
 		)
 		(stroke
@@ -3895,6 +3905,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 55.88) (xy 123.19 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20cf0dbe-7656-4622-8f3b-721689740806")
+	)
+	(wire
+		(pts
 			(xy 25.4 27.94) (xy 35.56 27.94)
 		)
 		(stroke
@@ -3935,6 +3955,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 50.8) (xy 123.19 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "253205ce-c70d-4189-81cc-243d07d27cac")
+	)
+	(wire
+		(pts
 			(xy 105.41 21.59) (xy 115.57 21.59)
 		)
 		(stroke
@@ -3972,16 +4002,6 @@
 			(type default)
 		)
 		(uuid "281018b5-4124-4206-9973-01920a9a37f5")
-	)
-	(wire
-		(pts
-			(xy 107.95 53.34) (xy 123.19 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "284c5b13-4e49-4fa3-95b6-252f8a5ae90c")
 	)
 	(wire
 		(pts
@@ -4075,16 +4095,6 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 58.42) (xy 123.19 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3b288530-84e0-43a5-8688-00c9c51a61c9")
-	)
-	(wire
-		(pts
 			(xy 95.25 40.64) (xy 95.25 36.83)
 		)
 		(stroke
@@ -4102,16 +4112,6 @@
 			(type default)
 		)
 		(uuid "3e8ca573-914c-4c8f-86ef-77cd005973ec")
-	)
-	(wire
-		(pts
-			(xy 107.95 50.8) (xy 123.19 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "43f527b5-1000-4580-bed8-6905232705f7")
 	)
 	(wire
 		(pts
@@ -4322,6 +4322,16 @@
 			(type default)
 		)
 		(uuid "7097b66e-f27f-486a-9f38-6340806f45b7")
+	)
+	(wire
+		(pts
+			(xy 107.95 53.34) (xy 123.19 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70d4a7ee-6143-49c5-a0ad-37daed7dc694")
 	)
 	(wire
 		(pts
@@ -4682,16 +4692,6 @@
 			(type default)
 		)
 		(uuid "b144f79f-ca4a-4246-a435-74d963e44fca")
-	)
-	(wire
-		(pts
-			(xy 107.95 55.88) (xy 123.19 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b42a2684-9e12-47d0-803a-cb8f9534a598")
 	)
 	(wire
 		(pts
@@ -9600,7 +9600,7 @@
 			)
 		)
 		(pin "I_ADC_DC" output
-			(at 123.19 50.8 180)
+			(at 123.19 55.88 180)
 			(uuid "63e38c67-8f84-4bce-b826-ac5510a4e6ae")
 			(effects
 				(font
@@ -9620,7 +9620,7 @@
 			)
 		)
 		(pin "V_ADC_AC" output
-			(at 123.19 58.42 180)
+			(at 123.19 50.8 180)
 			(uuid "ed9efbec-f4a1-49c9-85d2-e67111d1458c")
 			(effects
 				(font
@@ -9630,7 +9630,7 @@
 			)
 		)
 		(pin "I_ADC_AC" output
-			(at 123.19 55.88 180)
+			(at 123.19 58.42 180)
 			(uuid "5b0f8fa5-cbd0-4821-a716-0e7dc822af0a")
 			(effects
 				(font
