@@ -2739,7 +2739,7 @@
 		)
 		(uuid "019592f1-5606-42ee-a1bc-9f9f2acae295")
 	)
-	(text "Škálování digitálním \npotenciometrem"
+	(text "Škálování digitálním \npotenciometrem (8bit)"
 		(exclude_from_sim no)
 		(at 144.78 84.836 0)
 		(effects
@@ -2772,7 +2772,7 @@
 		)
 		(uuid "3c6b8010-0032-42d1-be14-3d9b79c8ceb9")
 	)
-	(text "Zesílení na 3Vpp (+1,5V DC)"
+	(text "Zesílení na 3,42Vpp (+1,71V DC)"
 		(exclude_from_sim no)
 		(at 119.634 99.314 0)
 		(effects
@@ -5380,7 +5380,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "33k"
+		(property "Value" "47k"
 			(at 126.492 87.6299 90)
 			(effects
 				(font
