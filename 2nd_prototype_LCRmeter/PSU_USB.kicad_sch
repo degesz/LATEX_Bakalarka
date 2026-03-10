@@ -2248,6 +2248,12 @@
 		(uuid "28f59380-d2c1-4047-b0be-351350c2001a")
 	)
 	(junction
+		(at 224.79 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "39a2bc33-9516-4571-9afc-0825283c89a8")
+	)
+	(junction
 		(at 139.7 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3434,6 +3440,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C_Polarized")
+		(at 224.79 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1b15057d-9393-4b07-9639-f964efeae283")
+		(property "Reference" "C29"
+			(at 228.6 118.4909 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "470u"
+			(at 228.6 121.0309 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-7343-30_AVX-N_HandSolder"
+			(at 225.7552 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 224.79 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Polarized capacitor"
+			(at 224.79 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cd2f0be5-bc89-4958-be59-fcf923875509")
+		)
+		(pin "2"
+			(uuid "eadc7ddf-5bfe-41a2-90b9-b62aa65dc46b")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "C29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 190.5 119.38 90)
 		(unit 1)
@@ -3628,6 +3704,72 @@
 			(project "LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 224.79 124.46 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3dbbd3da-3168-4280-a04d-610e50797f03")
+		(property "Reference" "#PWR066"
+			(at 224.79 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 224.79 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 224.79 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 224.79 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5fefaa8e-66da-4e9c-b7e3-b52a62cc6fdf")
+		)
+		(instances
+			(project "V2_LCR_Meter"
+				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
+					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -4275,7 +4417,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-7343-30_AVX-N_HandSolder"
 			(at 100.0252 124.46 0)
 			(effects
 				(font
@@ -4411,7 +4553,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm"
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-7343-30_AVX-N_HandSolder"
 			(at 232.1052 139.7 0)
 			(effects
 				(font
