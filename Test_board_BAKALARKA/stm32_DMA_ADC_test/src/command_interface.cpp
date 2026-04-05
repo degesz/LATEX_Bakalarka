@@ -4,11 +4,12 @@
 
 #include <Arduino.h>
 
+#include <cmath>
 #include <cstdlib>
 
 namespace {
 
-HardwareSerial& console() {
+Stream& console() {
   return Serial;
 }
 
@@ -20,6 +21,22 @@ void printKeyValue(const char* key, uint32_t value) {
   console().print(key);
   console().print(',');
   console().println(value);
+}
+
+void printFloatValue(const char* key, float value, int precision = 6) {
+  console().print(key);
+  console().print(',');
+  console().println(value, precision);
+}
+
+void printTextValue(const char* key, const char* value) {
+  console().print(key);
+  console().print(',');
+  console().println(value);
+}
+
+float radiansToDegrees(float radians) {
+  return radians * 180.0f / 3.14159265358979323846f;
 }
 
 }  // namespace
@@ -68,6 +85,17 @@ void CommandInterface::begin() {
   capture_pair.addPosArg("rate", "200000");
   capture_pair.setDescription("Capture a burst and stream both AC channels.");
 
+  Command measure = cli_.addCmd("measure", onMeasure);
+  measure.addPosArg("count", "256");
+  measure.addPosArg("rate", "200000");
+  measure.setDescription("Capture a burst and calculate voltage/current amplitude, phase, and impedance.");
+
+  Command calibrate = cli_.addCmd("cal", onCalibrate);
+  calibrate.addPosArg("kind", "open");
+  calibrate.addPosArg("count", "256");
+  calibrate.addPosArg("rate", "200000");
+  calibrate.setDescription("Store open or short calibration for the current range/gain settings.");
+
   Command dds = cli_.addCmd("dds", onDds);
   dds.addPosArg("freq_hz", "1000");
   dds.addPosArg("enable", "1");
@@ -78,7 +106,7 @@ void CommandInterface::begin() {
   amp.setDescription("Set MCP4561 amplitude wiper 0..255.");
 
   Command offset = cli_.addCmd("offset", onOffset);
-  offset.addPosArg("value", "128");
+  offset.addPosArg("value", "0");
   offset.setDescription("Set PA7 offset PWM 0..255.");
 
   Command range = cli_.addCmd("range", onRange);
@@ -100,10 +128,6 @@ void CommandInterface::begin() {
   led.addPosArg("index", "-1");
   led.setDescription("Set NeoPixel color for one pixel or all pixels.");
 
-  Command mcpaddr = cli_.addCmd("mcpaddr", onMcpAddress);
-  mcpaddr.addPosArg("address", "46");
-  mcpaddr.setDescription("Set MCP4561 7-bit I2C address (46 or 47 decimal).");
-
   input_line_.reserve(96);
 }
 
@@ -117,6 +141,7 @@ void CommandInterface::poll() {
     if (ch == '\n') {
       if (input_line_.length() > 0) {
         cli_.parse(input_line_);
+        console().println();
         input_line_.remove(0);
       }
       continue;
@@ -258,6 +283,75 @@ void CommandInterface::onCapturePair(cmd* command) {
     console().print(',');
     console().println(self->acquisition_.currentSample(i));
   }
+}
+
+void CommandInterface::onMeasure(cmd* command) {
+  auto* self = commandInterface();
+  if (self == nullptr) {
+    return;
+  }
+
+  Command cmd(command);
+  uint32_t sample_count = self->state_.acquisition.sample_count;
+  uint32_t sample_rate = self->state_.acquisition.sample_rate_hz;
+
+  if (!self->parseUnsigned(cmd.getArgument("count").getValue(), sample_count) ||
+      !self->parseUnsigned(cmd.getArgument("rate").getValue(), sample_rate)) {
+    console().println("error,invalid measure arguments");
+    return;
+  }
+
+  MeasurementResult result = {};
+  if (!self->captureAndAnalyze(sample_rate, sample_count, result)) {
+    console().print("error,");
+    console().println(result.error);
+    return;
+  }
+
+  self->printMeasurement(result);
+}
+
+void CommandInterface::onCalibrate(cmd* command) {
+  auto* self = commandInterface();
+  if (self == nullptr) {
+    return;
+  }
+
+  Command cmd(command);
+  CalibrationKind kind = CalibrationKind::Open;
+  uint32_t sample_count = self->state_.acquisition.sample_count;
+  uint32_t sample_rate = self->state_.acquisition.sample_rate_hz;
+
+  if (!self->parseCalibrationKind(cmd.getArgument("kind").getValue(), kind) ||
+      !self->parseUnsigned(cmd.getArgument("count").getValue(), sample_count) ||
+      !self->parseUnsigned(cmd.getArgument("rate").getValue(), sample_rate)) {
+    console().println("error,invalid calibration arguments");
+    return;
+  }
+
+  MeasurementResult result = {};
+  if (!self->captureAndAnalyze(sample_rate, sample_count, result)) {
+    console().print("error,");
+    console().println(result.error);
+    return;
+  }
+
+  MeasurementContext context = self->currentMeasurementContext();
+  CalibrationRecord& record =
+      self->analyzer_.calibrationRecord(self->state_.calibration, kind, context);
+  record.valid = true;
+  record.excitation_frequency_hz = context.excitation_frequency_hz;
+  record.impedance = result.raw_impedance;
+
+  printTextValue("calibration_kind", (kind == CalibrationKind::Open) ? "open" : "short");
+  printKeyValue("sample_rate_hz", context.sample_rate_hz);
+  printKeyValue("dds_frequency_hz", context.excitation_frequency_hz);
+  printKeyValue("shunt_range", context.shunt_range);
+  printKeyValue("voltage_pga", context.voltage_pga);
+  printKeyValue("current_pga", context.current_pga);
+  printFloatValue("stored_impedance_real_ohm", record.impedance.real);
+  printFloatValue("stored_impedance_imag_ohm", record.impedance.imag);
+  console().println("ok,cal");
 }
 
 void CommandInterface::onDds(cmd* command) {
@@ -420,29 +514,6 @@ void CommandInterface::onLed(cmd* command) {
   console().println("ok,led");
 }
 
-void CommandInterface::onMcpAddress(cmd* command) {
-  auto* self = commandInterface();
-  if (self == nullptr) {
-    return;
-  }
-
-  Command cmd(command);
-  uint32_t address = self->state_.outputs.mcp4561_address;
-  if (!self->parseUnsigned(cmd.getArgument("address").getValue(), address) ||
-      (address > 0x7FU)) {
-    console().println("error,invalid mcp address");
-    return;
-  }
-
-  if (!self->source_control_.setMcp4561Address(static_cast<uint8_t>(address))) {
-    console().println("error,unsupported mcp address");
-    return;
-  }
-
-  self->state_.outputs.mcp4561_address = static_cast<uint8_t>(address);
-  console().println("ok,mcpaddr");
-}
-
 void CommandInterface::onParseError(cmd_error* error) {
   CommandError command_error(error);
   console().print("error,");
@@ -477,16 +548,93 @@ bool CommandInterface::parseChannel(const String& text, StreamChannel& channel) 
   return false;
 }
 
+bool CommandInterface::parseCalibrationKind(const String& text, CalibrationKind& kind) const {
+  String lowered = text;
+  lowered.toLowerCase();
+
+  if (lowered == "open") {
+    kind = CalibrationKind::Open;
+    return true;
+  }
+
+  if ((lowered == "short") || (lowered == "closed")) {
+    kind = CalibrationKind::Short;
+    return true;
+  }
+
+  return false;
+}
+
 float CommandInterface::rawToVolts(uint16_t raw) const {
   return static_cast<float>(raw) * board::kAdcReferenceVolts /
          static_cast<float>(board::kAdcMaxCode);
 }
 
+MeasurementContext CommandInterface::currentMeasurementContext() const {
+  MeasurementContext context = {};
+  context.sample_rate_hz = acquisition_.lastSampleRateHz();
+  context.excitation_frequency_hz = state_.outputs.dds_frequency_hz;
+  context.shunt_range = state_.outputs.shunt_range;
+  context.voltage_pga = state_.outputs.voltage_pga;
+  context.current_pga = state_.outputs.current_pga;
+  return context;
+}
+
+bool CommandInterface::captureAndAnalyze(uint32_t sample_rate, uint32_t sample_count,
+                                         MeasurementResult& result) {
+  if (!acquisition_.captureBurst(sample_rate, sample_count)) {
+    result = {};
+    result.error = acquisition_.lastError();
+    return false;
+  }
+
+  state_.acquisition.sample_count = sample_count;
+  state_.acquisition.sample_rate_hz = acquisition_.lastSampleRateHz();
+  updateDcMeasurements(16);
+
+  MeasurementContext context = currentMeasurementContext();
+  return analyzer_.analyze(acquisition_, context, state_.calibration, result);
+}
+
+void CommandInterface::printMeasurement(const MeasurementResult& result) const {
+  const MeasurementContext context = currentMeasurementContext();
+  const ComplexValue& impedance =
+      result.calibrated ? result.calibrated_impedance : result.raw_impedance;
+
+  printKeyValue("sample_rate_hz", context.sample_rate_hz);
+  printKeyValue("dds_frequency_hz", context.excitation_frequency_hz);
+  printKeyValue("shunt_range", context.shunt_range);
+  printKeyValue("voltage_pga", context.voltage_pga);
+  printKeyValue("current_pga", context.current_pga);
+  printFloatValue("shunt_resistance_ohm", analyzer_.shuntResistanceOhms(context.shunt_range));
+  printFloatValue("samples_per_period", result.samples_per_period);
+  printFloatValue("captured_cycles", result.captured_cycles);
+  printFloatValue("voltage_amplitude_v", result.voltage.amplitude);
+  printFloatValue("voltage_phase_deg", radiansToDegrees(result.voltage.phase_rad));
+  printFloatValue("current_amplitude_a", result.current.amplitude);
+  printFloatValue("current_phase_deg", radiansToDegrees(result.current.phase_rad));
+  printFloatValue("phase_diff_deg", radiansToDegrees(result.phase_difference_rad));
+  printFloatValue("raw_impedance_mag_ohm", sqrtf((result.raw_impedance.real * result.raw_impedance.real) +
+                                                (result.raw_impedance.imag * result.raw_impedance.imag)));
+  printFloatValue("raw_impedance_real_ohm", result.raw_impedance.real);
+  printFloatValue("raw_impedance_imag_ohm", result.raw_impedance.imag);
+  printTextValue("calibration_status", result.calibration_status);
+  if (result.calibrated) {
+    printFloatValue("impedance_mag_ohm", sqrtf((impedance.real * impedance.real) +
+                                              (impedance.imag * impedance.imag)));
+    printFloatValue("impedance_real_ohm", impedance.real);
+    printFloatValue("impedance_imag_ohm", impedance.imag);
+  } else {
+    printFloatValue("impedance_mag_ohm", sqrtf((impedance.real * impedance.real) +
+                                              (impedance.imag * impedance.imag)));
+    printFloatValue("impedance_real_ohm", impedance.real);
+    printFloatValue("impedance_imag_ohm", impedance.imag);
+  }
+}
+
 void CommandInterface::printStatus() {
   printKeyValue("sample_rate_hz", state_.acquisition.sample_rate_hz);
   printKeyValue("sample_count", state_.acquisition.sample_count);
-  console().print("stream_channel,");
-  console().println(streamChannelName(state_.acquisition.stream_channel));
 
   printKeyValue("dds_frequency_hz", state_.outputs.dds_frequency_hz);
   printKeyValue("dds_enabled", state_.outputs.dds_enabled ? 1U : 0U);
@@ -495,7 +643,6 @@ void CommandInterface::printStatus() {
   printKeyValue("shunt_range", state_.outputs.shunt_range);
   printKeyValue("voltage_pga", state_.outputs.voltage_pga);
   printKeyValue("current_pga", state_.outputs.current_pga);
-  printKeyValue("mcp4561_address", state_.outputs.mcp4561_address);
   printKeyValue("v_lowpass_raw", state_.dc.voltage_lowpass_raw);
   printKeyValue("i_lowpass_raw", state_.dc.current_lowpass_raw);
 }
