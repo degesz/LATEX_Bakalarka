@@ -1,6 +1,7 @@
 #include "command_interface.h"
 
 #include "board_config.h"
+#include "serial_console.h"
 
 #include <Arduino.h>
 
@@ -10,7 +11,7 @@
 namespace {
 
 Stream& console() {
-  return Serial;
+  return consolePort();
 }
 
 CommandInterface* commandInterface() {
@@ -37,6 +38,26 @@ void printTextValue(const char* key, const char* value) {
 
 float radiansToDegrees(float radians) {
   return radians * 180.0f / 3.14159265358979323846f;
+}
+
+uint32_t defaultSampleRateForDds(uint32_t dds_frequency_hz) {
+  if (dds_frequency_hz == 0U) {
+    return board::kDefaultSampleRateHz;
+  }
+
+  const uint64_t target_rate =
+      static_cast<uint64_t>(dds_frequency_hz) * board::kTargetSamplesPerPeriod;
+  if (target_rate > board::kMaxSampleRateHz) {
+    return board::kMaxSampleRateHz;
+  }
+  if (target_rate < board::kMinSampleRateHz) {
+    return board::kMinSampleRateHz;
+  }
+  return static_cast<uint32_t>(target_rate);
+}
+
+uint32_t resolvedSampleRate(uint32_t requested_rate_hz, uint32_t dds_frequency_hz) {
+  return (requested_rate_hz == 0U) ? defaultSampleRateForDds(dds_frequency_hz) : requested_rate_hz;
 }
 
 }  // namespace
@@ -70,31 +91,21 @@ void CommandInterface::begin() {
   Command status = cli_.addCmd("status", onStatus);
   status.setDescription("Show current acquisition and output state.");
 
-  Command adc = cli_.addCmd("adc", onAdc);
-  adc.addPosArg("avg", "16");
-  adc.setDescription("Read slow lowpass DC channels.");
-
   Command capture = cli_.addCmd("capture", onCapture);
-  capture.addPosArg("count", "256");
-  capture.addPosArg("rate", "200000");
+  capture.addPosArg("count", "500");
+  capture.addPosArg("rate", "0");
   capture.addPosArg("channel", "voltage");
   capture.setDescription("Capture a burst and stream one AC channel as CSV.");
 
   Command capture_pair = cli_.addCmd("capturepair", onCapturePair);
-  capture_pair.addPosArg("count", "256");
-  capture_pair.addPosArg("rate", "200000");
+  capture_pair.addPosArg("count", "500");
+  capture_pair.addPosArg("rate", "0");
   capture_pair.setDescription("Capture a burst and stream both AC channels.");
 
   Command measure = cli_.addCmd("measure", onMeasure);
-  measure.addPosArg("count", "256");
-  measure.addPosArg("rate", "200000");
+  measure.addPosArg("count", "500");
+  measure.addPosArg("rate", "0");
   measure.setDescription("Capture a burst and calculate voltage/current amplitude, phase, and impedance.");
-
-  Command calibrate = cli_.addCmd("cal", onCalibrate);
-  calibrate.addPosArg("kind", "open");
-  calibrate.addPosArg("count", "256");
-  calibrate.addPosArg("rate", "200000");
-  calibrate.setDescription("Store open or short calibration for the current range/gain settings.");
 
   Command dds = cli_.addCmd("dds", onDds);
   dds.addPosArg("freq_hz", "1000");
@@ -120,13 +131,6 @@ void CommandInterface::begin() {
   Command ipga = cli_.addCmd("ipga", onCurrentPga);
   ipga.addPosArg("value", "0");
   ipga.setDescription("Set current PGA 0..3.");
-
-  Command led = cli_.addCmd("led", onLed);
-  led.addPosArg("r", "0");
-  led.addPosArg("g", "0");
-  led.addPosArg("b", "0");
-  led.addPosArg("index", "-1");
-  led.setDescription("Set NeoPixel color for one pixel or all pixels.");
 
   input_line_.reserve(96);
 }
@@ -177,30 +181,7 @@ void CommandInterface::onStatus(cmd*) {
     return;
   }
 
-  self->updateDcMeasurements(16);
   self->printStatus();
-}
-
-void CommandInterface::onAdc(cmd* command) {
-  auto* self = commandInterface();
-  if (self == nullptr) {
-    return;
-  }
-
-  Command cmd(command);
-  uint32_t average_count = 16;
-  if (!self->parseUnsigned(cmd.getArgument("avg").getValue(), average_count)) {
-    console().println("error,invalid avg");
-    return;
-  }
-
-  self->updateDcMeasurements(average_count);
-  printKeyValue("v_lowpass_raw", self->state_.dc.voltage_lowpass_raw);
-  printKeyValue("i_lowpass_raw", self->state_.dc.current_lowpass_raw);
-  console().print("v_lowpass_volts,");
-  console().println(self->rawToVolts(self->state_.dc.voltage_lowpass_raw), 6);
-  console().print("i_lowpass_volts,");
-  console().println(self->rawToVolts(self->state_.dc.current_lowpass_raw), 6);
 }
 
 void CommandInterface::onCapture(cmd* command) {
@@ -221,6 +202,8 @@ void CommandInterface::onCapture(cmd* command) {
     return;
   }
 
+  sample_rate = resolvedSampleRate(sample_rate, self->state_.outputs.dds_frequency_hz);
+
   if (!self->acquisition_.captureBurst(sample_rate, sample_count)) {
     console().print("error,");
     console().println(self->acquisition_.lastError());
@@ -230,7 +213,6 @@ void CommandInterface::onCapture(cmd* command) {
   self->state_.acquisition.sample_count = sample_count;
   self->state_.acquisition.sample_rate_hz = self->acquisition_.lastSampleRateHz();
   self->state_.acquisition.stream_channel = channel;
-  self->updateDcMeasurements(16);
 
   console().print("sample_rate_hz,");
   console().println(self->acquisition_.lastSampleRateHz());
@@ -261,6 +243,8 @@ void CommandInterface::onCapturePair(cmd* command) {
     return;
   }
 
+  sample_rate = resolvedSampleRate(sample_rate, self->state_.outputs.dds_frequency_hz);
+
   if (!self->acquisition_.captureBurst(sample_rate, sample_count)) {
     console().print("error,");
     console().println(self->acquisition_.lastError());
@@ -269,12 +253,9 @@ void CommandInterface::onCapturePair(cmd* command) {
 
   self->state_.acquisition.sample_count = sample_count;
   self->state_.acquisition.sample_rate_hz = self->acquisition_.lastSampleRateHz();
-  self->updateDcMeasurements(16);
 
   console().print("sample_rate_hz,");
   console().println(self->acquisition_.lastSampleRateHz());
-  printKeyValue("dc_voltage_lowpass_raw", self->state_.dc.voltage_lowpass_raw);
-  printKeyValue("dc_current_lowpass_raw", self->state_.dc.current_lowpass_raw);
   console().println("index,v_raw,i_raw");
   for (std::size_t i = 0; i < self->acquisition_.lastSampleCount(); ++i) {
     console().print(i);
@@ -301,6 +282,8 @@ void CommandInterface::onMeasure(cmd* command) {
     return;
   }
 
+  sample_rate = resolvedSampleRate(sample_rate, self->state_.outputs.dds_frequency_hz);
+
   MeasurementResult result = {};
   if (!self->captureAndAnalyze(sample_rate, sample_count, result)) {
     console().print("error,");
@@ -309,49 +292,6 @@ void CommandInterface::onMeasure(cmd* command) {
   }
 
   self->printMeasurement(result);
-}
-
-void CommandInterface::onCalibrate(cmd* command) {
-  auto* self = commandInterface();
-  if (self == nullptr) {
-    return;
-  }
-
-  Command cmd(command);
-  CalibrationKind kind = CalibrationKind::Open;
-  uint32_t sample_count = self->state_.acquisition.sample_count;
-  uint32_t sample_rate = self->state_.acquisition.sample_rate_hz;
-
-  if (!self->parseCalibrationKind(cmd.getArgument("kind").getValue(), kind) ||
-      !self->parseUnsigned(cmd.getArgument("count").getValue(), sample_count) ||
-      !self->parseUnsigned(cmd.getArgument("rate").getValue(), sample_rate)) {
-    console().println("error,invalid calibration arguments");
-    return;
-  }
-
-  MeasurementResult result = {};
-  if (!self->captureAndAnalyze(sample_rate, sample_count, result)) {
-    console().print("error,");
-    console().println(result.error);
-    return;
-  }
-
-  MeasurementContext context = self->currentMeasurementContext();
-  CalibrationRecord& record =
-      self->analyzer_.calibrationRecord(self->state_.calibration, kind, context);
-  record.valid = true;
-  record.excitation_frequency_hz = context.excitation_frequency_hz;
-  record.impedance = result.raw_impedance;
-
-  printTextValue("calibration_kind", (kind == CalibrationKind::Open) ? "open" : "short");
-  printKeyValue("sample_rate_hz", context.sample_rate_hz);
-  printKeyValue("dds_frequency_hz", context.excitation_frequency_hz);
-  printKeyValue("shunt_range", context.shunt_range);
-  printKeyValue("voltage_pga", context.voltage_pga);
-  printKeyValue("current_pga", context.current_pga);
-  printFloatValue("stored_impedance_real_ohm", record.impedance.real);
-  printFloatValue("stored_impedance_imag_ohm", record.impedance.imag);
-  console().println("ok,cal");
 }
 
 void CommandInterface::onDds(cmd* command) {
@@ -471,49 +411,6 @@ void CommandInterface::onCurrentPga(cmd* command) {
   console().println("ok,ipga");
 }
 
-void CommandInterface::onLed(cmd* command) {
-  auto* self = commandInterface();
-  if (self == nullptr) {
-    return;
-  }
-
-  Command cmd(command);
-  uint32_t r = 0;
-  uint32_t g = 0;
-  uint32_t b = 0;
-  uint32_t index = 0;
-
-  if (!self->parseUnsigned(cmd.getArgument("r").getValue(), r) ||
-      !self->parseUnsigned(cmd.getArgument("g").getValue(), g) ||
-      !self->parseUnsigned(cmd.getArgument("b").getValue(), b)) {
-    console().println("error,invalid led color");
-    return;
-  }
-
-  const String index_text = cmd.getArgument("index").getValue();
-  if (index_text == "-1") {
-    self->status_leds_.fill(static_cast<uint8_t>(r), static_cast<uint8_t>(g),
-                            static_cast<uint8_t>(b));
-    for (std::size_t i = 0; i < board::kNeoPixelCount; ++i) {
-      self->state_.outputs.pixels[i] = {static_cast<uint8_t>(r), static_cast<uint8_t>(g),
-                                        static_cast<uint8_t>(b)};
-    }
-    console().println("ok,led");
-    return;
-  }
-
-  if (!self->parseUnsigned(index_text, index) || (index >= board::kNeoPixelCount)) {
-    console().println("error,invalid led index");
-    return;
-  }
-
-  self->status_leds_.setPixel(index, static_cast<uint8_t>(r), static_cast<uint8_t>(g),
-                              static_cast<uint8_t>(b));
-  self->state_.outputs.pixels[index] = {static_cast<uint8_t>(r), static_cast<uint8_t>(g),
-                                        static_cast<uint8_t>(b)};
-  console().println("ok,led");
-}
-
 void CommandInterface::onParseError(cmd_error* error) {
   CommandError command_error(error);
   console().print("error,");
@@ -548,28 +445,6 @@ bool CommandInterface::parseChannel(const String& text, StreamChannel& channel) 
   return false;
 }
 
-bool CommandInterface::parseCalibrationKind(const String& text, CalibrationKind& kind) const {
-  String lowered = text;
-  lowered.toLowerCase();
-
-  if (lowered == "open") {
-    kind = CalibrationKind::Open;
-    return true;
-  }
-
-  if ((lowered == "short") || (lowered == "closed")) {
-    kind = CalibrationKind::Short;
-    return true;
-  }
-
-  return false;
-}
-
-float CommandInterface::rawToVolts(uint16_t raw) const {
-  return static_cast<float>(raw) * board::kAdcReferenceVolts /
-         static_cast<float>(board::kAdcMaxCode);
-}
-
 MeasurementContext CommandInterface::currentMeasurementContext() const {
   MeasurementContext context = {};
   context.sample_rate_hz = acquisition_.lastSampleRateHz();
@@ -590,16 +465,13 @@ bool CommandInterface::captureAndAnalyze(uint32_t sample_rate, uint32_t sample_c
 
   state_.acquisition.sample_count = sample_count;
   state_.acquisition.sample_rate_hz = acquisition_.lastSampleRateHz();
-  updateDcMeasurements(16);
 
   MeasurementContext context = currentMeasurementContext();
-  return analyzer_.analyze(acquisition_, context, state_.calibration, result);
+  return analyzer_.analyze(acquisition_, context, result);
 }
 
 void CommandInterface::printMeasurement(const MeasurementResult& result) const {
   const MeasurementContext context = currentMeasurementContext();
-  const ComplexValue& impedance =
-      result.calibrated ? result.calibrated_impedance : result.raw_impedance;
 
   printKeyValue("sample_rate_hz", context.sample_rate_hz);
   printKeyValue("dds_frequency_hz", context.excitation_frequency_hz);
@@ -614,22 +486,10 @@ void CommandInterface::printMeasurement(const MeasurementResult& result) const {
   printFloatValue("current_amplitude_a", result.current.amplitude);
   printFloatValue("current_phase_deg", radiansToDegrees(result.current.phase_rad));
   printFloatValue("phase_diff_deg", radiansToDegrees(result.phase_difference_rad));
-  printFloatValue("raw_impedance_mag_ohm", sqrtf((result.raw_impedance.real * result.raw_impedance.real) +
-                                                (result.raw_impedance.imag * result.raw_impedance.imag)));
-  printFloatValue("raw_impedance_real_ohm", result.raw_impedance.real);
-  printFloatValue("raw_impedance_imag_ohm", result.raw_impedance.imag);
-  printTextValue("calibration_status", result.calibration_status);
-  if (result.calibrated) {
-    printFloatValue("impedance_mag_ohm", sqrtf((impedance.real * impedance.real) +
-                                              (impedance.imag * impedance.imag)));
-    printFloatValue("impedance_real_ohm", impedance.real);
-    printFloatValue("impedance_imag_ohm", impedance.imag);
-  } else {
-    printFloatValue("impedance_mag_ohm", sqrtf((impedance.real * impedance.real) +
-                                              (impedance.imag * impedance.imag)));
-    printFloatValue("impedance_real_ohm", impedance.real);
-    printFloatValue("impedance_imag_ohm", impedance.imag);
-  }
+  printFloatValue("impedance_mag_ohm", sqrtf((result.impedance.real * result.impedance.real) +
+                                            (result.impedance.imag * result.impedance.imag)));
+  printFloatValue("impedance_real_ohm", result.impedance.real);
+  printFloatValue("impedance_imag_ohm", result.impedance.imag);
 }
 
 void CommandInterface::printStatus() {
@@ -643,12 +503,4 @@ void CommandInterface::printStatus() {
   printKeyValue("shunt_range", state_.outputs.shunt_range);
   printKeyValue("voltage_pga", state_.outputs.voltage_pga);
   printKeyValue("current_pga", state_.outputs.current_pga);
-  printKeyValue("v_lowpass_raw", state_.dc.voltage_lowpass_raw);
-  printKeyValue("i_lowpass_raw", state_.dc.current_lowpass_raw);
-}
-
-void CommandInterface::updateDcMeasurements(std::size_t average_count) {
-  acquisition_.sampleDc(state_.dc.voltage_lowpass_raw, state_.dc.current_lowpass_raw,
-                        average_count);
-  state_.dc.updated_at_ms = millis();
 }

@@ -12,8 +12,8 @@ constexpr float kTwoPi = 2.0f * kPi;
 constexpr float kAmplitudeEpsilon = 1.0e-9f;
 
 // Placeholder frontend gains. Replace these with measured analog gains later.
-constexpr float kVoltagePathGainTable[kMeasurementSettingCount] = {1.0f, 1.0f, 1.0f, 1.0f};
-constexpr float kCurrentPathGainTable[kMeasurementSettingCount] = {1.0f, 1.0f, 1.0f, 1.0f};
+constexpr float kVoltagePathGainTable[kMeasurementSettingCount] = {1.0f, 2.0f, 5.0f, 10.0f};
+constexpr float kCurrentPathGainTable[kMeasurementSettingCount] = {1.0f, 2.0f, 5.0f, 10.0f};
 constexpr float kShuntResistanceTable[kMeasurementSettingCount] = {100.0f, 1000.0f, 10000.0f,
                                                                    100000.0f};
 
@@ -31,46 +31,10 @@ float normalizePhase(float phase_rad) {
   return phase_rad;
 }
 
-ComplexValue subtractComplex(ComplexValue lhs, ComplexValue rhs) {
-  return {lhs.real - rhs.real, lhs.imag - rhs.imag};
-}
-
-float complexMagnitude(ComplexValue value) {
-  return sqrtf((value.real * value.real) + (value.imag * value.imag));
-}
-
-bool reciprocalComplex(ComplexValue value, ComplexValue& out) {
-  const float denominator = (value.real * value.real) + (value.imag * value.imag);
-  if (denominator <= kAmplitudeEpsilon) {
-    return false;
-  }
-
-  out.real = value.real / denominator;
-  out.imag = -value.imag / denominator;
-  return true;
-}
-
-bool applyOpenShortCorrection(ComplexValue raw_impedance, ComplexValue open_impedance,
-                              ComplexValue short_impedance, ComplexValue& corrected_impedance) {
-  const ComplexValue shifted_raw = subtractComplex(raw_impedance, short_impedance);
-  const ComplexValue shifted_open = subtractComplex(open_impedance, short_impedance);
-
-  ComplexValue shifted_raw_admittance = {};
-  ComplexValue open_parasitic_admittance = {};
-  if (!reciprocalComplex(shifted_raw, shifted_raw_admittance) ||
-      !reciprocalComplex(shifted_open, open_parasitic_admittance)) {
-    return false;
-  }
-
-  ComplexValue dut_admittance = subtractComplex(shifted_raw_admittance, open_parasitic_admittance);
-  return reciprocalComplex(dut_admittance, corrected_impedance);
-}
-
 }  // namespace
 
 bool ImpedanceAnalyzer::analyze(const AcquisitionEngine& acquisition,
                                 const MeasurementContext& context,
-                                const MeasurementCalibrationStore& calibration_store,
                                 MeasurementResult& result) const {
   result = {};
 
@@ -158,60 +122,12 @@ bool ImpedanceAnalyzer::analyze(const AcquisitionEngine& acquisition,
   }
 
   const float impedance_magnitude = result.voltage.amplitude / result.current.amplitude;
-  result.raw_impedance.real = impedance_magnitude * cosf(result.phase_difference_rad);
-  result.raw_impedance.imag = impedance_magnitude * sinf(result.phase_difference_rad);
-  result.calibrated_impedance = result.raw_impedance;
-  result.calibration_status = "missing_open";
-
-  const CalibrationRecord& open_record =
-      calibrationRecord(calibration_store, CalibrationKind::Open, context);
-  const CalibrationRecord& short_record =
-      calibrationRecord(calibration_store, CalibrationKind::Short, context);
-
-  if (!open_record.valid) {
-    result.calibration_status = "missing_open";
-  } else if (!short_record.valid) {
-    result.calibration_status = "missing_short";
-  } else if (open_record.excitation_frequency_hz != context.excitation_frequency_hz) {
-    result.calibration_status = "open_freq_mismatch";
-  } else if (short_record.excitation_frequency_hz != context.excitation_frequency_hz) {
-    result.calibration_status = "short_freq_mismatch";
-  } else if (applyOpenShortCorrection(result.raw_impedance, open_record.impedance,
-                                      short_record.impedance,
-                                      result.calibrated_impedance)) {
-    result.calibrated = true;
-    result.calibration_status = "applied";
-  } else {
-    result.calibration_status = "correction_failed";
-  }
+  result.impedance.real = impedance_magnitude * cosf(result.phase_difference_rad);
+  result.impedance.imag = impedance_magnitude * sinf(result.phase_difference_rad);
 
   result.success = true;
   result.error = "ok";
   return true;
-}
-
-CalibrationRecord& ImpedanceAnalyzer::calibrationRecord(
-    MeasurementCalibrationStore& calibration_store, CalibrationKind kind,
-    const MeasurementContext& context) const {
-  if (kind == CalibrationKind::Open) {
-    return calibration_store.open_records[context.shunt_range][context.voltage_pga]
-                                         [context.current_pga];
-  }
-
-  return calibration_store.short_records[context.shunt_range][context.voltage_pga]
-                                       [context.current_pga];
-}
-
-const CalibrationRecord& ImpedanceAnalyzer::calibrationRecord(
-    const MeasurementCalibrationStore& calibration_store, CalibrationKind kind,
-    const MeasurementContext& context) const {
-  if (kind == CalibrationKind::Open) {
-    return calibration_store.open_records[context.shunt_range][context.voltage_pga]
-                                         [context.current_pga];
-  }
-
-  return calibration_store.short_records[context.shunt_range][context.voltage_pga]
-                                       [context.current_pga];
 }
 
 float ImpedanceAnalyzer::shuntResistanceOhms(uint8_t shunt_range) {

@@ -16,7 +16,7 @@ Example:
 
 ```text
 status
-capture 256 200000 voltage
+capture
 dds 10000 1
 ```
 
@@ -40,18 +40,15 @@ ready,stm32f103_lcr_meter
 - `help`
 - `id`
 - `status`
-- `adc [avg]`
 - `capture [count] [rate] [channel]`
 - `capturepair [count] [rate]`
 - `measure [count] [rate]`
-- `cal [kind] [count] [rate]`
 - `dds [freq_hz] [enable]`
 - `amp [value]`
 - `offset [value]`
 - `range [value]`
 - `vpga [value]`
 - `ipga [value]`
-- `led [r] [g] [b] [index]`
 
 ## Command Details
 
@@ -85,7 +82,7 @@ max_burst_samples,2048
 
 ### `status`
 
-Prints the current acquisition settings, output settings, and latest lowpass/DC readings.
+Prints the current acquisition settings and output settings.
 
 Example:
 
@@ -96,8 +93,8 @@ status
 Typical output:
 
 ```text
-sample_rate_hz,200000
-sample_count,256
+sample_rate_hz,25000
+sample_count,500
 dds_frequency_hz,1000
 dds_enabled,1
 amp_wiper,128
@@ -105,31 +102,6 @@ offset_pwm,0
 shunt_range,0
 voltage_pga,0
 current_pga,0
-v_lowpass_raw,2046
-i_lowpass_raw,2051
-```
-
-### `adc [avg]`
-
-Reads the slow lowpass/DC channels and prints raw ADC codes plus voltages.
-
-Arguments:
-
-- `avg`: number of averaging reads, default `16`
-
-Example:
-
-```text
-adc 32
-```
-
-Typical output:
-
-```text
-v_lowpass_raw,2044
-i_lowpass_raw,2050
-v_lowpass_volts,1.647619
-i_lowpass_volts,1.652454
 ```
 
 ### `capture [count] [rate] [channel]`
@@ -144,13 +116,14 @@ Arguments:
 
 Defaults:
 
-- `count = 256`
-- `rate = 200000`
+- `count = 500`
+- `rate = 0` which means `min(dds_frequency_hz * 25, 1000000)`
 - `channel = voltage`
 
 Example:
 
 ```text
+capture
 capture 512 250000 voltage
 ```
 
@@ -168,6 +141,8 @@ index,value
 Notes:
 
 - The actual sample rate reported back is the configured timer rate after integer divider rounding.
+- With `rate = 0`, the firmware derives the request from the active DDS frequency so the target is `25` samples per period.
+- If `dds_frequency_hz * 25` exceeds `1000000 Hz`, the firmware captures `500` samples at the fastest achievable rate instead.
 - Requested sample rates must be between `1000 Hz` and `1000000 Hz`.
 - On the current STM32F103 setup, `TIM3` runs from a `72 MHz` timer clock, so the reported rate is the nearest achievable divider result in that range.
 - Valid sample count is limited by the burst buffer size.
@@ -183,12 +158,13 @@ Arguments:
 
 Defaults:
 
-- `count = 256`
-- `rate = 200000`
+- `count = 500`
+- `rate = 0` which means `min(dds_frequency_hz * 25, 1000000)`
 
 Example:
 
 ```text
+capturepair
 capturepair 128 100000
 ```
 
@@ -196,8 +172,6 @@ Typical output:
 
 ```text
 sample_rate_hz,100000
-dc_voltage_lowpass_raw,2047
-dc_current_lowpass_raw,2052
 index,v_raw,i_raw
 0,2042,2037
 1,2068,2059
@@ -207,7 +181,7 @@ index,v_raw,i_raw
 
 This command is useful when host software needs both synchronous AC channels at once.
 
-Sample-rate limits are the same as `capture`: request `1000..1000000 Hz`, then use the returned `sample_rate_hz` field as the actual configured rate.
+Sample-rate limits are the same as `capture`: request `1000..1000000 Hz`, or pass `0` to auto-select from DDS frequency with a `25` samples-per-period target.
 
 ### `measure [count] [rate]`
 
@@ -220,12 +194,13 @@ Arguments:
 
 Defaults:
 
-- `count = 256`
-- `rate = 200000`
+- `count = 500`
+- `rate = 0` which means `min(dds_frequency_hz * 25, 1000000)`
 
 Example:
 
 ```text
+measure
 measure 512 200000
 ```
 
@@ -245,10 +220,6 @@ voltage_phase_deg,3.400000
 current_amplitude_a,0.000118
 current_phase_deg,-1.100000
 phase_diff_deg,4.500000
-raw_impedance_mag_ohm,1016.949158
-raw_impedance_real_ohm,1013.815613
-raw_impedance_imag_ohm,79.796631
-calibration_status,missing_open
 impedance_mag_ohm,1016.949158
 impedance_real_ohm,1013.815613
 impedance_imag_ohm,79.796631
@@ -258,47 +229,10 @@ Notes:
 
 - ADC samples are converted from `0..3.3 V` and centered by subtracting `1.65 V`.
 - Current is derived from the centered current-channel voltage and the active shunt value.
+- With `rate = 0`, the firmware requests `25` samples per DDS period and caps the request at `1000000 Hz`.
 - The reported phase difference includes a fixed `180 deg` compensation for the inverted current analog path.
 - Shunt mapping is `0=100 ohm`, `1=1 kohm`, `2=10 kohm`, `3=100 kohm`.
 - Voltage and current PGA scaling currently use placeholder gain tables set to `1.0`; update `src/impedance_analyzer.cpp` with real analog gains later.
-- `impedance_*` equals the raw result until both open and short calibration records are available for the active range/PGA/frequency combination.
-
-### `cal [kind] [count] [rate]`
-
-Stores a calibration record for the current frontend settings and DDS frequency.
-
-Arguments:
-
-- `kind`: `open` or `short`
-- `count`: number of sample pairs
-- `rate`: requested sample rate in Hz
-
-Example:
-
-```text
-cal open 512 200000
-cal short 512 200000
-```
-
-Typical success response:
-
-```text
-calibration_kind,open
-sample_rate_hz,200000
-dds_frequency_hz,10000
-shunt_range,1
-voltage_pga,0
-current_pga,0
-stored_impedance_real_ohm,14523.221680
-stored_impedance_imag_ohm,-320.117035
-ok,cal
-```
-
-Notes:
-
-- Calibration is stored only in RAM and is lost on reset.
-- Records are keyed by `shunt_range`, `voltage_pga`, `current_pga`, and exact `dds_frequency_hz`.
-- The current implementation applies a two-term open/short correction to the measured complex impedance.
 
 ### `dds [freq_hz] [enable]`
 
@@ -436,37 +370,6 @@ Success response:
 ok,ipga
 ```
 
-### `led [r] [g] [b] [index]`
-
-Sets one NeoPixel or all NeoPixels.
-
-Arguments:
-
-- `r`: red `0..255`
-- `g`: green `0..255`
-- `b`: blue `0..255`
-- `index`: pixel index, or `-1` for all pixels
-
-Defaults:
-
-- `r = 0`
-- `g = 0`
-- `b = 0`
-- `index = -1`
-
-Examples:
-
-```text
-led 0 0 32 -1
-led 32 0 0 0
-```
-
-Success response:
-
-```text
-ok,led
-```
-
 ## Error Responses
 
 The CLI returns simple text errors when parsing or validation fails.
@@ -493,7 +396,6 @@ error,<SimpleCLI message>
 ```text
 id
 status
-adc
 ```
 
 ### 2. Set source and frontend, then capture one channel
@@ -511,7 +413,7 @@ capture 512 200000 voltage
 ### 3. Capture both synchronous AC channels
 
 ```text
-capturepair 512 200000
+capturepair
 ```
 
 ### 4. Use with the Python oscilloscope
@@ -519,13 +421,13 @@ capturepair 512 200000
 Run on the PC:
 
 ```bash
-python3 pc_osc/pc_oscilloscope.py --port /dev/ttyACM0 --baud 115200 --samples 256
+python3 pc_osc/pc_oscilloscope.py --port /dev/ttyACM0 --baud 115200 --samples 500 --sample-rate 0
 ```
 
 Then send on the device serial port:
 
 ```text
-capture 256 200000 voltage
+capture
 ```
 
 ## Notes

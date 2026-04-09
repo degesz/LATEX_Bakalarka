@@ -5,7 +5,6 @@ This project contains firmware for an STM32F103C8-based LCR meter implemented pr
 The current firmware focuses on acquisition and hardware control:
 
 - synchronous burst capture of the AC measurement channels
-- slow sampling of the DC offset channels
 - DDS source control
 - amplitude and offset control
 - shunt and PGA control
@@ -25,11 +24,6 @@ Two analog channels carry the AC measurement waveforms:
 
 These two channels must be sampled synchronously so that voltage/current phase information is preserved.
 
-Two additional analog channels are used for slow offset monitoring:
-
-- `PA2` = voltage lowpass
-- `PA3` = current lowpass
-
 All analog signals are biased around approximately `1.65 V`.
 
 ## Firmware Structure
@@ -43,7 +37,7 @@ The firmware is split into a few focused modules:
 - `src/source_control.cpp`
   Controls the AD9837 DDS, MCP4561 digipot, offset PWM, shunt selection, and PGA selection lines.
 - `src/status_leds.cpp`
-  Drives the NeoPixels and the heartbeat LED.
+  Drives the heartbeat LED.
 - `src/command_interface.cpp`
   Exposes the serial CLI using `SimpleCLI`.
 - `include/*.h`
@@ -54,8 +48,6 @@ The firmware is split into a few focused modules:
 ### Analog Inputs
 
 - `PA1` = `V_highpass`
-- `PA2` = `V_lowpass`
-- `PA3` = `I_lowpass`
 - `PA4` = `I_highpass`
 
 ### Signal Source Control
@@ -74,7 +66,6 @@ The firmware is split into a few focused modules:
 
 ### Status Outputs
 
-- `PB14` = NeoPixel data
 - `PB15` = simple heartbeat LED
 
 ## Acquisition Model
@@ -105,16 +96,6 @@ Each DMA word contains one voltage sample and one current sample from the same t
 Burst sample-rate requests are currently limited to `1000 Hz` through `1000000 Hz`.
 The requested rate is quantized onto the nearest `TIM3` divider setting, and the actual configured rate is reported back as `sample_rate_hz`.
 With the current STM32F103 clocking, `TIM3` runs from a `72 MHz` timer clock, so many requested rates are approximate rather than exact.
-
-### DC Sampling
-
-The lowpass channels are read separately with `analogRead()` and optional averaging.
-
-They are intended for:
-
-- DC offset monitoring
-- slow telemetry
-- support values for future impedance processing and calibration
 
 ## Source and Frontend Control
 
@@ -159,15 +140,11 @@ The exact mapping from selector value to physical range/gain depends on the anal
 
 The firmware uses:
 
-- two NeoPixels on `PB14`
 - one simple LED on `PB15`
 
 Current behavior:
 
 - `PB15` runs a non-blocking breathing pattern as a heartbeat
-- NeoPixels can be set from the CLI
-- on acquisition init failure, the NeoPixels are set red at startup
-- on normal startup, the NeoPixels are set dim blue
 
 ## Serial Interface
 
@@ -181,7 +158,7 @@ ready,stm32f103_lcr_meter
 
 The CLI reference is documented separately in [`CLI.md`](CLI.md).
 The `capturepair` acquisition path is described in [`CAPTUREPAIR.md`](CAPTUREPAIR.md).
-The impedance measurement and calibration flow is described in [`MEASUREMENT.md`](MEASUREMENT.md).
+The impedance measurement flow is described in [`MEASUREMENT.md`](MEASUREMENT.md).
 
 ## Oscilloscope Workflow
 
@@ -224,7 +201,6 @@ The project is configured for PlatformIO with:
 Current library dependencies:
 
 - `SimpleCLI`
-- `Adafruit NeoPixel`
 
 ## Suggested Next Steps
 

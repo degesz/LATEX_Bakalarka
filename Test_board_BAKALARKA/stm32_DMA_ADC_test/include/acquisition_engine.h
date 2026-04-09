@@ -15,8 +15,6 @@ class AcquisitionEngine {
   bool begin();
 
   bool captureBurst(uint32_t sample_rate_hz, std::size_t sample_count);
-  void sampleDc(uint16_t& voltage_lowpass_raw, uint16_t& current_lowpass_raw,
-                std::size_t average_count = 16);
 
   static AcquisitionEngine* instance();
   DMA_HandleTypeDef* dmaHandle();

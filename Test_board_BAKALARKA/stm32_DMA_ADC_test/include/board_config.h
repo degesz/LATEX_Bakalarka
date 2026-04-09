@@ -2,14 +2,11 @@
 
 #include <Arduino.h>
 
-#include <cstddef>
 #include <cstdint>
 
 namespace board {
 
 constexpr uint8_t kVoltageHighpassPin = PA1;
-constexpr uint8_t kVoltageLowpassPin = PA2;
-constexpr uint8_t kCurrentLowpassPin = PA3;
 constexpr uint8_t kCurrentHighpassPin = PA4;
 
 constexpr uint8_t kOffsetPwmPin = PA7;
@@ -25,9 +22,6 @@ constexpr uint8_t kCurrentPgaMsbPin = PB11;
 constexpr uint8_t kVoltagePgaLsbPin = PB12;
 constexpr uint8_t kVoltagePgaMsbPin = PB13;
 
-constexpr uint8_t kNeoPixelPin = PB14;
-constexpr std::size_t kNeoPixelCount = 2;
-
 constexpr uint8_t kHeartbeatLedPin = PB15;
 constexpr bool kHeartbeatActiveHigh = true;
 
@@ -41,8 +35,9 @@ constexpr uint16_t kAdcMaxCode = 4095;
 constexpr uint16_t kAdcCenterCode = 2048;
 
 constexpr std::size_t kMaxBurstSamples = 2048;
-constexpr uint32_t kDefaultBurstSamples = 256;
-constexpr uint32_t kDefaultSampleRateHz = 200000UL;
+constexpr uint32_t kDefaultBurstSamples = 500;
+constexpr uint32_t kTargetSamplesPerPeriod = 25UL;
+constexpr uint32_t kDefaultSampleRateHz = 25000UL;
 constexpr uint32_t kMinSampleRateHz = 1000UL;
 constexpr uint32_t kMaxSampleRateHz = 1000000UL;
 

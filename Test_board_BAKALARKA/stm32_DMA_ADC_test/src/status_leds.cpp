@@ -1,5 +1,7 @@
 #include "status_leds.h"
 
+#include "board_config.h"
+
 #include <Arduino.h>
 
 #include <cmath>
@@ -10,16 +12,11 @@ constexpr uint32_t kBreathPeriodMs = 2000;
 
 }  // namespace
 
-StatusLeds::StatusLeds()
-    : pixels_(board::kNeoPixelCount, board::kNeoPixelPin, NEO_GRB + NEO_KHZ800) {}
+StatusLeds::StatusLeds() = default;
 
 void StatusLeds::begin() {
   pinMode(board::kHeartbeatLedPin, OUTPUT);
   digitalWrite(board::kHeartbeatLedPin, board::kHeartbeatActiveHigh ? LOW : HIGH);
-
-  pixels_.begin();
-  pixels_.clear();
-  pixels_.show();
 }
 
 void StatusLeds::update() {
@@ -37,18 +34,14 @@ void StatusLeds::update() {
 }
 
 void StatusLeds::setPixel(std::size_t index, uint8_t r, uint8_t g, uint8_t b) {
-  if (index >= board::kNeoPixelCount) {
-    return;
-  }
-
-  pixels_.setPixelColor(index, pixels_.Color(r, g, b));
-  pixels_.show();
+  (void)index;
+  (void)r;
+  (void)g;
+  (void)b;
 }
 
 void StatusLeds::fill(uint8_t r, uint8_t g, uint8_t b) {
-  for (std::size_t i = 0; i < board::kNeoPixelCount; ++i) {
-    pixels_.setPixelColor(i, pixels_.Color(r, g, b));
-  }
-
-  pixels_.show();
+  (void)r;
+  (void)g;
+  (void)b;
 }

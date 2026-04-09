@@ -3,8 +3,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#include <cmath>
-
 namespace {
 
 constexpr uint8_t kMcpVolatileWiper0Reg = 0x00;
@@ -112,10 +110,11 @@ void SourceControl::writeDdsWord(uint16_t word) {
 }
 
 void SourceControl::applyDdsConfiguration() {
-  const uint32_t freq_word = static_cast<uint32_t>(
-      llround((static_cast<double>(dds_frequency_hz_) * (1UL << 28)) /
-              static_cast<double>(board::kDdsMasterClockHz))) &
-      0x0FFFFFFFUL;
+  const uint32_t freq_word =
+      static_cast<uint32_t>((((static_cast<uint64_t>(dds_frequency_hz_) << 28U) +
+                              (board::kDdsMasterClockHz / 2ULL)) /
+                             board::kDdsMasterClockHz) &
+                            0x0FFFFFFFULL);
 
   writeDdsWord(kDdsControlReset);
   writeDdsWord(kDdsFreqReg0 | static_cast<uint16_t>(freq_word & 0x3FFFU));

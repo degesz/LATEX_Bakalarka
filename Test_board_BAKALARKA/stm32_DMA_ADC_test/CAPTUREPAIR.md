@@ -34,7 +34,7 @@ The handler uses the same persisted defaults as `capture`:
 - `sample_count` starts from `state_.acquisition.sample_count`
 - `sample_rate_hz` starts from `state_.acquisition.sample_rate_hz`
 
-After a successful burst, the handler updates those stored values and refreshes the slow DC readings.
+After a successful burst, the handler updates those stored values.
 
 ## Serial Output Format
 
@@ -42,8 +42,6 @@ After a successful burst, the handler updates those stored values and refreshes 
 
 ```text
 sample_rate_hz,<actual_rate>
-dc_voltage_lowpass_raw,<value>
-dc_current_lowpass_raw,<value>
 index,v_raw,i_raw
 0,2042,2037
 1,2068,2059
@@ -53,7 +51,6 @@ index,v_raw,i_raw
 Important details:
 
 - `sample_rate_hz` is the actual configured timer rate, not necessarily the exact requested rate.
-- `dc_voltage_lowpass_raw` and `dc_current_lowpass_raw` come from the separate lowpass/DC channels read with `analogRead()`.
 - The CSV body contains one synchronous voltage/current pair per sample index.
 
 ## Acquisition Engine Internals
@@ -185,17 +182,6 @@ Once the requested count has been received, it emits a `Frame` object with:
 - the returned `sample_rate_hz`
 
 The UI then overlays both traces on the same time axis.
-
-## Relationship To DC Measurements
-
-`capturepair` also refreshes the lowpass/DC channels after the burst through `updateDcMeasurements(16)`.
-
-These values are not part of the synchronous DMA burst. They are auxiliary slow readings from:
-
-- `PA2` for voltage lowpass
-- `PA3` for current lowpass
-
-They are included so host software can observe the slowly varying bias/offset state alongside the AC waveform pair.
 
 ## Practical Summary
 

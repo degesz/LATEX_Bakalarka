@@ -21,7 +21,7 @@ void configureAnalogInputPins() {
 
   gpio_init.Mode = GPIO_MODE_ANALOG;
   gpio_init.Speed = GPIO_SPEED_FREQ_HIGH;
-  gpio_init.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4;
+  gpio_init.Pin = GPIO_PIN_1 | GPIO_PIN_4;
   HAL_GPIO_Init(GPIOA, &gpio_init);
 }
 
@@ -53,16 +53,6 @@ bool AcquisitionEngine::begin() {
   __HAL_RCC_ADC_CONFIG(RCC_ADCPCLK2_DIV4);
 
   if (!configureBurstPath()) {
-    return false;
-  }
-
-  if (HAL_ADCEx_Calibration_Start(&adc1_handle_) != HAL_OK) {
-    setError("adc1 calibration failed");
-    return false;
-  }
-
-  if (HAL_ADCEx_Calibration_Start(&adc2_handle_) != HAL_OK) {
-    setError("adc2 calibration failed");
     return false;
   }
 
@@ -142,22 +132,6 @@ bool AcquisitionEngine::captureBurst(uint32_t sample_rate_hz, std::size_t sample
 
   last_sample_count_ = sample_count;
   return true;
-}
-
-void AcquisitionEngine::sampleDc(uint16_t& voltage_lowpass_raw, uint16_t& current_lowpass_raw,
-                                 std::size_t average_count) {
-  average_count = (average_count == 0U) ? 1U : average_count;
-
-  uint32_t voltage_acc = 0;
-  uint32_t current_acc = 0;
-
-  for (std::size_t i = 0; i < average_count; ++i) {
-    voltage_acc += static_cast<uint16_t>(analogRead(board::kVoltageLowpassPin));
-    current_acc += static_cast<uint16_t>(analogRead(board::kCurrentLowpassPin));
-  }
-
-  voltage_lowpass_raw = static_cast<uint16_t>(voltage_acc / average_count);
-  current_lowpass_raw = static_cast<uint16_t>(current_acc / average_count);
 }
 
 std::size_t AcquisitionEngine::maxSampleCount() const {

@@ -1,24 +1,14 @@
-## Measurement And Calibration
+## Measurement
 
 This document describes the firmware-side impedance calculation path added on top of the synchronous `capturepair` acquisition engine.
 
-## Commands
+## Command
 
-Two CLI commands drive the feature:
+The measurement flow is driven by:
 
 - `measure <count> <rate>`
-- `cal <open|short> <count> <rate>`
 
 `measure` captures a burst and computes voltage amplitude, current amplitude, phase, and complex impedance.
-
-`cal` captures a burst and stores either an open or short calibration record for the active:
-
-- DDS frequency
-- shunt range
-- voltage PGA
-- current PGA
-
-Calibration records are stored only in RAM.
 
 ## Signal Conversion
 
@@ -76,7 +66,7 @@ In the current hardware, the current analog path is inverted, so the firmware co
 
 ## Impedance Calculation
 
-The raw complex impedance is reconstructed from the amplitude ratio and phase difference:
+The complex impedance is reconstructed from the amplitude ratio and phase difference:
 
 ```text
 |Z| = A_v / A_i
@@ -84,28 +74,7 @@ Re(Z) = |Z| * cos(phase_diff)
 Im(Z) = |Z| * sin(phase_diff)
 ```
 
-The CLI prints both the raw complex impedance and the final `impedance_*` fields. Until calibration is available, those values are identical.
-
-## Open / Short Calibration
-
-The current correction model assumes:
-
-- a residual series error measured by the short calibration
-- a residual parallel admittance measured by the open calibration
-
-With:
-
-- `Zm` = raw measured impedance
-- `Zshort` = stored short record
-- `Zopen` = stored open record
-
-the corrected DUT impedance is computed as:
-
-```text
-Zx = 1 / ( 1 / (Zm - Zshort) - 1 / (Zopen - Zshort) )
-```
-
-This is a practical two-term open/short correction model for the current bring-up stage.
+The CLI prints the complex impedance directly in the `impedance_*` fields.
 
 ## Recommended Workflow
 
@@ -118,29 +87,13 @@ vpga 0
 ipga 0
 ```
 
-2. Perform open calibration with the DUT disconnected:
-
-```text
-cal open 512 200000
-```
-
-3. Perform short calibration with the DUT terminals shorted:
-
-```text
-cal short 512 200000
-```
-
-4. Measure the DUT:
+2. Measure the DUT:
 
 ```text
 measure 512 200000
 ```
 
-5. If you change frequency, shunt range, or PGA settings, repeat calibration for that new setup.
-
 ## Current Limits
 
-- calibration is not persistent across reset
 - PGA gain tables are placeholders until real analog gains are entered
-- the correction is keyed to the exact DDS frequency value
 - the analyzer expects `dds_frequency_hz` to be below Nyquist for the chosen sample rate
