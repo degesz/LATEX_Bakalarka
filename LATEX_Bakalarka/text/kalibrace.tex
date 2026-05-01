@@ -1,0 +1,113 @@
+\chapter{Kalibrace měřiče}
+%%TODO: 
+%%Kalibrace je nutná pro potlačení systematických chyb způsobených analogovou částí, tolerancemi referenčních rezistorů, rozdílným zesílením měřicích kanálů a fázovým posunem mezi kanály. Cílem kalibrace není odstranit všechna omezení prototypu, ale zlepšit opakovatelnost a přesnost měření v použitelných rozsazích.
+
+%% \section{Zdroje systematických chyb}
+%% 
+%% Při měření impedance se mohou projevit zejména následující zdroje chyb:
+%% 
+%% \begin{itemize}
+%%     \item offset A/D převodníků,
+%%     \item rozdílný zisk napěťového a proudového kanálu,
+%%     \item fázový posun mezi měřicími kanály,
+%%     \item tolerance a frekvenční vlastnosti referenčních bočníků,
+%%     \item parazitní odpor, kapacita a indukčnost měřicích vodičů,
+%%     \item ruční opravy desky plošných spojů,
+%%     \item omezené rozlišení a přesnost interních A/D převodníků mikrokontroléru.
+%% \end{itemize}
+%% 
+%% \section{Kalibrace offsetu}
+%% 
+%% Offset A/D převodníků je možné určit měřením při nulovém vstupním signálu. Získaná střední hodnota vzorků je následně odečtena od měřených dat před výpočtem amplitudy a fáze. Tím se odstraní stejnosměrná složka, která by jinak mohla ovlivnit výsledek výpočtu.
+%% 
+%% \begin{table}[H]
+%%     \centering
+%%     \caption{Naměřené offsety A/D kanálů}
+%%     \label{tab:offset_adc}
+%%     \begin{tabularx}{\textwidth}{lXXX}
+%%         \toprule
+%%         Kanál & Počet vzorků & Průměrná hodnota [LSB] & Směrodatná odchylka [LSB] \\
+%%         \midrule
+%%         Napěťový kanál & TODO & TODO & TODO \\
+%%         Proudový kanál & TODO & TODO & TODO \\
+%%         \bottomrule
+%%     \end{tabularx}
+%% \end{table}
+%% 
+%% \section{Kalibrace zisku}
+%% 
+%% Rozdíl zisku měřicích kanálů způsobuje chybu v poměru napětí, ze kterého je impedance vypočítána. Korekci zisku lze provést měřením referenčního odporu známé hodnoty. Pro každý rozsah se stanoví korekční koeficient, kterým je následně upraven výsledek měření.
+%% 
+%% \begin{equation}
+%%     k_R = \frac{R_{ref}}{R_{meas}},
+%%     \label{eq:gain_calibration}
+%% \end{equation}
+%% kde $R_{ref}$ je referenční hodnota a $R_{meas}$ je hodnota naměřená před korekcí.
+%% 
+%% \begin{table}[H]
+%%     \centering
+%%     \caption{Kalibrační koeficienty měřicích rozsahů}
+%%     \label{tab:kalibracni_koeficienty}
+%%     \begin{tabularx}{\textwidth}{lXXXX}
+%%         \toprule
+%%         Rozsah & Bočník & Referenční odpor & Naměřená hodnota před korekcí & Koeficient $k_R$ \\
+%%         \midrule
+%%         R1 & TODO & TODO & TODO & TODO \\
+%%         R2 & TODO & TODO & TODO & TODO \\
+%%         R3 & TODO & TODO & TODO & TODO \\
+%%         R4 & TODO & TODO & TODO & TODO \\
+%%         \bottomrule
+%%     \end{tabularx}
+%% \end{table}
+%% 
+%% \section{Kalibrace fáze}
+%% 
+%% Fázová chyba mezi napěťovým a proudovým kanálem se projeví jako chybná reálná nebo imaginární složka impedance. Pro její určení je vhodné použít přesný rezistor, u kterého je očekávaný fázový posun blízký nule. Naměřená fáze je potom použita jako korekce pro další měření na daném rozsahu a frekvenci.
+%% 
+%% \begin{equation}
+%%     \varphi_{corr} = \varphi_{meas} - \varphi_{offset}.
+%%     \label{eq:phase_calibration}
+%% \end{equation}
+%% 
+%% \begin{table}[H]
+%%     \centering
+%%     \caption{Fázová korekce pro vybrané frekvence}
+%%     \label{tab:fazova_korekce}
+%%     \begin{tabularx}{\textwidth}{lXXXX}
+%%         \toprule
+%%         Frekvence & Rozsah R1 & Rozsah R2 & Rozsah R3 & Rozsah R4 \\
+%%         \midrule
+%%         100~Hz & TODO & TODO & TODO & TODO \\
+%%         1~kHz & TODO & TODO & TODO & TODO \\
+%%         10~kHz & TODO & TODO & TODO & TODO \\
+%%         100~kHz & TODO & TODO & TODO & TODO \\
+%%         \bottomrule
+%%     \end{tabularx}
+%% \end{table}
+%% 
+%% \section{Open a short kalibrace}
+%% 
+%% Parazitní vlastnosti měřicích vodičů a vstupního přípravku lze částečně kompenzovat pomocí měření naprázdno a nakrátko. Open kalibrace slouží především ke stanovení parazitní kapacity, zatímco short kalibrace zachycuje zbytkový odpor a indukčnost přívodů.
+%% 
+%% V současné revizi je tato kalibrace použitelná zejména pro zhodnocení vlivu přípravku a jako podklad pro další revizi zařízení. Její přesnost je omezena ručním připojením měřené součástky a mechanickým provedením měřicích vodičů.
+%% 
+%% \begin{table}[H]
+%%     \centering
+%%     \caption{Výsledky open a short kalibrace}
+%%     \label{tab:open_short}
+%%     \begin{tabularx}{\textwidth}{lXXXX}
+%%         \toprule
+%%         Frekvence & $|Z|$ open & Fáze open & $|Z|$ short & Fáze short \\
+%%         \midrule
+%%         100~Hz & TODO & TODO & TODO & TODO \\
+%%         1~kHz & TODO & TODO & TODO & TODO \\
+%%         10~kHz & TODO & TODO & TODO & TODO \\
+%%         100~kHz & TODO & TODO & TODO & TODO \\
+%%         \bottomrule
+%%     \end{tabularx}
+%% \end{table}
+%% 
+%% \section{Shrnutí kalibrace}
+%% 
+%% Prototyp umožňuje provést základní korekci offsetu, zisku a fázového posunu. Kalibrace zlepšuje výsledky zejména v rozsazích, kde je napětí na měřených kanálech dostatečně velké vzhledem k šumu a rozlišení A/D převodníku. U velmi nízkých impedancí zůstává přesnost omezená hodnotou nejmenšího použitého bočníku a vlastnostmi analogové části.
+%% 

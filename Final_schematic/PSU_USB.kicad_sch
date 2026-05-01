@@ -6,7 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "LCR Meter - Power supply")
-		(date "2025-01-20")
+		(date "2026-04-21")
 		(rev "1")
 		(company "Vojtěch Glombíček")
 	)
@@ -2385,18 +2385,23 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Chyba! "
+	(text "Toto schéma obsahuje opravy z produkčního schématu V2. Zbytečné prvky jsou vynechány pro jednoduchost."
 		(exclude_from_sim no)
-		(at 261.366 142.494 0)
+		(at 154.432 59.69 0)
 		(effects
 			(font
-				(size 7.62 7.62)
-				(thickness 1.524)
-				(bold yes)
-				(color 245 255 0 1)
+				(size 3.048 3.048)
+				(thickness 0.381)
+				(color 255 231 0 1)
 			)
 		)
-		(uuid "83521918-01bc-4075-a807-6b79233c8a29")
+		(uuid "068b2552-cb9d-4bf5-86dc-52aa558902d3")
+	)
+	(junction
+		(at 231.14 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "126c6d6e-0991-4c4a-8de0-e3538193991b")
 	)
 	(junction
 		(at 153.67 124.46)
@@ -2463,12 +2468,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4f1118ae-06f6-4666-9aa8-c6581c7fa50b")
-	)
-	(junction
-		(at 231.14 132.08)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "61de38de-03f2-4a48-a06a-13151d5f9d59")
 	)
 	(junction
 		(at 186.69 121.92)
@@ -2589,16 +2588,6 @@
 			(type default)
 		)
 		(uuid "00057215-c685-42ae-88c4-08ff2e32a0f7")
-	)
-	(wire
-		(pts
-			(xy 231.14 132.08) (xy 238.76 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "039e987e-a712-4535-8593-5f68833fa03c")
 	)
 	(wire
 		(pts
@@ -2999,6 +2988,16 @@
 			(type default)
 		)
 		(uuid "7448979e-d7a7-412a-8402-d8d19f3403e3")
+	)
+	(wire
+		(pts
+			(xy 231.14 132.08) (xy 238.76 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79290a85-86aa-421b-b5c7-c3389124927d")
 	)
 	(wire
 		(pts
@@ -3488,7 +3487,7 @@
 			(uuid "5aead25c-cf11-45b8-89a4-9025ab0b7123")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "U2")
 					(unit 1)
@@ -3566,7 +3565,7 @@
 			(uuid "d33fedaf-2a3a-46f6-8380-f301891ed98f")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR028")
 					(unit 1)
@@ -3648,7 +3647,7 @@
 			(uuid "0d34a00a-6037-4160-afb2-3ce1ac04b8f1")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C14")
 					(unit 1)
@@ -3730,7 +3729,7 @@
 			(uuid "eadc7ddf-5bfe-41a2-90b9-b62aa65dc46b")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C29")
 					(unit 1)
@@ -3809,7 +3808,7 @@
 			(uuid "4e039418-6eaf-4ec7-93e6-f962dcfeb9e4")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R9")
 					(unit 1)
@@ -3887,7 +3886,7 @@
 			(uuid "2820784f-a37c-4071-8bb2-153ee1610f95")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR037")
 					(unit 1)
@@ -3966,7 +3965,7 @@
 			(uuid "38b0f4af-5ed8-4c09-a17f-226075f471a5")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R12")
 					(unit 1)
@@ -4044,7 +4043,7 @@
 			(uuid "5fefaa8e-66da-4e9c-b7e3-b52a62cc6fdf")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR066")
 					(unit 1)
@@ -4125,7 +4124,7 @@
 			(uuid "eb3564a2-74f2-4a41-9225-0c7dcbbbbf28")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C13")
 					(unit 1)
@@ -4203,7 +4202,7 @@
 			(uuid "4939e61e-afe8-4913-bc32-6e6ab0c14f68")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR036")
 					(unit 1)
@@ -4281,7 +4280,7 @@
 			(uuid "8f2f486d-2daa-4a21-9cb5-a7d991bf11b7")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR0143")
 					(unit 1)
@@ -4360,7 +4359,7 @@
 			(uuid "9ba69aae-5e93-459b-afd3-24c72dc041c7")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R66")
 					(unit 1)
@@ -4441,7 +4440,7 @@
 			(uuid "5bbf6ca7-ca86-4f1b-8016-e7bb37bb5902")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C16")
 					(unit 1)
@@ -4522,7 +4521,7 @@
 			(uuid "ec13457f-eafa-469a-9943-39b96611ba4e")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C9")
 					(unit 1)
@@ -4606,7 +4605,7 @@
 			(uuid "9d51230d-b110-4d72-97ed-0c0c7cfb5eb6")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "U3")
 					(unit 1)
@@ -4687,7 +4686,7 @@
 			(uuid "265451ef-7961-492c-8c9c-89ea172738cf")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "D18")
 					(unit 1)
@@ -4766,7 +4765,7 @@
 			(uuid "67d1e9fa-672b-45dc-9b19-dba9d9924978")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R65")
 					(unit 1)
@@ -4848,7 +4847,7 @@
 			(uuid "975cff34-fe1c-4bd5-b094-ca244593e785")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C7")
 					(unit 1)
@@ -4926,7 +4925,7 @@
 			(uuid "bf34abe8-fcfb-4145-91d5-ad7977aa5704")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR034")
 					(unit 1)
@@ -4936,7 +4935,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Polarized")
-		(at 231.14 135.89 0)
+		(at 231.14 135.89 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4947,29 +4946,29 @@
 		(fields_autoplaced yes)
 		(uuid "86430c9f-80ea-4e6b-8291-8aa5da464088")
 		(property "Reference" "C18"
-			(at 234.95 133.7309 0)
+			(at 234.95 135.5089 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "470u"
-			(at 234.95 136.2709 0)
+			(at 234.95 138.0489 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-7343-30_AVX-N_HandSolder"
-			(at 232.1052 139.7 0)
+			(at 230.1748 132.08 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5008,7 +5007,7 @@
 			(uuid "08d2d811-da4d-4e47-8f50-1dd3c2d7ab4f")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C18")
 					(unit 1)
@@ -5086,7 +5085,7 @@
 			(uuid "38649b46-d266-4975-9861-ca578f34f88f")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR027")
 					(unit 1)
@@ -5168,7 +5167,7 @@
 			(uuid "7a482ebb-8ba2-42d8-89fb-47ab64bc5a64")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C12")
 					(unit 1)
@@ -5247,7 +5246,7 @@
 			(uuid "890a17a0-7d38-48af-a475-e5f7ab02268f")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R64")
 					(unit 1)
@@ -5325,7 +5324,7 @@
 			(uuid "81dbd5fa-1617-4af7-9019-8fea5da5c2f5")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR038")
 					(unit 1)
@@ -5403,7 +5402,7 @@
 			(uuid "202024cb-d510-49c8-8802-183676edbfb8")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR029")
 					(unit 1)
@@ -5481,7 +5480,7 @@
 			(uuid "0a46c3b3-3447-4c8a-bd8e-7afb505ca91a")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR039")
 					(unit 1)
@@ -5559,7 +5558,7 @@
 			(uuid "3e2acca2-25a4-4148-bce6-1d7ed25932bb")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR035")
 					(unit 1)
@@ -5640,7 +5639,7 @@
 			(uuid "eba60912-fddd-47a6-b39e-84153db40cc2")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C15")
 					(unit 1)
@@ -5718,7 +5717,7 @@
 			(uuid "f12c1cc9-661b-48d2-ad1d-8d0e5bd304c8")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR030")
 					(unit 1)
@@ -5800,7 +5799,7 @@
 			(uuid "1f33fcf5-b2f6-472e-a461-e4fbdc5b8e21")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "D1")
 					(unit 1)
@@ -5878,7 +5877,7 @@
 			(uuid "37ea6e60-7ccd-4740-982f-f870e1d68e80")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR040")
 					(unit 1)
@@ -5960,7 +5959,7 @@
 			(uuid "a811f6a9-5b8e-45aa-8da4-2c949109a343")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C11")
 					(unit 1)
@@ -6039,7 +6038,7 @@
 			(uuid "e77c26de-35b3-45ff-88da-405f67308992")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R11")
 					(unit 1)
@@ -6117,7 +6116,7 @@
 			(uuid "2f844d3b-aba8-435c-b5b5-6566907b9d2e")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR031")
 					(unit 1)
@@ -6195,7 +6194,7 @@
 			(uuid "05bf36f7-8117-45b3-8168-cb7f36ec1f7b")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR033")
 					(unit 1)
@@ -6273,7 +6272,7 @@
 			(uuid "e687ea4d-0ed4-41cd-886a-a887c1b3812e")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR026")
 					(unit 1)
@@ -6351,7 +6350,7 @@
 			(uuid "81cf132e-eaf8-4424-9d78-03a270332108")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR032")
 					(unit 1)
@@ -6475,7 +6474,7 @@
 			(uuid "fa81b2e3-3a4f-412b-8d78-b4b510439545")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "J4")
 					(unit 1)
@@ -6554,7 +6553,7 @@
 			(uuid "54089dd5-c802-43de-85c5-6cd65b4fa622")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R8")
 					(unit 1)
@@ -6633,7 +6632,7 @@
 			(uuid "ccdd8b1e-105a-4708-80cd-88708e2de7ea")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "R10")
 					(unit 1)
@@ -6714,7 +6713,7 @@
 			(uuid "5d9d1705-6c88-42b6-9c34-c6a4da50573f")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C8")
 					(unit 1)
@@ -6792,7 +6791,7 @@
 			(uuid "611a967c-e072-446f-a6b2-25ddcc813216")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "#PWR041")
 					(unit 1)
@@ -6874,7 +6873,7 @@
 			(uuid "a2972bb7-b2c9-46c6-89b9-351e679c5484")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/c4d4ab3e-37b0-40e2-997c-8f2441aa9b93"
 					(reference "C10")
 					(unit 1)

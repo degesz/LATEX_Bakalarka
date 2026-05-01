@@ -1,0 +1,129 @@
+\chapter{Firmware a PC aplikace}
+
+Tato kapitola popisuje programové vybavení měřiče impedance. Firmware zajišťuje nastavení měřicí frekvence, sběr vzorků, výpočet impedance a odeslání výsledků do počítače. Pro zobrazení a další zpracování dat byla vytvořena jednoduchá aplikace v jazyce Python.
+
+\section{Struktura firmwaru}
+
+Firmware je rozdělen do několika funkčních bloků. Hlavní část programu nastavuje měřicí parametry, spouští vzorkování a po dokončení přenosu dat provádí výpočet měřených veličin.
+
+\begin{figure}[H]
+    \centering
+    % TODO: Doplnit vývojový diagram měřicího cyklu.
+    % \includegraphics[width=0.85\textwidth]{obrazky/firmware_flowchart.pdf}
+    \caption{Zjednodušený vývojový diagram měřicího cyklu}
+    \label{fig:firmware_flowchart}
+\end{figure}
+
+\section{Konfigurace A/D převodníků a DMA}
+
+Mikrokontrolér STM32F103C8 využívá pro digitalizaci měřených signálů interní A/D převodníky. Vzorkování je nastaveno tak, aby byla dosažena vzorkovací frekvence 1~MSPS. Naměřené vzorky jsou ukládány do paměti pomocí přímého přístupu do paměti (\acs{DMA}), díky čemuž není nutné obsluhovat každý vzorek samostatně v přerušení.
+
+\begin{table}[H]
+    \centering
+    \caption{Základní nastavení vzorkování}
+    \label{tab:nastaveni_adc}
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        Parametr & Hodnota \\
+        \midrule
+        Mikrokontrolér & STM32F103C8 \\
+        Použitý převodník & Interní \acs{ADC} \\
+        Přenos vzorků & \acs{DMA} \\
+        Vzorkovací frekvence & 1~MSPS \\
+        Počet vzorkovaných kanálů & 2 \\
+        Počet vzorků na měření & TODO \\
+        Počet period zpracovaných jedním měřením & TODO \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\section{Měřicí cyklus}
+
+Jeden měřicí cyklus se skládá z nastavení měřicí frekvence, ustálení analogové části, spuštění vzorkování, zpracování získaných vzorků a odeslání výsledků do počítače.
+
+\begin{enumerate}
+    \item Nastavení měřicí frekvence a případně amplitudy měřicího signálu.
+    \item Ruční volba vhodného měřicího rozsahu.
+    \item Krátké čekání na ustálení signálu.
+    \item Spuštění vzorkování obou měřicích kanálů.
+    \item Uložení vzorků do paměti pomocí \acs{DMA}.
+    \item Výpočet amplitudy a fáze napěťového a proudového kanálu.
+    \item Výpočet impedance a odvozených veličin.
+    \item Odeslání výsledků přes \acs{UART} do PC aplikace.
+\end{enumerate}
+
+\section{Výpočet impedance}
+
+Z naměřených vzorků je pro každý kanál určena složka signálu na měřicí frekvenci. Výpočet vychází ze zjednodušené diskrétní Fourierovy transformace popsané v kapitole 3.2.2. Pro napěťový i proudový kanál jsou určeny kosinová a sinová složka, ze kterých se vypočítá amplituda a fáze.
+
+Komplexní impedance měřené součástky je určena ze vztahu
+\begin{equation}
+    Z_x = \frac{U_x}{I_x}.
+    \label{eq:fw_impedance}
+\end{equation}
+
+Protože proud měřenou součástkou je určen nepřímo z napětí na referenčním bočníku, lze vztah zapsat také jako
+\begin{equation}
+    Z_x = R_{ref} \cdot \frac{U_x}{U_{ref}},
+    \label{eq:fw_impedance_ref}
+\end{equation}
+kde $R_{ref}$ je hodnota zvoleného referenčního bočníku, $U_x$ je komplexní napětí na měřené součástce a $U_{ref}$ je komplexní napětí odpovídající proudu měřenou součástkou.
+
+\section{Výpočet odvozených veličin}
+
+Z komplexní impedance jsou dále dopočítány veličiny běžně zobrazované LCR metry. Pro odporovou složku platí
+\begin{equation}
+    R = \operatorname{Re}(Z_x),
+\end{equation}
+reaktanční složka je dána
+\begin{equation}
+    X = \operatorname{Im}(Z_x).
+\end{equation}
+
+Indukčnost a kapacita jsou určeny podle znaménka reaktanční složky. Pro induktivní charakter platí
+\begin{equation}
+    L = \frac{X}{2 \pi f},
+\end{equation}
+zatímco pro kapacitní charakter
+\begin{equation}
+    C = -\frac{1}{2 \pi f X}.
+\end{equation}
+
+Firmware umožňuje dopočítat také ESR, činitel kvality Q a ztrátový činitel D. Přesnost těchto veličin je však v současné revizi omezena zejména přesností měření nízkých impedancí.
+
+\section{Komunikace s počítačem}
+
+Naměřené hodnoty jsou odesílány do počítače pomocí sériového rozhraní \acs{UART}. Tento způsob komunikace byl zvolen pro jednoduchost implementace a snadné ladění během vývoje.
+
+\begin{table}[H]
+    \centering
+    \caption{Formát dat odesílaných do PC aplikace}
+    \label{tab:uart_format}
+    \begin{tabularx}{\textwidth}{lXX}
+        \toprule
+        Položka & Význam & Jednotka \\
+        \midrule
+        TODO & Měřicí frekvence & Hz \\
+        TODO & Modul impedance & $\Omega$ \\
+        TODO & Fázový posun & $^\circ$ \\
+        TODO & Odporová složka & $\Omega$ \\
+        TODO & Kapacita nebo indukčnost & F / H \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\section{Python aplikace}
+
+PC aplikace slouží k příjmu dat ze sériové linky, zobrazení výsledků měření a případně k uložení dat pro další zpracování. Při ověřovacích měřeních byla využita také pro sběr dat potřebných k porovnání s referenčním LCR metrem.
+
+\begin{figure}[H]
+    \centering
+    % TODO: Doplnit snímek obrazovky PC aplikace.
+    % \includegraphics[width=0.9\textwidth]{obrazky/python_aplikace.png}
+    \caption{Ukázka PC aplikace pro zobrazení naměřených dat}
+    \label{fig:python_aplikace}
+\end{figure}
+
+\section{Shrnutí firmwaru}
+
+Firmware umožňuje řídit měřicí cyklus, získat vzorky pomocí interních A/D převodníků a vypočítat komplexní impedanci měřené součástky. Použití \acs{DMA} umožňuje efektivní sběr vzorků bez výrazného zatížení procesoru. Přesnost výsledků je dána nejen výpočetním algoritmem, ale také omezeními interních A/D převodníků a analogové měřicí části.

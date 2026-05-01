@@ -1,0 +1,112 @@
+\chapter{Realizace finálního prototypu}
+
+Tato kapitola popisuje realizaci finálního prototypu měřiče impedance. Obecné principy použité v návrhu byly popsány v předchozích kapitolách, proto je zde pozornost věnována zejména konkrétnímu zapojení, zvoleným součástkám a změnám oproti prvnímu prototypu.
+
+\section{Požadavky na finální prototyp}
+
+Finální prototyp byl navržen jako měřič impedance pro charakterizaci pasivních součástek v pásmu nízkých a středních frekvencí. Základní požadavky byly převzaty ze závěru teoretické části a upraveny podle poznatků získaných při testování prvního prototypu.
+
+\begin{table}[H]
+    \centering
+    \caption{Požadované a dosažené parametry finálního prototypu}
+    \label{tab:finalni_parametry}
+    \begin{tabularx}{\textwidth}{lXX}
+        \toprule
+        Parametr & Požadavek & Realizace ve finálním prototypu \\
+        \midrule
+        Frekvenční rozsah & 100~Hz až 100~kHz & 100~Hz až 100~kHz \\
+        Vzorkovací frekvence & --- & 1~MSPS \\
+        Řídicí mikrokontrolér & --- & STM32F103C8 \\
+        Digitalizace signálů & Synchronní vzorkování dvou kanálů & Interní \acs{ADC} mikrokontroléru s přenosem vzorků pomocí \acs{DMA} \\
+        Přepínání rozsahů & Automatické nebo manuální & Manuální \\
+        Výstup dat & Komunikace s PC & \acs{UART} a Python aplikace \\
+        Měřené veličiny & R, L, C, $|Z|$, fáze & R, L, C, $|Z|$, fáze; ESR, Q a D pouze orientačně \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\section{Blokové zapojení zařízení}
+
+Zařízení se skládá ze zdroje měřicího signálu, analogové měřicí části, mikrokontroléru a komunikačního rozhraní pro připojení k počítači. Měřicí signál je přiveden na měřenou součástku a proud procházející součástkou je převeden na napětí pomocí samovyvažovacího můstku. Napěťový a proudový kanál jsou následně vzorkovány A/D převodníky mikrokontroléru.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{obrazky/block_diagram_meter.pdf}
+    \caption{Blokové schéma finálního prototypu měřiče impedance}
+    \label{fig:finalni_blokove_schema}
+\end{figure}
+
+\section{Zdroj měřicího signálu}
+
+Zdroj měřicího signálu vychází z principu přímé digitální syntézy popsaného v kapitole \ref{sec:dds}. Pro finální prototyp bylo zachováno řešení ověřené na prvním prototypu, protože generátor měřicího signálu pracoval spolehlivě i při maximální požadované frekvenci 100~kHz.
+
+V této části je vhodné doplnit konkrétní hodnoty použitých součástek, rozsah nastavení amplitudy, způsob nastavení stejnosměrné složky a případné rozdíly proti prvnímu prototypu.
+
+\section{Analogová měřicí část}
+
+Měřicí část je založena na samovyvažovacím můstku, který převádí proud protékající měřenou impedancí na napětí. Oproti prvnímu prototypu bylo zapojení zjednodušeno odstraněním nadbytečných zesilovacích stupňů v signálové cestě. Tím se snížil počet aktivních prvků, zjednodušilo nastavení rozsahů a omezily možné zdroje systematické chyby.
+
+\subsection{Referenční bočníky}
+
+Rozsah měření je určen sadou referenčních bočníků. Ve finálním prototypu je přepínání rozsahů realizováno manuálně. Tato varianta zjednodušuje zapojení a umožňuje ověřit princip měření bez dalších chyb způsobených spínacími prvky.
+
+\begin{table}[H]
+    \centering
+    \caption{Použité měřicí rozsahy}
+    \label{tab:shunty}
+    \begin{tabularx}{\textwidth}{lXXX}
+        \toprule
+        Rozsah & Hodnota bočníku & Předpokládané použití & Poznámka \\
+        \midrule
+        R1 & TODO & TODO & TODO \\
+        R2 & TODO & TODO & TODO \\
+        R3 & TODO & TODO & TODO \\
+        R4 & TODO & TODO & TODO \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{Omezení při měření nízkých impedancí}
+
+Nejmenší použitý bočník má v současné revizi příliš vysokou hodnotu pro přesné měření velmi nízkých impedancí. To se projevuje zejména při výpočtu parametrů ESR, Q a D, které jsou citlivé na přesnost určení malé reálné nebo imaginární složky impedance. Tyto veličiny jsou proto ve výsledcích uváděny pouze jako orientační.
+
+\section{Digitalizace signálů}
+
+Digitalizace je realizována interními A/D převodníky mikrokontroléru STM32F103C8. Vzorky jsou ukládány do paměti pomocí \acs{DMA}, což snižuje zatížení procesoru a umožňuje následné zpracování naměřeného bloku dat.
+
+Vzorkovací frekvence byla nastavena na 1~MSPS. Při maximální měřicí frekvenci 100~kHz tak připadá na jednu periodu přibližně deset vzorků. Tento počet je na horní hranici frekvenčního rozsahu omezený, ale umožňuje ověřit funkčnost zvolené metody přímého vzorkování.
+
+\section{Návrh desky plošných spojů}
+
+Finální prototyp byl realizován na desce plošných spojů. Návrh desky musel zohlednit oddělení analogové a digitální části, krátké vedení citlivých měřicích signálů a vhodné umístění napájecích blokovacích kondenzátorů.
+
+\begin{figure}[H]
+    \centering
+    % TODO: Doplnit fotografii nebo render osazené desky.
+    % \includegraphics[width=0.9\textwidth]{obrazky/finalni_pcb.jpg}
+    \caption{Finální prototyp měřiče impedance}
+    \label{fig:finalni_pcb}
+\end{figure}
+
+\section{Ruční opravy desky}
+
+Při oživování byly zjištěny chyby návrhu desky, které byly v prototypu opraveny ručními úpravami. Tyto opravy umožnily pokračovat v měření a současně poskytly podklady pro návrh další revize zařízení.
+
+\begin{table}[H]
+    \centering
+    \caption{Ruční opravy provedené na finálním prototypu}
+    \label{tab:opravy_pcb}
+    \begin{tabularx}{\textwidth}{lXXX}
+        \toprule
+        Označení opravy & Problém & Provedená úprava & Dopad na funkci zařízení \\
+        \midrule
+        TODO & TODO & TODO & TODO \\
+        TODO & TODO & TODO & TODO \\
+        TODO & TODO & TODO & TODO \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\section{Shrnutí realizace}
+
+Finální prototyp realizuje měření impedance metodou přímého vzorkování napěťového a proudového kanálu. Oproti prvnímu prototypu byla odstraněna analogová detekce fáze a zjednodušena signálová cesta. Současná revize umožňuje ověření základních funkcí přístroje, avšak obsahuje několik konstrukčních omezení, která jsou dále zhodnocena v kapitole s výsledky měření.

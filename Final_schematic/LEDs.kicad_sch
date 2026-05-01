@@ -6,7 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "LCR Meter - LEDs")
-		(date "2025-01-20")
+		(date "2026-04-21")
 		(rev "1")
 		(company "Vojtěch Glombíček")
 	)
@@ -994,7 +994,7 @@
 			(uuid "edb12086-d529-4ba4-9237-9f749dadb845")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "R63")
 					(unit 1)
@@ -1072,7 +1072,7 @@
 			(uuid "ee3203f2-4c85-4e05-9e8a-bc3a62de5f00")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "#PWR0140")
 					(unit 1)
@@ -1150,7 +1150,7 @@
 			(uuid "017bf2cb-ea30-46d8-bd7a-76a5d0c6789c")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "#PWR0137")
 					(unit 1)
@@ -1228,7 +1228,7 @@
 			(uuid "afb7f65d-c9f7-4d26-acff-3b0d452efdf9")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "#PWR0141")
 					(unit 1)
@@ -1316,7 +1316,7 @@
 			(uuid "7e3db1bd-1c9a-4e6b-a4fc-39039fa42dc2")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "D17")
 					(unit 1)
@@ -1394,7 +1394,7 @@
 			(uuid "ba001cbe-8cf6-42f6-b129-1c245dc57dbe")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "#PWR0139")
 					(unit 1)
@@ -1474,7 +1474,7 @@
 			(uuid "f9c3b27f-4621-4e56-a94e-eb030bda8071")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "D16")
 					(unit 1)
@@ -1563,7 +1563,7 @@
 			(uuid "1377d1c5-48f5-42e4-9b61-9f7172fba3fb")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "D15")
 					(unit 1)
@@ -1641,7 +1641,7 @@
 			(uuid "bd7fc261-3650-4deb-884d-05aa6aac5241")
 		)
 		(instances
-			(project "V2_LCR_Meter"
+			(project "Final_LCR_Meter"
 				(path "/16346e7b-8abe-4c50-bf10-43609be2b1c5/fac0422f-7e79-4373-832c-9f162cf2289f"
 					(reference "#PWR0138")
 					(unit 1)
