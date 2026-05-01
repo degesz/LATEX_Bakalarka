@@ -71,6 +71,7 @@ proj-lib-table.local
 *.prl
 *.kicad_prl
 history
+*.history
 
 # Plot and Fabrication Outputs (Gerbers, etc.) - Uncomment as needed if you
 # keep these in a 'build' or 'export' folder, or if you plot directly
