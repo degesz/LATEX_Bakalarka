@@ -69,7 +69,6 @@ Tím je zajištěn dostatečný prostor pro úbytek napětí na regulátorech. \
 
 Generátor měřícího signálu je realizován pomocí \acs{DDS} syntézy, jak bylo popsáno v kapitole \ref{sec:dds}.
 Jelikož výstupní signál integrovaného obvodu AD9837 má jak amplitudu, tak stejnosměrnou složku 0,3~V \cite{AD9837}, bylo nutné použít upravovací obvod se zesilovačem, digitálním potenciometrem a sčítačkou.
-V tomto prototypu byla nedopatřením zapojena sčítačka jako invertující zesilovač, nastavený DC offset byl tedy záporný. 
 Schéma generátoru je zobrazeno na obr.~\ref{fig:sigsource_sch}.
 
 Měřením bylo zjištěno, že tento návrh generátoru signálu je plně funkční i při maximální frekvenci 100~kHz.
@@ -90,14 +89,17 @@ V průběhu testování prototypu došlo k odkrytí několika chyb v návrhu. Z 
 V zájmu snížení nákladů na prototyp byl v samovyvažovacím můstku použit levnější OZ TLV9154 \cite{TLV9154}.
 Při vyšších frekvencích bylo osciloskopem změřeno, že tento OZ zkresluje tvar sinusového signálu, což výrazně snižuje přesnost měření.
 
-\subsection{Nadbytečné zesilovače}
-V návrhu prototypu byly v dráze signálu měřeného napětí a proudu použity diferenční zesilovače INA823 s nastavitelným zesílením \cite{INA823}.
-Zesílení bylo nastavováno připojením různých rezistorů pomocí analogového multiplexeru.
 
-To se ukázalo jako zbytečná komplikace, nastavování rozsahů pak bylo příliš složité.
+%note
+%%  \subsection{Nadbytečné zesilovače}
+%%  V návrhu prototypu byly v dráze signálu měřeného napětí a proudu použity diferenční zesilovače INA823 s nastavitelným zesílením \cite{INA823}.
+%%  Zesílení bylo nastavováno připojením různých rezistorů pomocí analogového multiplexeru.
+%%  
+%%  To se ukázalo jako zbytečná komplikace, nastavování rozsahů pak bylo příliš složité.
 
-\subsection{Špatné měření fáze}
+\subsection{Nevhodný způsob měření fáze}
 V tomto prototypu bylo měření fáze implementováno pomocí detekce průchodu nulou komparátorem a následném měření časové prodlevy hran pulzů mikrokontrolérem.
 Takové měření je nejen nákladné na procesorový čas vzhledem k časté aktivaci přerušení, ale také při frekvenci 100 kHz neposkytuje vysoké rozlišení.
 
-
+\subsection{Nevhodný způsob měření amplitud}
+Metoda převodu na stejnosměrné napětí blíže popsaná v kapitole \ref{sec:digit_DC} se ukázala jako nepřesná.

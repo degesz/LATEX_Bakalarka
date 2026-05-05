@@ -6,6 +6,8 @@ Tato kapitola hodnotí vlastnosti realizovaného prototypu měřiče impedance. 
 
 Pro ověřovací měření byla použita sada rezistorů, kondenzátorů a cívek. Každá součástka byla změřena navrženým měřičem a referenčním LCR metrem při stejných nebo nejbližších dostupných měřicích frekvencích.
 
+Jako referenční přístroj byl použit ruční LCR metr BK Precision 880, který umožňuje měření parametrů R, L, C, ESR, D a Q s měřicí frekvencí až 100~kHz \cite{BKPrecision_880_Datasheet}.
+
 Relativní chyba měření byla určena podle vztahu
 \begin{equation}
     \delta = \frac{x_{meas} - x_{ref}}{x_{ref}} \cdot 100~\%,
@@ -22,11 +24,18 @@ kde $x_{meas}$ je hodnota naměřená navrženým měřičem a $x_{ref}$ je hodn
         Přístroj & Popis \\
         \midrule
         Navržený LCR metr & Prototyp měřiče impedance s mikrokontrolérem STM32F103C8 \\
-        Referenční LCR metr & TODO: doplnit typ referenčního LCR metru \\
+        Referenční LCR metr & BK Precision 880, ruční LCR metr s měřicí frekvencí až 100~kHz \cite{BKPrecision_880_Datasheet} \\
         Pomocné vybavení & TODO: doplnit napájecí zdroj, multimetr, osciloskop apod. \\
         \bottomrule
     \end{tabularx}
 \end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.55\textheight]{obrazky/BK_precision_880.png}
+    \caption{Referenční LCR metr BK Precision 880. Převzato z \cite{BKPrecision_880_Datasheet}.}
+    \label{fig:bk_precision_880}
+\end{figure}
 
 \section{Měření odporů}
 
@@ -255,4 +264,4 @@ Na základě provedených měření byly určeny dosažené parametry prototypu.
 
 Naměřené výsledky je nutné hodnotit s ohledem na charakter prototypu. Zařízení ověřuje funkčnost metody přímého vzorkování a digitálního výpočtu impedance, ale jeho přesnost je omezena zejména vlastnostmi interních A/D převodníků mikrokontroléru, ručním přepínáním rozsahů, hodnotami použitých bočníků a parazitními vlastnostmi měřicího přípravku.
 
-Nejvýraznější omezení se projevuje při měření nízkých impedancí. V těchto případech je napětí odpovídající měřené veličině malé a výsledek je více ovlivněn šumem, offsetem a fázovou chybou. To se promítá především do výpočtu ESR, Q a D.
+Nejvýraznější omezení se projevuje při měření nízkých impedancí. V těchto případech je napětí odpovídající měřené veličině malé a výsledek je více ovlivněn šumem, offsetem a fázovou chybou. To se promítá především do výpočtu ESR, Q a D. 

@@ -2,32 +2,24 @@
 
 Tato kapitola popisuje realizaci finálního prototypu měřiče impedance. Obecné principy použité v návrhu byly popsány v předchozích kapitolách, proto je zde pozornost věnována zejména konkrétnímu zapojení, zvoleným součástkám a změnám oproti prvnímu prototypu.
 
-\section{Požadavky na finální prototyp}
+\section{Změny oproti testovacímu prototypu}
 
-Finální prototyp byl navržen jako měřič impedance pro charakterizaci pasivních součástek v pásmu nízkých a středních frekvencí. Základní požadavky byly převzaty ze závěru teoretické části a upraveny podle poznatků získaných při testování prvního prototypu.
+Hlavní změnou oproti testovacímu prototypu byl přechod z analogového vyhodnocování amplitudy a fáze na metodu přímého vzorkování měřených 
+signálů popsanou v kapitole \ref{sec:digit_sampling}. 
+Tím bylo možné odstranit část analogových vyhodnocovacích obvodů a přesunout výpočet impedance do mikrokontroléru.
 
-\begin{table}[H]
-    \centering
-    \caption{Požadované a dosažené parametry finálního prototypu}
-    \label{tab:finalni_parametry}
-    \begin{tabularx}{\textwidth}{lXX}
-        \toprule
-        Parametr & Požadavek & Realizace ve finálním prototypu \\
-        \midrule
-        Frekvenční rozsah & 100~Hz až 100~kHz & 100~Hz až 100~kHz \\
-        Vzorkovací frekvence & --- & 1~MSPS \\
-        Řídicí mikrokontrolér & --- & STM32F103C8 \\
-        Digitalizace signálů & Synchronní vzorkování dvou kanálů & Interní \acs{ADC} mikrokontroléru s přenosem vzorků pomocí \acs{DMA} \\
-        Přepínání rozsahů & Automatické nebo manuální & Manuální \\
-        Výstup dat & Komunikace s PC & \acs{UART} a Python aplikace \\
-        Měřené veličiny & R, L, C, $|Z|$, fáze & R, L, C, $|Z|$, fáze; ESR, Q a D pouze orientačně \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+Z tohoto důvodu byl změněn také řídicí mikrokontrolér. Místo ESP32-S2 byl použit STM32F103C8, 
+který obsahuje dva 12bitové \acs{ADC} převodníky s dostatečnou vzorkovací rychlostí a podporou \acs{DMA} pro rychlé ukládání do paměti. 
+Důležitou roli při výběru mikrokontroléru hrála také předchozí zkušenost s jeho použitím a dostupná podpora v prostředí Arduino.
+
+V měřící části byly použity rychlejší operační zesilovače OPA2192 \cite{OPA2192}, které by neměly zkreslovat signál při vyšších kmitočtech.
 
 \section{Blokové zapojení zařízení}
 
-Zařízení se skládá ze zdroje měřicího signálu, analogové měřicí části, mikrokontroléru a komunikačního rozhraní pro připojení k počítači. Měřicí signál je přiveden na měřenou součástku a proud procházející součástkou je převeden na napětí pomocí samovyvažovacího můstku. Napěťový a proudový kanál jsou následně vzorkovány A/D převodníky mikrokontroléru.
+Zařízení se skládá ze zdroje měřicího signálu, analogové měřicí části, mikrokontroléru a komunikačního rozhraní pro připojení k počítači. 
+Měřicí signál je přiveden na měřenou součástku a proud procházející součástkou je převeden
+ na napětí pomocí samovyvažovacího můstku a vybraného bočníku. 
+ Napěťový i proudový kanál jsou dále zesíleny a jejich signály jsou vzorkovány pomocí \acs{A/D} převodníků mikrokontroléru.
 
 \begin{figure}[H]
     \centering
@@ -36,77 +28,57 @@ Zařízení se skládá ze zdroje měřicího signálu, analogové měřicí č�
     \label{fig:finalni_blokove_schema}
 \end{figure}
 
-\section{Zdroj měřicího signálu}
-
-Zdroj měřicího signálu vychází z principu přímé digitální syntézy popsaného v kapitole \ref{sec:dds}. Pro finální prototyp bylo zachováno řešení ověřené na prvním prototypu, protože generátor měřicího signálu pracoval spolehlivě i při maximální požadované frekvenci 100~kHz.
-
-V této části je vhodné doplnit konkrétní hodnoty použitých součástek, rozsah nastavení amplitudy, způsob nastavení stejnosměrné složky a případné rozdíly proti prvnímu prototypu.
-
-\section{Analogová měřicí část}
-
-Měřicí část je založena na samovyvažovacím můstku, který převádí proud protékající měřenou impedancí na napětí. Oproti prvnímu prototypu bylo zapojení zjednodušeno odstraněním nadbytečných zesilovacích stupňů v signálové cestě. Tím se snížil počet aktivních prvků, zjednodušilo nastavení rozsahů a omezily možné zdroje systematické chyby.
+%% TODO:\section{Zdroj měřicího signálu}
+%% 
+%% Zdroj měřicího signálu vychází z principu přímé digitální syntézy popsaného v kapitole \ref{sec:dds}. Pro finální prototyp bylo zachováno řešení ověřené na prvním prototypu, protože generátor měřicího signálu pracoval spolehlivě i při maximální požadované frekvenci 100~kHz.
+%% 
+%TODO: V této části je vhodné doplnit konkrétní hodnoty použitých součástek, rozsah nastavení amplitudy, způsob nastavení stejnosměrné složky a případné rozdíly proti prvnímu prototypu.
 
 \subsection{Referenční bočníky}
 
-Rozsah měření je určen sadou referenčních bočníků. Ve finálním prototypu je přepínání rozsahů realizováno manuálně. Tato varianta zjednodušuje zapojení a umožňuje ověřit princip měření bez dalších chyb způsobených spínacími prvky.
+Rozsah měření je určen referenčním bočníkem, což je rezistor, který převádí proud na napětí. Jejich přepínání je řešeno pomocí analogových spínačů CD4052, které jsou řízeny dvěma binárními signály z mikrokontroléru. 
 
-\begin{table}[H]
-    \centering
-    \caption{Použité měřicí rozsahy}
-    \label{tab:shunty}
-    \begin{tabularx}{\textwidth}{lXXX}
-        \toprule
-        Rozsah & Hodnota bočníku & Předpokládané použití & Poznámka \\
-        \midrule
-        R1 & TODO & TODO & TODO \\
-        R2 & TODO & TODO & TODO \\
-        R3 & TODO & TODO & TODO \\
-        R4 & TODO & TODO & TODO \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+Jelikož vnitřní odpor spínačů není v porovnání s bočníkem o nejmenší hodnotě zanedbatelný, je tento bočník spínán pomocí relé. Toto relé je řízeno pomocí NOR hradla ze stejných binárních signálů.
 
-\subsection{Omezení při měření nízkých impedancí}
+Pro další potlačení vlivu vnitřního odporu spínačů je zapojení provedeno tak, aby proudová cesta a signál do vstupu \acs{OZ} měly separátní spínače (viz obr.~\ref{fig:range_switch}).
 
-Nejmenší použitý bočník má v současné revizi příliš vysokou hodnotu pro přesné měření velmi nízkých impedancí. To se projevuje zejména při výpočtu parametrů ESR, Q a D, které jsou citlivé na přesnost určení malé reálné nebo imaginární složky impedance. Tyto veličiny jsou proto ve výsledcích uváděny pouze jako orientační.
-
-\section{Digitalizace signálů}
-
-Digitalizace je realizována interními A/D převodníky mikrokontroléru STM32F103C8. Vzorky jsou ukládány do paměti pomocí \acs{DMA}, což snižuje zatížení procesoru a umožňuje následné zpracování naměřeného bloku dat.
-
-Vzorkovací frekvence byla nastavena na 1~MSPS. Při maximální měřicí frekvenci 100~kHz tak připadá na jednu periodu přibližně deset vzorků. Tento počet je na horní hranici frekvenčního rozsahu omezený, ale umožňuje ověřit funkčnost zvolené metody přímého vzorkování.
-
-\section{Návrh desky plošných spojů}
-
-Finální prototyp byl realizován na desce plošných spojů. Návrh desky musel zohlednit oddělení analogové a digitální části, krátké vedení citlivých měřicích signálů a vhodné umístění napájecích blokovacích kondenzátorů.
+Hodnoty bočníků byly převzaty z doporučení v dokumentu Texas Instruments \cite{TI_ImpedanceMeasurement}.
 
 \begin{figure}[H]
     \centering
-    % TODO: Doplnit fotografii nebo render osazené desky.
-    % \includegraphics[width=0.9\textwidth]{obrazky/finalni_pcb.jpg}
-    \caption{Finální prototyp měřiče impedance}
+    \includegraphics[width=0.9\textwidth]{obrazky/range_switch.pdf}
+    \caption{Zjednodušené schéma přepínání referenčních bočníků}
+    \label{fig:range_switch}
+\end{figure}
+
+%%TODO: \subsection{Omezení při měření nízkých impedancí}
+%%
+%%Nejmenší použitý bočník má v současné revizi příliš vysokou hodnotu pro přesné měření velmi nízkých impedancí. To se projevuje zejména při výpočtu parametrů ESR, Q a D, které jsou citlivé na přesnost určení malé reálné nebo imaginární složky impedance. Tyto veličiny jsou proto ve výsledcích uváděny pouze jako orientační.
+%%
+\section{Návrh desky plošných spojů}
+
+Finální prototyp byl realizován na 6-vrstvé desce plošných spojů. Návrh desky musel zohlednit oddělení analogové a digitální části, 
+krátké vedení citlivých měřicích signálů a vhodné umístění napájecích blokovacích kondenzátorů.
+
+Vnitřní 4 vrstvy byly použity jako souvislé plochy pro nízkoimpedanční připojení napájení ke všem součástkám.
+Většina pasivních součástek byla umístěna na zadní stranu desky.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{obrazky/final_PCB_photo_marked.pdf}
+    \caption{Osazená deska finálního prototypu měřiče impedance s označenými ručními opravami}
     \label{fig:finalni_pcb}
 \end{figure}
 
-\section{Ruční opravy desky}
+\subsection{Ruční opravy desky}
 
-Při oživování byly zjištěny chyby návrhu desky, které byly v prototypu opraveny ručními úpravami. Tyto opravy umožnily pokračovat v měření a současně poskytly podklady pro návrh další revize zařízení.
+Při oživování byly zjištěny chyby návrhu desky, které byly v prototypu opraveny ručními úpravami. 
 
-\begin{table}[H]
-    \centering
-    \caption{Ruční opravy provedené na finálním prototypu}
-    \label{tab:opravy_pcb}
-    \begin{tabularx}{\textwidth}{lXXX}
-        \toprule
-        Označení opravy & Problém & Provedená úprava & Dopad na funkci zařízení \\
-        \midrule
-        TODO & TODO & TODO & TODO \\
-        TODO & TODO & TODO & TODO \\
-        TODO & TODO & TODO & TODO \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+\begin{enumerate}
+    \item Nesprávné zapojení neinvertujícího sumačního zesilovače bylo opraveno odstraněním rezistorů ze spodní strany desky a přidáním nových na horní stranu.
+    \item Zaměněné vstupy \acs{OZ} byly opraveny nadzvednutím pinů čipu a správným připojením drátky. Původní plošky byly izolovány kaptonovou páskou.
+    \item Původní návrh rozděloval výstup diferenčního zesilovače na dva, z nichž jeden byl filtrován dolní a druhý horní propustí. Nebylo však zohledněno, že \acs{HP} odstraní fixní DC složku potřebnou pro vstup do \acs{ADC}, který neměří záporné napětí. Tato chyba byla opravena přemostěním filtrů, nyní se měří přímo signál z diferenčního zesilovače. 
+    \item Označení indikačních LED pro zesílení napětí je zrcadlené, ale rozmístění jednotlivých LED zrcadlené není. Tato chyba nebyla opravena, nemá vliv na funkčnost.
+\end{enumerate}
 
-\section{Shrnutí realizace}
-
-Finální prototyp realizuje měření impedance metodou přímého vzorkování napěťového a proudového kanálu. Oproti prvnímu prototypu byla odstraněna analogová detekce fáze a zjednodušena signálová cesta. Současná revize umožňuje ověření základních funkcí přístroje, avšak obsahuje několik konstrukčních omezení, která jsou dále zhodnocena v kapitole s výsledky měření.
+Všechny tyto chyby byly způsobeny nepozorností při návrhu schématu. Schéma uvedené v příloze bylo opraveno.

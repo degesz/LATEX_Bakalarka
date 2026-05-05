@@ -5396,19 +5396,6 @@
 		)
 		(uuid "a919d2ed-a052-40c8-96bb-32e5acac7f2b")
 	)
-	(text "Chyba! "
-		(exclude_from_sim no)
-		(at 187.96 97.79 0)
-		(effects
-			(font
-				(size 7.62 7.62)
-				(thickness 1.524)
-				(bold yes)
-				(color 245 255 0 1)
-			)
-		)
-		(uuid "ae03aabb-3d01-451b-b97b-b0144c5ea4b7")
-	)
 	(text "Voltage reference"
 		(exclude_from_sim no)
 		(at 363.474 86.36 0)

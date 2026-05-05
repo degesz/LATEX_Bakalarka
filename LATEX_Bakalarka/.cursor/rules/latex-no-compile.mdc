@@ -1,0 +1,12 @@
+---
+description: Prevent agents from compiling LaTeX in this project
+alwaysApply: true
+---
+
+# LaTeX Compilation
+
+Agents must not compile LaTeX in this project.
+
+Do not run commands such as `pdflatex`, `xelatex`, `lualatex`, `latexmk`, `bibtex`, `biber`, or project build commands whose purpose is to generate the thesis PDF.
+
+It is OK to edit `.tex`, `.bib`, and related source files. If verification is needed, check the source text and linter diagnostics only, then tell the user that PDF compilation was not run because project rules forbid it.

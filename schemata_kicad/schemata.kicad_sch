@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20250114)
+	(version 20260306)
 	(generator "eeschema")
-	(generator_version "9.0")
+	(generator_version "10.0")
 	(uuid "ba5b7f3f-bcc2-4274-bf72-d951c4da15c7")
 	(paper "A4")
 	(lib_symbols)
@@ -155,6 +155,52 @@
 		(uuid "f74cd8b2-b06f-40af-ba4f-357938dde75c")
 	)
 	(sheet
+		(at 48.26 17.78)
+		(size 29.21 8.89)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "280baf79-ced4-469d-977b-6455080f3287")
+		(property "Sheetname" "range_switch"
+			(at 48.26 17.0684 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "range_switch.kicad_sch"
+			(at 48.26 27.2546 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 16.51 16.51)
 		(size 25.4 8.89)
 		(exclude_from_sim no)
@@ -167,11 +213,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "81b9f537-724d-48ac-ae2f-ece78e16245d")
 		(property "Sheetname" "i_v_conv"
 			(at 16.51 15.7984 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -181,6 +229,8 @@
 		)
 		(property "Sheetfile" "i_v_conv.kicad_sch"
 			(at 16.51 25.9846 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -209,11 +259,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "b07e9222-1b5b-4006-ba73-7ec0f2c6acad")
 		(property "Sheetname" "resonant method"
 			(at 17.145 50.0884 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -223,6 +275,8 @@
 		)
 		(property "Sheetfile" "resonant.kicad_sch"
 			(at 17.145 61.5446 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -251,11 +305,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "b2272ab4-eaf0-415a-9fcd-515f8aa481a6")
 		(property "Sheetname" "DC Offset"
 			(at 17.78 127.5584 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -265,6 +321,8 @@
 		)
 		(property "Sheetfile" "DC_offset.kicad_sch"
 			(at 17.78 139.0146 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -293,11 +351,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "b4cf9568-c830-403d-b725-6918fa0d8830")
 		(property "Sheetname" "XOR_phase"
 			(at 17.78 89.4584 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -307,6 +367,8 @@
 		)
 		(property "Sheetfile" "XOR_phase.kicad_sch"
 			(at 17.78 99.6446 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -335,11 +397,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "cc843ba0-d1bd-4c35-8f2d-0fd5113ded5b")
 		(property "Sheetname" "amplitude"
 			(at 18.415 108.5084 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -349,6 +413,8 @@
 		)
 		(property "Sheetfile" "amplitude.kicad_sch"
 			(at 18.415 119.9646 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -377,11 +443,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "cf495051-2476-4c51-be7f-aa6f5b7b53b1")
 		(property "Sheetname" "peak_detect"
 			(at 17.78 70.4084 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -391,6 +459,8 @@
 		)
 		(property "Sheetfile" "peak_detect.kicad_sch"
 			(at 17.78 80.5946 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -419,11 +489,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "e39c6ceb-98aa-46f9-8e7d-c134b310cc1c")
 		(property "Sheetname" "wheatstone"
 			(at 16.51 32.3084 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -433,6 +505,8 @@
 		)
 		(property "Sheetfile" "wheatstone.kicad_sch"
 			(at 16.51 42.4946 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
