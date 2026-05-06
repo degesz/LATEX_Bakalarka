@@ -4,10 +4,13 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import queue
 import re
+import shutil
+import subprocess
 import threading
 import time
 from concurrent.futures import Future
@@ -24,6 +27,7 @@ from PySide6.QtWidgets import (
     QButtonGroup,
     QComboBox,
     QDoubleSpinBox,
+    QFileDialog,
     QFormLayout,
     QFrame,
     QGridLayout,
@@ -53,6 +57,8 @@ from PySide6.QtWidgets import (
 )
 import serial
 import serial.tools.list_ports
+
+from data_viewer import DataViewerWidget
 
 
 APP_TITLE = "STM32 LCR Meter"
@@ -176,6 +182,13 @@ class CommandRequest:
 @dataclass
 class SweepPoint:
     frequency_hz: float
+    measurement: MeasurementData
+
+
+@dataclass
+class MeasurementPoint:
+    index: int
+    elapsed_s: float
     measurement: MeasurementData
 
 
@@ -326,6 +339,8 @@ def profile_snapshot_from_dict(values: dict[str, Any]) -> dict[str, Any]:
         "sweep_settle_ms": int(values.get("sweep_settle_ms", 120)),
         "sweep_samples": int(values.get("sweep_samples", 500)),
         "sweep_sample_rate": int(values.get("sweep_sample_rate", 0)),
+        "measurement_count": int(values.get("measurement_count", 1)),
+        "measurement_delay_s": float(values.get("measurement_delay_s", 0.0)),
     }
 
 
@@ -764,6 +779,75 @@ class SweepRunner(threading.Thread):
             self._emit({"kind": "sweep_error", "message": str(exc)})
 
 
+class MeasurementRunner(threading.Thread):
+    def __init__(
+        self,
+        controller: SerialController,
+        event_queue: "queue.Queue[dict[str, Any]]",
+        count: int,
+        delay_s: float,
+        samples: int,
+        sample_rate: int,
+    ) -> None:
+        super().__init__(daemon=True)
+        self.controller = controller
+        self.event_queue = event_queue
+        self.count = max(1, int(count))
+        self.delay_s = max(0.0, float(delay_s))
+        self.samples = int(samples)
+        self.sample_rate = int(sample_rate)
+        self.stop_event = threading.Event()
+
+    def stop(self) -> None:
+        self.stop_event.set()
+
+    def _emit(self, event: dict[str, Any]) -> None:
+        try:
+            self.event_queue.put_nowait(event)
+        except queue.Full:
+            pass
+
+    def run(self) -> None:
+        try:
+            self._emit({"kind": "measurement_series_started", "total": self.count})
+            start_time = time.monotonic()
+            for index in range(1, self.count + 1):
+                if self.stop_event.is_set():
+                    self._emit({"kind": "measurement_series_stopped"})
+                    return
+
+                measurement = self.controller.submit_wait(
+                    CommandRequest(
+                        "measure",
+                        f"measure {self.samples} {self.sample_rate}",
+                        MEASURE_TIMEOUT_S,
+                        label="measure",
+                    ),
+                    timeout=MEASURE_TIMEOUT_S + 0.5,
+                )
+                if not isinstance(measurement, MeasurementData):
+                    raise RuntimeError("Unexpected measurement result.")
+                self._emit(
+                    {
+                        "kind": "measurement_series_point",
+                        "point": MeasurementPoint(
+                            index=index,
+                            elapsed_s=time.monotonic() - start_time,
+                            measurement=measurement,
+                        ),
+                        "total": self.count,
+                    }
+                )
+
+                if index < self.count and self.delay_s > 0.0:
+                    if self.stop_event.wait(self.delay_s):
+                        self._emit({"kind": "measurement_series_stopped"})
+                        return
+            self._emit({"kind": "measurement_series_complete"})
+        except Exception as exc:  # noqa: BLE001
+            self._emit({"kind": "measurement_series_error", "message": str(exc)})
+
+
 class LivePlotPanel(QWidget):
     def __init__(self, ui_scale: float) -> None:
         super().__init__()
@@ -1009,7 +1093,9 @@ class MainWindow(QMainWindow):
         self.profile_store = ProfileStore(PROFILE_PATH)
         self.profiles = self.profile_store.load()
         self.sweep_event_queue: "queue.Queue[dict[str, Any]]" = queue.Queue(maxsize=128)
+        self.measurement_event_queue: "queue.Queue[dict[str, Any]]" = queue.Queue(maxsize=128)
         self.sweep_runner: Optional[SweepRunner] = None
+        self.measurement_runner: Optional[MeasurementRunner] = None
         self.latest_frame: Optional[FrameData] = None
         self.latest_status: dict[str, str] = {}
         self.last_connected_port: str = args.port or autodetect_port() or ""
@@ -1020,6 +1106,7 @@ class MainWindow(QMainWindow):
         self._suspend_frontend_autoupdate = False
         self.freeze_view = False
         self.sweep_results: list[SweepPoint] = []
+        self.measurement_results: list[MeasurementPoint] = []
 
         self.setWindowTitle(APP_TITLE)
         self.resize(
@@ -1133,6 +1220,19 @@ class MainWindow(QMainWindow):
                 background: #962828;
                 color: #fff0f0;
             }}
+            QPushButton[savePrompt="true"] {{
+                background: #123d73;
+                border: 1px solid {CURRENT_COLOR};
+                color: #d7ebff;
+            }}
+            QPushButton[savePrompt="true"]:hover {{
+                background: #18508f;
+                color: #eef7ff;
+            }}
+            QPushButton[savePrompt="true"]:pressed {{
+                background: #2065b0;
+                color: #ffffff;
+            }}
             QCheckBox#autoCaptureCheckbox {{
                 spacing: {max(8, int(round(8 * self.ui_scale)))}px;
             }}
@@ -1221,16 +1321,25 @@ class MainWindow(QMainWindow):
                 top: -1px;
             }}
             QTabBar::tab {{
-                background: #000000;
-                border: 1px solid {BORDER_COLOR};
+                background: #080500;
+                border: 1px solid #4d3612;
+                color: {MUTED_COLOR};
                 padding: {max(8, int(round(8 * self.ui_scale)))}px {max(14, int(round(14 * self.ui_scale)))}px;
                 margin-right: 4px;
                 border-top-left-radius: {border_radius}px;
                 border-top-right-radius: {border_radius}px;
             }}
+            QTabBar::tab:hover {{
+                background: #1f1200;
+                color: {TEXT_COLOR};
+                border-color: {BORDER_COLOR};
+            }}
             QTabBar::tab:selected {{
-                background: {PANEL_COLOR};
+                background: #3a1f00;
                 color: #fff1c7;
+                border: 2px solid {FIELD_TEXT_COLOR};
+                border-bottom: 2px solid {PANEL_COLOR};
+                font-weight: 700;
             }}
             QStatusBar {{
                 background: {PANEL_COLOR};
@@ -1365,6 +1474,23 @@ class MainWindow(QMainWindow):
         self.capture_button.clicked.connect(self.capture_once)
         self.measure_button = QPushButton("Measure")
         self.measure_button.clicked.connect(self.run_measurement)
+        self.measurement_count_spin = QSpinBox()
+        self.measurement_count_spin.setRange(1, 10000)
+        self.measurement_count_spin.setValue(1)
+        self.measurement_delay_spin = QDoubleSpinBox()
+        self.measurement_delay_spin.setRange(0.0, 3600.0)
+        self.measurement_delay_spin.setDecimals(2)
+        self.measurement_delay_spin.setSingleStep(0.01)
+        self.measurement_delay_spin.setSuffix(" s")
+        self.run_measurements_button = QPushButton("Run measurements")
+        self.run_measurements_button.clicked.connect(self.start_measurement_series)
+        self.stop_measurements_button = QPushButton("Stop")
+        self.stop_measurements_button.clicked.connect(self.stop_measurement_series)
+        self.stop_measurements_button.setEnabled(False)
+        self.save_measurements_button = QPushButton("Save CSV")
+        self.save_measurements_button.setProperty("savePrompt", False)
+        self.save_measurements_button.setEnabled(False)
+        self.save_measurements_button.clicked.connect(self.save_measurements_csv)
 
         layout.addWidget(QLabel("Samples"), 0, 0)
         layout.addWidget(self.samples_spin, 0, 1)
@@ -1381,6 +1507,13 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.auto_capture_checkbox, 3, 0, 1, 2)
         layout.addWidget(self.capture_button, 4, 0)
         layout.addWidget(self.measure_button, 4, 1)
+        layout.addWidget(QLabel("Measurements"), 5, 0)
+        layout.addWidget(self.measurement_count_spin, 5, 1)
+        layout.addWidget(QLabel("Delay"), 6, 0)
+        layout.addWidget(self.measurement_delay_spin, 6, 1)
+        layout.addWidget(self.run_measurements_button, 7, 0)
+        layout.addWidget(self.stop_measurements_button, 7, 1)
+        layout.addWidget(self.save_measurements_button, 8, 0, 1, 2)
         return box
 
     def _build_source_group(self) -> QWidget:
@@ -1487,9 +1620,11 @@ class MainWindow(QMainWindow):
         self.tabs = QTabWidget()
         self.live_tab = self._build_live_tab()
         self.sweep_tab = self._build_sweep_tab()
+        self.data_viewer_tab = DataViewerWidget(load_last=False)
         self.terminal_tab = self._build_terminal_tab()
         self.tabs.addTab(self.live_tab, "Live")
         self.tabs.addTab(self.sweep_tab, "Sweep")
+        self.tabs.addTab(self.data_viewer_tab, "Data Viewer")
         self.tabs.addTab(self.terminal_tab, "Terminal")
         layout.addWidget(self.tabs, 1)
         return panel
@@ -1505,6 +1640,18 @@ class MainWindow(QMainWindow):
         measurement_group = QGroupBox("Measurement")
         measurement_layout = QVBoxLayout(measurement_group)
         measurement_layout.addWidget(self.measurement_panel)
+        self.measurement_series_label = QLabel("No repeated measurements.")
+        self.measurement_series_label.setObjectName("summaryLabel")
+        measurement_layout.addWidget(self.measurement_series_label)
+        self.measurement_table = QTableWidget(0, 8)
+        self.measurement_table.setHorizontalHeaderLabels(
+            ["#", "Elapsed (s)", "|Z|", "Phase", "Model", "R", "L", "C"]
+        )
+        self.measurement_table.verticalHeader().setVisible(False)
+        self.measurement_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.measurement_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.measurement_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        measurement_layout.addWidget(self.measurement_table, 1)
 
         layout.addWidget(self.live_plot, 3)
         layout.addWidget(measurement_group, 2)
@@ -1747,11 +1894,163 @@ class MainWindow(QMainWindow):
         if not self.controller.is_connected():
             self._update_status("Not connected.")
             return
+        if self.measurement_runner is not None:
+            self._update_status("Repeated measurements are already running.")
+            return
         self.measurement_panel.clear()
         self._queue_dirty_settings()
         command = f"measure {self.samples_spin.value()} {self._requested_sample_rate()}"
         self.controller.submit(CommandRequest("measure", command, MEASURE_TIMEOUT_S, label="measure"))
         self._update_status(f"Queued {command}")
+
+    def start_measurement_series(self) -> None:
+        if not self.controller.is_connected():
+            self._update_status("Connect first.")
+            return
+        if self.measurement_runner is not None:
+            self._update_status("Repeated measurements are already running.")
+            return
+        if self.sweep_runner is not None:
+            self._update_status("Wait for sweep to finish before measuring.")
+            return
+        if not self.controller.is_idle():
+            self._update_status("Wait for current activity to finish before measuring.")
+            return
+
+        self.auto_capture_checkbox.setChecked(False)
+        self.measurement_panel.clear()
+        self.measurement_results = []
+        self.measurement_table.setRowCount(0)
+        self._set_save_measurements_prompt(False)
+        self._queue_dirty_settings()
+        self.measurement_runner = MeasurementRunner(
+            self.controller,
+            self.measurement_event_queue,
+            self.measurement_count_spin.value(),
+            self.measurement_delay_spin.value(),
+            self.samples_spin.value(),
+            self._requested_sample_rate(),
+        )
+        self.measurement_runner.start()
+        self.run_measurements_button.setEnabled(False)
+        self.stop_measurements_button.setEnabled(True)
+        self.tabs.setCurrentWidget(self.live_tab)
+        self._update_status("Repeated measurements started.")
+
+    def stop_measurement_series(self) -> None:
+        if self.measurement_runner is not None:
+            self.measurement_runner.stop()
+            self._update_status("Stopping repeated measurements...")
+
+    def save_measurements_csv(self) -> None:
+        if not self.measurement_results:
+            self._update_status("No repeated measurements to save.")
+            return
+        default_name = f"lcr_measurements_{time.strftime('%Y%m%d_%H%M%S')}.csv"
+        path_text = self._choose_csv_save_path(default_name)
+        if not path_text:
+            return
+        path = Path(path_text)
+        if path.suffix.lower() != ".csv":
+            path = path.with_suffix(".csv")
+
+        headers = ["index", "elapsed_s", "model", "series_r", "series_l", "series_c", *MEASUREMENT_KEYS]
+        try:
+            with path.open("w", newline="", encoding="utf-8") as csv_file:
+                writer = csv.DictWriter(csv_file, fieldnames=headers)
+                writer.writeheader()
+                for point in self.measurement_results:
+                    writer.writerow(self._measurement_csv_row(point))
+        except OSError as exc:
+            QMessageBox.critical(self, "CSV Error", f"Could not save measurements:\n{exc}")
+            return
+        self._set_save_measurements_prompt(False)
+        self._update_status(f"Saved {len(self.measurement_results)} measurements to {path.name}.")
+
+    def _measurement_csv_rows(self) -> list[dict[str, str]]:
+        return [self._measurement_csv_row(point) for point in self.measurement_results]
+
+    def _measurement_csv_row(self, point: MeasurementPoint) -> dict[str, str]:
+        values = point.measurement.values
+        model, _resistance, _inductance, _capacitance = derived_rlc_fields(values)
+        row: dict[str, str] = {
+            "index": str(point.index),
+            "elapsed_s": f"{point.elapsed_s:.6f}",
+            "model": model,
+            "series_r": values.get("impedance_real_ohm", ""),
+            "series_l": self._derived_inductance_h(values),
+            "series_c": self._derived_capacitance_f(values),
+        }
+        row.update({key: values.get(key, "") for key in MEASUREMENT_KEYS})
+        return row
+
+    def _set_save_measurements_prompt(self, prompted: bool) -> None:
+        has_measurements = bool(self.measurement_results)
+        self.save_measurements_button.setEnabled(has_measurements)
+        self.save_measurements_button.setProperty("savePrompt", prompted and has_measurements)
+        self.save_measurements_button.style().unpolish(self.save_measurements_button)
+        self.save_measurements_button.style().polish(self.save_measurements_button)
+
+    def _choose_csv_save_path(self, default_name: str) -> str:
+        default_path = str(Path.home() / default_name)
+        if shutil.which("kdialog") is not None:
+            result = subprocess.run(
+                [
+                    "kdialog",
+                    "--getsavefilename",
+                    default_path,
+                    "CSV files (*.csv)",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            if result.returncode == 0:
+                return result.stdout.strip()
+            return ""
+
+        if shutil.which("zenity") is not None:
+            result = subprocess.run(
+                [
+                    "zenity",
+                    "--file-selection",
+                    "--save",
+                    "--confirm-overwrite",
+                    f"--filename={default_path}",
+                    "--file-filter=CSV files | *.csv",
+                    "--file-filter=All files | *",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            if result.returncode == 0:
+                return result.stdout.strip()
+            return ""
+
+        path_text, _selected_filter = QFileDialog.getSaveFileName(
+            self,
+            "Save Measurements CSV",
+            default_name,
+            "CSV files (*.csv);;All files (*)",
+        )
+        return path_text
+
+    @staticmethod
+    def _derived_inductance_h(values: dict[str, str]) -> str:
+        reactance = safe_float(values, "impedance_imag_ohm")
+        frequency_hz = safe_float(values, "dds_frequency_hz")
+        if reactance is None or reactance <= 0.0 or frequency_hz is None or frequency_hz <= 0.0:
+            return ""
+        return f"{reactance / (2.0 * math.pi * frequency_hz):.12g}"
+
+    @staticmethod
+    def _derived_capacitance_f(values: dict[str, str]) -> str:
+        reactance = safe_float(values, "impedance_imag_ohm")
+        frequency_hz = safe_float(values, "dds_frequency_hz")
+        if reactance is None or reactance >= 0.0 or frequency_hz is None or frequency_hz <= 0.0:
+            return ""
+        return f"{-1.0 / (2.0 * math.pi * frequency_hz * reactance):.12g}"
 
     def send_terminal_command(self) -> None:
         command = self.terminal_input.text().strip()
@@ -1880,7 +2179,7 @@ class MainWindow(QMainWindow):
             self.auto_capture_timer.stop()
 
     def _auto_capture_tick(self) -> None:
-        if not self.controller.is_connected() or self.sweep_runner is not None:
+        if not self.controller.is_connected() or self.sweep_runner is not None or self.measurement_runner is not None:
             return
         self.auto_capture_timer.setInterval(self.request_interval_spin.value())
         if not self.controller.is_idle():
@@ -1937,6 +2236,13 @@ class MainWindow(QMainWindow):
             except queue.Empty:
                 break
             self._handle_sweep_event(event)
+
+        while True:
+            try:
+                event = self.measurement_event_queue.get_nowait()
+            except queue.Empty:
+                break
+            self._handle_measurement_series_event(event)
 
     def _attempt_reconnect(self) -> None:
         if self.controller.is_connected():
@@ -2105,6 +2411,8 @@ class MainWindow(QMainWindow):
                 "sweep_settle_ms": self.sweep_settle_spin.value(),
                 "sweep_samples": self.sweep_samples_spin.value(),
                 "sweep_sample_rate": self.sweep_sample_rate_spin.value(),
+                "measurement_count": self.measurement_count_spin.value(),
+                "measurement_delay_s": self.measurement_delay_spin.value(),
             }
         )
 
@@ -2133,6 +2441,8 @@ class MainWindow(QMainWindow):
         self.sweep_settle_spin.setValue(int(profile["sweep_settle_ms"]))
         self.sweep_samples_spin.setValue(int(profile["sweep_samples"]))
         self.sweep_sample_rate_spin.setValue(int(profile["sweep_sample_rate"]))
+        self.measurement_count_spin.setValue(int(profile["measurement_count"]))
+        self.measurement_delay_spin.setValue(float(profile["measurement_delay_s"]))
         self.source_dirty = True
         self.frontend_dirty = True
         self._sync_auto_capture_timer()
@@ -2207,6 +2517,61 @@ class MainWindow(QMainWindow):
         self.start_sweep_button.setEnabled(True)
         self.stop_sweep_button.setEnabled(False)
 
+    def _handle_measurement_series_event(self, event: dict[str, Any]) -> None:
+        kind = event["kind"]
+        if kind == "measurement_series_started":
+            self.measurement_series_label.setText(f"Running 0 / {event['total']} measurements...")
+        elif kind == "measurement_series_point":
+            point: MeasurementPoint = event["point"]
+            self.measurement_results.append(point)
+            self._set_save_measurements_prompt(False)
+            self._append_measurement_row(point)
+            self.measurement_panel.update_measurement(point.measurement)
+            self.measurement_series_label.setText(
+                f"Measurement {point.index} / {event['total']} | elapsed {point.elapsed_s:.3f} s"
+            )
+        elif kind == "measurement_series_complete":
+            self.measurement_series_label.setText(f"Completed {len(self.measurement_results)} measurements.")
+            self._finish_measurement_series()
+            self.data_viewer_tab.load_rows(self._measurement_csv_rows(), label="Unsaved measurement series")
+            self.tabs.setCurrentWidget(self.data_viewer_tab)
+            self._set_save_measurements_prompt(True)
+            self._update_status("Repeated measurements completed.")
+        elif kind == "measurement_series_stopped":
+            self.measurement_series_label.setText(f"Stopped after {len(self.measurement_results)} measurements.")
+            self._finish_measurement_series()
+            self._update_status("Repeated measurements stopped.")
+        elif kind == "measurement_series_error":
+            self.measurement_series_label.setText(f"Measurement error: {event['message']}")
+            self._append_note(f"measurement error: {event['message']}", color=ERROR_COLOR)
+            self._finish_measurement_series()
+            self._update_status(f"Measurement error: {event['message']}")
+
+    def _finish_measurement_series(self) -> None:
+        if self.measurement_runner is not None:
+            self.measurement_runner = None
+        self.run_measurements_button.setEnabled(True)
+        self.stop_measurements_button.setEnabled(False)
+
+    def _append_measurement_row(self, point: MeasurementPoint) -> None:
+        row = self.measurement_table.rowCount()
+        self.measurement_table.insertRow(row)
+        values = point.measurement.values
+        model, resistance, inductance, capacitance = derived_rlc_fields(values)
+        cells = [
+            str(point.index),
+            f"{point.elapsed_s:.3f}",
+            values.get("impedance_mag_ohm", ""),
+            values.get("phase_diff_deg", ""),
+            model,
+            resistance,
+            inductance,
+            capacitance,
+        ]
+        for column, text in enumerate(cells):
+            self.measurement_table.setItem(row, column, QTableWidgetItem(text))
+        self.measurement_table.scrollToBottom()
+
     def _append_sweep_row(self, point: SweepPoint) -> None:
         row = self.sweep_table.rowCount()
         self.sweep_table.insertRow(row)
@@ -2235,6 +2600,10 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event: Any) -> None:  # noqa: N802
         self.auto_capture_timer.stop()
         self.reconnect_timer.stop()
+        if self.measurement_runner is not None:
+            self.measurement_runner.stop()
+            self.measurement_runner.join(timeout=1.0)
+            self.measurement_runner = None
         if self.sweep_runner is not None:
             self.sweep_runner.stop()
             self.sweep_runner.join(timeout=1.0)

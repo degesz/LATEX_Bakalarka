@@ -84,6 +84,11 @@ history
 # *.gerber
 # */
 
+
+.pio/
+.venv/
+__pycache__/
+
 Test_board_BAKALARKA/stm32_DMA_ADC_test/pc_osc/.venv/
 Test_board_BAKALARKA/stm32_DMA_ADC_test/pc_osc/__pycache__/
 2nd_prototype_LCRmeter/.history/
@@ -152,3 +157,4 @@ Final_schematic/.history
 2nd_prototype_LCRmeter/packages3D/TSSOP-16_4.4x5mm_P0.65mm.wrl
 2nd_prototype_LCRmeter/packages3D/USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal.step
 2nd_prototype_LCRmeter/packages3D/USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal.wrl
+Test_board_BAKALARKA/stm32_DMA_ADC_test/pc_osc/.venv/

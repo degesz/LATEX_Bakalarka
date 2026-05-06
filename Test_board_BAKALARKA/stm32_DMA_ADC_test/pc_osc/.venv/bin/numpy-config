@@ -1,4 +1,4 @@
-#!/home/degesz/Documents/BAKALARKA/Test_board_BAKALARKA/stm32_DMA_ADC_test/pc_osc/.venv/bin/python3
+#!/home/degesz/Documents/BAKALARKA/Test_board_BAKALARKA/stm32_DMA_ADC_test/pc_osc/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

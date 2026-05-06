@@ -30,7 +30,7 @@ Původní záměr byl připojit ovládací modul s displejem a tlačítky pozdě
 
 
 \section{Validované subsystémy}
-Na prototypu byly odzkoušeny řešení pro napájení a generaci měřícího signálu. Tyto subsystémy fungovaly bezproblémově a budou proto přeneseny do finálního návrhu.
+Na prototypu byly odzkoušeny řešení pro napájení a generaci měřícího signálu. Tyto subsystémy fungovaly bezproblémově a byly proto přeneseny do finálního návrhu.
 
 \subsection{Napájecí systém}
 Celé zařízení je napájeno z 5V USB. Dále je zařazen jednoduchý lineární regulátor HT7533, který poskytuje napájecí linku 3,3 V pro digitální součástky.
@@ -80,6 +80,58 @@ Měřením bylo zjištěno, že tento návrh generátoru signálu je plně funk�
     \label{fig:sigsource_sch}
 \end{figure}
 
+
+\subsection{Referenční bočníky}
+
+Rozsah měření je určen referenčním bočníkem, což je rezistor, který převádí proud na napětí. 
+Jejich přepínání je řešeno pomocí analogových spínačů CD4052 \cite{CD4052B}, které jsou řízeny dvěma binárními signály 
+z mikrokontroléru. 
+
+Jelikož vnitřní odpor spínačů není v porovnání s bočníkem o nejmenší hodnotě zanedbatelný, 
+je tento bočník spínán pomocí relé. Toto relé je řízeno pomocí NOR hradla ze stejných binárních signálů.
+
+Pro další potlačení vlivu vnitřního odporu spínačů je zapojení provedeno tak, 
+aby proudová cesta a signál do vstupu \acs{OZ} měly separátní spínače (viz obr.~\ref{fig:range_switch}).
+
+Hodnoty bočníků byly převzaty z doporučení v dokumentu Texas Instruments \cite{TI_ImpedanceMeasurement}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{obrazky/range_switch.pdf}
+    \caption{Zjednodušené schéma přepínání referenčních bočníků}
+    \label{fig:range_switch}
+\end{figure}
+
+Pro vizualizaci aktuálně zvoleného bočníku byl použit další analogový spínač připojený na stejné řídící signály, 
+který spínal signalizační LED.
+
+
+\subsection{Nastavitelné zesilovače}
+Aby nedošlo ke zkreslení měřených signálů vlivem vstupní impedance \acs{A/D} převodníku, musí být
+signály odděleny aktivním prvkem s nízkou výstupní impedancí.
+
+K tomu účelu byly zapojeny diferenční zesilovače INA823 \cite{INA823} s nastavitelným zesílením, 
+díky kterým lze navíc zesílit slabé signály a tak rozšířit oblast použitelnosti jednotlivých bočníků.
+
+Zesílení \(G\) se nastavuje připojeným rezistorem \(R_G\).
+
+\begin{equation}
+    G = 1 + \frac{100~\mathrm{k\Omega}}{R_G}
+\end{equation}
+
+Byly zvoleny možnosti zesílení \(1\times\), \(2\times\), \(5\times\) a \(10\times\), 
+tedy rezistory \(R_G = 100~\mathrm{k\Omega}\), \(25~\mathrm{k\Omega}\) a \(11~\mathrm{k\Omega}\).
+ Pro zesílení \(1\times\) je potřebný odpor nekonečný, není tedy zapojen žádný rezistor.
+
+Přepínání rezistorů i se signalizací bylo řešeno analogovými spínači podobě jako přepínání bočníků.
+
+
+%%TODO: auto balancing bridge stability issue - resistor in series with measured impedance
+
+%%TODO: \subsection{Omezení při měření nízkých impedancí}
+%%
+%%Nejmenší použitý bočník má v současné revizi příliš vysokou hodnotu pro přesné měření velmi nízkých impedancí. To se projevuje zejména při výpočtu parametrů ESR, Q a D, které jsou citlivé na přesnost určení malé reálné nebo imaginární složky impedance. Tyto veličiny jsou proto ve výsledcích uváděny pouze jako orientační.
+%%
 
 
 \section{Zjištěné nedostatky}

@@ -1,6 +1,6 @@
 \chapter{Realizace finálního prototypu}
 
-Tato kapitola popisuje realizaci finálního prototypu měřiče impedance. Obecné principy použité v návrhu byly popsány v předchozích kapitolách, proto je zde pozornost věnována zejména konkrétnímu zapojení, zvoleným součástkám a změnám oproti prvnímu prototypu.
+%%TODO  Tato kapitola popisuje realizaci finálního prototypu měřiče impedance. Obecné principy použité v návrhu byly popsány v předchozích kapitolách, proto je zde pozornost věnována zejména konkrétnímu zapojení, zvoleným součástkám a změnám oproti prvnímu prototypu.
 
 \section{Změny oproti testovacímu prototypu}
 
@@ -34,51 +34,45 @@ Měřicí signál je přiveden na měřenou součástku a proud procházející 
 %% 
 %TODO: V této části je vhodné doplnit konkrétní hodnoty použitých součástek, rozsah nastavení amplitudy, způsob nastavení stejnosměrné složky a případné rozdíly proti prvnímu prototypu.
 
-\subsection{Referenční bočníky}
 
-Rozsah měření je určen referenčním bočníkem, což je rezistor, který převádí proud na napětí. Jejich přepínání je řešeno pomocí analogových spínačů CD4052, které jsou řízeny dvěma binárními signály z mikrokontroléru. 
-
-Jelikož vnitřní odpor spínačů není v porovnání s bočníkem o nejmenší hodnotě zanedbatelný, je tento bočník spínán pomocí relé. Toto relé je řízeno pomocí NOR hradla ze stejných binárních signálů.
-
-Pro další potlačení vlivu vnitřního odporu spínačů je zapojení provedeno tak, aby proudová cesta a signál do vstupu \acs{OZ} měly separátní spínače (viz obr.~\ref{fig:range_switch}).
-
-Hodnoty bočníků byly převzaty z doporučení v dokumentu Texas Instruments \cite{TI_ImpedanceMeasurement}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{obrazky/range_switch.pdf}
-    \caption{Zjednodušené schéma přepínání referenčních bočníků}
-    \label{fig:range_switch}
-\end{figure}
-
-%%TODO: \subsection{Omezení při měření nízkých impedancí}
-%%
-%%Nejmenší použitý bočník má v současné revizi příliš vysokou hodnotu pro přesné měření velmi nízkých impedancí. To se projevuje zejména při výpočtu parametrů ESR, Q a D, které jsou citlivé na přesnost určení malé reálné nebo imaginární složky impedance. Tyto veličiny jsou proto ve výsledcích uváděny pouze jako orientační.
-%%
 \section{Návrh desky plošných spojů}
 
-Finální prototyp byl realizován na 6-vrstvé desce plošných spojů. Návrh desky musel zohlednit oddělení analogové a digitální části, 
-krátké vedení citlivých měřicích signálů a vhodné umístění napájecích blokovacích kondenzátorů.
+Finální prototyp byl realizován na 6-vrstvé desce plošných spojů. 
+Návrh desky musel zohlednit oddělení analogové a digitální části, 
+krátké vedení citlivých měřicích signálů a vhodné umístění napájecích blokovacích kondenzátorů. 
+Součástky byly seskupeny do jednotlivých funkčních bloků, viz obr.~\ref{fig:finalni_navrh_dps}.
 
-Vnitřní 4 vrstvy byly použity jako souvislé plochy pro nízkoimpedanční připojení napájení ke všem součástkám.
+Signální cesty byly zapojeny na vnějších měděných vrstvách z důvodu snadného přístupu pro budoucí opravy, zatímco 
+vnitřní 4 vrstvy byly použity jako souvislé plochy pro nízkoimpedanční připojení napájení ke všem součástkám.
 Většina pasivních součástek byla umístěna na zadní stranu desky.
+
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{obrazky/final_PCB_photo_marked.pdf}
-    \caption{Osazená deska finálního prototypu měřiče impedance s označenými ručními opravami}
-    \label{fig:finalni_pcb}
+    \includegraphics[width=0.95\textwidth]{obrazky/layout_img.pdf}
+    \caption{Render navržené DPS s vyznačenými funkčními bloky.}
+    \label{fig:finalni_navrh_dps}
 \end{figure}
+
+
+
 
 \subsection{Ruční opravy desky}
 
-Při oživování byly zjištěny chyby návrhu desky, které byly v prototypu opraveny ručními úpravami. 
+Při oživování byly zjištěny chyby návrhu desky, které byly v prototypu opraveny ručními úpravami (viz obr.~\ref{fig:finalni_pcb_foto}).
 
 \begin{enumerate}
     \item Nesprávné zapojení neinvertujícího sumačního zesilovače bylo opraveno odstraněním rezistorů ze spodní strany desky a přidáním nových na horní stranu.
     \item Zaměněné vstupy \acs{OZ} byly opraveny nadzvednutím pinů čipu a správným připojením drátky. Původní plošky byly izolovány kaptonovou páskou.
     \item Původní návrh rozděloval výstup diferenčního zesilovače na dva, z nichž jeden byl filtrován dolní a druhý horní propustí. Nebylo však zohledněno, že \acs{HP} odstraní fixní DC složku potřebnou pro vstup do \acs{ADC}, který neměří záporné napětí. Tato chyba byla opravena přemostěním filtrů, nyní se měří přímo signál z diferenčního zesilovače. 
-    \item Označení indikačních LED pro zesílení napětí je zrcadlené, ale rozmístění jednotlivých LED zrcadlené není. Tato chyba nebyla opravena, nemá vliv na funkčnost.
+   % \item Označení indikačních LED pro zesílení napětí je zrcadlené, ale rozmístění jednotlivých LED zrcadlené není. Tato chyba nebyla opravena, nemá vliv na funkčnost.
 \end{enumerate}
 
 Všechny tyto chyby byly způsobeny nepozorností při návrhu schématu. Schéma uvedené v příloze bylo opraveno.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{obrazky/final_PCB_photo_marked.pdf}
+    \caption{Osazená DPS finálního prototypu s označenými ručními opravami.}
+    \label{fig:finalni_pcb_foto}
+\end{figure}
