@@ -10,8 +10,8 @@
   %english-slovak,	% originální jazyk je angličtina, překlad je slovensky
 %
 %%% Z následujících voleb typu práce lze použít pouze jednu
-  semestral,		  % semestrální práce (výchozí)
-  %bachelor,			%	bakalářská práce
+  %semestral,		  % semestrální práce (výchozí)
+  bachelor,			%	bakalářská práce
   %master,			  % diplomová práce
   %treatise,			% pojednání o disertační práci
   %doctoral,			% disertační práce
@@ -52,6 +52,8 @@
 % v případě, že nechcete, aby se na titulním snímku prezentace zobrazoval oponent, pouze příkaz zakomentujte;
 % u obhajoby semestrální práce se oponent nezobrazuje (jelikož neexistuje)
 % U dizertační práce jsou typicky dva až tři oponenti. Pokud je chcete mít na titulním slajdu, prosím ručně odkomentujte a upravte jejich jména v definici "VUT title page" v souboru thesis.sty.
+
+%TODO: jmeno oponenta
 \opponent[doc.\ Mgr.]{Křestní}{Příjmení}[Ph.D.]
 
 %%% Název práce
@@ -113,9 +115,9 @@
 
 %%% Abstrakt
 \abstract[%
-This semestral thesis deals with the design of a digital impedance meter (LCR meter). The aim of the work was to study the principles of impedance measurement and to propose a concept of a measuring device for the frequency range of 100 Hz to 100 kHz. The proposed solution utilizes the auto-balancing bridge method. The thesis describes the theoretical background of impedance measurement, signal source implementation using direct digital synthesis (DDS), and signal digitization methods. A first prototype was constructed to verify the proposed concepts, which revealed several design shortcomings and motivated the transition to a direct sampling method. Based on the findings, the next steps for the follow-up bachelor thesis are outlined.
+This bachelor thesis deals with the design of a digital impedance meter (LCR meter). The aim of the work was to study the principles of impedance measurement and to propose a concept of a measuring device for the frequency range of 100 Hz to 100 kHz. The proposed solution utilizes the auto-balancing bridge method. The thesis describes the theoretical background of impedance measurement, signal source implementation using direct digital synthesis (DDS), and signal digitization methods. A first prototype was constructed to verify the proposed concepts, which revealed several design shortcomings and motivated the transition to a direct sampling method. Based on the findings, the next steps for the follow-up bachelor thesis are outlined.
 ]{
-Tato semestrální práce se zabývá návrhem digitálního měřiče impedance (LCR metru). Cílem práce bylo nastudovat principy měření impedance a navrhnout koncepci měřicího přístroje pro frekvenční rozsah 100 Hz až 100 kHz. Navržené řešení využívá metodu samo-vyvažovacího můstku. Práce popisuje teoretická východiska měření impedance, implementaci zdroje signálu metodou přímé digitální syntézy (DDS) a metody digitalizace signálů. Pro ověření navržených konceptů byl zkonstruován první prototyp, který odhalil několik nedostatků návrhu a motivoval přechod na metodu přímého vzorkování. Na základě získaných poznatků jsou navrženy další kroky pro navazující bakalářskou práci.
+Tato bakalářská práce se zabývá návrhem digitálního měřiče impedance (LCR metru). Cílem práce bylo nastudovat principy měření impedance a navrhnout koncepci měřicího přístroje pro frekvenční rozsah 100 Hz až 100 kHz. Navržené řešení využívá metodu samo-vyvažovacího můstku. Práce popisuje teoretická východiska měření impedance, implementaci zdroje signálu metodou přímé digitální syntézy (DDS) a metody digitalizace signálů. Pro ověření navržených konceptů byl zkonstruován první prototyp, který odhalil několik nedostatků návrhu a motivoval přechod na metodu přímého vzorkování. Na základě získaných poznatků jsou navrženy další kroky pro navazující bakalářskou práci.
 }
 
 %%% Klíčová slova
@@ -128,7 +130,7 @@ Měřič impedance, LCR metr, samo-vyvažovací můstek, měření RLC, přímá
 %%%%%TEMPORARY, change later
       %%% Poděkování
       \acknowledgement{%
-      Rád bych poděkoval vedoucímu semestrální práce
+      Rád bych poděkoval vedoucímu bakalářské práce
       panu Ing.~Alexandru Otáhalovi, Ph.D.\ za odborné vedení,
       konzultace, trpělivost a~podnětné návrhy k~práci.
       }%

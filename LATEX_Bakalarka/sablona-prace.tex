@@ -128,6 +128,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Při načteném balíčku 'hyperref' lze použít příkaz '\pdfsettings':
 \pdfsettings
+\definecolor{darkblue}{RGB}{0,40,115}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	urlcolor=darkblue
+}
 %  Nastavení polí je možné provést také ručně příkazem:
 %\hypersetup{
 %  pdftitle={Název studentské práce},    	% Pole 'Document Title'
@@ -231,6 +238,7 @@
 \include{text/prvni_prototyp}
 \include{text/finalni_navrh}
 \include{text/firmware}
+\include{text/pc_aplikace}
 %% TODO: \include{text/kalibrace}
 \include{text/vysledky}
 

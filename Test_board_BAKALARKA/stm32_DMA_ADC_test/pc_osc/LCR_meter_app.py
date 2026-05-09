@@ -20,7 +20,7 @@ from typing import Any, Optional
 
 import pyqtgraph as pg
 from PySide6.QtCore import QSignalBlocker, Qt, QTimer
-from PySide6.QtGui import QColor, QFont, QGuiApplication, QTextCharFormat, QTextCursor
+from PySide6.QtGui import QColor, QFont, QGuiApplication, QIcon, QTextCharFormat, QTextCursor
 from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
@@ -63,6 +63,7 @@ from data_viewer import DataViewerWidget
 
 APP_TITLE = "STM32 LCR Meter"
 APP_ORG = "stm32_lcr_meter"
+APP_ICON_PATH = Path(__file__).with_name("icon")
 APP_CONFIG_PATH = Path.home() / ".config" / APP_ORG
 PROFILE_PATH = APP_CONFIG_PATH / "profiles.json"
 
@@ -1109,6 +1110,8 @@ class MainWindow(QMainWindow):
         self.measurement_results: list[MeasurementPoint] = []
 
         self.setWindowTitle(APP_TITLE)
+        if APP_ICON_PATH.exists():
+            self.setWindowIcon(QIcon(str(APP_ICON_PATH)))
         self.resize(
             int(round(1680 * self.ui_scale)),
             int(round(980 * self.ui_scale)),
@@ -1623,7 +1626,8 @@ class MainWindow(QMainWindow):
         self.data_viewer_tab = DataViewerWidget(load_last=False)
         self.terminal_tab = self._build_terminal_tab()
         self.tabs.addTab(self.live_tab, "Live")
-        self.tabs.addTab(self.sweep_tab, "Sweep")
+        # Sweep tab hidden intentionally; keep functionality available in code.
+        # self.tabs.addTab(self.sweep_tab, "Sweep")
         self.tabs.addTab(self.data_viewer_tab, "Data Viewer")
         self.tabs.addTab(self.terminal_tab, "Terminal")
         layout.addWidget(self.tabs, 1)
@@ -2640,6 +2644,8 @@ def main() -> None:
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
     )
     app = QApplication([])
+    if APP_ICON_PATH.exists():
+        app.setWindowIcon(QIcon(str(APP_ICON_PATH)))
     window = MainWindow(build_arg_parser().parse_args())
     window.showMaximized()
     app.exec()

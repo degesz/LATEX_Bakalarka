@@ -2,7 +2,7 @@
 
 Firmware finálního prototypu je určen především pro ovládání analogové části, vzorkování napěťového a proudového signálu a následný výpočet impedance. 
 Je napsán pro mikrokontrolér STM32F103C8 v prostředí PlatformIO s frameworkem Arduino. 
-Pro části, u kterých je důležité přesné časování, je však použita přímo knihovna STM32 HAL.
+Pro části, které se dotýkají časování a nastavení ADC, je však použita přímo knihovna STM32 HAL.
 
 Program po spuštění inicializuje komunikační rozhraní, řídicí výstupy, zdroj měřicího signálu, indikační LED a snímací část. 
 Poté  v hlavní smyčce pouze zpracovává příkazy ze sériové linky. 
@@ -10,8 +10,7 @@ Samotné měření tedy není spuštěno trvale, ale vždy až na požadavek z p
 
 \section{Komunikační rozhraní}
 
-Zařízení je ovládáno textovým příkazovým rozhraním po sériové lince. 
-Příkazy jsou ukončeny znakem konce řádku. 
+Zařízení je ovládáno textovým příkazovým rozhraním po sériové lince je k tomu využita knihovna SimpleCLI \cite{SimpleCLI}. 
 Rozhraní slouží jak pro nastavování generátoru a analogového frontendu, tak pro vyvolání snímání nebo výpočtu impedance.
 
 Mezi hlavní příkazy patří:
@@ -43,27 +42,27 @@ To umožňuje snadné algoritmické zpracování na straně počítače a zárov
 
 \section{Řízení zdroje měřicího signálu a rozsahů}
 
-Zdroj měřicího signálu je založen na obvodu AD9837. 
-Mikrokontrolér jej ovládá softwarově generovaným sériovým rozhraním na pinech PA5, PA6 a PA8. 
-Při změně frekvence firmware vypočítá ladicí slovo podle hodinového kmitočtu 16 MHz a zapíše jej do frekvenčního registru DDS. 
-Výstup lze také softwarově povolit nebo ponechat v resetu.
+Zdroj měřicího signálu je založen na obvodu . 
+Mikrokontrolér ovládá obvod AD9837 sériovým rozhraním. 
+Při změně frekvence firmware vypočítá ladicí slovo podle hodinového kmitočtu 16 MHz 
+a zapíše jej do frekvenčního registru DDS. 
+Výstup lze také softwarově zapnout a vypnout.
 
 Amplituda výstupního signálu je nastavována digitálním potenciometrem MCP4561 přes sběrnici I\textsuperscript{2}C. 
-Firmware zapisuje hodnotu 0 až 255 do jeho volatilního registru jezdce. 
-Stejnosměrná složka zdroje je nastavována pomocí PWM výstupu na pinu PA7, který je v analogové části filtrován.
+Firmware zapisuje hodnotu 0 až 255 do jeho registru jezdce. 
+Stejnosměrná složka zdroje je nastavována změnou střídy PWM výstupu, který je v analogové části filtrován.
 
-Proudový rozsah a zesílení obou měřicích větví jsou řízeny jako dvoubitové hodnoty. 
-Piny PB8 a PB9 volí proudový rozsah, PB10 a PB11 zesílení proudového kanálu a PB12 s PB13 zesílení napěťového kanálu. 
-Firmware pro tyto volby pouze nastavuje příslušné binární kombinace; fyzický význam jednotlivých kódů je dán zapojením analogové části.
+Proudový rozsah a zesílení obou měřicích větví jsou řízeny jako tři dvoubitové hodnoty na šesti digitálních výstupech. 
+%%TODO: good or not?   Firmware pro tyto volby pouze nastavuje příslušné binární kombinace; fyzický význam jednotlivých kódů je dán zapojením analogové části.
+
 
 \section{Synchronní snímání signálů}
 
 Měřené střídavé signály jsou přivedeny na dva analogové vstupy mikrokontroléru. 
-Napěťový kanál je připojen na PA1 a proudový kanál na PA4. 
-Protože pro výpočet impedance je důležitý nejen poměr amplitud, ale i fázový rozdíl, musí být oba kanály vzorkovány současně.
+Protože pro výpočet impedance je důležitý nejen poměr amplitud, ale i fázový rozdíl,
+musí být oba kanály vzorkovány současně.
 
-Firmware k tomu využívá dvojici převodníků \acs{ADC} v režimu současné pravidelné konverze. 
-ADC1 vzorkuje napěťový kanál a ADC2 proudový kanál. 
+Firmware k tomu využívá dvojici \acs{A/D} převodníků v režimu současné pravidelné konverze. 
 Spouštění převodu zajišťuje časovač TIM3, jehož událost update je přivedena jako externí trigger pro ADC1. 
 Po každém impulzu časovače tedy vznikne jeden synchronní pár vzorků.
 
@@ -73,78 +72,31 @@ Maximální délka jedné dávky je 2048 dvojic vzorků.
 
 Vzorkování je dávkové. 
 Hostitelský počítač pošle požadovaný počet vzorků a požadovanou vzorkovací frekvenci. 
-Firmware podle požadované frekvence nastaví děličku a periodu časovače TIM3, spustí ADC a DMA, počká na dokončení přenosu a po skončení časovač i převodníky zastaví. 
-Povolený rozsah požadované vzorkovací frekvence je 1 kHz až 1 MHz. 
-Protože časovač používá celočíselné dělení, skutečná frekvence nemusí být přesně rovna požadované hodnotě; firmware proto v odpovědi vždy vrací skutečně nastavenou hodnotu.
+Firmware podle požadované frekvence nastaví děličku a periodu časovače TIM3, spustí ADC a DMA, 
+počká na dokončení přenosu a po skončení časovač i převodníky zastaví. 
+Protože časovač používá celočíselné dělení, skutečná frekvence nemusí být přesně rovna požadované hodnotě; 
+firmware proto v odpovědi vždy vrací skutečně nastavenou hodnotu.
 
-Pokud je požadovaná vzorkovací frekvence v příkazu zadána jako nula, firmware ji odvodí z aktuální frekvence DDS. 
-Cílem je přibližně 25 vzorků na periodu měřicího signálu, nejvýše však 1 MHz.
+Pokud je požadovaná vzorkovací frekvence v příkazu zadána jako nula, 
+firmware ji automaticky odvodí z aktuální frekvence DDS. 
+Cílem je 25 vzorků na periodu měřicího signálu, při měřící frekvenci větší než 40 kHz 
+je však dosažen hardwarový limit vzorkovací frekvence 1 MHz a počet vzorků na periodu se snižuje.
 
-\section{Výstup naměřených dat}
+Získané vzorky jsou následně buď odeslány po sériové lince do PC, nebo je z nich vypočítána impedance 
+(v závislosti na použití příkazu \texttt{capture} nebo \texttt{measure}).
 
-Příkaz \texttt{capture} provede synchronní sejmutí obou kanálů, ale po sériové lince odešle pouze jeden z nich. 
-Tento režim je vhodný hlavně pro rychlé zobrazení průběhu v jednoduchém osciloskopickém programu na počítači. 
-Výstup má tvar
-\begin{verbatim}
-sample_rate_hz,200000
-index,value
-0,2048
-1,2074
-\end{verbatim}
-
-Příkaz \texttt{capturepair} používá stejný snímací mechanismus, ale odešle oba kanály společně:
-\begin{verbatim}
-sample_rate_hz,200000
-index,v_raw,i_raw
-0,2048,2039
-1,2074,2051
-\end{verbatim}
-Tento režim je důležitý pro další zpracování, protože zachovává dvojice vzorků ze stejného okamžiku.
 
 \section{Výpočet impedance}
+%%TODO: vypocet impedance ve firmwaru
 
-Příkaz \texttt{measure} provede sejmutí obou kanálů a následně v mikrokontroléru vypočítá amplitudu, fázi a komplexní impedanci. 
-Nejprve jsou surové 12bitové hodnoty \acs{ADC} převedeny na napětí podle referenční hodnoty 3,3 V. 
-Protože analogové signály jsou posunuty přibližně do poloviny napájecího rozsahu, odečítá se od nich hodnota 1,65 V.
-
-Napěťový kanál je dále přepočten pomocí nastaveného zesílení napěťové větve. 
-Proudový kanál je považován za napětí na zvoleném bočníku a po korekci zesílení proudové větve je převeden na proud. 
-Ve firmwaru jsou použity hodnoty bočníků 100 $\Omega$, 1 k$\Omega$, 10 k$\Omega$ a 100 k$\Omega$. 
-Tabulky zesílení napěťové a proudové větve jsou v aktuální verzi pouze zástupné a musí být nahrazeny hodnotami získanými měřením.
-
-Amplituda a fáze jsou určeny výpočtem jedné složky diskrétní Fourierovy transformace na frekvenci nastaveného DDS. 
-Pro každý kanál se počítají součty se sinem a kosinem
-\begin{equation}
-    X_c = \frac{2}{N} \sum_{n=0}^{N-1} x[n]\cos\left(2\pi f \frac{n}{f_s}\right),
-\end{equation}
-\begin{equation}
-    X_s = \frac{2}{N} \sum_{n=0}^{N-1} x[n]\sin\left(2\pi f \frac{n}{f_s}\right),
-\end{equation}
-kde $N$ je počet vzorků, $f$ frekvence měřicího signálu a $f_s$ skutečná vzorkovací frekvence. 
-Z těchto hodnot se určí amplituda
-\begin{equation}
-    A = \sqrt{X_c^2 + X_s^2}
-\end{equation}
-a fáze
-\begin{equation}
-    \varphi = \arctan2(-X_s, X_c).
-\end{equation}
-
-Fázový rozdíl je počítán jako rozdíl fáze napěťového a proudového kanálu. 
-Protože je v aktuálním zapojení proudová analogová cesta invertovaná, firmware k výsledku přičítá kompenzaci 180$^\circ$. 
-Komplexní impedance je následně určena z poměru amplitud a fázového rozdílu:
-\begin{equation}
-    |Z| = \frac{A_U}{A_I},
-\end{equation}
-\begin{equation}
-    \operatorname{Re}(Z) = |Z|\cos(\varphi),
-    \qquad
-    \operatorname{Im}(Z) = |Z|\sin(\varphi).
-\end{equation}
-
-Výsledek příkazu \texttt{measure} obsahuje použitou vzorkovací frekvenci, frekvenci DDS, nastavený rozsah, amplitudu a fázi obou kanálů a vypočtenou reálnou i imaginární složku impedance.
 
 \section{Stavová indikace}
 
-Pro jednoduchou kontrolu běhu programu je použit výstup PB15. 
-Firmware na něm generuje pomalý pulzující průběh, který slouží jako indikace, že hlavní smyčka běží a mikrokontrolér není zablokovaný.
+Pro jednoduchou kontrolu běhu programu je použit výstup na signalizační LED. 
+Firmware na něm generuje signál PWM s pomalu se měnící střídou a tím vizuálně indikuje, 
+že hlavní smyčka běží a mikrokontrolér není zablokovaný.
+
+Pro další signalizační účely jsou na DPS zapojené dvě adresovatelné RGB diody, 
+ale v současnosti nejsou ve firmwaru nijak implementovány.
+
+
