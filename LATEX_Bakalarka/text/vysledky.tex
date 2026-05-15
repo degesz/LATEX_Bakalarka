@@ -5,14 +5,77 @@
 
 Pro ověřovací měření byla použita sada rezistorů, kondenzátorů a cívek. Každá součástka byla změřena navrženým měřičem a referenčním LCR metrem při stejných měřicích frekvencích.
 
-Jako referenční přístroj byl použit ruční LCR metr BK Precision 880, který umožňuje měření parametrů R, L, C, ESR, D a Q s měřicí frekvencí až 100~kHz \cite{BKPrecision_880_Datasheet}.
+Jako referenční přístroj byl použit ruční LCR metr BK Precision 880, který umožňuje měření parametrů R, L, C při frekvencích 1, 10 a 100 kHz. \cite{BKPrecision_880_Datasheet}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.55\textheight]{obrazky/BK_precision_880.png}
+    \includegraphics[height=0.30\textheight]{obrazky/BK_precision_880.png}
     \caption{Referenční LCR metr BK Precision 880. Převzato z \cite{BKPrecision_880_Datasheet}.}
     \label{fig:bk_precision_880}
 \end{figure}
+
+Několik součástek uvedených v tabulce~\ref{tab:overovaci-soucastky} bylo vybráno jako ověřovací. 
+Byly změřeny jak navrženým přístrojem tak komerčním referenčním LCR metrem. 
+
+% Zástupce snímku (1{,}5 cm čtverec). Nahraďte v řádku např.:
+% \includegraphics[width=1.5cm,height=1.5cm,keepaspectratio]{obrazky/nazev.jpg}
+\providecommand{\SoucastkaFotoPlaceholder}{%
+  \begingroup
+  \setlength{\fboxsep}{0pt}%
+  \setlength{\fboxrule}{0.35pt}%
+  \fbox{\parbox[c][1.5cm][c]{1.5cm}{\centering\scriptsize\textcolor{black!40}{foto}}}%
+  \endgroup
+}
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{@{}>{\centering\arraybackslash}m{1.85cm} l l@{}}
+        \toprule
+        & Součástka & Nominální hodnota \\
+        \midrule
+        \SoucastkaFotoPlaceholder & Cívka toroidní & \textit{neznámá} \\
+        \addlinespace[0.25em]
+        \SoucastkaFotoPlaceholder & Cívka malá & $10\,\mu\mathrm{H}$ \\
+        \addlinespace[0.25em]
+        \SoucastkaFotoPlaceholder & Elektrolytický kondenzátor & $100\,\mu\mathrm{F}$ \\
+        \addlinespace[0.25em]
+        \SoucastkaFotoPlaceholder & Polypropylenový kondenzátor & $10\,\mathrm{nF}$ \\
+        \addlinespace[0.25em]
+        \SoucastkaFotoPlaceholder & Polypropylenový kondenzátor (větší) & $470\,\mathrm{nF}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Ověřovací součástky použité při měření.}
+    \label{tab:overovaci-soucastky}
+\end{table}
+
+
+\section{Výsledky měření}
+
+Shrnutí naměřených hodnot pro vybrané ověřovací součástky je v tabulce~\ref{tab:vysledky-komponenty}. Sloupec DCR udává stejnosměrný odpor součástky. U cívek další sloupce uvádějí indukčnost~$L$ při uvedené měřicí frekvenci, u kondenzátorů kapacitu~$C$; jednotky jsou uvedeny přímo u číselných hodnot.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{@{}l r c c c@{}}
+        \toprule
+        Součástka & $R_{\mathrm{DC}}$ & \multicolumn{1}{c}{1\,kHz} & \multicolumn{1}{c}{10\,kHz} & \multicolumn{1}{c}{100\,kHz} \\
+        \midrule
+        Cívka toroidní           & $20{,}8\,\mathrm{m}\Omega$ & $107\,\mu\mathrm{H}$ & $107\,\mu\mathrm{H}$ & $106\,\mu\mathrm{H}$ \\
+        \addlinespace[0.35em]
+        Cívka malá          & $26{,}1\,\mathrm{m}\Omega$ & $12{,}8\,\mu\mathrm{H}$ & $12{,}8\,\mu\mathrm{H}$ & $12{,}3\,\mu\mathrm{H}$ \\
+        \addlinespace[0.35em]
+        Elektrolytický kondenzátor & $571\,\mathrm{m}\Omega$ & $106\,\mu\mathrm{F}$ & $7{,}98\,\mu\mathrm{F}$  & $485\,\mathrm{nF}$ \\
+        \addlinespace[0.35em]
+        Polypropylenový kondenzátor & $2{,}942\,\Omega$  & $9{,}71\,\mathrm{nF}$ & $9{,}71\,\mathrm{nF}$ & $9{,}71\,\mathrm{nF}$ \\
+        \addlinespace[0.35em]
+        Polypropylenový kondenzátor (větší) & $87{,}9\,\mathrm{m}\Omega$ & $455\,\mathrm{nF}$ & $455\,\mathrm{nF}$ & $452\,\mathrm{nF}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Hodnoty ověřovacích součástek naměřené LCR metrem BK Precision 880.}
+    \label{tab:vysledky-komponenty}
+\end{table}
+
 
 \section{Diskuze výsledků}
 

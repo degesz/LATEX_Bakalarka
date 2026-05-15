@@ -1,0 +1,25 @@
+% -----------------------------------------------------------------------------
+% Osamělá jednopísmenná spojky a předložky (a, i, k, o, s, u, v, z, …) na konci
+% řádku: řádek se raději zalomí dříve a krátké slovo zůstane s následujícím slovem.
+%
+% LuaLaTeX: transform „oneletter.nobreak“ z balíčku babel (locale češtiny).
+% Končí-li odstavec krátkým slovem, za ním už není slovní mezera, transform se
+% neprojeví — odstavec může končit jedním písmenem.
+%
+% Dvoupísmenná slova tento mechanismus nepokrývá (v locale je jen „oneletter“).
+% U častých tvarů (že, ve, se, …) doplňte v textu pevnou mezeru (~), případně
+% použijte externí nástroj vlna na zdrojové soubory.
+%
+% pdfLaTeX: totéž z babelu nejde (transformy vyžadují LuaTeX); pro automatiku
+% přejděte na LuaLaTeX (např. latexmk -lualatex) nebo doplňujte ~ ručně.
+% -----------------------------------------------------------------------------
+\IfFileExists{iftex.sty}{%
+  \RequirePackage{iftex}%
+}{%
+  \PackageWarning{typografie-zlomy}{Chybí balíček iftex; podmíněná aktivace přeskočena.}%
+}
+\ifLuaTeX
+  \AtBeginDocument{%
+    \babelprovide[transforms=oneletter.nobreak]{czech}%
+  }%
+\fi

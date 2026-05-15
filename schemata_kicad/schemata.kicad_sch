@@ -522,6 +522,52 @@
 			)
 		)
 	)
+	(sheet
+		(at 52.07 35.56)
+		(size 25.4 8.89)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fcf928e6-b04a-482e-a5df-d3195ad7f4bb")
+		(property "Sheetname" "i_v_conv1"
+			(at 52.07 34.8484 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "i_v_conv.kicad_sch"
+			(at 52.07 45.0346 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "10")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

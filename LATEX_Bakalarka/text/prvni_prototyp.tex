@@ -38,7 +38,7 @@ Celé zařízení je napájeno z 5V USB. Dále je zařazen jednoduchý lineárn�
 Jelikož analogová část obvodu pracuje se střídavým napětím, potřebují \acs{OZ} kladnou i zápornou napájecí linku.
 Tu zajišťuje integrovaný obvod LM27762 od společnosti Texas Instruments \cite{LM27762}.
 Tento čip v sobě sdružuje invertující nábojovou pumpu a lineární regulátory pro obě koleje.
-Schéma napájecího systému je zobrazeno na obr.~\ref{fig:power_sch}.
+Schéma napájecího systému je zobrazeno na~obr.~\ref{fig:power_sch}.
 
 \begin{figure}[h!]
     \centering
@@ -61,13 +61,13 @@ Analogicky pro zápornou kolej platí vztah \ref{eq:vout_neg}.
 \end{equation}
 
 Zvolením hodnot $R_4 = R_6 = 68\ \unit{k\Omega}$ a $R_5 = R_7 = 22\ \unit{k\Omega}$ je regulace výstupu nastavena na $\pm 4{,}91\ \unit{V}$.
-Tím je zajištěn dostatečný prostor pro úbytek napětí na regulátorech. \cite{LM27762}
+Tím je zajištěn dostatečný prostor pro úbytek napětí na~regulátorech. \cite{LM27762}
 
 
 
 \subsection{Generátor měřícího signálu}
 
-Generátor měřícího signálu je realizován pomocí \acs{DDS} syntézy, jak bylo popsáno v kapitole \ref{sec:dds}.
+Generátor měřícího signálu je realizován pomocí \acs{DDS} syntézy, jak bylo popsáno v~kapitole \ref{sec:dds}.
 Jelikož výstupní signál integrovaného obvodu AD9837 má jak amplitudu, tak stejnosměrnou složku 0,3~V \cite{AD9837}, bylo nutné použít upravovací obvod se zesilovačem, digitálním potenciometrem a sčítačkou.
 Schéma generátoru je zobrazeno na obr.~\ref{fig:sigsource_sch}.
 
@@ -134,7 +134,37 @@ Přepínání rezistorů i se signalizací bylo řešeno analogovými spínači 
 %%
 
 \subsection{4-bodové měření}
-%%TODO kelvin connection
+Jelikož vodiče mezi měřenou impedancí a měřicím přístrojem mají vlastní impedanci, která není předmětem měření, 
+byla k potlačení jejího vlivu použita 4-bodová konfigurace, v odborné literatuře často označovaná jako Kelvinovo připojení~\cite[str.~277]{ArtOfElectronics}.
+
+\vspace{0.5cm}
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[b]{0.34\textwidth}
+		\centering
+		\includegraphics[height=4.9cm,keepaspectratio]{obrazky/4wire_connection.pdf}
+		\caption{Schématické znázornění}
+		\label{fig:4wire_connection_sch}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.62\textwidth}
+		\centering
+		\includegraphics[height=4.9cm,keepaspectratio]{obrazky/4wire_diagram.pdf}
+		\caption{Fyzická realizace (převzato z~\cite{KeysightImpedanceHandbook})}
+		\label{fig:4wire_diagram}
+	\end{subfigure}
+	\caption{Princip 4-bodového (Kelvinova) připojení měřené impedance.}
+	\label{fig:4wire_connection}
+\end{figure}
+Tato konfigurace se vyznačuje připojení měřené impedance čtyřmi vodiči, přičemž dvěmi protéká proud a dvěmi se snímá napětí.
+Z důvodu vysoké vstupní impedance diferenciálních zesilovačů je proud protékající napěťovými vodiči zanedbatelný, nezpůsobuje tedy pokles napěťí.
+Stínění připojené k zemi poskytuje další odolnost vůči šumu.
+
+Terminály se standardně označují $H_{\mathrm{CUR}}$, $H_{\mathrm{POT}}$, $L_{\mathrm{POT}}$, $L_{\mathrm{CUR}}$ 
+(z anglických slov \uv{potential} a \uv{current}).
+Typicky jsou realizovány pomocí koaxiálních BNC konektorů s roztečí 22 mm, 
+což bylo dodrženo pro zachování kompatibility komerčních měřících fixtur.
+
 
 
 \section{Zjištěné nedostatky}

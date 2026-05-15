@@ -640,7 +640,7 @@
         "uuid": "ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
       }
     ],
-    "used_designators": "",
+    "used_designators": "L1-8,J1-8,Z2,U14-15,R7-16",
     "variants": []
   },
   "sheets": [
@@ -679,6 +679,10 @@
     [
       "280baf79-ced4-469d-977b-6455080f3287",
       "range_switch"
+    ],
+    [
+      "fcf928e6-b04a-482e-a5df-d3195ad7f4bb",
+      "i_v_conv1"
     ]
   ],
   "text_variables": {},
