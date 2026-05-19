@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130mm" viewBox="0 0 1300 80" style="font-family: 'Ioskeley Mono', monospace; background-color: white;">
+<text x="12" y="18" font-size="40" fill="#000000" font-weight="regular">Kondenzátor polypropylenový 470n</text>
+<rect x="346.9806801888926" y="33" width="144.37046127126075" height="42" fill="#1d7634" fill-opacity="0.35" />
+<rect x="491.35114146015337" y="33" width="144.37046127126087" height="42" fill="#1d7634" fill-opacity="0.35" />
+<rect x="15.404565840613616" y="33" width="331.576114348279" height="42" fill="#e6b800" fill-opacity="0.35" />
+<rect x="635.7216027314142" y="33" width="577.4818450850413" height="42" fill="#e6b800" fill-opacity="0.35" />
+<rect x="1213.2034478164555" y="33" width="71.39198634293098" height="42" fill="#e67e22" fill-opacity="0.35" />
+<line x1="15.404565840613616" y1="49" x2="15.404565840613616" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="78.86410925655225" y1="49" x2="78.86410925655225" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="142.3236526724909" y1="49" x2="142.3236526724909" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="205.78319608842955" y1="49" x2="205.78319608842955" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="269.24273950436816" y1="49" x2="269.24273950436816" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="332.7022829203068" y1="49" x2="332.7022829203068" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="396.16182633624544" y1="49" x2="396.16182633624544" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="459.6213697521841" y1="49" x2="459.6213697521841" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="523.0809131681227" y1="49" x2="523.0809131681227" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="586.5404565840614" y1="49" x2="586.5404565840614" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="650.0" y1="49" x2="650.0" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="713.4595434159387" y1="49" x2="713.4595434159387" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="776.9190868318773" y1="49" x2="776.9190868318773" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="840.378630247816" y1="49" x2="840.378630247816" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="903.8381736637546" y1="49" x2="903.8381736637546" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="967.2977170796931" y1="49" x2="967.2977170796931" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1030.757260495632" y1="49" x2="1030.757260495632" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1094.2168039115707" y1="49" x2="1094.2168039115707" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1157.6763473275093" y1="49" x2="1157.6763473275093" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1221.1358907434478" y1="49" x2="1221.1358907434478" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1284.5954341593865" y1="49" x2="1284.5954341593865" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="15.404565840613616" y1="32" x2="15.404565840613616" y2="76" stroke="#000000" stroke-width="3" />
+<text x="15.404565840613616" y="114" text-anchor="start" font-size="38" fill="black">440 nF</text>
+<line x1="332.7022829203068" y1="32" x2="332.7022829203068" y2="76" stroke="#000000" stroke-width="3" />
+<text x="332.7022829203068" y="114" text-anchor="middle" font-size="38" fill="black">450 nF</text>
+<line x1="650.0" y1="32" x2="650.0" y2="76" stroke="#000000" stroke-width="3" />
+<text x="650.0" y="114" text-anchor="middle" font-size="38" fill="black">460 nF</text>
+<line x1="967.2977170796931" y1="32" x2="967.2977170796931" y2="76" stroke="#000000" stroke-width="3" />
+<text x="967.2977170796931" y="114" text-anchor="middle" font-size="38" fill="black">470 nF</text>
+<line x1="1284.5954341593865" y1="32" x2="1284.5954341593865" y2="76" stroke="#000000" stroke-width="3" />
+<text x="1284.5954341593865" y="114" text-anchor="end" font-size="38" fill="black">480 nF</text>
+<path d="M 15.404565840613616 32 L 1284.5954341593863 32 L 1300 54 L 1284.5954341593863 76 L 15.404565840613616 76 L 0 54 Z" fill="none" stroke="#000000" stroke-width="3" />
+<line x1="0" y1="54" x2="1300" y2="54" stroke="#000000" stroke-width="3" />
+<polygon points="483.35114146015337,22 499.35114146015337,22 491.35114146015337,54" fill="#00c853" stroke="white" stroke-width="1.5" />
+<polygon points="483.35114146015337,86 499.35114146015337,86 491.35114146015337,54" fill="#00c853" stroke="white" stroke-width="1.5" />
+<polygon points="417.98781174173655,22 433.98781174173655,22 425.98781174173655,54" fill="#ff1744" stroke="white" stroke-width="1.5" />
+<polygon points="417.98781174173655,86 433.98781174173655,86 425.98781174173655,54" fill="#ff1744" stroke="white" stroke-width="1.5" />
+<polygon points="959.2977170796931,22 975.2977170796931,22 967.2977170796931,54" fill="#448aff" stroke="white" stroke-width="1.5" />
+<polygon points="959.2977170796931,86 975.2977170796931,86 967.2977170796931,54" fill="#448aff" stroke="white" stroke-width="1.5" />
+</svg>

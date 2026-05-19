@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130mm" viewBox="0 0 1300 80" style="font-family: 'Ioskeley Mono', monospace; background-color: white;">
+<text x="12" y="18" font-size="40" fill="#000000" font-weight="regular">Kondenzátor polypropylenový 10n</text>
+<rect x="533.9959546356655" y="33" width="82.1589555425013" height="42" fill="#1d7634" fill-opacity="0.35" />
+<rect x="616.1549101781668" y="33" width="82.1589555425013" height="42" fill="#1d7634" fill-opacity="0.35" />
+<rect x="205.3601324656573" y="33" width="328.63582217000817" height="42" fill="#e6b800" fill-opacity="0.35" />
+<rect x="698.3138657206681" y="33" width="328.6358221700083" height="42" fill="#e6b800" fill-opacity="0.35" />
+<rect x="15.404565840613616" y="33" width="189.95556662504367" height="42" fill="#e67e22" fill-opacity="0.35" />
+<rect x="1026.9496878906764" y="33" width="257.6457462687101" height="42" fill="#e67e22" fill-opacity="0.35" />
+<line x1="15.404565840613616" y1="49" x2="15.404565840613616" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="100.01729039519817" y1="49" x2="100.01729039519817" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="184.63001494978275" y1="49" x2="184.63001494978275" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="269.24273950436725" y1="49" x2="269.24273950436725" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="353.85546405895184" y1="49" x2="353.85546405895184" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="438.46818861353637" y1="49" x2="438.46818861353637" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="523.0809131681209" y1="49" x2="523.0809131681209" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="607.6936377227055" y1="49" x2="607.6936377227055" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="692.3063622772901" y1="49" x2="692.3063622772901" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="776.9190868318746" y1="49" x2="776.9190868318746" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="861.5318113864591" y1="49" x2="861.5318113864591" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="946.1445359410437" y1="49" x2="946.1445359410437" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1030.7572604956283" y1="49" x2="1030.7572604956283" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1115.3699850502128" y1="49" x2="1115.3699850502128" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1199.9827096047975" y1="49" x2="1199.9827096047975" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1284.595434159382" y1="49" x2="1284.595434159382" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="15.404565840613616" y1="32" x2="15.404565840613616" y2="76" stroke="#000000" stroke-width="3" />
+<text x="15.404565840613616" y="114" text-anchor="start" font-size="38" fill="black">9 nF</text>
+<line x1="438.46818861353785" y1="32" x2="438.46818861353785" y2="76" stroke="#000000" stroke-width="3" />
+<text x="438.46818861353785" y="114" text-anchor="middle" font-size="38" fill="black">9.5 nF</text>
+<line x1="861.5318113864621" y1="32" x2="861.5318113864621" y2="76" stroke="#000000" stroke-width="3" />
+<text x="861.5318113864621" y="114" text-anchor="middle" font-size="38" fill="black">10 nF</text>
+<line x1="1284.5954341593865" y1="32" x2="1284.5954341593865" y2="76" stroke="#000000" stroke-width="3" />
+<text x="1284.5954341593865" y="114" text-anchor="end" font-size="38" fill="black">10.5 nF</text>
+<path d="M 15.404565840613616 32 L 1284.5954341593863 32 L 1300 54 L 1284.5954341593863 76 L 15.404565840613616 76 L 0 54 Z" fill="none" stroke="#000000" stroke-width="3" />
+<line x1="0" y1="54" x2="1300" y2="54" stroke="#000000" stroke-width="3" />
+<polygon points="608.1549101781668,22 624.1549101781668,22 616.1549101781668,54" fill="#00c853" stroke="white" stroke-width="1.5" />
+<polygon points="608.1549101781668,86 624.1549101781668,86 616.1549101781668,54" fill="#00c853" stroke="white" stroke-width="1.5" />
+<polygon points="667.383817366375,22 683.383817366375,22 675.383817366375,54" fill="#ff1744" stroke="white" stroke-width="1.5" />
+<polygon points="667.383817366375,86 683.383817366375,86 675.383817366375,54" fill="#ff1744" stroke="white" stroke-width="1.5" />
+<polygon points="853.5318113864621,22 869.5318113864621,22 861.5318113864621,54" fill="#448aff" stroke="white" stroke-width="1.5" />
+<polygon points="853.5318113864621,86 869.5318113864621,86 861.5318113864621,54" fill="#448aff" stroke="white" stroke-width="1.5" />
+</svg>

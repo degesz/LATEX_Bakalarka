@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130mm" viewBox="0 0 1300 80" style="font-family: 'Ioskeley Mono', monospace; background-color: white;">
+<text x="12" y="18" font-size="40" fill="#000000" font-weight="regular">Induktor toroidní</text>
+<rect x="517.1580224493011" y="33" width="90.53561527340639" height="42" fill="#1d7634" fill-opacity="0.35" />
+<rect x="607.6936377227075" y="33" width="90.53561527340639" height="42" fill="#1d7634" fill-opacity="0.35" />
+<rect x="155.0155613556779" y="33" width="362.14246109362324" height="42" fill="#e6b800" fill-opacity="0.35" />
+<rect x="698.2292529961139" y="33" width="362.1424610936235" height="42" fill="#e6b800" fill-opacity="0.35" />
+<rect x="15.404565840613616" y="33" width="139.61099551506427" height="42" fill="#e67e22" fill-opacity="0.35" />
+<rect x="1060.3717140897375" y="33" width="224.22372006964906" height="42" fill="#e67e22" fill-opacity="0.35" />
+<line x1="15.404565840613616" y1="49" x2="15.404565840613616" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="100.01729039519847" y1="49" x2="100.01729039519847" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="184.63001494978334" y1="49" x2="184.63001494978334" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="269.24273950436816" y1="49" x2="269.24273950436816" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="353.85546405895303" y1="49" x2="353.85546405895303" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="438.46818861353785" y1="49" x2="438.46818861353785" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="523.0809131681227" y1="49" x2="523.0809131681227" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="607.6936377227075" y1="49" x2="607.6936377227075" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="692.3063622772925" y1="49" x2="692.3063622772925" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="776.9190868318773" y1="49" x2="776.9190868318773" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="861.5318113864621" y1="49" x2="861.5318113864621" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="946.1445359410469" y1="49" x2="946.1445359410469" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1030.757260495632" y1="49" x2="1030.757260495632" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1115.3699850502169" y1="49" x2="1115.3699850502169" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1199.9827096048016" y1="49" x2="1199.9827096048016" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="1284.5954341593865" y1="49" x2="1284.5954341593865" y2="59" stroke="#888888" stroke-width="2" />
+<line x1="15.404565840613616" y1="32" x2="15.404565840613616" y2="76" stroke="#000000" stroke-width="3" />
+<text x="15.404565840613616" y="114" text-anchor="start" font-size="38" fill="black">100 μH</text>
+<line x1="438.46818861353785" y1="32" x2="438.46818861353785" y2="76" stroke="#000000" stroke-width="3" />
+<text x="438.46818861353785" y="114" text-anchor="middle" font-size="38" fill="black">105 μH</text>
+<line x1="861.5318113864621" y1="32" x2="861.5318113864621" y2="76" stroke="#000000" stroke-width="3" />
+<text x="861.5318113864621" y="114" text-anchor="middle" font-size="38" fill="black">110 μH</text>
+<line x1="1284.5954341593865" y1="32" x2="1284.5954341593865" y2="76" stroke="#000000" stroke-width="3" />
+<text x="1284.5954341593865" y="114" text-anchor="end" font-size="38" fill="black">115 μH</text>
+<path d="M 15.404565840613616 32 L 1284.5954341593863 32 L 1300 54 L 1284.5954341593863 76 L 15.404565840613616 76 L 0 54 Z" fill="none" stroke="#000000" stroke-width="3" />
+<line x1="0" y1="54" x2="1300" y2="54" stroke="#000000" stroke-width="3" />
+<polygon points="599.6936377227075,22 615.6936377227075,22 607.6936377227075,54" fill="#00c853" stroke="white" stroke-width="1.5" />
+<polygon points="599.6936377227075,86 615.6936377227075,86 607.6936377227075,54" fill="#00c853" stroke="white" stroke-width="1.5" />
+<polygon points="804.4564311448031,22 820.4564311448031,22 812.4564311448031,54" fill="#ff1744" stroke="white" stroke-width="1.5" />
+<polygon points="804.4564311448031,86 820.4564311448031,86 812.4564311448031,54" fill="#ff1744" stroke="white" stroke-width="1.5" />
+<polygon points="599.6936377227075,22 615.6936377227075,22 607.6936377227075,54" fill="#448aff" stroke="white" stroke-width="1.5" />
+<polygon points="599.6936377227075,86 615.6936377227075,86 607.6936377227075,54" fill="#448aff" stroke="white" stroke-width="1.5" />
+</svg>
