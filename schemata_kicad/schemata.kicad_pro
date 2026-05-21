@@ -640,7 +640,7 @@
         "uuid": "ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
       }
     ],
-    "used_designators": "L1-8,J1-8,Z2,U14-15,R7-16",
+    "used_designators": "K1,C3-4,D2,#PWR8-9,#PWR71-75,L1-8,J1-8,Z2,Q2,U1-2,U14-16,R7-25",
     "variants": []
   },
   "sheets": [
@@ -683,6 +683,10 @@
     [
       "fcf928e6-b04a-482e-a5df-d3195ad7f4bb",
       "i_v_conv1"
+    ],
+    [
+      "ec8a1780-8716-43f2-b6f0-25f34024e62a",
+      "Zero compensation"
     ]
   ],
   "text_variables": {},

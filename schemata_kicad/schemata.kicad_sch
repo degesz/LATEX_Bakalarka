@@ -523,6 +523,52 @@
 		)
 	)
 	(sheet
+		(at 54.61 55.245)
+		(size 27.305 13.335)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "ec8a1780-8716-43f2-b6f0-25f34024e62a")
+		(property "Sheetname" "Zero compensation"
+			(at 54.61 54.5334 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "zero_comp.kicad_sch"
+			(at 54.61 69.1646 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "schemata"
+				(path "/ba5b7f3f-bcc2-4274-bf72-d951c4da15c7"
+					(page "11")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 52.07 35.56)
 		(size 25.4 8.89)
 		(exclude_from_sim no)

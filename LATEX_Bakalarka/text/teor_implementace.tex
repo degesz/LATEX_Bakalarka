@@ -173,8 +173,79 @@ Automatické přepínání rozsahu lze implementovat následujícím algoritmem:
 
 Pro zajištění stability měření je vhodné po přepnutí rozsahu počkat několik period měřícího signálu, než se provede finální měření, aby se přechodové jevy ustálily.
 
-Hodnoty bočníků by měly být voleny tak, aby se jejich rozsahy překrývaly, což umožňuje plynulé přepínání bez mezer v měřitelném rozsahu.
+%todo  Hodnoty bočníků by měly být voleny tak, aby se jejich rozsahy překrývaly, což umožňuje plynulé přepínání bez mezer v měřitelném rozsahu.
 
+\subsection{Problém se stabilitou obvodu}
+\label{sec:stability}
 
+Pokud má měřená impedance kapacitní charakter, může být samovyvažovací můstek náchylný k oscilacím.
+Problém nastává ve zpětnovazební smyčce operačního zesilovače, který pracuje jako převodník proudu na napětí.
+%  Jeho přenosová funkce je určena poměrem $\beta = V^-/V_{OUT}$.
+
+Pro zapojení na obr.~\ref{fig:uncompensated} je přenosová funkce zpětné vazby:
+\begin{equation}
+    \frac{1}{\beta} =\frac{V^-}{V_{OUT}} = 1 + s R_F C_X
+    \label{eq:transf}
+\end{equation}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{obrazky/uncompensated.pdf}
+    \caption{Nekompenzované zapojení pro měření kapacitní impedance.}
+    \label{fig:uncompensated}
+\end{figure}
+
+Tato přenosová funkce obsahuje nulový bod na frekvenci
+
+\begin{equation}
+f_Z = \frac{1}{2\pi R_F C_X}
+\end{equation}
+
+Tento nulový bod způsobí, že se křivka $A_{ol}\beta$ uzavírá rychlostí 40~dB/dekádu, čímž se fázová rezerva snižuje až k nule a obvod se stává nestabilním.
+Frekvence nunulového bodu přitom závisí na neznámé kapacitě $C_X$, takže ji nelze kompenzovat pevným kondenzátorem $C_F$ paralelně k $R_F$ pro celý rozsah měření.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{obrazky/lcr_uncompensated_exact.pdf}
+    \caption{Průběh $A_{OL}$ a $1/\beta$ pro nekompenzované zapojení.}
+    \label{fig:uncompensated_graph}
+\end{figure}
+
+\subsubsection{Kompenzace sériovým rezistorem}
+
+Řešení problému je převzato z návodu Texas Instruments \cite{TI_ImpedanceMeasurement}. Kompenzace je provedena přidáním rezistoru $R_G$ do série s měřenou impedancí $Z_X$,
+přičemž pro každý měřicí rozsah platí $R_G = R_F$.
+Zapojení je znázorněno na obr.~\ref{fig:compensated}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{obrazky/compensated.pdf}
+    \caption{Kompenzované zapojení s rezistorem $R_G$ v sérii s měřenou impedancí.}
+    \label{fig:compensated}
+\end{figure}
+
+V přenosové funkci zpětné vazby se tedy vytvoří pár nula--pól:
+\begin{equation}
+    \frac{1}{\beta} = \frac{1 + s (R_G + R_F) C_X}{1 + s R_G C_X}.
+    \label{eq:beta_comp}
+\end{equation}
+
+Frekvence těchto bodů lze určit z rovnic \ref{eq:pole_zero}.
+
+\begin{equation}
+    f_Z = \frac{1}{2\pi (R_G + R_F) C_X}, \qquad
+    f_P = \frac{1}{2\pi R_G C_X}.
+    \label{eq:pole_zero}
+\end{equation}
+
+Protože $R_G = R_F$, platí že pól leží vždy na dvojnásobném kmitočtu nuly, a tento poměr je \textbf{nezávislý na $C_X$}.
+Pól tak inherentně ruší vliv nuly a uzavírací rychlost $A_{ol}\beta$ se sníží zpět na 20~dB/dekádu, což zaručuje stabilitu obvodu pro všechny typy a hodnoty měřených impedancí.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{obrazky/lcr_compensated_exact.pdf}
+    \caption{Průběh $A_{OL}$ a $1/\beta$ pro kompenzované zapojení.}
+    \label{fig:compensated_graph}
+\end{figure}
 
 
