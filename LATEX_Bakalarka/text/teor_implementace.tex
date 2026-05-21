@@ -171,7 +171,7 @@ Automatické přepínání rozsahu lze implementovat následujícím algoritmem:
 \end{enumerate}
 \end{tcolorbox}
 
-Pro zajištění stability měření je vhodné po přepnutí rozsahu počkat několik period měřícího signálu, než se provede finální měření, aby se přechodové jevy ustálily.
+Pro zajištění stability měření je vhodné po přepnutí rozsahu počkat několik period měřicího signálu, než se provede finální měření, aby se přechodové jevy ustálily.
 
 %todo  Hodnoty bočníků by měly být voleny tak, aby se jejich rozsahy překrývaly, což umožňuje plynulé přepínání bez mezer v měřitelném rozsahu.
 
@@ -184,7 +184,7 @@ Problém nastává ve zpětnovazební smyčce operačního zesilovače, který p
 
 Pro zapojení na obr.~\ref{fig:uncompensated} je přenosová funkce zpětné vazby:
 \begin{equation}
-    \frac{1}{\beta} =\frac{V^-}{V_{OUT}} = 1 + s R_F C_X
+    \frac{1}{\beta} = \frac{V_{OUT}}{V^-} = 1 + s R_F C_X
     \label{eq:transf}
 \end{equation}
 
@@ -201,13 +201,13 @@ Tato přenosová funkce obsahuje nulový bod na frekvenci
 f_Z = \frac{1}{2\pi R_F C_X}
 \end{equation}
 
-Tento nulový bod způsobí, že se křivka $A_{ol}\beta$ uzavírá rychlostí 40~dB/dekádu, čímž se fázová rezerva snižuje až k nule a obvod se stává nestabilním.
-Frekvence nunulového bodu přitom závisí na neznámé kapacitě $C_X$, takže ji nelze kompenzovat pevným kondenzátorem $C_F$ paralelně k $R_F$ pro celý rozsah měření.
+Tento nulový bod způsobí, že se charakteristiky $|A_{OL}|$ a $|1/\beta|$ protínají s rozdílem strmostí (rate of closure) 40~dB/dekádu, čímž se fázová rezerva snižuje až k~nule a obvod se stává nestabilním.
+Frekvence nulového bodu přitom závisí na neznámé kapacitě $C_X$, takže ji nelze kompenzovat pevným kondenzátorem $C_F$ paralelně k~$R_F$ pro celý rozsah měření.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{obrazky/lcr_uncompensated_exact.pdf}
-    \caption{Průběh $A_{OL}$ a $1/\beta$ pro nekompenzované zapojení.}
+    \caption{Frekvenční závislost $A_{OL}$ a $1/\beta$ pro nekompenzované zapojení.}
     \label{fig:uncompensated_graph}
 \end{figure}
 
@@ -230,7 +230,7 @@ V přenosové funkci zpětné vazby se tedy vytvoří pár nula--pól:
     \label{eq:beta_comp}
 \end{equation}
 
-Frekvence těchto bodů lze určit z rovnic \ref{eq:pole_zero}.
+Kmitočty těchto bodů jsou dány vztahy~\ref{eq:pole_zero}.
 
 \begin{equation}
     f_Z = \frac{1}{2\pi (R_G + R_F) C_X}, \qquad
@@ -238,13 +238,13 @@ Frekvence těchto bodů lze určit z rovnic \ref{eq:pole_zero}.
     \label{eq:pole_zero}
 \end{equation}
 
-Protože $R_G = R_F$, platí že pól leží vždy na dvojnásobném kmitočtu nuly, a tento poměr je \textbf{nezávislý na $C_X$}.
-Pól tak inherentně ruší vliv nuly a uzavírací rychlost $A_{ol}\beta$ se sníží zpět na 20~dB/dekádu, což zaručuje stabilitu obvodu pro všechny typy a hodnoty měřených impedancí.
+Protože $R_G = R_F$, platí, že pól leží vždy na dvojnásobném kmitočtu nuly, a tento poměr je \textbf{nezávislý na $C_X$}.
+Pól tak inherentně ruší vliv nuly a rozdíl strmostí charakteristik v~bodě jejich průsečíku se sníží zpět na 20~dB/dekádu, což zaručuje stabilitu obvodu pro všechny typy a hodnoty měřených impedancí.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{obrazky/lcr_compensated_exact.pdf}
-    \caption{Průběh $A_{OL}$ a $1/\beta$ pro kompenzované zapojení.}
+    \caption{Frekvenční závislost $A_{OL}$ a $1/\beta$ pro kompenzované zapojení.}
     \label{fig:compensated_graph}
 \end{figure}
 
