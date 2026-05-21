@@ -1,0 +1,67 @@
+\chapter{Budoucí vylepšení}
+
+Současný prototyp plní základní funkci měření impedance, avšak několik oblastí nabízí prostor pro výrazné zlepšení. Následující podkapitoly navrhují možná budoucí vylepšení, která by zvýšila přesnost, použitelnost a uživatelský komfort zařízení.
+
+\section{Kalibrace}
+
+Přesnost měření je omezena systematickými chybami analogové cesty -- offsetem a ziskem A/D převodníků, fázovým posunem mezi kanály, tolerancemi referenčních bočníků a parazitními vlastnostmi měřicích vodičů. V současné podobě prototyp neimplementuje žádnou kalibrační proceduru, všechna měření jsou prováděna s hrubými hodnotami.
+
+Implementace kalibrace by zahrnovala několik kroků:
+
+\begin{itemize}
+    \item \textbf{Kalibrace offsetu} -- měřením při nulovém vstupním signálu a následným odečtením střední hodnoty z měřených dat.
+    \item \textbf{Kalibrace zisku} -- měřením referenčního rezistoru o známé hodnotě pro každý rozsah a výpočtem korekčního koeficientu.
+    \item \textbf{Open a short kalibrace} -- kompenzací parazitní kapacity (open) a parazitního odporu a indukčnosti (short) měřicích vodičů a přípravku.
+\end{itemize}
+
+Tyto kalibrační kroky by ideálně probíhaly automaticky při spuštění přístroje nebo na vyžádání uživatelem. Kalibrační koeficienty by byly ukládány do paměti mikrokontroléru pro jednotlivé frekvenční i proudové rozsahy.
+
+\section{Automatické přepínání rozsahů}
+
+Při ručním nastavování rozsahu musí uživatel na PC aplikaci sledovat amplitudy signálů a podle nich volit vhodný bočník a zesílení. Tento proces je zdlouhavý a vyžaduje zkušenost.
+
+Automatické přepínání rozsahů by fungovalo na principu předběžného měření: přístroj by nejprve provedl rychlé změření při nejcitlivějším rozsahu, vyhodnotil, zda nedochází k ořezání signálu nebo naopak k příliš nízké úrovni, a podle toho by zvolil optimální kombinaci bočníku a zesílení. Následně by provedl ostré měření s nastavenými parametry.
+
+Tato funkce by vyžadovala rozšíření firmwaru o stavový automat a úpravu komunikačního protokolu. Vhodné by bylo také přidání hardwarového detektoru ořezání signálu, který by umožnil rychlejší reakci na přebuzení.
+
+\section{Fyzické ovládací rozhraní}
+
+Současný prototyp je ovládán výhradně přes PC aplikaci, což omezuje jeho použití v situacích, 
+kde není k dispozici počítač. 
+Přidání fyzického ovládacího rozhraní by výrazně zvýšilo samostatnost 
+a praktickou použitelnost zařízení.
+
+Prototyp obsahuje konektor pro rozšíření s vyvedenými sběrnicemi $I^{2}C$, SPI a UART.
+Bylo zamýšleno, že se do něj připojí deska ovládacího panelu s vlastním mikrokontrolérem, 
+mohl by se tak zachovat podobný komunikační protokol jako po sériové lince s PC.
+
+\section{Elektrická ochrana}
+
+Současný prototyp neobsahuje žádné obvody na ochranu proti elektrostatickému výboji, přepětí na vstupech ani galvanické oddělení. Pro nasazení v méně kontrolovaném prostředí by bylo vhodné tyto ochrany doplnit.
+
+\subsection{Ochrana proti ESD}
+
+Měřicí vodiče a BNC konektory jsou přímou cestou pro elektrostatický výboj do citlivé 
+analogové části. Ochrana by mohla být realizována pomocí nízkokapacitních TVS diod 
+ zapojených mezi signálové vodiče a zem. 
+Tyto diody mají zanedbatelný vliv na měřený signál při běžném provozu, 
+ale při ESD výboji odvedou proud do země dříve, 
+než dojde k poškození operačních zesilovačů nebo ADC převodníku.
+
+\subsection{Ochrana proti přepětí}
+
+Připojení externího napětí na měřicí svorky (např. při měření na již napájeném obvodu) 
+by mohlo zničit vstupní stupně zesilovačů. Vhodným doplňkem by byly zpětně zapojené diody 
+k napájecím kolejnicím v kombinaci s PTC pojistkami omezujícími proud. 
+Pro vyšší úroveň ochrany by bylo možné použít integrované přepěťové ochrany, 
+které kombinují TVS diodu a proudové omezení v jednom pouzdře.
+
+\subsection{Galvanické oddělení}
+
+Protože je zařízení napájeno z USB portu počítače, vzniká zemní smyčka mezi přístrojem a 
+počítačem. U měření velmi nízkých impedancí se tato smyčka může projevit 
+jako přídavný šum nebo chyba měření. Galvanické oddělení sériové linky pomocí optoizolátoru 
+(např. ISO7240) nebo integrovaného izolovaného rozhraní (např. ADuM1201) 
+by tuto smyčku přerušilo. Zároveň by optoizolátor poskytl dodatečnou ochranu počítače 
+v případě poruchy na měřeném zařízení.
+

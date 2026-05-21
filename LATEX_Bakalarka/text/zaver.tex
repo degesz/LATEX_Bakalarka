@@ -2,34 +2,3 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Závěr}
 
-Tato bakalářská práce se zabývala návrhem a realizací měřiče impedance (LCR metru)
-s měřicí frekvencí až 100~kHz. V~práci byly popsány teoretické základy měření impedance,
-způsoby digitalizace naměřených signálů a princip přímé digitální syntézy.
-Na základě těchto poznatků byl navržen a sestaven první prototyp, který sloužil
-k~ověření funkčnosti dílčích subsystémů -- napájení, generátoru měřicího signálu
-a přepínání rozsahů. Testování tohoto prototypu odhalilo zásadní nedostatky,
-konkrétně zkreslení signálu operačním zesilovačem při vyšších kmitočtech
-a~nedostatečnou přesnost metody převodu na stejnosměrná napětí pro určení fáze a amplitudy.
-
-Na základě získaných zkušeností byl vytvořen finální prototyp, který namísto
-analogového vyhodnocování využívá metodu přímého vzorkování obou měřicích kanálů
-pomocí A/D převodníků mikrokontroléru STM32F103C8. Tento přístup umožnil výrazně
-zjednodušit analogovou část a~přesunout výpočet impedance do firmwaru.
-Pro obsluhu zařízení byla vytvořena PC aplikace v jazyce Python, která poskytuje
-grafické rozhraní pro nastavení parametrů, vizualizaci vzorků a statistické
-vyhodnocení opakovaných měření.
-
-Součástí práce je také návrh kalibračních postupů pro potlačení offsetu A/D převodníků,
-rozdílného zisku měřicích kanálů a fázového posunu mezi nimi. Byly diskutovány možnosti
-open a short kalibrace pro kompenzaci parazitních vlastností měřicích vodičů a~přípravku.
-
-Ověřovací měření ukázala, že zařízení je schopné měřit impedanci v~užitečném rozsahu
-hodnot a kmitočtů. Přesnost je však v~současné revizi omezena především ručními opravami
-desky plošných spojů, parazitními vlastnostmi přívodů a~omezeným rozlišením interních
-A/D převodníků.
-
-Práce vytvořila funkční základ pro další vývoj. Do budoucna by bylo vhodné se zaměřit na
-přepracování desky plošných spojů bez ručních oprav, implementaci automatického
-nastavení rozsahu a~zlepšení přesnosti měření nízkých impedancí volbou vhodnějších
-referenčních bočníků. Dalším přirozeným krokem je doplnění vestavěného uživatelského
-rozhraní s~displejem, které by umožnilo samostatný provoz zařízení bez připojení k~počítači.
