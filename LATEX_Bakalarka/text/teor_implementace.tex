@@ -1,8 +1,8 @@
 \chapter{Implementace analogového obvodu}
 
-Tato kapitola se zabývá obecnou implementací analogové měřící části zařízení.
+Tato kapitola se zabývá obecnou implementací analogové měřicí části zařízení.
 
-\section{Zdroj měřícího signálu}
+\section{Zdroj měřicího signálu}
 
 Komponentu, jejíž impedanci chceme měřit, je nezbytné vybudit adekvátním napětím.
 
@@ -119,16 +119,16 @@ kde $n$ je bitové rozlišení digitálního potenciometru.
 
 \section{Samovyvažovací můstek}
 
-Ústřední částí měřícího obvodu je samovyvažovací můstek, který se chová jako převodník proudu na napětí. Skládá se z \acs{OZ} a referenčního rezistoru.
+Ústřední částí měřicího obvodu je samovyvažovací můstek, který se chová jako převodník proudu na napětí. Skládá se z \acs{OZ} a referenčního rezistoru.
 
 \subsection{Výběr operačního zesilovače}
 \label{sec:opamp_selection}
-Operační zesilovač v měřící sekci je kritický prvek, odvíjí se od něj přesnost celého měřidla.
+Operační zesilovač v měřicí sekci je kritický prvek, odvíjí se od něj přesnost celého měřidla.
 Při jeho výběru je nutno dbát na následující parametry:
 \begin{enumerate}
     \item \textbf{Šířka pásma (\acs{GBW})} -- U samovyvažovacího můstku musí \acs{OZ} udržovat \uv{virtuální nulu} na svém invertujícím vstupu. 
     Aby byla tato nula dostatečně stabilní i při vyšších frekvencích, musí mít \acs{OZ} velkou rezervu zesílení. 
-    \acs{GBW} by tedy mělo být alespoň $100\times$ vyšší, než je maximální měřící frekvence. 
+    \acs{GBW} by tedy mělo být alespoň $100\times$ vyšší, než je maximální měřicí frekvence. 
     \item \textbf{Vstupní proud} -- Vstupní proud \acs{OZ} by měl být co nejnižší, aby nedocházelo ke zkreslení zejména při měření vysokých impedancí. \cite{TI_ImpedanceMeasurement} 
     Vstupní proud musí být řádově menší než proud protékající měřenou impedancí, jinak vznikne hrubá chyba.
     \item \textbf{Napěťový offset} -- \acs{OZ} by měl mít co nejmenší napěťový offset, aby neovlivňoval výsledky měření nízkých napětí a nebyla tak do výsledků vnášena systematická chyba.

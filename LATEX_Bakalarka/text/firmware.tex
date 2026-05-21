@@ -23,9 +23,9 @@ Mezi hlavní příkazy patří:
         \midrule
         \texttt{status} & Vypíše aktuální nastavení. \\
         \texttt{dds <frekvence> <povoleni>} & Nastaví frekvenci a zapnutí zdroje měřicího signálu. \\
-        \texttt{amp <hodnota>} & Nastaví amplitudu měřícího signálu. \\
+        \texttt{amp <hodnota>} & Nastaví amplitudu měřicího signálu. \\
         \texttt{offset <hodnota>} & Nastaví stejnosměrnou složku signálu pomocí PWM. \\
-        \texttt{range <hodnota>} & Vybere bočník pro změnu měřícího rozsahu. \\
+        \texttt{range <hodnota>} & Vybere bočník pro změnu měřicího rozsahu. \\
         \texttt{vpga <hodnota>} & Nastaví zesílení napěťového kanálu. \\
         \texttt{ipga <hodnota>} & Nastaví zesílení proudového kanálu. \\
         \texttt{capture} & Sejme a odešle jeden z měřicích kanálů. \\
@@ -79,7 +79,7 @@ firmware proto v odpovědi vždy vrací skutečně nastavenou hodnotu.
 
 Pokud je požadovaná vzorkovací frekvence v příkazu zadána jako nula, 
 firmware ji automaticky odvodí z aktuální frekvence DDS. 
-Cílem je 25 vzorků na periodu měřicího signálu, při měřící frekvenci větší než 40 kHz 
+Cílem je 25 vzorků na periodu měřicího signálu, při měřicí frekvenci větší než 40 kHz 
 je však dosažen hardwarový limit vzorkovací frekvence 1 MHz a počet vzorků na periodu se snižuje.
 
 Získané vzorky jsou následně buď odeslány po sériové lince do PC, nebo je z nich vypočítána impedance 
