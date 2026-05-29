@@ -1,9 +1,20 @@
+\makeatletter
+\@openrightfalse
+\makeatother
 
-\addcontentsline{toc}{chapter}{Obsah elektronické přílohy}
-%\addcontentsline{toa}{chapter}{Obsah elektronické přílohy}
+\chapter*{Přílohy}
+\addcontentsline{toc}{chapter}{Přílohy}
 
-\vspace{1em}
-\noindent\textbf{Obsah elektronické přílohy:}
+
+
+%%\section*{Seznam příloh}
+\noindent
+\noindent
+\textbf{A}~-- Schémata prototypu \dotfill \pageref{app:schematics}\\[2mm]
+\textbf{B}~-- Vodivé motivy DPS \dotfill \pageref{app:pcb_layers}
+
+\section*{Obsah elektronické přílohy}
+
 \begin{enumerate}
 	\item Návrhové soubory prvního prototypu (formát KiCAD 9.0) -- \texttt{prototyp\_LCRmetr.zip}
 	\item Návrhové soubory druhého prototypu (formát KiCAD 10.0) -- \texttt{soubory.zip}
@@ -13,7 +24,10 @@
 
 \newgeometry{hmargin=1.5cm, top=1.5cm, bottom=2cm, footskip=5mm}
 
-\chapter{Schémata prototypu}
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{section}{0}
+
+\section{Schémata prototypu}
 \label{app:schematics}
 
 \begin{figure}[H]
@@ -46,7 +60,7 @@
     \caption{Schéma -- strana 5 - indikační LED}
 \end{figure}
 
-\chapter{Vodivé motivy DPS}
+\section{Vodivé motivy DPS}
 \label{app:pcb_layers}
 
 \begin{figure}[H]
@@ -92,6 +106,6 @@
     \end{minipage}
 \end{figure}
 
-\restoregeometry
+%\restoregeometry
 
 

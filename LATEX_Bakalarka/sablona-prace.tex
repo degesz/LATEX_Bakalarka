@@ -255,25 +255,18 @@
 \include{text/zaver}
 
 %%% Vložení souboru 'text/prohlaseni_ai' s prohlášením o použití umělé inteligence
-\include{text/prohlaseni_ai}
+\let\cleardoublepage\clearpage
+\input{text/prohlaseni_ai}
 
 %%% Vložení souboru 'text/literatura' se seznamem zdrojů
-\include{text/literatura}
+\input{text/literatura}
 
 %%% Vložení souboru 'text/zkratky' se seznam použitých symbolů, veličin a zkratek
-\include{text/zkratky}
+\input{text/zkratky}
 
 %%% Začátek příloh
-\appendix
-
-%%% Vysázení seznamu příloh
-% (vynechejte, pokud máte dvě nebo méně příloh)
-\listofappendices
 
 %%% Vložení souboru 'text/prilohy' s přílohami
-% Obvykle je přítomen alespoň popis co najdeme na přiloženém médiu
-% Poznámka: použito \input místo \include, aby přílohy byly na stejné stránce jako nadpis
-\let\cleardoublepage\clearpage
 \input{text/prilohy}
 
 \end{document}

@@ -131,8 +131,8 @@ Proto je nutné měřit také fázový posun $U_{x}$ a $U_{r}$, který je roven 
  Z = |Z| \angle \varphi
 \end{equation}
 
-\subsection{Samo-vyvažovací můstek}
-V praxi se metoda měření proudu a napětí často implementuje pomocí tzv. samo-vyvažovacího můstku,
+\subsection{Samovyvažovací můstek}
+V praxi se metoda měření proudu a napětí často implementuje pomocí tzv. samovyvažovacího můstku,
 což je operační zesilovač, který vytváří virtuální zem \vizobr{fig:autobalance_bridge}. \cite{KeysightImpedanceHandbook}
 
 Výhoda takového uspořádání je, že jak měřená impedance, tak bočník jsou připojeny k zemi, 
@@ -141,7 +141,7 @@ je tedy možné na nich jednoduše měřit napětí vzhledem k zemi.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.55\textwidth]{obrazky/i_v_conv.pdf}
-    \caption{Schéma samo-vyvažovacího můstku}
+    \caption{Schéma samovyvažovacího můstku}
     \label{fig:autobalance_bridge}
 \end{figure}
 
@@ -241,7 +241,7 @@ Specifikace navrhovaného zařízení:
     \item \textbf{Frekvenční rozsah:} $100~\mathrm{Hz}$ -- $100~\mathrm{kHz}$
     \item \textbf{Rozsah měření indukčnosti:} $100~\mathrm{nH}$ -- $10~\mathrm{H}$
     \item \textbf{Rozsah měření kapacity:} $100~\mathrm{pF}$ -- $10~\mathrm{mF}$
-    \item \textbf{Cílová přesnost:} $1~\%$
+    \item \textbf{Cílová přesnost:} $5~\%$
     \item \textbf{Amplituda měřicího signálu:} $0{,}1~\mathrm{V}$ -- $2~\mathrm{V}$
     \item \textbf{Stejnosměrná složka (Bias):} $0$ -- $2~\mathrm{V}$
     \item \textbf{Konektivita:} Komunikace s PC a napájení přes USB
