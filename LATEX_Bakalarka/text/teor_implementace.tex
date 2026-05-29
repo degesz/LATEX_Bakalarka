@@ -179,7 +179,7 @@ Pro zajištění stability měření je vhodné po přepnutí rozsahu počkat n�
 \label{sec:stability}
 
 Pokud má měřená impedance kapacitní charakter, může být samovyvažovací můstek náchylný k oscilacím.
-Problém nastává ve zpětnovazební smyčce operačního zesilovače, který pracuje jako převodník proudu na napětí.
+Problém nastává ve zpětnovazební smyčce operačního zesilovače, který pracuje jako převodník proudu na napětí. \cite{TI_stability}
 %  Jeho přenosová funkce je určena poměrem $\beta = V^-/V_{OUT}$.
 
 Pro zapojení na obr.~\ref{fig:uncompensated} je přenosová funkce zpětné vazby:
@@ -201,7 +201,7 @@ Tato přenosová funkce obsahuje nulový bod na frekvenci
 f_Z = \frac{1}{2\pi R_F C_X}
 \end{equation}
 
-Tento nulový bod způsobí, že se charakteristiky $|A_{OL}|$ a $|1/\beta|$ protínají s rozdílem strmostí (rate of closure) 40~dB/dekádu, čímž se fázová rezerva snižuje až k~nule a obvod se stává nestabilním.
+Tento nulový bod způsobí, že se charakteristiky $|A_{OL}|$ a $|1/\beta|$ protínají s rozdílem strmostí (rate of closure) 40~dB/dekádu (ilustrováno na obr. \ref{fig:uncompensated_graph}), čímž se fázová rezerva snižuje až k~nule a obvod se stává nestabilním.
 Frekvence nulového bodu přitom závisí na neznámé kapacitě $C_X$, takže ji nelze kompenzovat pevným kondenzátorem $C_F$ paralelně k~$R_F$ pro celý rozsah měření.
 
 \begin{figure}[h!]
@@ -239,7 +239,7 @@ Kmitočty těchto bodů jsou dány vztahy~\ref{eq:pole_zero}.
 \end{equation}
 
 Protože $R_G = R_F$, platí, že pól leží vždy na dvojnásobném kmitočtu nuly, a tento poměr je \textbf{nezávislý na $C_X$}.
-Pól tak inherentně ruší vliv nuly a rozdíl strmostí charakteristik v~bodě jejich průsečíku se sníží zpět na 20~dB/dekádu, což zaručuje stabilitu obvodu pro všechny typy a hodnoty měřených impedancí.
+Pól tak inherentně ruší vliv nuly a rozdíl strmostí charakteristik v~bodě jejich průsečíku se sníží zpět na 20~dB/dekádu (ilustrováno na obr. \ref{fig:compensated_graph}), což zaručuje stabilitu obvodu pro všechny typy a hodnoty měřených impedancí.
 
 \begin{figure}[h!]
     \centering

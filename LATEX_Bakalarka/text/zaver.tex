@@ -2,3 +2,40 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Závěr}
 
+Cílem této práce bylo navrhnout, zkonstruovat a ověřit funkčnost zařízení 
+pro měření impedance elektrických součástek, které by při rozumných nákladech 
+poskytovalo dostatečnou přesnost pro běžné laboratorní použití.
+
+V teoretické části byly popsány principy měření impedance, přičemž jako 
+nejvhodnější byla zvolena metoda samo-vyvažovacího můstku v kombinaci s 
+přímou digitální syntézou měřicího signálu. Dále byla provedena rešerše 
+komerčně dostupných LCR metrů, na jejímž základě byly stanoveny cílové 
+parametry navrhovaného zařízení.
+
+První prototyp byl postaven s analogovým vyhodnocováním amplitudy a fáze 
+pomocí špičkového a fázového detektoru. Testování však odhalilo zásadní 
+nedostatky této metody -- zejména náchylnost k šumu a nedostatečné rozlišení 
+měření fáze. Na základě těchto zjištění byl navržen druhý prototyp s přímým 
+vzorkováním měřicích signálů a digitálním zpracováním pomocí diskrétní 
+Fourierovy transformace. Tento přístup umožnil odstranit většinu analogových 
+vyhodnocovacích obvodů a přesunout výpočet impedance do mikrokontroléru.
+
+Finální prototyp byl realizován na 6vrstvé desce plošných spojů s řídicím 
+mikrokontrolérem STM32F103C8. Pro komunikaci s počítačem slouží textové 
+příkazové rozhraní po sériové lince. K obsluze zařízení byla vytvořena 
+doprovodná PC aplikace v jazyce Python s grafickým uživatelským rozhraním, 
+která umožňuje nastavení přístroje, vizualizaci vzorků, statistické zpracování
+ opakovaných měření a ukládání dat.
+
+Funkčnost zařízení byla ověřena měřením sady referenčních součástek a 
+porovnáním s profesionálním LCR metrem BK Precision 880. 
+Výsledky ukázaly, že navržený měřič dosahuje u většiny měření relativní 
+odchylky pod 5~\% u kapacit a indukčností, což odpovídá cílové přesnosti. 
+Velké odchylky byly pozorovány u měření sériového odporu, což bylo způsobeno 
+nevhodnou volbou hodnot bočníků.
+
+V práci byla také navržena možná budoucí vylepšení, 
+mezi která patří implementace kalibračních procedur, 
+automatické přepínání měřicích rozsahů, přidání fyzického ovládacího 
+rozhraní a doplnění ochranných obvodů. Tyto úpravy by zvýšily přesnost, 
+použitelnost a robustnost zařízení.

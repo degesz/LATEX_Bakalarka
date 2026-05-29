@@ -156,7 +156,7 @@ Pro harmonický signál ve tvaru $u(t) = A \cos(\omega t + \varphi)$ lze amplitu
     \label{eq:amplitude_dft}
 \end{equation}
 \begin{equation}
-    \varphi = \arctan\left(\frac{-U_s}{U_c}\right)
+    \varphi = \operatorname{atan2}(-U_s, U_c)
     \label{eq:phase_dft}
 \end{equation}
 
@@ -174,6 +174,18 @@ Tento výpočet se provede pro oba kanály~-- napětí i proud. Fázový posun m
 \begin{equation}
     \Delta\varphi = \varphi_u - \varphi_i
     \label{eq:phase_difference}
+\end{equation}
+
+Modul impedance je pak dán poměrem amplitud napětí a proudu:
+\begin{equation}
+    |Z| = \frac{A_u}{A_i}
+    \label{eq:impedance_modulus}
+\end{equation}
+
+Komplexní impedance je následně získána spojením modulu a fázového posunu:
+\begin{equation}
+    Z = |Z| \, e^{j\Delta\varphi} = |Z| \bigl(\cos\Delta\varphi + j\sin\Delta\varphi\bigr)
+    \label{eq:complex_impedance}
 \end{equation}
 
 Výhodou této metody je vysoká odolnost vůči šumu a harmonickým zkreslením, protože \acs{DFT} extrahuje pouze složku na základní frekvenci měřeného signálu.

@@ -5,7 +5,7 @@
 
 Pro ověřovací měření byla použita sada ověřovacích součástek uvedených v tabulce~\ref{tab:overovaci-soucastky}. Každá součástka byla změřena navrženým měřičem a referenčním LCR metrem.
 
-Každá součástka (s vyjímkou rezistoru) byla změřena při frekvencích 1, 10 a 100 kHz. Rezistor a odporové hodnoty součástek byly měřeny při frekvenci 1kHz.
+Každá součástka (s vyjímkou rezistoru) byla změřena při frekvencích 1, 10 a 100 kHz. Rezistor a hodnoty sériového odporu součástek byly měřeny při frekvenci 1kHz.
 Jako referenční přístroj byl použit ruční LCR metr BK Precision 880, který umožňuje měření parametrů R, L, C. \cite{BKPrecision_880_Datasheet}.
 
 \begin{figure}[H]
@@ -227,6 +227,35 @@ Tyto měření nebyly porovnány s referenčním LCR metrem, protože ten takovo
 
 \section{Diskuze výsledků}
 
+Z dosažených výsledků ověřovacích měření vyplývá, že navržený digitální měřič impedance úspěšně plní svou základní funkci a ve většině provozních režimů dosahuje stanovených cílů. 
 
+Při měření polypropylenových kondenzátorů ($C_{10n}$ a $C_{470n}$) vykazuje přístroj excelentní shodu s referenčním LCR metrem BK Precision 880, kdy relativní odchylka kapacity nepřekročila hranici 1~\% v celém pásmu do 10~kHz. Velmi dobrých výsledků v rámci stanoveného tolerančního pásma do 5~\% bylo dosaženo také u charakterizace induktorů ($L_{Toroid}$ a $L_{SMD}$) a kalibračního rezistoru.
+
+\subsection{Statistická stabilita a chování na nízkých kmitočtech}
+Při měřicích frekvencích 1~kHz a 10~kHz odpovídá rozdělení naměřených hodnot v histogramech standardnímu normálnímu (Gaussovu) rozdělení, což potvrzuje, že dominantním zdrojem nejistoty je v těchto oblastech náhodný šum. Na základě získaných dat však nelze jednoznačně určit, zda je měření stabilnější při frekvenci 1~kHz nebo 10~kHz. Zatímco při 1~kHz vykazoval přístroj nižší směrodatnou odchylku sériového odporu, při frekvenci 10~kHz byla naopak zaznamenána menší směrodatná odchylka samotné indukčnosti.
+
+\subsection{Analýza chování na kmitočtu 100~kHz}
+Při přechodu na maximální specifikovanou frekvenci 100~kHz dochází k výraznému zhoršení metrologických vlastností přístroje. Směrodatné odchylky indukčnosti i sériového odporu vykazují při 100~kHz zdaleka nejvyšší hodnoty. Zásadním zjištěním je deformace tvaru histogramu, který se na tomto kmitočtu již nepodobá Gaussově křivce, ale vykazuje charakteristické špičky na svých okrajích. 
+
+Tento jev indikuje přítomnost periodického zkreslení, které je způsobeno dosažením hardwarového limitu vzorkovací frekvence integrovaného A/D převodníku v mikrokontroléru STM32F103C8. Při poklesu počtu vzorků na periodu se výrazně projevuje vliv fázového jitteru a nesynchronního vzorkování, což vnáší do výpočtu diskrétní Fourierovy transformace (DFT) deterministickou chybu.
+
+U elektrolytického kondenzátoru ($C_{Elektrolyt}$) navíc hodnota při 100~kHz zcela chybí, neboť přístroj součástku v důsledku parazitní indukčnosti samotného kondenzátoru a měřicích přívodů vyhodnotil jako induktivní.
+
+\subsection{Limity měření sériového odporu (ESR) a fázového posunu}
+Měření nízkých hodnot ekvivalentního sériového odporu (ESR) se v současné konfiguraci ukázalo jako velmi nepřesné. Relativní odchylky v řádu desítek procent (např. u cívky $L_{Toroid}$ či kondenzátoru $C_{470n}$) jsou způsobeny nevhodnou volbou proudových rozsahů. Nejmenší implementovaný referenční bočník s hodnotou $100~\Omega$ je vzhledem k měřenému sériovému odporu v řádu desítek či stovek miliohmů příliš vysoký. Úbytek napětí na bočníku tak v komplexní rovině zcela dominuje nad úbytkem na ztrátovém odporu součástky.
+
+Druhým kritickým omezením je nemožnost korektně změřit sériovou indukčnost u čistě rezistivních součástek (rezistor R). Fázový rozdíl mezi napěťovým a proudovým kanálem je v tomto případě tak malý, že jej při použité vzorkovací frekvenci mikrokontroléru nelze spolehlivě detekovat. Vypočtená imaginární složka impedance je extrémně citlivá na sebemenší fázovou chybu, což bez dodatečné hardwarové či softwarové kompenzace fázového posuvu analogových cest znemožňuje stabilní vyhodnocení parazitních reaktančních parametrů.
+
+
+%%- u polypropylenových kondenzátorů jsou vysledky vyborne - do 1\% od referenčního měření
+%%- induktory a rezistor - dobré výsledky - v tolerančním pásmu do 5\%
+%%- Při měřících frekvencích 1 a 10 kHz odpovídá chyba normálnímu rozdělení 
+%%- Nelze říct, při které frekvenci je měření stabilnější. Při frekvenci 1 kHz byla menší směředatná odchylka sériového doporu, zato 
+%%při frekvenci 10 kHz byla menší odchylka indukčnosti.
+%%
+%%- při frekvenci 100 kHz se tvar histogramu nepodoba gaussove krivce - špičky na okrajích histogramu naznacují periodické zkreslení. Směrodatné odchylky indukčnosti i sériového odporu byly při této frekvenci zdaleka nejvyšší.
+%%- mereni nizkych hodnot serioveho odporu velmi nepřesné, nejmensi bocnik 100ohm ma oproti seriovemu odporu moc vysokou hodnotu.
+%%
+%%- U odporu nemožné změřit sériovou indukčnost - fázový rozdíl příliš malý pro danou vzorkovací frekvenci. Vypočtená imaginární složka impedance je silně ovlivněna i malou chybou v měření fázového rozdílu.
 
  
