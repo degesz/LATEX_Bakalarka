@@ -89,6 +89,12 @@ history
 .venv/
 __pycache__/
 
+# PC software build artifacts
+PC_software/dist/
+PC_software/build/
+PC_software/*.spec
+PC_software/wine_python/
+
 Test_board_BAKALARKA/stm32_DMA_ADC_test/pc_osc/.venv/
 Test_board_BAKALARKA/stm32_DMA_ADC_test/pc_osc/__pycache__/
 2nd_prototype_LCRmeter/.history/
