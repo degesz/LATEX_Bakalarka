@@ -2,7 +2,7 @@
 
 Firmware finálního prototypu je určen především pro ovládání analogové části, vzorkování napěťového a proudového signálu a následný výpočet impedance. 
 Je napsán pro mikrokontrolér STM32F103C8 v prostředí PlatformIO s frameworkem Arduino. 
-Pro části, které se dotýkají časování a nastavení ADC, je však použita přímo knihovna STM32 HAL.
+Pro části, které se dotýkají časování a nastavení ADC, je však použita přímo knihovna STM32 HAL. \cite{STM32_manual}
 
 Program po spuštění inicializuje komunikační rozhraní, řídicí výstupy, zdroj měřicího signálu, indikační LED a snímací část. 
 Poté  v hlavní smyčce pouze zpracovává příkazy ze sériové linky. 

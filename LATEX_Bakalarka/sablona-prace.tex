@@ -64,6 +64,14 @@
 \usepackage{float}
 \usepackage[output-decimal-marker={,}, group-separator={}, separate-uncertainty=true]{siunitx}
 
+\usepackage{url}
+% Allow the URL to break at hyphens (-) as well, which is vital for your specific STM32 link
+\def\UrlBreaks{\do\/\do-} 
+
+%% % Optional but highly recommended for bibliographies with long URLs:
+%% \usepackage{etoolbox}
+%% \apptocmd{\thebibliography}{\raggedright}{}{}
+
 \raggedbottom
 
 \newcommand{\vizobr}[1]{%
