@@ -1,0 +1,6 @@
+dist/
+build/
+*.spec
+wine_python/
+__pycache__/
+*.pyc
