@@ -322,7 +322,7 @@ def profile_snapshot_from_dict(values: dict[str, Any]) -> dict[str, Any]:
     return {
         "port": str(values.get("port", "")),
         "baud": int(values.get("baud", 115200)),
-        "samples": int(values.get("samples", 500)),
+        "samples": int(values.get("samples", 100)),
         "sample_rate": int(values.get("sample_rate", 100000)),
         "sample_rate_auto": bool(values.get("sample_rate_auto", True)),
         "request_interval_ms": int(values.get("request_interval_ms", 100)),
@@ -340,7 +340,7 @@ def profile_snapshot_from_dict(values: dict[str, Any]) -> dict[str, Any]:
         "sweep_settle_ms": int(values.get("sweep_settle_ms", 120)),
         "sweep_samples": int(values.get("sweep_samples", 500)),
         "sweep_sample_rate": int(values.get("sweep_sample_rate", 0)),
-        "measurement_count": int(values.get("measurement_count", 1)),
+        "measurement_count": int(values.get("measurement_count", 100)),
         "measurement_delay_s": float(values.get("measurement_delay_s", 0.0)),
     }
 
@@ -1451,7 +1451,7 @@ class MainWindow(QMainWindow):
         layout = QGridLayout(box)
 
         self.samples_spin = QSpinBox()
-        self.samples_spin.setRange(1, 20000)
+        self.samples_spin.setRange(1, 400)
         self.samples_spin.setValue(self.args.samples)
 
         self.sample_rate_spin = QSpinBox()
@@ -1479,7 +1479,7 @@ class MainWindow(QMainWindow):
         self.measure_button.clicked.connect(self.run_measurement)
         self.measurement_count_spin = QSpinBox()
         self.measurement_count_spin.setRange(1, 10000)
-        self.measurement_count_spin.setValue(1)
+        self.measurement_count_spin.setValue(100)
         self.measurement_delay_spin = QDoubleSpinBox()
         self.measurement_delay_spin.setRange(0.0, 3600.0)
         self.measurement_delay_spin.setDecimals(2)
@@ -2620,7 +2620,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Desktop STM32 LCR meter application.")
     parser.add_argument("--port", default=None, help="Serial port device.")
     parser.add_argument("--baud", type=int, default=115200, help="Serial baud rate.")
-    parser.add_argument("--samples", type=int, default=500, help="Default capture sample count.")
+    parser.add_argument("--samples", type=int, default=100, help="Default capture sample count.")
     parser.add_argument("--sample-rate", type=int, default=0, help="Default capture sample rate.")
     parser.add_argument(
         "--channel",
