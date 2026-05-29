@@ -1,7 +1,93 @@
 
+\addcontentsline{toc}{chapter}{Obsah elektronické přílohy}
+%\addcontentsline{toa}{chapter}{Obsah elektronické přílohy}
+
+\vspace{1em}
+\noindent\textbf{Obsah elektronické přílohy:}
 \begin{enumerate}
-	\item Návrhové soubory prvniho prototypu (formát KiCAD 9.0) -- \texttt{prototyp\_LCRmetr.zip}
-	- navrhove soubory druheho prototypu (formát KiCAD 10.0)  
-	- Firmware pro STM32F103C8  
-	- PC aplikace
+	\item Návrhové soubory prvního prototypu (formát KiCAD 9.0) -- \texttt{prototyp\_LCRmetr.zip}
+	\item Návrhové soubory druhého prototypu (formát KiCAD 10.0) -- \texttt{soubory.zip}
+	\item Firmware pro STM32F103C8 -- \texttt{firmware.zip}
+	\item PC aplikace -- zdrojový kód
 \end{enumerate}
+
+\chapter{Schémata prototypu}
+\label{app:schematics}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{obrazky/schema+layout/Final_LCR_Meter_page_1.pdf}
+    \caption{Schéma -- strana 1 - mikrokontrolér}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{obrazky/schema+layout/Final_LCR_Meter_page_2.pdf}
+    \caption{Schéma -- strana 2 - napájení}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{obrazky/schema+layout/Final_LCR_Meter_page_3.pdf}
+    \caption{Schéma -- strana 3 - analogový frontend}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{obrazky/schema+layout/Final_LCR_Meter_page_4.pdf}
+    \caption{Schéma -- strana 4 - zdroj měřicího signálu}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{obrazky/schema+layout/Final_LCR_Meter_page_5.pdf}
+    \caption{Schéma -- strana 5 - indikační LED}
+\end{figure}
+
+\chapter{Vodivé motivy DPS}
+\label{app:pcb_layers}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.46\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{obrazky/schema+layout/cu_F.pdf}
+        \caption{Vrstva Top}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.46\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{obrazky/schema+layout/cu_in1.pdf}
+        \caption{Vrstva In1}
+    \end{minipage}
+
+    \vspace{0.5em}
+
+    \begin{minipage}{0.46\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{obrazky/schema+layout/cu_in2.pdf}
+        \caption{Vrstva In2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.46\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{obrazky/schema+layout/cu_in3.pdf}
+        \caption{Vrstva In3}
+    \end{minipage}
+
+    \vspace{0.5em}
+
+    \begin{minipage}{0.46\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{obrazky/schema+layout/cu_in4.pdf}
+        \caption{Vrstva In4}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.46\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{obrazky/schema+layout/cu_B.pdf}
+        \caption{Vrstva Bottom}
+    \end{minipage}
+\end{figure}
+
+
