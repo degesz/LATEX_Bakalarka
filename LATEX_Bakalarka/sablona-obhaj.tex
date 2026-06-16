@@ -1,419 +1,345 @@
 % Soubory musí být v kódování, které je nastaveno v příkazu \usepackage[...]{inputenc}
 
-\documentclass[%        Základní nastavení
-  %draft,    				  % Testovací překlad
-  12pt,       				% Velikost základního písma je 12 bodů
-	t,                  % obsah slajdů bude vždy začínat od shora (nebude vertikálně centrovaný)
-	aspectratio=1610,   % poměr stran bude 16:10 (všechny projektory v učebnách na Technické 12 Brno),
-	                    % další volby jsou 43, 149, 169, 54, 32.
-	unicode,						% Záložky a informace budou v kódování unicode
-]{beamer}				    	% Dokument třídy 'zpráva', vhodná pro sazbu závěrečných prací s kapitolami
-%\usepackage{etex}
+\documentclass[
+  12pt,
+	t,
+	aspectratio=1610,
+	unicode,
+]{beamer}
 
-\usepackage[utf8]		  % Kódování zdrojových souborů je v UTF-8
-	{inputenc}					% Balíček pro nastavení kódování zdrojových souborů
-	
-\usepackage{graphicx} % Balíček 'graphicx' pro vkládání obrázků
-											% Nutné pro vložení logotypů školy a fakulty
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[nohyperlinks]{acronym}
+\usepackage{cmap}
+\usepackage{booktabs}
+\usepackage{amsmath}
 
-\usepackage[          % Balíček 'acronym' pro sazby zkratek a symbolů
-	nohyperlinks				% Nebudou tvořeny hypertextové odkazy do seznamu zkratek
-]{acronym}						
-											% Nutné pro použití prostředí 'acronym' balíčku 'thesis'
+\input{nastaveni}
+\date{červen 2026}
 
-%% Balíček hyperref je volán třídou beamer automaticky, proto není třeba následujícího kódu:
-%\usepackage[
-%	breaklinks=true,		% Hypertextové odkazy mohou obsahovat zalomení řádku
-%	hypertexnames=false % Názvy hypertextových odkazů budou tvořeny
-%											% nezávisle na názvech TeXu
-%]{hyperref}						% Balíček 'hyperref' pro sazbu hypertextových odkazů
-%											% Nutné pro použití příkazu 'nastavenipdf' balíčku 'thesis'
-
-\usepackage{cmap} 		% Balíček cmap zajišťuje, že PDF vytvořené `pdflatexem' je
-											% plně "prohledávatelné" a "kopírovatelné"
-
-%\usepackage{upgreek}	% Balíček pro sazbu stojatých řeckých písmem
-											%% např. stojaté pí: \uppi
-											%% např. stojaté mí: \upmu (použitelné třeba v mikrometrech)
-											%% pozor, grafická nekompatibilita s fonty typu Computer Modern!
-
-%\usepackage{amsmath} %balíček pro sabu náročnější matematiky
-
-\usepackage{booktabs} % Balíček, který umožňuje v tabulce používat
-                      % příkazy \toprule, \midrule, \bottomrule
-
-\usepackage{algorithm2e} %balíček pro sazbu algoritmů/pseudokódu
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%      Definice informací o dokumentu             %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\input{nastaveni}      % v tomto souboru doplňte údaje o sobě, o názvu práce...
-                       % (tento soubor je sdílený s textem práce)
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%     Nastavení polí ve Vlastnostech dokumentu PDF      %%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Při vloženém balíčku 'hyperref' lze použít příkaz '\pdfsettings'
 \pdfsettings
-%  Nastavení polí je možné provést také ručně příkazem:
-%\hypersetup{
-%  pdftitle={Název studentské práce},    	% Pole 'Document Title'
-%  pdfauthor={Autor studenstké práce},   	% Pole 'Author'
-%  pdfsubject={Typ práce}, 						  	% Pole 'Subject'
-%  pdfkeywords={Klíčová slova}           	% Pole 'Keywords'
-%}
-\hypersetup{pdfpagemode=FullScreen}       % otevření rovnou v režimu celé obrazovky
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{pdfpagemode=FullScreen}
 
-\usetheme{VUT} 				% barvy a rozložení prezentace odpovídající VUT FEKT
-% alternativně lze použít jiná berevná témata, ale bez záruky. Například: 
-%\usetheme{Darmstadt} \usecolortheme{default2}
-\logoheader					% vytvoření zkráceného loga VUT FEKT v hlavičce slajdu, nechte odkomentované
-
-
+\usetheme{VUT}
+\logoheader
 
 \begin{document}
 
-% v případě zakomentování následujícího se zobrazí v pravém dolním rohu slajdů klikatelné navigační symboly 
-\disablenavigationsymbols
-
-% titulní snímek, vysazen bez horních, dolních a postranních lišt (volba plain),
-% není tak vysazen ani nadpis snímku
-\maketitle
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 1. snímek s cíli (zadaním) práce
-\begin{frame} 
-	% nadpis snímku
-	\frametitle{Zadání práce}
-	
-	\begin{enumerate}
-		\item Nastudujte principy měření impedance elektrických součástek a dostupné metody realizace měřicích přístrojů v~oblasti nízkých a~středních frekvencí. Zaměřte se na způsoby buzení měřeného prvku, zpracování signálu a~vyhodnocení výsledků.
-		
-		\item Na základě rešerše navrhněte schéma přístroje pro měření impedance v~pásmu nastavitelných frekvencí do 100~kHz. Přístroj by měl umožňovat charakterizaci pasivních součástek, zejména cívek a~kondenzátorů.
-		
-		\item Výsledky zpracujte v~semestrálním projektu.
-	\end{enumerate}
-	
-	\vspace{2ex}
-	\begin{block}{Specifikace navrhovaného zařízení}
-		\begin{itemize}
-			\item Frekvenční rozsah: $100~\mathrm{Hz}$ -- $100~\mathrm{kHz}$
-			\item Cílová přesnost: $1\,\%$
-			\item Nastavitelná amplituda: $0{,}1~\mathrm{V}$ -- $2~\mathrm{V}$
-			\item Napájení a komunikace přes USB
-		\end{itemize}
-	\end{block}
+\setbeamertemplate{navigation symbols}{}
+\begin{frame}[plain,c]
+	\begin{center}
+		\vspace{1em}
+		{\Large Vysoké učení technické v Brně}\\[0.4em]
+		{\large Fakulta elektrotechniky a komunikačních technologií}\\[2.2em]
+		{\huge Návrh měřiče impedance}\\[1.2em]
+		{\large Bakalářská práce}\\[2.0em]
+		\begin{tabular}{rl}
+			Autor: & Vojtěch Glombíček\\
+			Vedoucí: & Ing. Alexandr Otáhal, Ph.D.\\
+		\end{tabular}\\[2.0em]
+		Brno, červen 2026
+	\end{center}
 \end{frame}
 
-
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Rešerše -- Komerční měřiče impedance}
-	
+\begin{frame}
+	\frametitle{O čem práce je}
 	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
-			\textbf{Ruční LCR metr} \\
-			Keysight U1732C
+		\begin{column}{0.54\textwidth}
+			\textbf{Cíl:} navrhnout a ověřit digitální měřič impedance pro pasivní součástky.
+			\vspace{0.5em}
 			\begin{itemize}
-				\item Cena: $\approx 15\,000$ Kč
-				\item Přesnost: $0{,}2\,\%$
-				\item Pevné frekvence
+				\item Frekvenční rozsah $100\,\mathrm{Hz}$ až $100\,\mathrm{kHz}$
+				\item Měření $R$, $L$, $C$ z amplitudy a fáze
+				\item Komunikace s PC přes USB/sériovou linku
 			\end{itemize}
-			\vspace{1em}
-			\includegraphics[width=0.35\columnwidth]{obrazky/Keysight_U1732C.jpg}
+			\vspace{0.5em}
+			\textbf{Výstup práce:} funkční prototyp, firmware, PC aplikace a ověřovací měření proti LCR metru BK Precision 880.\par
 		\end{column}
-		%
-		\begin{column}{0.5\textwidth}
-			\textbf{Stolní LCR metr} \\
-			Rohde \& Schwarz LCX200
-			\begin{itemize}
-				\item Cena: $\approx 200\,000$ Kč
-				\item Přesnost: $0{,}05\,\%$
-				\item Spojitý rozsah 4~Hz -- 10~MHz
-				\item Pokročilé funkce
-			\end{itemize}
-			\vspace{1em}
-			\includegraphics[width=0.95\columnwidth]{obrazky/Rhode_schwarz-LCX200.jpg}
+		\begin{column}{0.46\textwidth}
+			\centering
+			\includegraphics[width=0.72\columnwidth,height=0.58\textheight,keepaspectratio]{obrazky/final_PCB_photo.jpg}\par
 		\end{column}
 	\end{columns}
-	
-	\vspace{1em}
-	\begin{block}{Cíl projektu}
-		Navrhnout cenově dostupný měřič s dostatečnou přesností pro domácí laboratoř
-	\end{block}
+\par
 \end{frame}
 
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Zvolená metoda -- Samovyvažovací můstek}
-	
+\begin{frame}
+	\frametitle{Základní princip měření}
+	\small
 	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
-			\textbf{Princip metody:}
+		\begin{column}{0.50\textwidth}
+			\textbf{Zvolená metoda: samovyvažovací můstek}
 			\begin{itemize}
-				\item Měří se napětí, proud a jejich fázový rozdíl
-				\item OZ vytváří virtuální zem
-				\item Měření napětí na DUT i na bočníku oproti zemi
+				\item Měřená součástka je buzena sinusovým signálem
+				\item Proud se převádí na napětí přes známý bočník
+				\item Z poměru amplitud a fázového posunu se vypočte komplexní impedance
 			\end{itemize}
-			
-			\vspace{1em}
-			\textbf{Výpočet impedance:}
-			$$|Z| = \frac{U_{x}}{U_{r}}\cdot R_1$$
-			$$ Z = |Z| \angle \varphi$$
-			
-		%	\vspace{1em}
-		%	Fázový posun $\varphi$ je rozdíl fází $U_x$ a $U_r$
+			\vspace{0.8em}
+				\[
+					|Z| = \frac{U_x}{U_r} R_r,\qquad
+					Z = |Z|\angle\varphi
+				\]
+			\end{column}
+				\begin{column}{0.50\textwidth}
+					\centering
+					\includegraphics[width=0.86\columnwidth,height=0.28\textheight,keepaspectratio]{obrazky/i_v_conv.pdf}
+					\vspace{0.25em}
+					\includegraphics[width=\columnwidth,height=0.30\textheight,keepaspectratio]{obrazky/voltage_current_phase.png}
+			\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Architektura navrženého přístroje}
+	\small
+	\begin{columns}[T]
+		\begin{column}{0.42\textwidth}
+			\begin{enumerate}
+				\item DDS generátor vytvoří měřicí sinus
+				\item Analogová část upraví amplitudu a offset
+				\item Měřicí můstek převede proud na napětí
+				\item Dva ADC kanály vzorkují napětí a proud
+				\item MCU vypočte amplitudy, fázi a impedanci
+			\end{enumerate}
 		\end{column}
-		%
-		\begin{column}{0.5\textwidth}
-			\begin{figure}
+		\begin{column}{0.58\textwidth}
+			\centering
+				\includegraphics[width=\columnwidth,height=0.58\textheight,keepaspectratio]{obrazky/block_diagram_meter.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{První prototyp a poučení}
+	\begin{columns}[T]
+		\begin{column}{0.48\textwidth}
+			\textbf{Ověřovaný koncept}
+			\begin{itemize}
+				\item Analogové vyhodnocení amplitudy a fáze
+				\item Špičkový detektor pro amplitudu
+				\item XOR detektor pro fázový posun
+				\item Jednoduché zpracování pomocí ADC
+			\end{itemize}
+				\vspace{0.3em}
+				\begin{alertblock}{Problém}
+					Testování ukázalo citlivost na šum, zkreslení signálu a nedostatečně spolehlivé měření fáze.
+				\end{alertblock}
+				\textbf{Důsledek:} přechod na přímé vzorkování harmonických signálů.
+			\end{column}
+			\begin{column}{0.52\textwidth}
 				\centering
-				\includegraphics[width=0.95\columnwidth]{obrazky/i_v_conv.pdf}
-				\caption{Samovyvažovací můstek}
-			\end{figure}
+				\includegraphics[width=\columnwidth,height=0.64\textheight,keepaspectratio]{obrazky/prototyp_render.png}
 		\end{column}
 	\end{columns}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Přímé vzorkování a výpočet}
+	\begin{columns}[T]
+		\begin{column}{0.43\textwidth}
+			\begin{itemize}
+				\item Napěťový i proudový signál se přímo vzorkují ADC
+				\item Z naměřených dat se pomocí DFT vytáhne pouze složka na nastavené měřicí frekvenci
+				\item Z této složky se určí amplituda a fáze obou kanálů
+				\item Rušení mimo měřicí frekvenci má menší vliv na výsledek
+			\end{itemize}
+			\vspace{0.2em}
+			\textbf{Výhoda:} selektivní vyhodnocení bez analogového fázového detektoru.
+		\end{column}
+		\begin{column}{0.57\textwidth}
+			\centering
+			\includegraphics[width=\columnwidth,height=0.62\textheight,keepaspectratio]{obrazky/dft_harmonic_extraction.png}
+		\end{column}
+	\end{columns}
+\end{frame}
 
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Generátor měřicího signálu}
-	
+\begin{frame}
+	\frametitle{Realizace finálního prototypu}
+	\small
+	\begin{columns}[T]
+		\begin{column}{0.28\textwidth}
+			\textbf{Finální DPS}
+			\begin{itemize}
+				\item Šestivrstvá deska
+				\item Oddělení analogové a digitální části
+				\item Oživení - několik ručních oprav
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.72\textwidth}
+			\centering
+			\includegraphics[width=\columnwidth,height=0.76\textheight,keepaspectratio]{obrazky/layout_img.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Firmware a PC aplikace}
+	\begin{columns}[T]
+		\begin{column}{0.43\textwidth}
+			\textbf{Firmware}
+			\begin{itemize}
+				\item Nastavuje analogový frontend
+				\item Provádí vzorkování a výpočet impedance
+				\item Komunikuje textovými příkazy po sériové lince
+			\end{itemize}
+			\vspace{0.7em}
+				\textbf{PC aplikace}
+				\begin{itemize}
+					\item Konfigurace měření
+					\item Zobrazení naměřených výsledků
+					\item Automatizace měření a histogramy
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.57\textwidth}
+				\centering
+				\includegraphics[width=\columnwidth,height=0.62\textheight,keepaspectratio]{obrazky/basic_meas_inv.png}
+			\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ověření na reálných součástkách}
+	\small
+	\begin{columns}[T]
+			\begin{column}{0.44\textwidth}
+				\textbf{Postup měření}
+				\begin{itemize}
+					\item Sada rezistorů, cívek a kondenzátorů
+					\item Měření při 1, 10 a $100\,\mathrm{kHz}$
+					\item Srovnání s referenčním LCR metrem BK Precision 880
+					\item 1000 vzorků na jedno měření (25 period sinusovky)
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.56\textwidth}
+				\centering
+				\includegraphics[width=0.46\columnwidth,height=0.34\textheight,keepaspectratio]{obrazky/BK_precision_880.png}
+				\vspace{0.25em}
+
+				\begin{tabular}{ccc}
+					\includegraphics[width=0.25\columnwidth,height=0.12\textheight,keepaspectratio]{obrazky/komponenty/rezistor.jpg} &
+					\includegraphics[width=0.25\columnwidth,height=0.12\textheight,keepaspectratio]{obrazky/komponenty/civka_velka.jpg} &
+					\includegraphics[width=0.25\columnwidth,height=0.12\textheight,keepaspectratio]{obrazky/komponenty/civka_smd.jpg} \\
+					\includegraphics[width=0.25\columnwidth,height=0.12\textheight,keepaspectratio]{obrazky/komponenty/cap_electrolyt.jpg} &
+					\includegraphics[width=0.25\columnwidth,height=0.12\textheight,keepaspectratio]{obrazky/komponenty/cap_pp_maly.jpg} &
+					\includegraphics[width=0.25\columnwidth,height=0.12\textheight,keepaspectratio]{obrazky/komponenty/cap_pp_velky.jpg}
+				\end{tabular}
+			\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dosažené výsledky}
+	\begin{table}
+		\centering
+		\Large
+		\begin{tabular}{@{}lccc@{}}
+			\toprule
+			Součástka & 1\,kHz & 10\,kHz & 100\,kHz \\
+			\midrule
+			Toroidní cívka & $2{,}3\,\%$ & $3{,}7\,\%$ & $2{,}0\,\%$ \\
+			SMD cívka $12\,\mu\mathrm{H}$ & $3{,}3\,\%$ & $1{,}3\,\%$ & $0{,}2\,\%$ \\
+			Kondenzátor 10\,nF & $0{,}7\,\%$ & $1{,}2\,\%$ & $5{,}7\,\%$ \\
+			Kondenzátor 470\,nF & $0{,}5\,\%$ & $1{,}2\,\%$ & $18{,}0\,\%$ \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Stabilita a limit 100 kHz}
+	\small
 	\begin{columns}[T]
 		\begin{column}{0.45\textwidth}
-			\textbf{Přímá digitální syntéza (DDS):}
 			\begin{itemize}
-				\item Hodnoty $\sin(t)$ v paměti (LUT)
-				\item D/A převodník generuje průběh
-				\item Frekvence řízena rychlostí čtení
-				\item Filtr DP odstraní harmonické
+				\item Při 1 a $10\,\mathrm{kHz}$ mají opakovaná měření očekávané rozdělení
+				\item Při $100\,\mathrm{kHz}$ se projeví nízký počet vzorků na periodu
 			\end{itemize}
-			
-			\vspace{1em}
-			\textbf{Použitý obvod AD9837:}
-			\begin{itemize}
-				\item Rozsah 0 -- 12,5~MHz
-				\item Rozlišení 0,1~Hz
-				\item Řízení přes SPI
-			\end{itemize}
+				\vspace{0.3em}
+				\begin{block}{Hlavní závěr z měření}
+					Přístroj je použitelný, ale pro přesnější měření na $100\,\mathrm{kHz}$ je potřeba rychlejší digitalizace.
+				\end{block}
 		\end{column}
-		%
-		\begin{column}{0.55\textwidth}
-
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Úprava signálu -- Amplituda a DC offset}
-	
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
-			\textbf{Nastavení amplitudy:}
-			\begin{itemize}
-				\item Digitální potenciometr jako dělič
-				\item Zesílení OZ s fixním $A = 5$
-			\end{itemize}
-			
-			\begin{figure}
+			\begin{column}{0.55\textwidth}
 				\centering
-				\includegraphics[width=0.9\columnwidth]{obrazky/amplitude_set_sch.pdf}
-			\end{figure}
-		\end{column}
-		%
-		\begin{column}{0.5\textwidth}
-			\textbf{Nastavení DC offsetu:}
-			\begin{itemize}
-				\item CR filtr HP pro odstranění DC
-				\item Sčítačka přidá nastavitelné $U_{DC}$
-			\end{itemize}
-			
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.95\columnwidth]{obrazky/adder_sch.pdf}
-			\end{figure}
-		\end{column}
+					\includegraphics[width=0.82\columnwidth,height=0.30\textheight,keepaspectratio]{obrazky/komponent_viz/histogramy/toroid_1khz_L.pdf}\par
+					\vspace{0.25em}
+					\includegraphics[width=0.82\columnwidth,height=0.30\textheight,keepaspectratio]{obrazky/komponent_viz/histogramy/toroid_100khz_L.pdf}
+			\end{column}
 	\end{columns}
 \end{frame}
 
-
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Digitalizace signálů -- Převod na DC}
-	
+\begin{frame}
+	\frametitle{Zhodnocení práce}
+	\small
 	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
-			\textbf{Princip metody:}
+		\begin{column}{0.52\textwidth}
+			\textbf{V práci jsem:}
 			\begin{itemize}
-				\item Špičkový detektor -- amplituda
-				\item XOR fázový detektor -- fáze
-				\item Jednoduchý ADC, nízký výkon MCU
+				\item Nastudoval metody měření impedance
+				\item Navrhl architekturu LCR metru
+				\item Ověřil první prototyp a změnil koncepci vyhodnocení
+				\item Navrhl a oživil finální DPS
+				\item Napsal firmware a PC aplikaci
+				\item Provedl porovnání s referenčním přístrojem
 			\end{itemize}
-			
-			\vspace{1em}
-			\begin{block}{Výhoda}
-				Intuitivní princip měření
-			\end{block}
-			
-			\vspace{0.5em}
-			\begin{alertblock}{Nevýhody}
-				\begin{itemize}
-					\item Nepřesné měření
-					\item Citlivost na šum a rušení
-				\end{itemize}
-			\end{alertblock}
 		\end{column}
-		%
-		\begin{column}{0.5\textwidth}
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.95\columnwidth]{obrazky/peak_detect_chart.pdf}
-				\caption{Špičkový detektor}
-			\end{figure}
+		\begin{column}{0.48\textwidth}
+			\textbf{Další zlepšení}
+			\begin{itemize}
+				\item Automatické přepínání rozsahů
+				\item Kalibrace
+				\item Nižší bočníky pro přesnější ESR
+				\item Rychlejší ADC
+				\item Ochranné obvody
+				\item Fyzické ovládání
+			\end{itemize}
 		\end{column}
 	\end{columns}
 \end{frame}
 
-
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Digitalizace signálů -- Přímé vzorkování}
-	
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
-			\textbf{Princip metody:}
-			\begin{itemize}
-				\item Synchronní vzorkování ADC
-				\item Diskrétní Fourierova transformace
-				\item Výpočet amplitudy a fáze v MCU
-			\end{itemize}
-			
-			\vspace{1em}
-			\begin{block}{Výhoda}
-				Přesnější měření
-			\end{block}
-			
-			\vspace{0.5em}
-			\begin{alertblock}{Nevýhody}
-				\begin{itemize}
-					\item Nutnost rychlého vzorkování
-					\item Složitější výpočet
-				\end{itemize}
-			\end{alertblock}
-		\end{column}
-		%
-		\begin{column}{0.5\textwidth}
-			\textbf{Výpočet parametrů:}
-			$$A = \sqrt{U_c^2 + U_s^2}$$
-			$$\varphi = \arctan\left(\frac{-U_s}{U_c}\right)$$
-			
-			\vspace{1em}
-			kde $U_c$ a $U_s$ jsou kosinová a~sinová složka signálu z~DFT.
-		\end{column}
-	\end{columns}
-\end{frame}
-
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{První prototyp}
-	
-	\begin{columns}[T]
-		\begin{column}{0.45\textwidth}
-			\textbf{Realizace:}
-			\begin{itemize}
-				\item Metoda převodu na DC napětí
-				\item Pouze měřicí část
-				\item Data přes sériovou linku
-				\item Napájení z USB 5V
-			\end{itemize}
-			
-			\vspace{1em}
-			\textbf{Ověřené subsystémy:}
-			\begin{itemize}
-				\item[$\checkmark$] Napájecí systém $\pm$5 V
-				\item[$\checkmark$] Generátor DDS signálu
-				\item[$\checkmark$] Nastavení amplitudy a DC offsetu
-			\end{itemize}
-		\end{column}
-		%
-		\begin{column}{0.55\textwidth}
-			\vspace{-1.5em}
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.75\columnwidth]{obrazky/prototyp_render.png}
-				\caption{3D render prvního prototypu}
-			\end{figure}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Zjištěné nedostatky prototypu}
-	
-	\begin{alertblock}{Identifikované problémy}
-		\begin{enumerate}
-			\item \textbf{Zkreslující OZ (TLV9154)} \\
-			Při vyšších frekvencích zkresluje tvar sinusového signálu $\rightarrow$ chyba měření
-			
-			\vspace{0.5em}
-			\item \textbf{Nadbytečné zesilovače} \\
-			Diferenční zesilovače INA823 s přepínáním zesílení -- zbytečná komplikace
-			
-			\vspace{0.5em}
-			\item \textbf{Nepřesné měření} \\
-			Amplituda ze šp. detektoru a měření průchodu nulou neposkytovaly přesné výsledky
-		\end{enumerate}
-	\end{alertblock}
-	
-	\vspace{1em}
-	\begin{block}{Závěr z testování}
-		$\Rightarrow$ Přechod na metodu přímého vzorkování harmonických signálů
+\begin{frame}
+	\frametitle{Otázka k obhajobě 1}
+	\Large
+	\begin{block}{}
+		Jakým způsobem byste implementoval kalibrační proceduru pro navržený měřič impedance (např. open/short/load)? Jaký dopad byste očekával na výslednou přesnost v celém měřicím pásmu?
 	\end{block}
 \end{frame}
 
-
-%%%%%%%%%%%%%
-\begin{frame} 
-	\frametitle{Závěr a zhodnocení}
-	
-	\textbf{Dosažené výsledky:}
+\begin{frame}
+	\frametitle{Odpověď 1: Kalibrace}
+	\large
 	\begin{itemize}
-		\item Nastudovány metody měření impedance
-		\item Navržena koncepce měřiče s samovyvažovacím můstkem
-		\item Implementace DDS generátoru a úprava signálu
-		\item Analyzovány metody digitalizace (DC převod vs. přímé vzorkování)
-		\item Zkonstruován a otestován první prototyp
-		\item Identifikovány nedostatky $\rightarrow$ nový směr vývoje
+		\item \textbf{Open, short} -- Kalibrace parazitní impedance přístroje
+		\item \textbf{Load} -- Kalibrace chyby etalonem
+		\item Kalibrace pro každý rozsah
+		\item Uložení korekčních konstant v paměti
+		\item Očekávaná přesnost 1-2\%
 	\end{itemize}
-	
-	\vspace{1em}
-	\begin{block}{Úkoly pro bakalářskou práci}
-		\begin{enumerate}
-			\item Konstrukce testovacího přípravku pro synchronní vzorkování (1~MHz)
-			\item Finální návrh měřiče s metodou přímého vzorkování
-			\item Ověřovací měření oproti komerčnímu přístroji
-			\item Stanovení dosažené přesnosti
-		\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Otázka k obhajobě 2}
+	\Large
+	\begin{block}{}
+		Který zdroj chyby považujete ve vašem řešení za dominantní v různých částech měřicího rozsahu (např. nízké vs. vysoké impedance) a jak by bylo možné jeho vliv minimalizovat?
 	\end{block}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Odpověď 2: Dominantní chyby}
+	\large
+	\begin{itemize}
+		\item \textbf{Velikost hodnoty bočníku} -- Měl by být řádově stejný jako měřená impedance
+		\item \textbf{Nepřesnost hodnoty bočníku a zisku zesilovače} -- Kalibrace etalonem
+		\item \textbf{Omezený měřicí proud} -- Nízké impedance působí jako zkrat; řešení výkonnějším OpAmpem nebo výkonovým stupněm
+		\item \textbf{Omezená vzorkovací frekvence} -- Při 100 kHz málo vzorků na periodu, omezené rozlišení měření fáze; řešení - rychlejší ADC
+	\end{itemize}
+\end{frame}
 
-%%%%%%%%%%%%%
-% podekovani
-\begin{frame}[c] 
-% bez nadpisu snímku
+\begin{frame}[c]
 	\frametitle{\mbox{ }}
 	\begin{center}
-		{\Huge Děkuji za pozornost!}
+		{\Huge Děkuji za pozornost}
 	\end{center}
 \end{frame}
 
